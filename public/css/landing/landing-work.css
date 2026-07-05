@@ -1,0 +1,133 @@
+/* landing-work.css — Selected Work section component styles */
+
+/* ================================
+   TOP HALF — Rules
+   ================================ */
+
+/* ── Slide layout ────────────────────────────────────────── */
+
+.lp-repo-slide { grid-template-columns: 260px 1fr; }
+
+/* ── Repo card ───────────────────────────────────────────── */
+
+.lp-repo-card {
+  background: transparent;
+  transition: border-color var(--ex-duration-slow) ease, background var(--ex-duration-slow) ease;
+}
+.lp-repo-card:hover           { border-color: var(--ex-color-accent-mid); }
+.lp-repo-card--static         { cursor: default; }
+
+.lp-repo-slide[data-expanded="true"] .lp-repo-card {
+  background: var(--ex-color-white-faint);
+  border-color: var(--ex-color-accent-mid);
+}
+
+/* ── Card stripe ─────────────────────────────────────────── */
+
+.lp-repo-card-stripe { height: 2px; }
+.lp-repo-card--strata   .lp-repo-card-stripe { background: var(--ex-color-cat-design); }
+.lp-repo-card--triforge .lp-repo-card-stripe { background: var(--ex-color-cat-development); }
+.lp-repo-card--exo      .lp-repo-card-stripe { background: var(--ex-color-accent); }
+
+/* ── Card typography ─────────────────────────────────────── */
+
+.lp-repo-card-cat   { letter-spacing: var(--ex-tracking-lg); }
+.lp-repo-card-title { letter-spacing: var(--ex-tracking-tight); }
+.lp-repo-card-count { letter-spacing: var(--ex-tracking-sm); }
+.lp-repo-card-hint  { letter-spacing: var(--ex-tracking-sm); }
+
+/* ── Card hint state ─────────────────────────────────────── */
+
+.lp-repo-card-hint--pkgs                                  { display: none; }
+.lp-repo-slide[data-expanded="true"] .lp-repo-card-hint--info { display: none; }
+.lp-repo-slide[data-expanded="true"] .lp-repo-card-hint--pkgs { display: inline; }
+
+/* ── Info / packages panels ──────────────────────────────── */
+
+.lp-repo-info,
+.lp-repo-pkgs {
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+}
+
+.lp-repo-info { transform: translateX(0); }
+.lp-repo-pkgs { transform: translateX(24px); }
+
+.lp-repo-slide[data-expanded="true"] .lp-repo-info {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-24px);
+}
+.lp-repo-slide[data-expanded="true"] .lp-repo-pkgs {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+/* ── Work tag ────────────────────────────────────────────── */
+
+.lp-work-tag { letter-spacing: var(--ex-tracking-sm); }
+.lp-work-tag::before { content: '#'; }
+
+/* ── Packages list ───────────────────────────────────────── */
+
+.lp-repo-pkgs-list {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.lp-repo-pkgs-list::-webkit-scrollbar { display: none; }
+
+/* ── Package item ────────────────────────────────────────── */
+
+.lp-repo-pkg {
+  padding: var(--ex-space-sm) 0;
+  transition: background var(--ex-duration-fast) ease;
+}
+
+/* ── Package name ────────────────────────────────────────── */
+
+.lp-repo-pkg-name { letter-spacing: var(--ex-tracking-sm); }
+.lp-repo-pkg--strata   .lp-repo-pkg-name { color: var(--ex-color-cat-design); }
+.lp-repo-pkg--triforge .lp-repo-pkg-name { color: var(--ex-color-cat-development); }
+
+/* ── Package description ─────────────────────────────────── */
+
+.lp-repo-pkg-desc {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ── Nav arrows ──────────────────────────────────────────── */
+
+.lp-work-prev,
+.lp-work-next {
+  border-color: var(--ex-color-border-faint);
+  transition: border-color var(--ex-duration-fast) ease, background var(--ex-duration-fast) ease;
+}
+.lp-work-prev:hover,
+.lp-work-next:hover {
+  background: var(--ex-color-white-a10);
+  border-color: var(--ex-color-accent-mid);
+  color: var(--ex-color-white);
+}
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+  .lp-repo-slide { grid-template-columns: 1fr; height: auto; }
+}
+
+/* Small — Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .lp-repo-slide { grid-template-columns: 1fr; height: auto; }
+}
+
+/* Medium — Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-repo-slide { grid-template-columns: 200px 1fr; }
+}

@@ -1,0 +1,85 @@
+/* landing-comm.css — Commercial Work section component styles */
+/* Only rules strata-css cannot express live here: pseudo-states, attribute
+   selectors, letter-spacing, clamp(), and per-breakpoint sizing (no
+   responsive h-/w-/grid-template-columns arbitrary support). Everything
+   else is applied as strata utility/arbitrary classes in the markup. */
+
+/* ================================
+   TOP HALF — Rules
+   ================================ */
+
+/* ── Slide ───────────────────────────────────────────────── */
+
+.lp-comm-slide {
+  background: transparent;
+  transition: border-color var(--ex-duration-slow) ease;
+}
+.lp-comm-slide:hover { border-color: var(--ex-color-white-a12); }
+
+/* ── Slide typography ────────────────────────────────────── */
+
+.lp-comm-slide-industry { letter-spacing: var(--ex-tracking-xl); }
+.lp-comm-slide-title    { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+
+/* ── Stat / metric typography ────────────────────────────── */
+
+.lp-comm-stat-num,
+.lp-comm-metric-num   { letter-spacing: var(--ex-tracking-tight); }
+.lp-comm-stat-label,
+.lp-comm-metric-label { letter-spacing: var(--ex-tracking-sm); }
+
+/* ── CTA buttons ─────────────────────────────────────────── */
+
+.lp-comm-btn { transition: border-color var(--ex-duration-fast) ease, background var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease; }
+.lp-comm-btn--ghost:hover { background: var(--ex-color-white-a10); border-color: var(--ex-color-accent-mid); }
+.lp-comm-btn--solid:hover { opacity: var(--ex-opacity-high); }
+
+/* ── Rail ────────────────────────────────────────────────── */
+
+.lp-comm-rail-badge { letter-spacing: var(--ex-tracking-sm); }
+
+.lp-comm-thumb { transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease; }
+.lp-comm-thumb:hover               { border-color: var(--ex-color-accent-mid); }
+.lp-comm-thumb[data-active="true"] { background: var(--ex-color-accent-dim); border-color: var(--ex-color-accent); color: var(--ex-color-accent); }
+
+.lp-comm-prev,
+.lp-comm-next { transition: border-color var(--ex-duration-fast) ease, background var(--ex-duration-fast) ease; }
+.lp-comm-prev:hover,
+.lp-comm-next:hover {
+  background: var(--ex-color-white-a10);
+  border-color: var(--ex-color-accent-mid);
+  color: var(--ex-color-white);
+}
+
+.lp-comm-rail-counter { letter-spacing: var(--ex-tracking-sm); }
+
+/* ── Metrics bar ─────────────────────────────────────────── */
+
+.lp-comm-metrics-bar   { border-top: 1px solid var(--ex-color-border-faint); }
+.lp-comm-metrics-label { letter-spacing: var(--ex-tracking-xl); }
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+  .lp-comm-body  { grid-template-columns: 1fr; }
+  .lp-comm-stage { height: var(--ex-size-default); }
+  .lp-comm-orb   { height: var(--ex-size-default); width: var(--ex-size-default); }
+  .lp-comm-slide { padding: var(--ex-space-lg) var(--ex-space-md); }
+}
+
+/* Small — Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .lp-comm-body  { grid-template-columns: 1fr; }
+  .lp-comm-stage { height: var(--ex-size-lg); }
+  .lp-comm-orb   { height: var(--ex-size-lg); width: var(--ex-size-lg); }
+}
+
+/* Medium — Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-comm-body  { grid-template-columns: 1fr; }
+  .lp-comm-stage { height: var(--ex-size-xl); }
+  .lp-comm-orb   { height: var(--ex-size-xl); width: var(--ex-size-xl); }
+}

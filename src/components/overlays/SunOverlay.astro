@@ -1,0 +1,185 @@
+---
+// src/components/overlays/SunOverlay.astro — About / Identity
+
+const items = [
+  {
+    category: 'DISCIPLINE',
+    title:    'What I Build',
+    meta:     'Full-stack · Design to deployment',
+    body: [
+      'I work across the full product lifecycle — from early research and wireframing through component-level design and shipped code. The split between "designer" and "developer" has never resonated. The most interesting problems live at the boundary.',
+      'On the design side: UI/UX for web and mobile, design systems from scratch, motion and interaction, brand and visual identity. On the engineering side: semantic HTML, accessible CSS, TypeScript, React, Astro, Three.js, GSAP.',
+      'I am most effective on small, focused teams where design and engineering work closely together — where a decision in Figma is immediately stress-tested against what is possible in code, and vice versa. Placeholder — update with your actual discipline range.',
+    ],
+  },
+  {
+    category: 'PHILOSOPHY',
+    title:    'How I Work',
+    meta:     'Problem-first · Clarity over cleverness',
+    body: [
+      'Design starts with constraints, not aesthetics. Before touching Figma, I want to understand: what problem are we solving, for whom, and what does success look like? The visual language is a response to those answers — not a starting point.',
+      'Clarity over cleverness is the rule that has saved me the most time. A clever solution nobody else can maintain is a liability. A clear solution another developer can read and modify without asking questions is a gift. I write code and design systems with the next person in mind.',
+      'I work async-first, with documented decisions and clean handoffs. I will tell you when a timeline is unrealistic, when a brief needs more clarity, or when a technical decision I disagree with is about to cause a problem. Placeholder — update with your actual working preferences.',
+    ],
+  },
+  {
+    category: 'STACK',
+    title:    'Tools of the Trade',
+    meta:     'Design + engineering stack',
+    body: [
+      'Design tools: Figma for UI and systems. Illustrator for vector and identity. After Effects and GSAP for motion. Framer for interactive prototyping when static wireframes are not enough.',
+      'Frontend: TypeScript with strict mode. React for component-driven UIs. Astro for content-focused sites. GSAP for animation. Three.js and GLSL for 3D and shader work. CSS with cascade layers and custom properties — no framework dependency.',
+      'Backend and infrastructure: Node.js, PostgreSQL, Supabase. Vercel and Netlify for deployment. I am comfortable owning the full stack on smaller projects and contributing to backend systems on larger ones. Placeholder — update with your actual stack.',
+    ],
+  },
+  {
+    category: 'HIGHLIGHTS',
+    title:    'At a Glance',
+    meta:     'Key numbers — update with yours',
+    body: [
+      'Placeholder — this sidebar is for the numbers that matter to the people you want to work with. Client projects shipped. Years in the field. Industries worked across. Team sizes collaborated within. Awards or recognitions if relevant.',
+      'What makes a highlight worth including? It should be specific, verifiable, and relevant to the work you want to attract. "5 years of experience" is less useful than "shipped 12 production applications across healthcare, fintech, and SaaS."',
+      'Update this with your actual highlights. Remove anything that is not specific. Add anything that makes a prospective client or employer understand immediately what kind of work you have done and what kind of work you want to do next.',
+    ],
+  },
+];
+---
+
+<!-- 01 — Who I am -->
+<div class="ex-sun-section" data-layout="bottom-center">
+  <span class="ex-sun-section-label">01 — Identity</span>
+  <h2 class="ex-heading ex-sun-section-title">The Source</h2>
+  <p class="ex-para ex-sun-body">I'm Aftab Kazi — a designer and developer building digital products at the intersection of craft and clarity. Everything in this system orbits something. This is where it starts. Freelance, open to full-time, passionate about work that matters.</p>
+  <div class="ex-sun-stats-row">
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">5+ yrs</span><span class="ex-sun-stat-pill-label">Experience</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Design + Dev</span><span class="ex-sun-stat-pill-label">Discipline</span></div>
+  </div>
+</div>
+
+<!-- 02 — What I do -->
+<div class="ex-sun-section" data-layout="bottom-right">
+  <span class="ex-sun-section-label">02 — Discipline</span>
+  <h2 class="ex-heading ex-sun-section-title">What I Build</h2>
+  <p class="ex-para ex-sun-body">UI/UX design. Front-end engineering. Design systems. Motion and interaction. I work across the full product lifecycle — from early concepts to shipped code. Comfortable in Figma and a terminal in equal measure.</p>
+  <div class="ex-sun-key-fact">
+    <span class="ex-sun-fact-number">Full-Stack</span>
+    <span class="ex-sun-fact-label">Design to deployment</span>
+  </div>
+  <button class="ex-sun-detail-link" data-item-id="0" data-item-side="left" data-planet="sun">More detail →</button>
+</div>
+
+<!-- 03 — Approach -->
+<div class="ex-sun-section" data-layout="top-left">
+  <span class="ex-sun-section-label">03 — Philosophy</span>
+  <h2 class="ex-heading ex-sun-section-title">How I Work</h2>
+  <p class="ex-para ex-sun-body">Clarity over cleverness. Systems over one-offs. I believe the best design is invisible — it removes friction and lets the work speak. I start with constraints, not aesthetics. The visual language follows from the problem.</p>
+  <div class="ex-sun-key-fact">
+    <span class="ex-sun-fact-number">Problem-first</span>
+    <span class="ex-sun-fact-label">Design methodology</span>
+  </div>
+  <button class="ex-sun-detail-link" data-item-id="1" data-item-side="right" data-planet="sun">More detail →</button>
+</div>
+
+<!-- 04 — Tools -->
+<div class="ex-sun-section" data-layout="right">
+  <span class="ex-sun-section-label">04 — Stack</span>
+  <h2 class="ex-heading ex-sun-section-title">Tools of the Trade</h2>
+  <p class="ex-para ex-sun-body">Figma, Astro, TypeScript, React, GSAP, Three.js, CSS. On the back end: Node, PostgreSQL, Supabase. I choose tools that match the problem — not the trend. Placeholder — update with your actual stack.</p>
+  <div class="ex-sun-stats-row">
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Figma</span><span class="ex-sun-stat-pill-label">Design</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Astro / TS</span><span class="ex-sun-stat-pill-label">Frontend</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">GSAP</span><span class="ex-sun-stat-pill-label">Motion</span></div>
+  </div>
+  <button class="ex-sun-detail-link" data-item-id="2" data-item-side="left" data-planet="sun">Full stack breakdown →</button>
+</div>
+
+<!-- 05 — Background -->
+<div class="ex-sun-section" data-layout="bottom-left">
+  <span class="ex-sun-section-label">05 — Background</span>
+  <h2 class="ex-heading ex-sun-section-title">The Journey</h2>
+  <p class="ex-para ex-sun-body">Started in [discipline] in [year]. Worked at [Company], [Company], and as an independent practitioner for [X] years. Self-taught in 3D and creative coding. Based in [City]. Placeholder — fill in your story.</p>
+  <div class="ex-sun-key-fact">
+    <span class="ex-sun-fact-number">Since [Year]</span>
+    <span class="ex-sun-fact-label">Working independently</span>
+  </div>
+</div>
+
+<!-- 06 — Values -->
+<div class="ex-sun-section" data-layout="top-left">
+  <span class="ex-sun-section-label">06 — Values</span>
+  <h2 class="ex-heading ex-sun-section-title">What I Stand By</h2>
+  <p class="ex-para ex-sun-body">Honest timelines. Clean handoffs. Code that another human can read. I don't over-promise and I don't disappear mid-project. I collaborate openly and I'll tell you when something isn't working — before it ships.</p>
+  <div class="ex-sun-stats-row">
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Async-first</span><span class="ex-sun-stat-pill-label">Communication</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Open source</span><span class="ex-sun-stat-pill-label">Contributor</span></div>
+  </div>
+</div>
+
+<!-- 07 — Highlights -->
+<div class="ex-sun-section" data-layout="right">
+  <span class="ex-sun-section-label">07 — Highlights</span>
+  <h2 class="ex-heading ex-sun-section-title">At a Glance</h2>
+  <p class="ex-para ex-sun-body">Placeholder — add your key numbers here. Projects shipped, clients worked with, years of experience, or whatever signal matters most to the people you want to work with.</p>
+  <div class="ex-sun-key-fact">
+    <span class="ex-sun-fact-number">[X] Projects</span>
+    <span class="ex-sun-fact-label">Shipped across [N] industries</span>
+  </div>
+  <button class="ex-sun-detail-link" data-item-id="3" data-item-side="left" data-planet="sun">Full highlights →</button>
+</div>
+
+<!-- 08 — Navigate -->
+<div class="ex-sun-section" data-layout="center">
+  <span class="ex-sun-section-label">08 — The System</span>
+  <h2 class="ex-heading ex-sun-section-title">Explore the Orbits</h2>
+  <p class="ex-para ex-sun-body">Each planet in this system holds a different body of work. Design lives on Venus. Development on Earth. Experiments on Mars. Enterprise work on Jupiter. Products on Saturn. Concepts on Uranus. Reach me at Neptune.</p>
+  <div class="ex-sun-stats-row">
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">8 planets</span><span class="ex-sun-stat-pill-label">8 bodies of work</span></div>
+  </div>
+</div>
+
+<!-- ── Item data for sidebar ───────────────────────────────────── -->
+<script type="application/json" id="ex-sun-items-data" is:inline set:html={JSON.stringify(items)}></script>
+
+<script>
+  import StrataOffcanvas from '@strata-packages/offcanvas';
+
+  function init(): void {
+    const dataEl       = document.getElementById('ex-sun-items-data');
+    const sidebarLeft  = document.getElementById('ex-sun-sidebar-left');
+    const sidebarRight = document.getElementById('ex-sun-sidebar-right');
+
+    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+
+    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+
+    const items: { category: string; title: string; meta: string; body: string[] }[] =
+      JSON.parse(dataEl.textContent ?? '[]');
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
+      if (!btn || btn.dataset.planet !== 'sun') return;
+      const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
+      if (!item) return;
+
+      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
+      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
+      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
+
+      const catEl   = document.getElementById(`ex-sun-sidebar-cat-${side}`);
+      const titleEl = document.getElementById(`ex-sun-sidebar-title-${side}`);
+      const metaEl  = document.getElementById(`ex-sun-sidebar-meta-${side}`);
+      const bodyEl  = document.getElementById(`ex-sun-sidebar-body-${side}`);
+
+      if (catEl)   catEl.textContent   = item.category;
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl)  metaEl.textContent  = item.meta;
+      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
+
+      StrataOffcanvas.open(sidebar);
+      setTimeout(() => closeBtn?.focus(), 60);
+    });
+  }
+
+  init();
+</script>

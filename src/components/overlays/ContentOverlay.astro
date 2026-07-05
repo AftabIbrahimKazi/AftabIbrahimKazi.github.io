@@ -1,0 +1,302 @@
+---
+import '@strata-packages/offcanvas/css';
+import MercuryOverlay from './MercuryOverlay.astro';
+import VenusOverlay   from './VenusOverlay.astro';
+import EarthOverlay   from './EarthOverlay.astro';
+import MarsOverlay    from './MarsOverlay.astro';
+import JupiterOverlay from './JupiterOverlay.astro';
+import SaturnOverlay  from './SaturnOverlay.astro';
+import UranusOverlay  from './UranusOverlay.astro';
+import NeptuneOverlay from './NeptuneOverlay.astro';
+import SunOverlay     from './SunOverlay.astro';
+---
+
+<!-- ══════════════════════════════════════════════════════════════
+     MERCURY sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-mercury-sidebar-left" class="ex-mercury-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Article">
+  <div class="ex-mercury-sidebar-inner">
+    <div class="ex-mercury-sidebar-header">
+      <button class="ex-mercury-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close article">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-mercury-sidebar-cat"  id="ex-mercury-sidebar-cat-left"></span>
+      <h2 class="ex-mercury-sidebar-title"  id="ex-mercury-sidebar-title-left"></h2>
+      <p class="ex-mercury-sidebar-meta"    id="ex-mercury-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-mercury-sidebar-body" id="ex-mercury-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-mercury-sidebar-right" class="ex-mercury-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Article">
+  <div class="ex-mercury-sidebar-inner">
+    <div class="ex-mercury-sidebar-header">
+      <button class="ex-mercury-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close article">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-mercury-sidebar-cat"  id="ex-mercury-sidebar-cat-right"></span>
+      <h2 class="ex-mercury-sidebar-title"  id="ex-mercury-sidebar-title-right"></h2>
+      <p class="ex-mercury-sidebar-meta"    id="ex-mercury-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-mercury-sidebar-body" id="ex-mercury-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SUN sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-sun-sidebar-left" class="ex-sun-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Detail">
+  <div class="ex-sun-sidebar-inner">
+    <div class="ex-sun-sidebar-header">
+      <button class="ex-sun-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-sun-sidebar-cat"  id="ex-sun-sidebar-cat-left"></span>
+      <h2 class="ex-sun-sidebar-title"  id="ex-sun-sidebar-title-left"></h2>
+      <p class="ex-sun-sidebar-meta"    id="ex-sun-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-sun-sidebar-body" id="ex-sun-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-sun-sidebar-right" class="ex-sun-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Detail">
+  <div class="ex-sun-sidebar-inner">
+    <div class="ex-sun-sidebar-header">
+      <button class="ex-sun-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-sun-sidebar-cat"  id="ex-sun-sidebar-cat-right"></span>
+      <h2 class="ex-sun-sidebar-title"  id="ex-sun-sidebar-title-right"></h2>
+      <p class="ex-sun-sidebar-meta"    id="ex-sun-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-sun-sidebar-body" id="ex-sun-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     VENUS sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-venus-sidebar-left" class="ex-venus-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
+  <div class="ex-venus-sidebar-inner">
+    <div class="ex-venus-sidebar-header">
+      <button class="ex-venus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-venus-sidebar-cat"  id="ex-venus-sidebar-cat-left"></span>
+      <h2 class="ex-venus-sidebar-title"  id="ex-venus-sidebar-title-left"></h2>
+      <p class="ex-venus-sidebar-meta"    id="ex-venus-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-venus-sidebar-body" id="ex-venus-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-venus-sidebar-right" class="ex-venus-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
+  <div class="ex-venus-sidebar-inner">
+    <div class="ex-venus-sidebar-header">
+      <button class="ex-venus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-venus-sidebar-cat"  id="ex-venus-sidebar-cat-right"></span>
+      <h2 class="ex-venus-sidebar-title"  id="ex-venus-sidebar-title-right"></h2>
+      <p class="ex-venus-sidebar-meta"    id="ex-venus-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-venus-sidebar-body" id="ex-venus-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     EARTH sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-earth-sidebar-left" class="ex-earth-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
+  <div class="ex-earth-sidebar-inner">
+    <div class="ex-earth-sidebar-header">
+      <button class="ex-earth-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-earth-sidebar-cat"  id="ex-earth-sidebar-cat-left"></span>
+      <h2 class="ex-earth-sidebar-title"  id="ex-earth-sidebar-title-left"></h2>
+      <p class="ex-earth-sidebar-meta"    id="ex-earth-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-earth-sidebar-body" id="ex-earth-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-earth-sidebar-right" class="ex-earth-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
+  <div class="ex-earth-sidebar-inner">
+    <div class="ex-earth-sidebar-header">
+      <button class="ex-earth-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-earth-sidebar-cat"  id="ex-earth-sidebar-cat-right"></span>
+      <h2 class="ex-earth-sidebar-title"  id="ex-earth-sidebar-title-right"></h2>
+      <p class="ex-earth-sidebar-meta"    id="ex-earth-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-earth-sidebar-body" id="ex-earth-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MARS sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-mars-sidebar-left" class="ex-mars-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Experiment detail">
+  <div class="ex-mars-sidebar-inner">
+    <div class="ex-mars-sidebar-header">
+      <button class="ex-mars-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-mars-sidebar-cat"  id="ex-mars-sidebar-cat-left"></span>
+      <h2 class="ex-mars-sidebar-title"  id="ex-mars-sidebar-title-left"></h2>
+      <p class="ex-mars-sidebar-meta"    id="ex-mars-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-mars-sidebar-body" id="ex-mars-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-mars-sidebar-right" class="ex-mars-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Experiment detail">
+  <div class="ex-mars-sidebar-inner">
+    <div class="ex-mars-sidebar-header">
+      <button class="ex-mars-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-mars-sidebar-cat"  id="ex-mars-sidebar-cat-right"></span>
+      <h2 class="ex-mars-sidebar-title"  id="ex-mars-sidebar-title-right"></h2>
+      <p class="ex-mars-sidebar-meta"    id="ex-mars-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-mars-sidebar-body" id="ex-mars-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     JUPITER sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-jupiter-sidebar-left" class="ex-jupiter-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Client detail">
+  <div class="ex-jupiter-sidebar-inner">
+    <div class="ex-jupiter-sidebar-header">
+      <button class="ex-jupiter-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-jupiter-sidebar-cat"  id="ex-jupiter-sidebar-cat-left"></span>
+      <h2 class="ex-jupiter-sidebar-title"  id="ex-jupiter-sidebar-title-left"></h2>
+      <p class="ex-jupiter-sidebar-meta"    id="ex-jupiter-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-jupiter-sidebar-body" id="ex-jupiter-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-jupiter-sidebar-right" class="ex-jupiter-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Client detail">
+  <div class="ex-jupiter-sidebar-inner">
+    <div class="ex-jupiter-sidebar-header">
+      <button class="ex-jupiter-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-jupiter-sidebar-cat"  id="ex-jupiter-sidebar-cat-right"></span>
+      <h2 class="ex-jupiter-sidebar-title"  id="ex-jupiter-sidebar-title-right"></h2>
+      <p class="ex-jupiter-sidebar-meta"    id="ex-jupiter-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-jupiter-sidebar-body" id="ex-jupiter-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SATURN sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-saturn-sidebar-left" class="ex-saturn-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Product detail">
+  <div class="ex-saturn-sidebar-inner">
+    <div class="ex-saturn-sidebar-header">
+      <button class="ex-saturn-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-saturn-sidebar-cat"  id="ex-saturn-sidebar-cat-left"></span>
+      <h2 class="ex-saturn-sidebar-title"  id="ex-saturn-sidebar-title-left"></h2>
+      <p class="ex-saturn-sidebar-meta"    id="ex-saturn-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-saturn-sidebar-body" id="ex-saturn-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-saturn-sidebar-right" class="ex-saturn-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Product detail">
+  <div class="ex-saturn-sidebar-inner">
+    <div class="ex-saturn-sidebar-header">
+      <button class="ex-saturn-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-saturn-sidebar-cat"  id="ex-saturn-sidebar-cat-right"></span>
+      <h2 class="ex-saturn-sidebar-title"  id="ex-saturn-sidebar-title-right"></h2>
+      <p class="ex-saturn-sidebar-meta"    id="ex-saturn-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-saturn-sidebar-body" id="ex-saturn-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     URANUS sidebars
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-uranus-sidebar-left" class="ex-uranus-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Concept detail">
+  <div class="ex-uranus-sidebar-inner">
+    <div class="ex-uranus-sidebar-header">
+      <button class="ex-uranus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-uranus-sidebar-cat"  id="ex-uranus-sidebar-cat-left"></span>
+      <h2 class="ex-uranus-sidebar-title"  id="ex-uranus-sidebar-title-left"></h2>
+      <p class="ex-uranus-sidebar-meta"    id="ex-uranus-sidebar-meta-left"></p>
+    </div>
+    <div class="ex-uranus-sidebar-body" id="ex-uranus-sidebar-body-left"></div>
+  </div>
+</div>
+
+<div id="ex-uranus-sidebar-right" class="ex-uranus-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Concept detail">
+  <div class="ex-uranus-sidebar-inner">
+    <div class="ex-uranus-sidebar-header">
+      <button class="ex-uranus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <span class="ex-uranus-sidebar-cat"  id="ex-uranus-sidebar-cat-right"></span>
+      <h2 class="ex-uranus-sidebar-title"  id="ex-uranus-sidebar-title-right"></h2>
+      <p class="ex-uranus-sidebar-meta"    id="ex-uranus-sidebar-meta-right"></p>
+    </div>
+    <div class="ex-uranus-sidebar-body" id="ex-uranus-sidebar-body-right"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     OVERLAY CONTAINER
+     ══════════════════════════════════════════════════════════════ -->
+<div id="ex-content-overlay" class="ex-content-overlay" data-overlay-state="closed" data-planet="">
+
+  <section class="ex-overlay-hero" id="ex-overlay-hero-ts">
+    <div class="ex-overlay-nav-hint" id="ex-overlay-nav-hint-ts">
+      <div class="ex-overlay-nav-prev">
+        <i class="ex-icon fa-solid fa-chevron-left"></i>
+        <span id="ex-overlay-prev-label-ts"></span>
+      </div>
+      <div class="ex-overlay-scroll-hint" id="ex-overlay-scroll-hint-ts">
+        <span class="ex-overlay-scroll-hint-label">Scroll to Explore</span>
+        <i class="ex-icon fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="ex-overlay-nav-next">
+        <span id="ex-overlay-next-label-ts"></span>
+        <i class="ex-icon fa-solid fa-chevron-right"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="ex-overlay-section ex-overlay-section--entry" id="ex-overlay-main-content-ts">
+    <div class="container">
+      <div class="ex-overlay-entry-header">
+        <h1 class="ex-heading ex-overlay-planet-name" id="ex-overlay-planet-name-ts"></h1>
+        <p class="ex-para ex-overlay-planet-tagline" id="ex-overlay-planet-tagline-ts"></p>
+      </div>
+      <div data-planet-content="ex-mercury-js"><MercuryOverlay /></div>
+      <div data-planet-content="ex-venus-js"><VenusOverlay /></div>
+      <div data-planet-content="ex-earth-js"><EarthOverlay /></div>
+      <div data-planet-content="ex-mars-js"><MarsOverlay /></div>
+      <div data-planet-content="ex-jupiter-js"><JupiterOverlay /></div>
+      <div data-planet-content="ex-saturn-js"><SaturnOverlay /></div>
+      <div data-planet-content="ex-uranus-js"><UranusOverlay /></div>
+      <div data-planet-content="ex-neptune-js"><NeptuneOverlay /></div>
+      <div data-planet-content="ex-sun-js"><SunOverlay /></div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,185 @@
+---
+// src/components/overlays/MarsOverlay.astro — Labs / Experiments
+
+const items = [
+  {
+    category: 'EXPERIMENT',
+    title:    '[Experiment Name]',
+    meta:     '[Tech] · [Year]',
+    body: [
+      'Placeholder — describe an experiment here. What were you testing? What was the constraint you gave yourself? The most interesting lab work comes from a single unusual restriction: one unusual input, one novel output, or one forbidden approach.',
+      'What worked? What did not? Lab work is allowed to fail — in fact, experiments that fail teach more than ones that succeed on the first attempt. Describe the failure honestly and what it revealed about the problem space.',
+      'Is this live? Is there a demo? A repo? If so, link it here. If not, describe what would be needed to take it from experiment to something shippable. Replace this placeholder with your actual experiment.',
+    ],
+  },
+  {
+    category: 'EXPERIMENT',
+    title:    '[Experiment Name]',
+    meta:     '[Tech] · [Year]',
+    body: [
+      'Placeholder — a second experiment. This one could be a shader, a generative system, a physics simulation, or a weird CSS trick. The best lab experiments are the ones where you are genuinely unsure what the output will look like before you start.',
+      'What was the unexpected result? Experiments often produce outputs you did not anticipate — sometimes better, sometimes stranger, sometimes both. That moment of surprise is often worth documenting more than the intended outcome.',
+      'What does this experiment demonstrate about how you approach creative coding? Update this placeholder with your actual experiment and make it specific — the technology, the constraint, and the result.',
+    ],
+  },
+  {
+    category: 'EXPERIMENT',
+    title:    '[Experiment Name]',
+    meta:     '[Tech] · [Year]',
+    body: [
+      'Placeholder — a third experiment. Interactive audio, data visualisation, machine learning in the browser, generative art. The medium does not matter as long as the constraint is clear and the question is specific.',
+      'What did building this teach you about the medium? Sometimes an experiment reveals a limitation of a tool or a browser API. Sometimes it reveals a new technique that ends up in production work. What did this one reveal?',
+      'Status: ongoing, archived, or turned into a product? Some experiments stay experiments. Some grow into something you ship. Describe where this one stands. Replace this placeholder with your actual work.',
+    ],
+  },
+  {
+    category: 'EXPERIMENT',
+    title:    '[Experiment Name]',
+    meta:     '[Tech] · [Year]',
+    body: [
+      'Placeholder — a fourth experiment. This space is for the work that does not fit anywhere else. The strange, the speculative, the one that took three weekends and you are still not sure it works but you cannot stop thinking about it.',
+      'What makes this one different from the others? If your other experiments were about technique, this one might be about concept. If your others were about code, this one might be about material or form.',
+      'Three weekends in, what did you learn? Not just about the technology — about yourself as a maker. The best lab notes capture the honest intellectual experience of the experiment, not just the technical outcome. Update this placeholder.',
+    ],
+  },
+];
+---
+
+<!-- 01 — Overview -->
+<div class="ex-mars-section" data-layout="bottom-center">
+  <span class="ex-mars-section-label">01 — Labs</span>
+  <h2 class="ex-heading ex-mars-section-title">Push the Limits</h2>
+  <p class="ex-para ex-mars-body">Experiments that don't need a client brief. Work done to learn, to break, to find the edge of what's possible in a browser. Some ships. Some stays here. All of it teaches something.</p>
+  <div class="ex-mars-stats-row">
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[N] active</span><span class="ex-mars-stat-pill-label">Experiments</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">WebGL</span><span class="ex-mars-stat-pill-label">Primary medium</span></div>
+  </div>
+</div>
+
+<!-- 02 — Experiment 1 -->
+<div class="ex-mars-section" data-layout="bottom-right">
+  <span class="ex-mars-section-label">02 — Experiment</span>
+  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
+  <p class="ex-para ex-mars-body">Placeholder — describe an experiment here. What were you testing? What was the constraint you gave yourself? What worked and what didn't? One or two sentences is enough.</p>
+  <div class="ex-mars-key-fact">
+    <span class="ex-mars-fact-number">[Tech]</span>
+    <span class="ex-mars-fact-label">Built with</span>
+  </div>
+  <button class="ex-mars-detail-link" data-item-id="0" data-item-side="left" data-planet="mars">Lab notes →</button>
+</div>
+
+<!-- 03 — Experiment 2 -->
+<div class="ex-mars-section" data-layout="top-left">
+  <span class="ex-mars-section-label">03 — Experiment</span>
+  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
+  <p class="ex-para ex-mars-body">Placeholder — another experiment. Maybe this one is a shader, a generative system, a physics simulation, or a weird CSS trick. Describe it in one or two sentences focused on what was interesting.</p>
+  <div class="ex-mars-key-fact">
+    <span class="ex-mars-fact-number">[Outcome]</span>
+    <span class="ex-mars-fact-label">What it does</span>
+  </div>
+  <button class="ex-mars-detail-link" data-item-id="1" data-item-side="right" data-planet="mars">Lab notes →</button>
+</div>
+
+<!-- 04 — Experiment 3 -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">04 — Experiment</span>
+  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
+  <p class="ex-para ex-mars-body">Placeholder — a third experiment. Interactive audio, data visualisation, machine learning in the browser, generative art. Describe the concept and what you learned from building it.</p>
+  <div class="ex-mars-stats-row">
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Year]</span><span class="ex-mars-stat-pill-label">Built</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Status]</span><span class="ex-mars-stat-pill-label">Ongoing / archived</span></div>
+  </div>
+  <button class="ex-mars-detail-link" data-item-id="2" data-item-side="left" data-planet="mars">Lab notes →</button>
+</div>
+
+<!-- 05 — Experiment 4 -->
+<div class="ex-mars-section" data-layout="bottom-left">
+  <span class="ex-mars-section-label">05 — Experiment</span>
+  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
+  <p class="ex-para ex-mars-body">Placeholder — a fourth experiment. This space is for the work that doesn't fit anywhere else. The strange, the speculative, the one that took three weekends and you're still not sure it works.</p>
+  <div class="ex-mars-key-fact">
+    <span class="ex-mars-fact-number">[N] iterations</span>
+    <span class="ex-mars-fact-label">Before it clicked</span>
+  </div>
+  <button class="ex-mars-detail-link" data-item-id="3" data-item-side="right" data-planet="mars">Lab notes →</button>
+</div>
+
+<!-- 06 — Process -->
+<div class="ex-mars-section" data-layout="top-left">
+  <span class="ex-mars-section-label">06 — Process</span>
+  <h2 class="ex-heading ex-mars-section-title">The Lab Method</h2>
+  <p class="ex-para ex-mars-body">Every experiment starts with a single constraint: one unusual input, one novel output, or one forbidden approach. Time-boxed. Documented. The ones that survive go into the field. The rest stay as notes.</p>
+  <div class="ex-mars-key-fact">
+    <span class="ex-mars-fact-number">Time-boxed</span>
+    <span class="ex-mars-fact-label">Experimental method</span>
+  </div>
+</div>
+
+<!-- 07 — Tools -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">07 — Tools</span>
+  <h2 class="ex-heading ex-mars-section-title">Lab Equipment</h2>
+  <p class="ex-para ex-mars-body">Three.js, GLSL shaders, WebGL, Web Audio API, Canvas, GSAP. Sometimes just raw CSS. The constraint isn't the tool — it's the question. Placeholder — update with your actual experimentation stack.</p>
+  <div class="ex-mars-stats-row">
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Three.js</span><span class="ex-mars-stat-pill-label">3D</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">GLSL</span><span class="ex-mars-stat-pill-label">Shaders</span></div>
+  </div>
+</div>
+
+<!-- 08 — CTA -->
+<div class="ex-mars-section" data-layout="center">
+  <span class="ex-mars-section-label">08 — Field Notes</span>
+  <h2 class="ex-heading ex-mars-section-title">Read the Notes</h2>
+  <p class="ex-para ex-mars-body">Write-ups for some experiments live on Mercury. The rest are on GitHub with comments. If something here interests you — working or not — reach out. Broken things are often more interesting than finished ones.</p>
+  <div class="ex-mars-stats-row">
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Mercury</span><span class="ex-mars-stat-pill-label">Lab notes</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Neptune</span><span class="ex-mars-stat-pill-label">Reach out</span></div>
+  </div>
+</div>
+
+<!-- ── Item data for sidebar ───────────────────────────────────── -->
+<script type="application/json" id="ex-mars-items-data" is:inline set:html={JSON.stringify(items)}></script>
+
+<script>
+  import StrataOffcanvas from '@strata-packages/offcanvas';
+
+  function init(): void {
+    const dataEl       = document.getElementById('ex-mars-items-data');
+    const sidebarLeft  = document.getElementById('ex-mars-sidebar-left');
+    const sidebarRight = document.getElementById('ex-mars-sidebar-right');
+
+    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+
+    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+
+    const items: { category: string; title: string; meta: string; body: string[] }[] =
+      JSON.parse(dataEl.textContent ?? '[]');
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
+      if (!btn || btn.dataset.planet !== 'mars') return;
+      const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
+      if (!item) return;
+
+      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
+      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
+      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
+
+      const catEl   = document.getElementById(`ex-mars-sidebar-cat-${side}`);
+      const titleEl = document.getElementById(`ex-mars-sidebar-title-${side}`);
+      const metaEl  = document.getElementById(`ex-mars-sidebar-meta-${side}`);
+      const bodyEl  = document.getElementById(`ex-mars-sidebar-body-${side}`);
+
+      if (catEl)   catEl.textContent   = item.category;
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl)  metaEl.textContent  = item.meta;
+      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
+
+      StrataOffcanvas.open(sidebar);
+      setTimeout(() => closeBtn?.focus(), 60);
+    });
+  }
+
+  init();
+</script>

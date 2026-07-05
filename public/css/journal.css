@@ -1,0 +1,387 @@
+/* journal.css — Mercury / Journal page styles */
+
+/* ── Sidebar — visual overrides (layout + open/close handled by offcanvas package) ── */
+
+.ex-jn-sidebar {
+  --st-offcanvas-width: 360px;
+  --st-bg:              var(--ex-color-black);
+  --st-border:          transparent;
+  --st-duration:        var(--ex-duration-mid);
+  gap:                  var(--ex-space-md);
+  overflow-y:           auto;
+  padding:              var(--ex-space-xl) var(--ex-space-lg);
+}
+
+/* ── Sidebar — directional border ──────────────────────────── */
+
+.ex-jn-sidebar[data-st-side="right"] {
+  border-left: 1px solid var(--ex-color-border-faint);
+}
+
+.ex-jn-sidebar[data-st-side="left"] {
+  border-right: 1px solid var(--ex-color-border-faint);
+}
+
+/* ── Sidebar — close button ─────────────────────────────────── */
+
+.ex-jn-sidebar-close {
+  align-self: flex-end;
+  background: var(--ex-color-white-a06);
+  border: 1px solid var(--ex-color-border-faint);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-color-white);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: var(--ex-font-size-lg);
+  height: var(--ex-size-36);
+  line-height: 1;
+  transition: background var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+
+.ex-jn-sidebar-close:hover { background: var(--ex-color-white-a12); }
+
+.ex-jn-sidebar-close:focus-visible {
+  outline: 2px solid var(--ex-color-white-a30);
+  outline-offset: 2px;
+}
+
+/* ── Sidebar — content elements ─────────────────────────────── */
+
+.ex-jn-sidebar-category {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-lg);
+}
+
+.ex-jn-sidebar-title {
+  color: var(--ex-color-white);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-md);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-jn-sidebar-excerpt {
+  color: var(--ex-color-nebula-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-para-font-weight);
+}
+
+.ex-jn-sidebar-date {
+  color: var(--ex-color-white-dim);
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+}
+
+.ex-jn-sidebar-link {
+  color: var(--ex-color-accent);
+  display: inline-block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-font-weight-medium);
+  letter-spacing: var(--ex-tracking-md);
+  margin-top: var(--ex-space-sm);
+  text-decoration: none;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-jn-sidebar-link:hover { opacity: var(--ex-opacity-mid); }
+
+
+/* ── Page shell ─────────────────────────────────────────────── */
+
+.ex-jn-body {
+  background: var(--ex-color-black);
+}
+
+.ex-jn-main {
+  padding-top: var(--ex-space-xxxl);
+  padding-bottom: var(--ex-space-xxxl);
+}
+
+.ex-jn-container {
+  margin-inline: auto;
+  max-width: var(--ex-size-1280);
+  padding-inline: var(--ex-space-xl);
+}
+
+/* ── Section header ─────────────────────────────────────────── */
+
+.ex-jn-section-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--ex-space-lg);
+}
+
+.ex-jn-section-title {
+  color: var(--ex-color-white);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+}
+
+.ex-jn-view-all {
+  align-items: center;
+  color: var(--ex-color-accent);
+  display: flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-font-weight-medium);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-md);
+  text-decoration: none;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-jn-view-all:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Article grid ───────────────────────────────────────────── */
+
+.ex-jn-grid {
+  display: grid;
+  gap: var(--ex-space-md);
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: var(--ex-space-lg);
+}
+
+/* ── Article card ───────────────────────────────────────────── */
+
+.ex-jn-card {
+  background: var(--ex-color-white-a04);
+  border: 1px solid var(--ex-color-border-faint);
+  border-radius: var(--ex-border-radius-outer);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+}
+
+.ex-jn-card:hover {
+  border-color: var(--ex-color-white-a16);
+  transform: translateY(-2px);
+}
+
+/* ── Card image ─────────────────────────────────────────────── */
+
+.ex-jn-card-image {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.ex-jn-card-image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--ex-duration-slow) ease;
+  width: 100%;
+}
+
+.ex-jn-card:hover .ex-jn-card-image img { transform: scale(1.04); }
+
+.ex-jn-card-read-time {
+  background: var(--ex-color-black-a55);
+  border-radius: var(--ex-border-radius-outer);
+  bottom: var(--ex-space-xs);
+  color: var(--ex-color-white-mid);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  padding: var(--ex-space-xxs) var(--ex-space-xs);
+  position: absolute;
+  right: var(--ex-space-xs);
+}
+
+/* ── Card body ──────────────────────────────────────────────── */
+
+.ex-jn-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--ex-space-xs);
+  padding: var(--ex-space-md);
+}
+
+.ex-jn-card-category {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-lg);
+}
+
+.ex-jn-card-category--development { color: var(--ex-color-cat-development); }
+.ex-jn-card-category--design      { color: var(--ex-color-cat-design);      }
+.ex-jn-card-category--technology  { color: var(--ex-color-cat-technology);  }
+.ex-jn-card-category--life        { color: var(--ex-color-cat-life);        }
+
+.ex-jn-card-title {
+  color: var(--ex-color-white);
+  display: -webkit-box;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-heading-font-weight);
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ex-jn-card-excerpt {
+  color: var(--ex-color-nebula-body);
+  display: -webkit-box;
+  flex: 1;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-para-font-weight);
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* ── Card footer ────────────────────────────────────────────── */
+
+.ex-jn-card-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--ex-space-xs);
+}
+
+.ex-jn-card-date {
+  color: var(--ex-color-white-dim);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+}
+
+.ex-jn-card-arrow {
+  align-items: center;
+  background: var(--ex-color-white-a06);
+  border: 1px solid var(--ex-color-border-faint);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-color-white);
+  cursor: pointer;
+  display: flex;
+  font-size: var(--ex-font-size-sm);
+  height: var(--ex-size-36);
+  justify-content: center;
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+
+.ex-jn-card-arrow:hover {
+  background: var(--ex-color-white-a12);
+  border-color: var(--ex-color-white-a24);
+}
+
+/* ── Newsletter CTA ─────────────────────────────────────────── */
+
+.ex-jn-newsletter {
+  border-radius: var(--ex-border-radius-outer);
+  overflow: hidden;
+  position: relative;
+}
+
+.ex-jn-newsletter-bg {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.ex-jn-newsletter-bg img {
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  opacity: var(--ex-opacity-body);
+  width: 100%;
+}
+
+.ex-jn-newsletter-content {
+  align-items: center;
+  background: linear-gradient(90deg, var(--ex-color-black-a85) 55%, var(--ex-color-black-a20));
+  display: flex;
+  gap: var(--ex-space-xxxl);
+  justify-content: space-between;
+  padding: var(--ex-space-xl) var(--ex-space-xxl);
+  position: relative;
+}
+
+.ex-jn-newsletter-eyebrow {
+  color: var(--ex-color-cat-development);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-xs);
+}
+
+.ex-jn-newsletter-title {
+  color: var(--ex-color-white);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-lg);
+  font-weight: var(--ex-heading-font-weight);
+  margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-420);
+}
+
+.ex-jn-newsletter-desc {
+  color: var(--ex-color-white-mid);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-para-font-weight);
+}
+
+.ex-jn-newsletter-form {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--ex-space-xs);
+}
+
+.ex-jn-newsletter-input {
+  background: var(--ex-color-border-faint);
+  border: 1px solid var(--ex-color-border-faint);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-white);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  padding: var(--ex-space-sm) var(--ex-space-md);
+  width: var(--ex-size-280);
+}
+
+.ex-jn-newsletter-input::placeholder { color: var(--ex-color-white-dim); }
+
+.ex-jn-newsletter-input:focus {
+  border-color: var(--ex-color-white-a30);
+  outline: none;
+}
+
+.ex-jn-newsletter-btn {
+  align-items: center;
+  background: var(--ex-color-cat-development);
+  border: none;
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-white);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-md);
+  padding: var(--ex-space-sm) var(--ex-space-md);
+  transition: opacity var(--ex-duration-fast) ease;
+  white-space: nowrap;
+}
+
+.ex-jn-newsletter-btn:hover { opacity: var(--ex-opacity-high); }

@@ -1,0 +1,123 @@
+---
+// src/layouts/Main.astro
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Scene from "../components/Scene.astro";
+import ContentOverlay from "../components/overlays/ContentOverlay.astro";
+import WarpOverlay from "../components/WarpOverlay.astro";
+import { Icon } from "astro-icon/components";
+import "../styles/strata.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  isDark?: boolean;
+}
+
+const {
+  title       = "Exo Space Planetarium",
+  description = "Explore our solar system in an interactive 3D planetarium built with Astro and Three.js.",
+  canonical   = Astro.url.href,
+  ogImage     = "/images/og-default.jpg",
+  isDark      = true,
+} = Astro.props;
+const themeValue = isDark ? "dark" : "light";
+---
+
+<!doctype html>
+<html lang="en" id="ex-html-theme-js" data-ex-theme={themeValue} data-st-theme={themeValue}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+
+    <!-- custom-font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- custom-css -->
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+
+
+    <link rel="stylesheet" href="/css/overlay/explore-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/mercury-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/venus-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/earth-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/mars-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/jupiter-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/saturn-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/uranus-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/neptune-overlay.css" />
+    <link rel="stylesheet" href="/css/overlay/sun-overlay.css" />
+
+    <!-- custom-ts -->
+    <script>
+      import '../scripts/sol-entry';
+    </script>
+    <script>
+      import '../scripts/warp-entry';
+    </script>
+  </head>
+  <body class="ex-body" data-cursor-state="default" data-scroll-state="auto">
+    <WarpOverlay />
+    <div id="ex-top-sensor-js"></div>
+    <Scene />
+    <ContentOverlay />
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <div class="ex-toggle-container">
+      <button
+        id="ex-scroll-top-btn-js"
+        data-scroll-top-state="no"
+        data-visibility-state="hidden"
+      >
+        <div class="ex-icon-wrapper">
+          <Icon name="lucide:chevron-up" class="ex-icon" />
+        </div>
+      </button>
+
+      <button id="ex-toggle-theme-js" data-ex-theme="dark">
+          <div class="ex-icon-wrapper">
+            <Icon name="lucide:sun" class="ex-icon" />
+          </div>
+          <div class="ex-icon-wrapper">
+            <Icon name="lucide:moon" class="ex-icon" />
+          </div>
+      </button>
+
+      <button id="ex-toggle-music-btn-js" data-sound-state="paused">
+        <div class="ex-icon-wrapper">
+          <svg viewBox="0 0 40 20" preserveAspectRatio="none" class="ex-icon">
+            <path class="ex-wave-path" d="M0,10 L40,10"></path>
+          </svg>
+        </div>
+        <audio id="ex-bgm-link-js" loop>
+          <source src="/audio/space-themed-bgm.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </button>
+    </div>
+
+    <Footer />
+  </body>
+</html>

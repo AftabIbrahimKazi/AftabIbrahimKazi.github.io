@@ -1,0 +1,65 @@
+﻿// src/scripts/animations/MercuryAnimation.ts
+
+import * as THREE from 'three';
+import { AnimationMixer, AnimationClip, KeyframeTrack, easeInOutSine } from '@triforge/keyframe';
+import { Mercury } from '../../objects/solar-system/mercury/Mercury';
+
+export class MercuryAnimation {
+
+  private _mixer: AnimationMixer | null = null;
+  private _worldPos = new THREE.Vector3();
+
+  constructor(private mercury: Mercury) {}
+
+  update(delta: number): void {
+    if (!this.mercury.mesh || !this.mercury.pivot) return;
+
+    if (!this._mixer) {
+      this._mixer = this._init();
+      if (!this._mixer) return;
+    }
+
+    this._mixer.update(delta);
+    this._updateSunDirection();
+  }
+
+  private _updateSunDirection(): void {
+    const material = this.mercury.mesh.material as THREE.ShaderMaterial;
+    if (!material.uniforms || !material.uniforms['uSunDirection']) return;
+
+    this.mercury.mesh.getWorldPosition(this._worldPos);
+    (material.uniforms['uSunDirection'].value as THREE.Vector3)
+      .copy(this._worldPos).multiplyScalar(-1).normalize();
+  }
+
+  private _init(): AnimationMixer | null {
+    const { mesh, pivot } = this.mercury;
+    if (!mesh || !pivot) return null;
+
+    const mixer = new AnimationMixer();
+
+    // Orbital rotation (loop)
+    const pivotRot = pivot.rotation as unknown as Record<string, number>;
+    mixer.play(new AnimationClip('orbit', [
+      new KeyframeTrack(pivotRot, 'y', [{ time: 0, value: 0 }, { time: 450, value: Math.PI * 2 }]),
+    ]), { wrapMode: 'loop' });
+
+    // Self-rotation (loop)
+    const meshRot = mesh.rotation as unknown as Record<string, number>;
+    mixer.play(new AnimationClip('self-rot', [
+      new KeyframeTrack(meshRot, 'y', [{ time: 0, value: 0 }, { time: 250, value: Math.PI * 2 }]),
+    ]), { wrapMode: 'loop' });
+
+    // Glow pulse (pingpong)
+    const glow = mesh.getObjectByName('ex-mercury-glow-js') as THREE.Sprite | undefined;
+    if (glow) {
+      const glowScale = glow.scale as unknown as Record<string, number>;
+      mixer.play(new AnimationClip('glow', [
+        new KeyframeTrack(glowScale, 'x', [{ time: 0, value: 1.25, easing: easeInOutSine }, { time: 2, value: 1.35 }]),
+        new KeyframeTrack(glowScale, 'y', [{ time: 0, value: 1.25, easing: easeInOutSine }, { time: 2, value: 1.35 }]),
+      ]), { wrapMode: 'pingpong' });
+    }
+
+    return mixer;
+  }
+}

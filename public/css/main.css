@@ -1,0 +1,652 @@
+/* src/styles/main.css */
+
+/* ---- global css ---- */
+
+.ex-line-break { display: block; }
+
+.ex-body[data-cursor-state="pointer"] { cursor: pointer; }
+.ex-body[data-scroll-state="locked"]  { overflow: hidden; }
+
+#ex-html-theme-js {
+    scroll-behavior: smooth;
+}
+
+.ex-body {
+    background-color: var(--ex-bg-body);
+    color: var(--ex-text-body);
+
+    font-size: var(--ex-font-size-default);
+    font-weight: var(--ex-para-font-weight);
+    height: 100dvh;
+    margin: 0;
+    scroll-behavior: smooth;
+    transition: background-color var(--ex-duration-slow) ease, color var(--ex-duration-mid) ease;
+    -webkit-font-smoothing: var(--ex--webkit-font-smoothing);
+}
+
+.ex-para .ex-text {
+    font-size: var(--ex-font-size-default);
+    font-weight: var(--ex-para-font-weight);
+    margin: 0px 0px var(--ex-space-default) 0px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+    text-align: justify;
+}
+
+.ex-heading .ex-text {
+    font-size: var(--ex-font-size-lg);
+    font-weight: var(--ex-heading-font-weight);
+    margin: 0px 0px var(--ex-space-default) 0px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.ex-nav-links a,
+.ex-social-links a {
+    color: var(--ex-nav-link-color);
+    transition: color var(--ex-duration-slow) ease;
+    -webkit-font-smoothing: var(--ex--webkit-font-smoothing);
+    text-decoration: none;
+}
+
+.ex-social-links {
+    display: flex;
+}
+
+.ex-nav-links a:hover,
+.ex-social-links a:hover {
+    color: var(--ex-nav-link-color-hover);
+    text-shadow: 0px 0px 8px var(--ex-nav-link-color-hover);
+}
+
+.ex-icon-wrapper {
+    height: var(--ex-size-20);
+    width: var(--ex-size-20);
+}
+
+.ex-icon {
+    height: fit-content;
+    vertical-align: text-bottom;
+    width: max-content;
+}
+
+.ex-list-style {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ex-news-letter input {
+    background-color: var(--ex-transparent);
+    border: 1px solid var(--ex-border-color);
+    border-radius: var(--ex-border-radius-outer);
+    box-shadow: var(--ex-drop-shadow);
+    color: var(--ex-text-body);
+    padding: var(--ex-space-xxs) var(--ex-space-xs);
+    transition: box-shadow var(--ex-duration-slow) ease, border-color var(--ex-duration-mid) ease;
+}
+
+.ex-news-letter input:hover {
+    box-shadow: var(--ex-drop-shadow-focus-hover);
+}
+.ex-news-letter input:focus-visible {
+    outline: 2px solid var(--ex-border-color);
+    outline-offset: 2px;
+    box-shadow: var(--ex-drop-shadow-focus-hover);
+}
+
+.ex-news-letter .ex-submit-btn {
+    align-self: center;
+    background-color: var(--ex-nav-link-color-hover);
+    border: 1px solid var(--ex-border-color);
+    border-radius: var(--ex-border-radius-outer);
+    color: var(--ex-btn-color-white);
+    display: inline-flex;
+    padding: var(--ex-space-xxs) var(--ex-space-xs);
+    transition: box-shadow var(--ex-duration-slow) ease, border-color var(--ex-duration-mid) ease;
+}
+
+.ex-news-letter .ex-submit-btn:hover {
+    box-shadow: var(--ex-drop-shadow-focus-hover);
+}
+
+
+.ex-toggle-container {
+    bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    right: 25px;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-user-profile-btn-js,
+#ex-toggle-music-btn-js,
+#ex-toggle-theme-js,
+#ex-scroll-top-btn-js {
+    align-items: center;
+    background-color: var(--ex-transparent);
+    border: 1px solid var(--ex-btn-color);
+    border-radius: var(--ex-border-radius-round);
+    display: flex;
+    height: var(--ex-size-40);
+    justify-content: center;
+    position: relative;
+    width: var(--ex-size-40);
+    -webkit-tap-highlight-color: transparent;
+}
+
+#ex-toggle-music-btn-js,
+#ex-toggle-theme-js,
+#ex-scroll-top-btn-js {
+    transition: scale var(--ex-duration-fast) ease;
+}
+
+#ex-toggle-music-btn-js:hover,
+#ex-toggle-theme-js:hover,
+#ex-scroll-top-btn-js:hover {
+    scale: 1.15;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-user-profile-btn-js .ex-icon-wrapper,
+#ex-toggle-music-btn-js .ex-icon-wrapper,
+#ex-toggle-theme-js .ex-icon-wrapper,
+#ex-scroll-top-btn-js .ex-icon-wrapper {
+    align-items: center;
+    color: var(--ex-btn-color);
+    display: flex;
+    justify-content: center;
+}
+
+#ex-toggle-music-btn-js .ex-icon-wrapper .ex-icon {
+    stroke: var(--ex-btn-color);
+}
+
+#ex-toggle-music-btn-js .ex-wave-path {
+    d: var(--ex-path-minus);
+    stroke-dashoffset: 0;
+}
+
+#ex-toggle-music-btn-js[data-sound-state="playing"] .ex-wave-path {
+    d: var(--ex-path-wave);
+    stroke-dasharray: var(--ex-dash-array-gap);
+    animation: ex-sine-wave var(--ex-wave-speed) infinite linear;
+    transition: d var(--ex-duration-slow) var(--ex-ease-ui), stroke-dashoffset var(--ex-duration-mid) ease-in-out;
+}
+
+#ex-toggle-music-btn-js[data-sound-state="paused"] .ex-wave-path {
+    d: var(--ex-path-minus);
+    stroke-dasharray: var(--ex-dash-array-straight);
+    animation: none;
+    stroke-dashoffset: 0;
+    transition: d var(--ex-duration-slow) var(--ex-ease-ui), stroke-dashoffset var(--ex-duration-mid) ease-in-out;
+}
+
+@keyframes ex-sine-wave {
+    0%   { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 400; }
+}
+
+#ex-toggle-theme-js .ex-icon-wrapper {
+    position: absolute;
+}
+
+#ex-toggle-theme-js[data-ex-theme="dark"] .ex-icon-wrapper:nth-child(1),
+#ex-toggle-theme-js[data-ex-theme="light"] .ex-icon-wrapper:nth-child(2) {
+    opacity: 0;
+    pointer-events: none;
+    scale: 0;
+    transform: rotate(0deg);
+    transition: transform var(--ex-duration-slow) ease;
+    visibility: hidden;
+}
+
+#ex-toggle-theme-js[data-ex-theme="dark"] .ex-icon-wrapper:nth-child(2),
+#ex-toggle-theme-js[data-ex-theme="light"] .ex-icon-wrapper:nth-child(1) {
+    opacity: 1;
+    pointer-events: auto;
+    scale: 1;
+    transform: rotate(-360deg);
+    transition: transform var(--ex-duration-slow) ease;
+    visibility: visible;
+}
+
+#ex-scroll-top-btn-js[data-visibility-state="hidden"] {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--ex-duration-slow) ease, visibility var(--ex-duration-mid) ease, scale var(--ex-duration-fast) ease;
+    visibility: hidden;
+}
+
+#ex-scroll-top-btn-js[data-visibility-state="visible"] {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity var(--ex-duration-slow) ease, visibility var(--ex-duration-mid) ease, scale var(--ex-duration-fast) ease;
+    visibility: visible;
+}
+
+#ex-scroll-top-btn-js[data-scroll-top-state="yes"] .ex-wave-path-js {
+    d: var(--ex-path-wave);
+}
+
+#ex-user-profile-dropdown-menu-js .ex-user-profile-btn-js {
+    justify-self: end;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-user-profile-btn-js[data-menu-btn="on"] .ex-icon-wrapper {
+    color: var(--ex-btn-color-white-active);
+    scale: 1.5;
+    transition: scale var(--ex-duration-fast) ease;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-user-profile-btn-js[data-menu-btn="off"] .ex-icon-wrapper {
+    color: var(--ex-btn-color);
+    scale: 1.0;
+    transition: scale var(--ex-duration-fast) ease;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-dropdown-menu-js {
+    background-color: var(--ex-transparent);
+    border-left: 2px solid var(--ex-border-color);
+    border-radius: 4px;
+    padding: var(--ex-space-xs) 0 var(--ex-space-xs) var(--ex-space-default);
+    position: absolute;
+    right: 25px;
+    transition: opacity var(--ex-duration-fast) ease-in-out, visibility var(--ex-duration-mid) ease-in-out, transform var(--ex-duration-mid) ease-in-out;
+    z-index: 1;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-dropdown-menu-js[data-menu-state="open"] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(10px);
+    visibility: visible;
+}
+
+#ex-user-profile-dropdown-menu-js .ex-dropdown-menu-js[data-menu-state="closed"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0px);
+    visibility: hidden;
+}
+
+/* ---- end of global css ---- */
+
+/* ---- css for warp overlay ---- */
+
+#ex-warp-canvas[data-canvas-state="done"] { display: none; }
+
+#ex-warp-veil {
+  background: var(--ex-color-black);
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 99;
+}
+
+#ex-warp-veil[data-veil-state="hidden"]    { opacity: 0; }
+#ex-warp-veil[data-veil-state="instant-on"] { opacity: 1; }
+
+#ex-warp-veil[data-veil-state="fading-out"] {
+  opacity: 0;
+  transition: opacity var(--ex-duration-veil-out) ease-out;
+}
+
+#ex-warp-veil[data-veil-state="fading-in"] {
+  opacity: 1;
+  transition: opacity var(--ex-duration-veil-in) ease-in;
+}
+
+#ex-canvas-vignette {
+  background: radial-gradient(ellipse at center, var(--ex-transparent) 0%, var(--ex-transparent) 45%, var(--ex-color-black) 90%, var(--ex-color-black) 100%);
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity var(--ex-duration-veil-out) ease-in;
+  /* z-index: 101; */
+}
+
+#ex-warp-canvas[data-canvas-state="done"] ~ #ex-canvas-vignette {
+  opacity: 1;
+}
+
+/* ---- end of css for warp overlay ---- */
+
+/* ---- css for canvas ---- */
+
+.ex-3d-container {
+    background-color: var(--ex-bg-body);
+    height: 100dvh;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.ex-canvas-wrapper canvas {
+    display: block;
+    height: 100%;
+    touch-action: none;
+    width: 100%;
+    -webkit-tap-highlight-color: var(--ex--webkit-tap-highlight-color);
+}
+
+/* css for planet button */
+
+.ex-planet-btn {
+    position: fixed;
+    pointer-events: none;
+    transition: opacity var(--ex-duration-fast) ease-in-out, visibility var(--ex-duration-mid) ease-in-out, transform var(--ex-duration-mid) ease-in-out;
+}
+
+.ex-planet-btn[data-btn-state="hidden"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.ex-planet-btn[data-btn-state="visible"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.ex-planet-btn-inner {
+    position: relative;
+}
+
+.ex-planet-btn[data-object="ex-sun-js"] .ex-planet-btn-inner     { transform: translate(80px, -20px); }
+.ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-btn-inner { transform: translate(30px, -10px); }
+.ex-planet-btn[data-object="ex-venus-js"] .ex-planet-btn-inner   { transform: translate(35px, -10px); }
+.ex-planet-btn[data-object="ex-earth-js"] .ex-planet-btn-inner   { transform: translate(35px, -10px); }
+.ex-planet-btn[data-object="ex-mars-js"] .ex-planet-btn-inner    { transform: translate(30px, -10px); }
+.ex-planet-btn[data-object="ex-jupiter-js"] .ex-planet-btn-inner { transform: translate(55px, -15px); }
+.ex-planet-btn[data-object="ex-saturn-js"] .ex-planet-btn-inner  { transform: translate(60px, -15px); }
+.ex-planet-btn[data-object="ex-uranus-js"] .ex-planet-btn-inner  { transform: translate(40px, -10px); }
+.ex-planet-btn[data-object="ex-neptune-js"] .ex-planet-btn-inner { transform: translate(40px, -10px); }
+
+.ex-planet-explore-btn {
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: var(--ex-color-overlay);
+    border: none;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 5px;
+    color: var(--ex-text-body);
+    cursor: pointer;
+    display: flex;
+
+    font-size: var(--ex-font-size-default);
+    gap: 8px;
+    padding: var(--ex-space-xxxs) var(--ex-space-sm);
+    transition: box-shadow var(--ex-duration-slow) ease, border-color var(--ex-duration-mid) ease;
+    white-space: nowrap;
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.ex-planet-explore-btn:hover                                            { box-shadow: var(--ex-drop-shadow-focus-hover); }
+.ex-planet-btn[data-object="ex-sun-js"] .ex-planet-explore-btn:hover     { box-shadow: 0 0 20px var(--ex-color-sun-glow); }
+.ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-explore-btn:hover { box-shadow: 0 0 20px var(--ex-color-mercury-glow); }
+.ex-planet-btn[data-object="ex-venus-js"] .ex-planet-explore-btn:hover   { box-shadow: 0 0 20px var(--ex-color-venus-glow); }
+.ex-planet-btn[data-object="ex-earth-js"] .ex-planet-explore-btn:hover   { box-shadow: 0 0 20px var(--ex-color-earth-glow); }
+.ex-planet-btn[data-object="ex-mars-js"] .ex-planet-explore-btn:hover    { box-shadow: 0 0 20px var(--ex-color-mars-glow); }
+.ex-planet-btn[data-object="ex-jupiter-js"] .ex-planet-explore-btn:hover { box-shadow: 0 0 20px var(--ex-color-jupiter-glow); }
+.ex-planet-btn[data-object="ex-saturn-js"] .ex-planet-explore-btn:hover  { box-shadow: 0 0 20px var(--ex-color-saturn-glow); }
+.ex-planet-btn[data-object="ex-uranus-js"] .ex-planet-explore-btn:hover  { box-shadow: 0 0 20px var(--ex-color-uranus-glow); }
+.ex-planet-btn[data-object="ex-neptune-js"] .ex-planet-explore-btn:hover { box-shadow: 0 0 20px var(--ex-color-neptune-glow); }
+
+/* end of css for planet button */
+
+/* css for tooltip */
+
+.ex-tooltip {
+    position: fixed;
+    pointer-events: none;
+    transform: translate(16px, -10px);
+    transition: opacity var(--ex-duration-fast) ease-in-out, visibility var(--ex-duration-mid) ease-in-out, transform var(--ex-duration-mid) ease-in-out;
+}
+
+.ex-tooltip[data-tooltip-state="hidden"] { opacity: 0; visibility: hidden; }
+.ex-tooltip[data-tooltip-state="visible"] { opacity: 1; visibility: visible; }
+
+.ex-tooltip-wrapper {
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to right, var(--ex-color-tooltip-fade) 0%, var(--ex-color-tooltip-opaque) 100%);
+    border-radius: 5px 5px 15px 5px;
+    color: var(--ex-text-body);
+    display: flex;
+    gap: 5px;
+    padding: var(--ex-space-xxxs) var(--ex-space-default) var(--ex-space-xxxs) var(--ex-space-xs);
+    white-space: nowrap;
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* end of css for tooltip */
+
+/* css for tooltip and explore button */
+
+.ex-tooltip[data-object="ex-sun-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-sun-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-sun-tip-fade) 0%, var(--ex-color-sun-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-sun-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-sun-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-sun-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-sun-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-sun-text-hi) 0%, var(--ex-color-sun-text-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-mercury-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-mercury-tip-fade) 0%, var(--ex-color-mercury-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-mercury-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-mercury-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-mercury-text-hi) 0%, var(--ex-color-mercury-text-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-venus-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-venus-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-venus-tip-fade) 0%, var(--ex-color-venus-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-venus-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-venus-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-venus-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-venus-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-venus-text-hi) 0%, var(--ex-color-venus-text-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-earth-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-earth-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-earth-tip-fade) 0%, var(--ex-color-earth-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-earth-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-earth-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-earth-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-earth-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-earth-text-hi) 0%, var(--ex-color-earth-text-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-mars-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-mars-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-mars-tip-fade) 0%, var(--ex-color-mars-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-mars-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-mars-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-mars-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-mars-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-mars-hi) 0%, var(--ex-color-mars-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-jupiter-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-jupiter-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-jupiter-tip-fade) 0%, var(--ex-color-jupiter-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-jupiter-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-jupiter-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-jupiter-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-jupiter-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-jupiter-hi) 0%, var(--ex-color-jupiter-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-saturn-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-saturn-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-saturn-tip-fade) 0%, var(--ex-color-saturn-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-saturn-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-saturn-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-saturn-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-saturn-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-saturn-hi) 0%, var(--ex-color-saturn-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-uranus-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-uranus-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-uranus-tip-fade) 0%, var(--ex-color-uranus-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-uranus-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-uranus-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-uranus-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-uranus-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-uranus-hi) 0%, var(--ex-color-uranus-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip[data-object="ex-neptune-js"] .ex-tooltip-wrapper,
+.ex-planet-btn[data-object="ex-neptune-js"] .ex-planet-explore-btn {
+    background: linear-gradient(to right, var(--ex-color-neptune-tip-fade) 0%, var(--ex-color-neptune-tip-fill) 100%);
+}
+.ex-tooltip[data-object="ex-neptune-js"] .ex-tooltip-wrapper .ex-tooltip-icon-ts,
+.ex-tooltip[data-object="ex-neptune-js"] .ex-tooltip-wrapper .ex-tooltip-label-ts,
+.ex-planet-btn[data-object="ex-neptune-js"] .ex-planet-explore-btn .ex-planet-btn-label-ts,
+.ex-planet-btn[data-object="ex-neptune-js"] .ex-planet-explore-btn .ex-icon {
+    background: linear-gradient(to right, var(--ex-color-neptune-hi) 0%, var(--ex-color-neptune-lo) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-tooltip-static-ts,
+.ex-tooltip-live-ts {
+    color: var(--ex-color-white);
+
+    font-size: var(--ex-font-size-xxs);
+    letter-spacing: var(--ex-tracking-sm);
+    padding: var(--ex-space-xxxs) var(--ex-space-sm);
+    white-space: nowrap;
+}
+.ex-tooltip-static-ts { opacity: 0.6; }
+.ex-tooltip-live-ts   { opacity: 0.95; font-weight: var(--ex-heading-font-weight); }
+
+/* end of css for tooltip and explore button */
+
+/* ---- end of css for canvas ---- */
+
+/* ---- css for header ---- */
+.ex-header-section {
+    padding: var(--ex-space-lg) var(--ex-space-default);
+    background: linear-gradient(to bottom, var(--ex-gradient-overlay-opaque) 0%, var(--ex-gradient-overlay-fade) 100%);
+}
+
+.ex-header-section .row { align-items: center; }
+.ex-header-section .ex-logo { justify-self: center; }
+
+.ex-header-section .ex-logo a {
+    display: flex;
+    align-items: center;
+    color: var(--ex-logo-color);
+    text-decoration: none;
+    transition: color var(--ex-duration-slow) ease;
+}
+.ex-header-section .ex-logo a:hover { color: var(--ex-logo-color-hover); }
+
+.ex-header-section .ex-logo .ex-icon { margin: 0px var(--ex-space-xxs) 0px 0px; width: var(--ex-size-50); height: var(--ex-size-50); }
+
+.ex-header-section .ex-logo-wrapper { display: flex; align-items: center; }
+.ex-header-section .ex-logo-wrapper .ex-list-style>li:first-child { font-size: var(--ex-font-size-lg); font-weight: var(--ex-heading-font-weight); }
+.ex-header-section .ex-logo-wrapper .ex-list-style>li:last-child  { font-size: var(--ex-font-size-xs);    font-weight: var(--ex-para-font-weight);    }
+
+.ex-header-section .ex-nav-links { justify-self: center; }
+.ex-header-section .ex-nav-links a { margin: 0px var(--ex-space-xs); }
+
+.ex-search-bar form { display: flex; align-items: center; gap: 5px; justify-self: start; }
+.ex-search-bar input {
+    background-color: var(--ex-transparent);
+    border: 1px solid var(--ex-border-color);
+    border-radius: var(--ex-border-radius-outer);
+    box-shadow: var(--ex-drop-shadow);
+    color: var(--ex-text-body);
+    padding: var(--ex-space-xxs) var(--ex-space-xs);
+    transition: box-shadow var(--ex-duration-slow) ease, border-color var(--ex-duration-mid) ease;
+}
+.ex-search-bar input:hover { box-shadow: var(--ex-drop-shadow-focus-hover); }
+.ex-search-bar input:focus-visible { outline: 2px solid var(--ex-border-color); outline-offset: 2px; box-shadow: var(--ex-drop-shadow-focus-hover); }
+
+.ex-search-bar .ex-submit-btn {
+    align-self: center;
+    background-color: var(--ex-transparent);
+    border: 0px;
+    border-radius: var(--ex-border-radius-outer);
+    color: var(--ex-btn-color);
+}
+.ex-search-bar .ex-submit-btn .ex-icon { width: var(--ex-size-25); height: var(--ex-size-25); }
+
+/* ---- end of css for header ---- */
+
+/* ---- css for footer ---- */
+.ex-footer-section {
+    padding: var(--ex-space-lg) var(--ex-space-default);
+    background: linear-gradient(to bottom, var(--ex-gradient-overlay-fade) 0%, var(--ex-gradient-overlay-opaque) 100%);
+}
+
+.ex-footer-section .ex-middle-wrapper { margin: 0px 0px var(--ex-space-lg) 0px; }
+.ex-footer-section .ex-middle-wrapper .ex-heading .ex-text { color: var(--ex-heading-text-color); }
+.ex-footer-section .ex-middle-wrapper .ex-nav-links a { margin: 0px var(--ex-space-default) 0px 0px; display: flex; }
+.ex-footer-section .ex-middle-wrapper .ex-list-style li { padding: 0 0 var(--ex-space-default) 0; }
+.ex-footer-section .ex-middle-wrapper .ex-news-letter .ex-icon-wrapper,
+.ex-footer-section .ex-middle-wrapper .ex-list-style .ex-icon-wrapper { margin: 0px var(--ex-space-xxs) 0px 0px; }
+.ex-footer-section .ex-middle-wrapper .ex-social-links a { margin: 0px var(--ex-space-default) 0px 0px; }
+.ex-footer-section .ex-bottom-wrapper .ex-nav-links { justify-self: self-end; }
+.ex-footer-section .ex-bottom-wrapper .ex-nav-links a { margin: 0px var(--ex-space-default); }
+
+/* ---- end of css for footer ---- */
+
+.ex-toggle-btn {
+    background-color: var(--ex-transparent);
+    border: 1px solid var(--ex-border-color);
+    border-radius: var(--ex-border-radius-full);
+    margin: 0px 0px 0px var(--ex-space-default);
+    padding: var(--ex-space-xxs);
+    width: var(--ex-size-50);
+}
+
+.ex-toggle-btn .ex-icon-wrapper {
+    background-color: var(--ex-btn-color);
+    border-radius: 50%;
+    height: var(--ex-size-15);
+    transition: transform var(--ex-duration-slow) ease;
+    width: var(--ex-size-15);
+}
+.ex-toggle-btn[data-sound-state="playing"] .ex-icon-wrapper { transform: translateX(25px); }
+.ex-toggle-btn[data-sound-state="paused"]  .ex-icon-wrapper { transform: translateX(0px); }
+
+.ex-dropdown-menu-js .ex-list-style li {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 0px 0px var(--ex-space-xs) 0px;
+}

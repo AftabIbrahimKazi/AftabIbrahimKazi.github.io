@@ -1,0 +1,84 @@
+/* landing-header.css — LandingHeader component styles */
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.lp-header {
+  backdrop-filter: blur(0px);
+  background: transparent;
+  transform: translateY(0);
+  transition:
+    transform       var(--ex-duration-header) var(--ex-ease-ui),
+    background      var(--ex-duration-sm)     var(--ex-ease-ui),
+    backdrop-filter var(--ex-duration-sm)     var(--ex-ease-ui);
+}
+
+.lp-header--scrolled {
+  backdrop-filter: blur(var(--ex-blur-glass));
+  background: var(--ex-color-black-a55);
+}
+
+.lp-header--hidden {
+  transform: translateY(-110%);
+}
+
+.lp-header::after {
+  border-bottom: 1px solid var(--ex-color-border-faint);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* ── Logo ────────────────────────────────────────────────────── */
+
+.lp-logo-mark {
+  letter-spacing: var(--ex-tracking-tight);
+}
+
+.lp-logo-name {
+  letter-spacing: var(--ex-tracking-md);
+}
+
+.lp-logo-role {
+  letter-spacing: var(--ex-tracking-lg);
+}
+
+/* ── Nav ─────────────────────────────────────────────────────── */
+
+.lp-nav-link {
+  letter-spacing: var(--ex-tracking-lg);
+  transition: color var(--ex-duration-slow) ease;
+}
+.lp-nav-link::after {
+  background: var(--ex-color-accent);
+  bottom: -3px;
+  content: '';
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transition: width var(--ex-duration-xs) ease;
+  width: 0;
+}
+.lp-nav-link:hover        { color: var(--ex-color-white); }
+.lp-nav-link:hover::after { width: 100%; }
+
+/* ── Section badge ───────────────────────────────────────────── */
+
+.lp-section-badge {
+  letter-spacing: var(--ex-tracking-lg);
+}
+
+/* ── Dot nav ─────────────────────────────────────────────────── */
+
+.lp-dot {
+  border-radius: var(--ex-border-radius-round);
+  transition: scale var(--ex-duration-fast) ease;
+}
+.lp-dot[data-active="true"] { background: var(--ex-color-accent); transform: scale(1.5); }
+.lp-dot:hover               { background: var(--ex-color-white-mid); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 575.98px) {
+  .lp-section-badge { width: var(--ex-size-sm); }
+}

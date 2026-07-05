@@ -1,0 +1,335 @@
+---
+// src/components/overlays/VenusOverlay.astro — Design / Visual Work
+// 12 sections matching VENUS_SCROLL_PATH waypoints
+
+const items = [
+  {
+    category: 'PROJECT',
+    title:    '[Project Name]',
+    meta:     '[Deliverable] · [Year]',
+    body: [
+      'Placeholder — describe your first featured design project. What was the brief, who was it for, and what was the core design challenge? The most compelling case studies start with a specific problem, not a list of deliverables.',
+      'What decisions did you make and why? Design is a series of choices under constraints. Describe the constraints — timeline, brand, technical, audience — and how they shaped the outcome. This is what separates a portfolio piece from a screenshot.',
+      'What was the result? If you have metrics, use them. If not, describe the qualitative outcome. Update this placeholder with your actual project details and remove everything that is not true.',
+    ],
+  },
+  {
+    category: 'PROJECT',
+    title:    '[Project Name]',
+    meta:     '[Deliverable] · [Year]',
+    body: [
+      'Placeholder — a second featured design project. This could be a brand identity, a dashboard, a mobile app, or a design system. The goal is to show range — a different type of problem, a different deliverable, a different scale.',
+      'What was your specific role? If this was a team project, be clear about what you were responsible for. Design credits matter — vague attribution signals imprecision. Be specific about your contribution.',
+      'What makes this project a good example of your design thinking? Not the visual output, but the reasoning. Update this placeholder with your actual project. Replace all placeholder brackets with real content.',
+    ],
+  },
+  {
+    category: 'PROJECT',
+    title:    '[Project Name]',
+    meta:     '[Deliverable] · [Year]',
+    body: [
+      'Placeholder — a third design project. Branding, product design, editorial, motion, or interactive. By this point you have shown range — this project can go deeper into one specialisation or demonstrate a type of design work the others do not cover.',
+      'What are you most proud of in this one? Not the visual — the decision. The moment where you chose a direction, defended it, and it turned out to be right. Those moments of conviction are what make a portfolio memorable.',
+      'What would you do differently now? Every project contains lessons. Naming them demonstrates self-awareness and growth. Update this placeholder with your actual project and be honest about what worked and what you would change.',
+    ],
+  },
+  {
+    category: 'PROJECT',
+    title:    '[Project Name]',
+    meta:     '[Deliverable] · [Year]',
+    body: [
+      'Placeholder — a fourth design project. Could be a case study, a design system, a redesign, or a speculative concept. This is a good place for a project that was challenging for non-obvious reasons — organisational, conceptual, or technical.',
+      'What was the most difficult constraint? The best design work often happens under the most difficult constraints. Describe what yours were and how you navigated them without the work showing the strain.',
+      'What is the measurable impact? Even if the metric is qualitative — user satisfaction, team adoption, client feedback — put a number on it if you can. Outcomes distinguish portfolio pieces from exercises. Update this placeholder.',
+    ],
+  },
+  {
+    category: 'PROJECT',
+    title:    '[Project Name]',
+    meta:     '[Deliverable] · [Year]',
+    body: [
+      'Placeholder — a fifth project. Maybe something speculative or a personal passion project. Work done for yourself, for a cause, or as an exploration is often the most revealing work in a portfolio — it shows what you choose to do when nobody is telling you what to do.',
+      'What question were you trying to answer with this project? Personal work at its best is a design research project: a hypothesis, an experiment, and a finding. Even if the outcome is "I learned that this approach does not work," that is a valid result.',
+      'What would you do with it if you had the time and budget to take it further? The answer reveals your ambition and your values. Update this placeholder with your actual project and be specific about what drove it.',
+    ],
+  },
+];
+---
+
+<!-- 01 — Overview -->
+<div class="ex-venus-section" data-layout="bottom-center">
+  <span class="ex-venus-section-label">01 — Design</span>
+  <h2 class="ex-heading ex-venus-section-title">Visual Work</h2>
+  <p class="ex-para ex-venus-body">
+    UI/UX design, brand identity, design systems, and motion. Work that earns attention, earns trust, and earns repeat use. Placeholder — update this with your actual design focus and who you design for.
+  </p>
+  <div class="ex-venus-stats-row">
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">[N] projects</span>
+      <span class="ex-venus-stat-pill-label">Designed</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Figma</span>
+      <span class="ex-venus-stat-pill-label">Primary tool</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Systems</span>
+      <span class="ex-venus-stat-pill-label">Approach</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">[N] yrs</span>
+      <span class="ex-venus-stat-pill-label">Experience</span>
+    </div>
+  </div>
+</div>
+
+<!-- 02 — Featured Project 1 -->
+<div class="ex-venus-section" data-layout="bottom-right">
+  <span class="ex-venus-section-label">02 — Project</span>
+  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
+  <p class="ex-para ex-venus-body">
+    Placeholder — describe your first featured design project. What was the brief, who was it for, what was the core design challenge? What made it stand out?
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[Outcome]</span>
+    <span class="ex-venus-fact-label">Key result</span>
+  </div>
+  <button class="ex-venus-detail-link" data-item-id="0" data-item-side="left" data-planet="venus">Case study →</button>
+</div>
+
+<!-- 03 — Process -->
+<div class="ex-venus-section" data-layout="bottom-left">
+  <span class="ex-venus-section-label">03 — Process</span>
+  <h2 class="ex-heading ex-venus-section-title">How I Design</h2>
+  <p class="ex-para ex-venus-body">
+    Research before pixels. Systems before screens. I design components that scale and flows that hold up under edge cases. Visual polish arrives after the structure is sound. Placeholder — describe your actual process.
+  </p>
+  <div class="ex-venus-stats-row">
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Research</span>
+      <span class="ex-venus-stat-pill-label">Phase 1</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Systems</span>
+      <span class="ex-venus-stat-pill-label">Phase 2</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Polish</span>
+      <span class="ex-venus-stat-pill-label">Phase 3</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Ship</span>
+      <span class="ex-venus-stat-pill-label">Phase 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- 04 — Featured Project 2 -->
+<div class="ex-venus-section" data-layout="right">
+  <span class="ex-venus-section-label">04 — Project</span>
+  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
+  <p class="ex-para ex-venus-body">
+    Placeholder — a second featured design project. This could be a brand identity, a dashboard, a mobile app, or a design system. Describe the scope and what you were responsible for.
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[Scope]</span>
+    <span class="ex-venus-fact-label">Scale of work</span>
+  </div>
+  <button class="ex-venus-detail-link" data-item-id="1" data-item-side="left" data-planet="venus">Case study →</button>
+</div>
+
+<!-- 05 — Branding -->
+<div class="ex-venus-section" data-layout="left">
+  <span class="ex-venus-section-label">05 — Branding</span>
+  <h2 class="ex-heading ex-venus-section-title">Identity Work</h2>
+  <p class="ex-para ex-venus-body">
+    Logo systems, type pairing, colour palettes, brand guidelines. I design identities that read clearly at 16px and hold their weight at 10 metres. Placeholder — describe your branding approach.
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[N] brands</span>
+    <span class="ex-venus-fact-label">Identity projects</span>
+  </div>
+</div>
+
+<!-- 06 — Featured Project 3 -->
+<div class="ex-venus-section" data-layout="top-left">
+  <span class="ex-venus-section-label">06 — Project</span>
+  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
+  <p class="ex-para ex-venus-body">
+    Placeholder — a third design project. Branding, product design, editorial, motion, or interactive. Describe the brief and your specific contribution. What are you most proud of in this one?
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[Deliverable]</span>
+    <span class="ex-venus-fact-label">Key output</span>
+  </div>
+  <button class="ex-venus-detail-link" data-item-id="2" data-item-side="right" data-planet="venus">Case study →</button>
+</div>
+
+<!-- 07 — Design Systems -->
+<div class="ex-venus-section" data-layout="right">
+  <span class="ex-venus-section-label">07 — Systems</span>
+  <h2 class="ex-heading ex-venus-section-title">Design at Scale</h2>
+  <p class="ex-para ex-venus-body">
+    Design systems are the highest-leverage design work. A token system, a component library, and clear documentation multiplies every designer and developer that works with it. Placeholder — describe your systems experience.
+  </p>
+  <div class="ex-venus-stats-row">
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Tokens</span>
+      <span class="ex-venus-stat-pill-label">Foundation</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Components</span>
+      <span class="ex-venus-stat-pill-label">Library</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Docs</span>
+      <span class="ex-venus-stat-pill-label">Adoption</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Figma</span>
+      <span class="ex-venus-stat-pill-label">Source of truth</span>
+    </div>
+  </div>
+</div>
+
+<!-- 08 — Featured Project 4 -->
+<div class="ex-venus-section" data-layout="bottom-left">
+  <span class="ex-venus-section-label">08 — Project</span>
+  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
+  <p class="ex-para ex-venus-body">
+    Placeholder — a fourth design project. Could be a case study, a design system, a redesign, or a speculative concept. Describe what made it challenging or interesting to work on.
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[Impact]</span>
+    <span class="ex-venus-fact-label">Measurable outcome</span>
+  </div>
+  <button class="ex-venus-detail-link" data-item-id="3" data-item-side="right" data-planet="venus">Case study →</button>
+</div>
+
+<!-- 09 — Motion -->
+<div class="ex-venus-section" data-layout="left">
+  <span class="ex-venus-section-label">09 — Motion</span>
+  <h2 class="ex-heading ex-venus-section-title">Things That Move</h2>
+  <p class="ex-para ex-venus-body">
+    Animation is communication. Transitions that orient. Micro-interactions that confirm. GSAP, CSS transitions, Lottie. Motion that earns its compute cycles. Placeholder — describe your motion design work.
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">GSAP</span>
+    <span class="ex-venus-fact-label">Primary animation tool</span>
+  </div>
+</div>
+
+<!-- 10 — Tools -->
+<div class="ex-venus-section" data-layout="right">
+  <span class="ex-venus-section-label">10 — Tools</span>
+  <h2 class="ex-heading ex-venus-section-title">Design Stack</h2>
+  <p class="ex-para ex-venus-body">
+    Figma for UI and systems. Illustrator for vector work. After Effects and GSAP for motion. Framer for interactive prototypes. I use whatever produces the most honest prototype. Placeholder — update with your tools.
+  </p>
+  <div class="ex-venus-stats-row">
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Figma</span>
+      <span class="ex-venus-stat-pill-label">UI & systems</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Framer</span>
+      <span class="ex-venus-stat-pill-label">Prototyping</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">After Effects</span>
+      <span class="ex-venus-stat-pill-label">Motion</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Illustrator</span>
+      <span class="ex-venus-stat-pill-label">Vector</span>
+    </div>
+  </div>
+</div>
+
+<!-- 11 — Featured Project 5 -->
+<div class="ex-venus-section" data-layout="bottom-right">
+  <span class="ex-venus-section-label">11 — Project</span>
+  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
+  <p class="ex-para ex-venus-body">
+    Placeholder — a fifth project. Maybe something speculative or a personal passion project. Describe what you designed, why, and what you'd do differently now.
+  </p>
+  <div class="ex-venus-key-fact">
+    <span class="ex-venus-fact-number">[Year]</span>
+    <span class="ex-venus-fact-label">Completed</span>
+  </div>
+  <button class="ex-venus-detail-link" data-item-id="4" data-item-side="left" data-planet="venus">Case study →</button>
+</div>
+
+<!-- 12 — CTA -->
+<div class="ex-venus-section" data-layout="center">
+  <span class="ex-venus-section-label">12 — Portfolio</span>
+  <h2 class="ex-heading ex-venus-section-title">See All the Work</h2>
+  <p class="ex-para ex-venus-body">
+    The full portfolio — case studies, process notes, and finished work — is available on request or via Dribbble and Behance. Get in touch at Neptune if you'd like a deck.
+  </p>
+  <div class="ex-venus-stats-row">
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Dribbble</span>
+      <span class="ex-venus-stat-pill-label">Visual shots</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Neptune</span>
+      <span class="ex-venus-stat-pill-label">Get in touch</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">Behance</span>
+      <span class="ex-venus-stat-pill-label">Case studies</span>
+    </div>
+    <div class="ex-venus-stat-pill">
+      <span class="ex-venus-stat-pill-value">PDF deck</span>
+      <span class="ex-venus-stat-pill-label">On request</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Item data for sidebar ───────────────────────────────────── -->
+<script type="application/json" id="ex-venus-items-data" is:inline set:html={JSON.stringify(items)}></script>
+
+<script>
+  import StrataOffcanvas from '@strata-packages/offcanvas';
+
+  function init(): void {
+    const dataEl       = document.getElementById('ex-venus-items-data');
+    const sidebarLeft  = document.getElementById('ex-venus-sidebar-left');
+    const sidebarRight = document.getElementById('ex-venus-sidebar-right');
+
+    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+
+    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+
+    const items: { category: string; title: string; meta: string; body: string[] }[] =
+      JSON.parse(dataEl.textContent ?? '[]');
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
+      if (!btn || btn.dataset.planet !== 'venus') return;
+      const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
+      if (!item) return;
+
+      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
+      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
+      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
+
+      const catEl   = document.getElementById(`ex-venus-sidebar-cat-${side}`);
+      const titleEl = document.getElementById(`ex-venus-sidebar-title-${side}`);
+      const metaEl  = document.getElementById(`ex-venus-sidebar-meta-${side}`);
+      const bodyEl  = document.getElementById(`ex-venus-sidebar-body-${side}`);
+
+      if (catEl)   catEl.textContent   = item.category;
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl)  metaEl.textContent  = item.meta;
+      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
+
+      StrataOffcanvas.open(sidebar);
+      setTimeout(() => closeBtn?.focus(), 60);
+    });
+  }
+
+  init();
+</script>

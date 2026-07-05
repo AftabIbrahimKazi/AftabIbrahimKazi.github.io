@@ -1,0 +1,327 @@
+/* saturn-overlay.css — Ringed jewel · Elegant refined theme */
+
+#ex-content-overlay[data-planet="ex-saturn-js"] { background: transparent; }
+
+#ex-content-overlay[data-planet="ex-saturn-js"] .ex-overlay-section,
+#ex-content-overlay[data-planet="ex-saturn-js"] .ex-overlay-section--entry {
+  background: transparent; min-height: unset; padding: 0;
+}
+
+#ex-content-overlay[data-planet="ex-saturn-js"] .ex-overlay-entry-header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--ex-color-saturn-bg);
+  border-bottom: none;
+  border-radius: var(--ex-border-radius-outer);
+  display: inline-block;
+  margin-bottom: 0;
+  padding: var(--ex-space-md) var(--ex-space-lg);
+}
+
+#ex-content-overlay[data-planet="ex-saturn-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Section base — refined, thin-bordered, elegant ──────────── */
+
+.ex-saturn-section {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(12, 10, 0, 0.83);
+  border-left: 1px solid var(--ex-color-saturn-border);
+  border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-md);
+  justify-content: center;
+  max-width: var(--ex-size-420);
+  min-height: auto;
+  padding: var(--ex-space-xl) var(--ex-space-xl);
+  position: relative;
+}
+
+/* ── Layout variants ─────────────────────────────────────────── */
+
+.ex-saturn-section[data-layout="bottom-center"] {
+  align-items: center;
+  border-bottom: 1px solid var(--ex-color-saturn-border);
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0 0;
+  margin: calc(100dvh * 0.55) auto 0;
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+.ex-saturn-section[data-layout="bottom-right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 1px solid var(--ex-color-saturn-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-saturn-section[data-layout="top-left"] {
+  margin-right: auto;
+  margin-top: var(--ex-space-xl);
+}
+
+.ex-saturn-section[data-layout="right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 1px solid var(--ex-color-saturn-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-saturn-section[data-layout="bottom-left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-saturn-section[data-layout="left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-saturn-section[data-layout="center"] {
+  align-items: center;
+  border-left: none;
+  border-radius: 0 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer);
+  border-top: 1px solid var(--ex-color-saturn-border);
+  margin: calc(100dvh * 0.2) auto var(--ex-space-xxl);
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+
+.ex-saturn-section-label {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--ex-color-saturn-label);
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-xl);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.ex-saturn-section-title {
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--ex-font-size-md);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-saturn-body {
+  color: var(--ex-text-body);
+  font-size: var(--ex-font-size-default);
+  line-height: 1.8;
+  opacity: var(--ex-opacity-body);
+}
+
+/* ── Key fact — ring-inspired triple-rule separator ──────────── */
+
+.ex-saturn-key-fact {
+  box-shadow:
+    0 -3px 0 0 var(--ex-color-saturn-border),
+    0 -5px 0 0 transparent,
+    0 -7px 0 0 var(--ex-color-saturn-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  margin-top: var(--ex-space-xs);
+  padding-top: var(--ex-space-lg);
+}
+
+.ex-saturn-fact-number {
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-saturn-fact-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+/* ── Stats row / pill ────────────────────────────────────────── */
+
+.ex-saturn-stats-row {
+  border-top: 1px solid var(--ex-color-saturn-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ex-space-xs);
+  padding-top: var(--ex-space-sm);
+}
+
+.ex-saturn-stat-pill {
+  background-color: var(--ex-color-white-faint);
+  border: 1px solid var(--ex-color-saturn-border);
+  border-radius: var(--ex-border-radius-full);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  padding: var(--ex-space-xs) var(--ex-space-default);
+}
+
+.ex-saturn-stat-pill-value {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-saturn-stat-pill-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+
+.ex-saturn-sidebar {
+  --st-offcanvas-width: min(520px, 100vw);
+  --st-bg:              rgba(14, 12, 2, 0.94);
+  --st-border:          transparent;
+  --st-duration:        var(--ex-duration-slow);
+  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(45, 38, 5, 0.94);
+  border-top: 2px solid var(--ex-color-saturn-hi);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ex-saturn-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-saturn-border); }
+.ex-saturn-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-saturn-border); }
+
+.ex-saturn-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-saturn-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-saturn-sidebar-header {
+  border-bottom: 1px solid var(--ex-color-saturn-border);
+  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
+  position: relative;
+}
+
+.ex-saturn-sidebar-close {
+  background: var(--ex-color-white-faint);
+  border: 1px solid var(--ex-color-saturn-border);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-lg);
+  top: var(--ex-space-lg);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+
+.ex-saturn-sidebar-close:hover {
+  background: var(--ex-color-saturn-border);
+  border-color: var(--ex-color-saturn-hi);
+}
+
+.ex-saturn-sidebar-cat {
+  -webkit-background-clip: text;
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-saturn-sidebar-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-lg);
+  font-weight: var(--ex-heading-font-weight);
+  line-height: 1.3;
+  margin-bottom: var(--ex-space-xs);
+}
+
+.ex-saturn-sidebar-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-saturn-sidebar-body {
+  flex: 1;
+  padding: var(--ex-space-lg);
+}
+
+.ex-saturn-sidebar-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  line-height: 1.75;
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-saturn-sidebar-body p:last-child { margin-bottom: 0; }
+
+/* ── Detail link ─────────────────────────────────────────────── */
+
+.ex-saturn-detail-link {
+  -webkit-background-clip: text;
+  align-items: center;
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  gap: var(--ex-space-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  margin-top: var(--ex-space-sm);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-saturn-detail-link:hover { opacity: var(--ex-opacity-mid); }

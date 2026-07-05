@@ -1,0 +1,144 @@
+﻿# Package Issues Log
+# Project: Planetarium
+# Purpose: Track bugs, errors, and unexpected behaviour found in @triforge/* and strata-css during real-world usage.
+# Format: [DATE] [PACKAGE] [SEVERITY] â€” Description + context
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# SEVERITY LEVELS
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# CRITICAL  â€” Breaks the site or causes data loss
+# HIGH      â€” Major feature broken or incorrect output
+# MEDIUM    â€” Feature works but behaves unexpectedly
+# LOW       â€” Minor visual or non-blocking issue
+# INFO      â€” Observation worth noting, not a bug
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# KNOWN ENVIRONMENT ISSUES (Pre-existing, not package-related)
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+[2026-06-20] [esbuild@0.27.3-0.28.0] [LOW] â€” Arbitrary file read vulnerability on Windows dev server.
+  Advisory: https://github.com/advisories/GHSA-g7r4-m6w7-qqqr
+  Context: Only exploitable if dev server is exposed on a network. Local dev only â€” risk accepted.
+  Resolution: No fix available without downgrading Astro to 5.17.2 (which reintroduces 6 high severity
+  Astro vulnerabilities). Current state (Astro 6.4.8) is the safest achievable configuration.
+  Status: ACCEPTED â€” monitor for upstream resolution.
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# @triforge PACKAGES
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+# @triforge/core-types@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/radius-parametric-geometry@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/animation-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/compositor-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/shader-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/keyframe@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/particle-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/curve-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/modifier-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/volume-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/uv-core@0.1.0
+# â€” No issues logged yet.
+
+# @triforge/geometry-nodes@0.1.0
+# â€” No issues logged yet.
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# strata-css
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+# strata-css
+# â€” No issues logged yet.
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# LOG ENTRIES â€” Add below this line
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+
+[2026-06-20] [strata-css] [LOW] â€” PostCSS plugin did not pass the `from` option to `postcss.parse`.
+  Warning: "A PostCSS plugin did not pass the `from` option to postcss.parse. This may cause imported assets to be incorrectly transformed."
+  Context: Appears during Vite/Astro build when strata-css PostCSS plugin processes src/styles/strata.css.
+  No broken output observed â€” build completes successfully and CSS is generated correctly.
+  Status: OPEN â€” contact package author to pass `from: opts.from` in PostCSS plugin call.
+
+[2026-06-20] [PROJECT BUG â€” FIXED] [HIGH] â€” AsteroidBelt.ts: Float32Array allocated with `count * 1` instead of `count * 3`.
+  File: src/scripts/objects/AsteroidBelt.ts (original), line 27: `new Float32Array(count * 1)`
+  Impact: Buffer was 3x too small. Writing positions[i*3], positions[i*3+1], positions[i*3+2] caused out-of-bounds
+  writes â€” undefined behaviour, likely silent data corruption or crash at runtime.
+  Fix: Migrated buildRing() to @triforge/geometry-nodes (GeometryLiteral + DistributePointsOnFaces + SetPosition).
+  The geometry-nodes graph generates correct BufferGeometry internally â€” no manual Float32Array allocation.
+  Status: FIXED.
+
+[2026-06-20] [@triforge/compositor-core] [MEDIUM] â€” Vite pre-bundler eagerly resolves `import("postprocessing")` inside `_compilePmndrs()`.
+  Error: "Failed to resolve import 'postprocessing' from node_modules/.vite/deps/@triforge_compositor-core.js"
+  Context: Vite's dependency optimizer scans all dynamic imports in the module graph, including those inside
+  try/catch blocks that only run on `backend === 'pmndrs'`. Since we use the default 'three' backend,
+  `postprocessing` is never actually imported at runtime, but Vite still tries to pre-bundle it.
+  Workaround: Created `src/stubs/postprocessing.js` (empty module stub) and added a Vite `resolve.alias`
+  mapping `postprocessing` → stub. Vite resolves the dynamic import to the stub at bundle time; at runtime
+  `_compilePmndrs()` is never called (backend is 'three'), so the empty stub is never accessed.
+  Note: `optimizeDeps.exclude` alone was insufficient — Vite still transforms the raw module file and
+  errors on unresolved dynamic imports even when the package is excluded from pre-bundling.
+  Root cause: `_compilePmndrs()` should guard its import behind a check that is opaque to static analysis,
+  e.g. using `new Function('m', 'return import(m)')('postprocessing')` or a vite-specific `/* @vite-ignore */`
+  comment on the import.
+  Status: OPEN â€” contact package author to add `/* @vite-ignore */` to the pmndrs dynamic import.
+
+
+[2026-06-20] [@triforge/compositor-core — Bloom] [MEDIUM] — UnrealBloomPass not resolved via three/addons in Vite pre-bundle context.
+  Error: "Bloom: UnrealBloomPass not found in three/addons."
+  Context: CompositorOutput._loadThreePassModules() does `import("three/addons/postprocessing/UnrealBloomPass.js")`
+  dynamically at runtime. The file exists in node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js
+  and three/addons/* is a valid export alias, but Vite fails to resolve it from inside the pre-bundled module.
+  The import() silently fails (caught internally), leaving the registry entry undefined, which _buildThree() then
+  throws on.
+  Workaround: Bloom removed from EnvironmentManager. Using Vignette + FilmGrain only (both use ShaderPass/FilmPass
+  which resolve correctly).
+  Root cause: Dynamic three/addons/* imports inside pre-bundled packages are not resolved by Vite. Package author
+  should either: (a) use `three/examples/jsm/` paths instead, or (b) ship with a Vite plugin that marks
+  three/addons/* as external in pre-bundle context.
+  Status: OPEN — Bloom pass disabled until resolved.
+
+[2026-06-20] [@triforge/geometry-nodes — DistributePointsOnFaces] [HIGH] — Output socket named "Points" but documented as "Geometry".
+  Error: `Node "DistributePointsOnFaces" has no output socket "Geometry". Available: Points`
+  Context: Calling scatter.output("Geometry") on a DistributePointsOnFaces node throws at runtime because
+  the actual output socket is named "Points", not "Geometry".
+  Fix applied: Changed all calls to scatter.output("Points") in AsteroidBelt.ts.
+  Root cause: Documentation/type definitions do not list socket names. The d.ts shows no output socket names —
+  they are only discoverable at runtime from the error message. Package author should export socket name
+  constants or list them in the d.ts.
+  Status: FIXED in project code. OPEN for package to document/type socket names.
+
+[2026-06-20] [@triforge/compositor-core] [HIGH] — Systematic incompatibility with Vite dynamic import resolution for three/addons/* paths.
+  All three/addons postprocessing passes (UnrealBloomPass, ShaderPass, FilmPass) fail to resolve when the
+  compositor is pre-bundled by Vite. The _loadThreePassModules() method uses dynamic import() for each pass,
+  but Vite cannot resolve `three/addons/postprocessing/*.js` from within a pre-bundled module at dev runtime.
+  The silent catch in _loadThreePassModules() masks the failure; _buildThree() then throws because the pass
+  constructor is undefined. This affects ALL passes including Vignette (ShaderPass) and FilmGrain (FilmPass).
+  Workaround: @triforge/compositor-core removed from project entirely. Plain renderer.render() used instead.
+  Root cause: The package dynamically imports three/addons/* paths at runtime, which requires Vite's module
+  resolver to intercept bare specifiers inside an async import(). This works in browser+importmap setups but
+  not in Vite's pre-bundled CommonJS/ESM hybrid context.
+  Fix needed in package: Use static imports (treeshaken at build time) or require the consumer to import and
+  pass the pass constructors explicitly rather than loading them dynamically.
+  Status: OPEN — compositor-core not usable in Vite-based projects until resolved.

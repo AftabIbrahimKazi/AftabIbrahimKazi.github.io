@@ -1,0 +1,37 @@
+---
+/* src/components/Scene3D.astro */
+---
+
+<div class="ex-3d-container">
+    <div class="ex-canvas-wrapper">
+        <canvas id="ex-main-canvas-ts"></canvas>
+    </div>
+    <div
+        id="ex-tooltip-ts"
+        class="ex-tooltip"
+        data-object=""
+        data-tooltip-state="hidden"
+    >
+        <div class="ex-tooltip-wrapper">
+            <span class="ex-tooltip-icon-ts"></span>
+            <span class="ex-tooltip-label-ts"></span>
+        </div>
+        <div class="ex-tooltip-static-ts"></div>
+        <div class="ex-tooltip-live-ts"></div>
+    </div>
+
+    <!-- Planet Focus Buttons -->
+    <div
+        id="ex-planet-btn-ts"
+        class="ex-planet-btn"
+        data-btn-state="hidden"
+        data-object=""
+    >
+        <div class="ex-planet-btn-inner">
+            <button class="ex-planet-explore-btn">
+                <span class="ex-planet-btn-label-ts"></span>
+                <i class="ex-icon fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

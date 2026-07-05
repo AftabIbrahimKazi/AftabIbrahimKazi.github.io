@@ -1,0 +1,108 @@
+/* landing-explore.css — Explore the System section component styles */
+
+/* ================================
+   TOP HALF — Rules
+   ================================ */
+
+/* ── Planet carousel ─────────────────────────────────────── */
+
+.lp-planet-carousel {
+  flex: 1;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.lp-planet-carousel::-webkit-scrollbar { display: none; }
+
+/* ── Planet item ─────────────────────────────────────────── */
+
+.lp-planet-item {
+  opacity: var(--ex-opacity-low);
+  transition: opacity var(--ex-duration-fast) ease-in-out, transform var(--ex-duration-mid) ease-in-out;
+}
+.lp-planet-item:hover               { opacity: var(--ex-opacity-high); transform: translateY(-4px); }
+.lp-planet-item[data-active="true"] { opacity: 1;                      transform: translateY(-6px); }
+
+.lp-planet-item:hover .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-mercury-lo), 0 0 0 1px var(--ex-color-mercury-hi), 0 0 15px var(--ex-color-mercury-glow); }
+
+/* ── Planet orb ──────────────────────────────────────────── */
+
+.lp-planet-orb {
+  border-radius: var(--ex-border-radius-round);
+  box-shadow: 0 0 0 1px var(--ex-color-border-faint);
+  transition: box-shadow var(--ex-duration-slow) ease;
+}
+
+/* Per-planet active ring */
+.lp-planet-item[data-planet="mercury"][data-active="true"] .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-mercury-lo), 0 0 0 1px var(--ex-color-mercury-hi), 0 0 15px var(--ex-color-mercury-glow); }
+.lp-planet-item[data-planet="venus"][data-active="true"]   .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-venus-lo),   0 0 0 1px var(--ex-color-venus-hi),   0 0 15px var(--ex-color-venus-glow); }
+.lp-planet-item[data-planet="earth"][data-active="true"]   .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-earth-lo),   0 0 0 1px var(--ex-color-earth-hi),   0 0 15px var(--ex-color-earth-glow); }
+.lp-planet-item[data-planet="mars"][data-active="true"]    .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-mars-lo),    0 0 0 1px var(--ex-color-mars-hi),    0 0 15px var(--ex-color-mars-glow); }
+.lp-planet-item[data-planet="jupiter"][data-active="true"] .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-jupiter-lo), 0 0 0 1px var(--ex-color-jupiter-hi), 0 0 15px var(--ex-color-jupiter-glow); }
+.lp-planet-item[data-planet="saturn"][data-active="true"]  .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-saturn-lo),  0 0 0 1px var(--ex-color-saturn-hi),  0 0 15px var(--ex-color-saturn-glow); }
+.lp-planet-item[data-planet="uranus"][data-active="true"]  .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-uranus-lo),  0 0 0 1px var(--ex-color-uranus-hi),  0 0 15px var(--ex-color-uranus-glow); }
+.lp-planet-item[data-planet="neptune"][data-active="true"] .lp-planet-orb { box-shadow: 0 0 0 0px var(--ex-color-neptune-lo), 0 0 0 1px var(--ex-color-neptune-hi), 0 0 15px var(--ex-color-neptune-glow); }
+
+/* ── Orb wrapper ─────────────────────────────────────────── */
+
+.lp-planet-orb-wrapper .lp-planet-orb { height: 100%; width: 100%; }
+
+/* ── Planet name ─────────────────────────────────────────── */
+
+.lp-planet-name {
+  letter-spacing: var(--ex-tracking-lg);
+  transition: color var(--ex-duration-slow) ease;
+}
+
+.lp-planet-item[data-planet="mercury"][data-active="true"] .lp-planet-name { color: var(--ex-color-mercury-hi); }
+.lp-planet-item[data-planet="venus"][data-active="true"]   .lp-planet-name { color: var(--ex-color-venus-hi); }
+.lp-planet-item[data-planet="earth"][data-active="true"]   .lp-planet-name { color: var(--ex-color-earth-hi); }
+.lp-planet-item[data-planet="mars"][data-active="true"]    .lp-planet-name { color: var(--ex-color-mars-hi); }
+.lp-planet-item[data-planet="jupiter"][data-active="true"] .lp-planet-name { color: var(--ex-color-jupiter-hi); }
+.lp-planet-item[data-planet="saturn"][data-active="true"]  .lp-planet-name { color: var(--ex-color-saturn-hi); }
+.lp-planet-item[data-planet="uranus"][data-active="true"]  .lp-planet-name { color: var(--ex-color-uranus-hi); }
+.lp-planet-item[data-planet="neptune"][data-active="true"] .lp-planet-name { color: var(--ex-color-neptune-hi); }
+
+/* ── Planet subtitle ─────────────────────────────────────── */
+
+.lp-planet-sub { letter-spacing: var(--ex-tracking-sm); }
+
+.lp-planet-item[data-planet="mercury"][data-active="true"] .lp-planet-sub { color: var(--ex-color-mercury-label); }
+.lp-planet-item[data-planet="venus"][data-active="true"]   .lp-planet-sub { color: var(--ex-color-venus-label); }
+.lp-planet-item[data-planet="earth"][data-active="true"]   .lp-planet-sub { color: var(--ex-color-earth-label); }
+.lp-planet-item[data-planet="mars"][data-active="true"]    .lp-planet-sub { color: var(--ex-color-mars-label); }
+.lp-planet-item[data-planet="jupiter"][data-active="true"] .lp-planet-sub { color: var(--ex-color-jupiter-label); }
+.lp-planet-item[data-planet="saturn"][data-active="true"]  .lp-planet-sub { color: var(--ex-color-saturn-label); }
+.lp-planet-item[data-planet="uranus"][data-active="true"]  .lp-planet-sub { color: var(--ex-color-uranus-label); }
+.lp-planet-item[data-planet="neptune"][data-active="true"] .lp-planet-sub { color: var(--ex-color-neptune-label); }
+
+/* ── Carousel arrows ─────────────────────────────────────── */
+
+.lp-carousel-arrow {
+  border-color: var(--ex-color-border-faint);
+  transition: box-shadow var(--ex-duration-slow) ease, border-color var(--ex-duration-mid) ease;
+}
+.lp-carousel-arrow:hover { border-color: var(--ex-color-accent); color: var(--ex-color-accent); }
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+  .lp-planet-orb            { height: var(--ex-size-xs); width: var(--ex-size-xs); }
+  .lp-planet-orb-wrapper    { height: var(--ex-size-xs); width: var(--ex-size-xs); }
+  .lp-carousel-arrow        { display: none; }
+}
+
+/* Small — Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .lp-planet-orb         { height: var(--ex-size-sm); width: var(--ex-size-sm); }
+  .lp-planet-orb-wrapper { height: var(--ex-size-sm); width: var(--ex-size-sm); }
+}
+
+/* Medium — Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-planet-orb         { height: var(--ex-size-default); width: var(--ex-size-default); }
+  .lp-planet-orb-wrapper { height: var(--ex-size-default); width: var(--ex-size-default); }
+}

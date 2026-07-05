@@ -1,0 +1,22 @@
+Copyright (c) 2026 Aftab Ibrahim Kazi. All rights reserved.
+
+This repository is published for portfolio review and educational reading only.
+
+Permission is granted to view and clone this repository to evaluate the
+author's work. No other rights are granted. In particular, you may NOT:
+
+- copy, reuse, or redistribute the source code, in whole or in part;
+- use the design, content, or assets in your own projects;
+- sell, sublicense, or create derivative works from any part of this
+  repository;
+- deploy this site or a modified version of it.
+
+The open-source libraries this project depends on (strata-css, @triforge/*,
+three.js, Astro, GSAP, and others) remain under their own licenses — see
+package.json and the respective projects.
+
+Planet and star textures are from Solar System Scope
+(https://www.solarsystemscope.com/textures/), licensed CC BY 4.0.
+
+For any use beyond the permissions above, contact the author:
+kazi3052@gmail.com

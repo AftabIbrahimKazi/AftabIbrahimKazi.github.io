@@ -1,0 +1,106 @@
+---
+// src/components/overlays/NeptuneOverlay.astro — Contact overlay
+---
+
+<!-- 01 — Intro -->
+<div class="ex-neptune-section" data-layout="bottom-center">
+  <span class="ex-neptune-section-label">01 — TRANSMISSION</span>
+  <h2 class="ex-heading ex-neptune-section-title">Send a Signal</h2>
+  <p class="ex-para ex-neptune-body">Neptune sits 4.5 billion kilometres from the Sun. Voyager 2 took 12 years to reach it. Your message will arrive considerably faster. Open to freelance projects, collaborations, and conversations.</p>
+  <div class="ex-neptune-key-fact">
+    <span class="ex-neptune-fact-number">Usually within 48 hrs</span>
+    <span class="ex-neptune-fact-label">Response time</span>
+  </div>
+</div>
+
+<!-- 02 — Direct line -->
+<div class="ex-neptune-section" data-layout="bottom-right">
+  <span class="ex-neptune-section-label">02 — DIRECT LINE</span>
+  <h2 class="ex-heading ex-neptune-section-title">Reach Out Directly</h2>
+  <a href="mailto:hello@aftabkazi.com" class="ex-neptune-email-link">hello@aftabkazi.com</a>
+  <div class="ex-neptune-availability">
+    <span class="ex-neptune-status-dot" aria-hidden="true"></span>
+    <span class="ex-neptune-status-text">Open to new projects</span>
+  </div>
+  <p class="ex-para ex-neptune-body">Based in [City, Country]. Working remotely worldwide.</p>
+</div>
+
+<!-- 03 — Contact form -->
+<div class="ex-neptune-section ex-neptune-section--form" data-layout="top-left">
+  <span class="ex-neptune-section-label">03 — MESSAGE FORM</span>
+  <h2 class="ex-heading ex-neptune-section-title">Compose Your Transmission</h2>
+  <form
+    class="ex-neptune-form"
+    name="contact"
+    method="POST"
+    action="/neptune/success"
+    onsubmit="return false;"
+    novalidate
+  >
+    <div class="ex-neptune-form-row">
+      <div class="ex-neptune-field">
+        <label class="ex-neptune-label" for="np-name">Name</label>
+        <input class="ex-neptune-input" id="np-name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
+      </div>
+      <div class="ex-neptune-field">
+        <label class="ex-neptune-label" for="np-email">Email</label>
+        <input class="ex-neptune-input" id="np-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+      </div>
+    </div>
+    <div class="ex-neptune-field">
+      <label class="ex-neptune-label" for="np-subject">Subject</label>
+      <input class="ex-neptune-input" id="np-subject" type="text" name="subject" placeholder="What's this about?" required />
+    </div>
+    <div class="ex-neptune-field">
+      <label class="ex-neptune-label" for="np-message">Message</label>
+      <textarea class="ex-neptune-input ex-neptune-textarea" id="np-message" name="message" rows="5" placeholder="Tell me about your project, idea, or just say hello." required></textarea>
+    </div>
+    <button class="ex-neptune-submit" type="submit">
+      <span>TRANSMIT</span>
+      <span aria-hidden="true">&rarr;</span>
+    </button>
+  </form>
+</div>
+
+<!-- 04 — Social links -->
+<div class="ex-neptune-section" data-layout="right">
+  <span class="ex-neptune-section-label">04 — ELSEWHERE</span>
+  <h2 class="ex-heading ex-neptune-section-title">Other Frequencies</h2>
+  <ul class="ex-neptune-socials" role="list">
+    <li>
+      <a href="https://github.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github ex-neptune-social-icon" aria-hidden="true"></i>
+        <span>GitHub</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://linkedin.com/in/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-linkedin ex-neptune-social-icon" aria-hidden="true"></i>
+        <span>LinkedIn</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-x-twitter ex-neptune-social-icon" aria-hidden="true"></i>
+        <span>Twitter / X</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://dribbble.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-dribbble ex-neptune-social-icon" aria-hidden="true"></i>
+        <span>Dribbble</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- 05 — Closing note -->
+<div class="ex-neptune-section" data-layout="center">
+  <span class="ex-neptune-section-label">05 — SIGNAL SENT</span>
+  <h2 class="ex-heading ex-neptune-section-title">End of Transmission</h2>
+  <p class="ex-para ex-neptune-body">Signal destination: Neptune, 8th planet, 4.495 × 10<sup>9</sup> km from origin. Estimated travel time: 4 hours 9 minutes at light speed. Actual reply time: considerably sooner.</p>
+  <div class="ex-neptune-key-fact">
+    <span class="ex-neptune-fact-number">Voyager 2 — 1989</span>
+    <span class="ex-neptune-fact-label">Only spacecraft to visit Neptune</span>
+  </div>
+</div>

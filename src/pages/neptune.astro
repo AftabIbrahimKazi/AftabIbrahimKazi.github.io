@@ -1,0 +1,187 @@
+---
+// src/pages/neptune.astro — Contact page
+import WarpOverlay   from '../components/WarpOverlay.astro';
+import LandingHeader from '../components/LandingHeader.astro';
+import LandingFooter from '../components/LandingFooter.astro';
+
+const socials = [
+  { label: 'GitHub',   href: 'https://github.com/placeholder',         icon: 'fa-brands fa-github' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/placeholder',     icon: 'fa-brands fa-linkedin' },
+  { label: 'Twitter',  href: 'https://twitter.com/placeholder',         icon: 'fa-brands fa-x-twitter' },
+  { label: 'Dribbble', href: 'https://dribbble.com/placeholder',        icon: 'fa-brands fa-dribbble' },
+];
+---
+
+<!doctype html>
+<html lang="en" data-ex-theme="dark" data-st-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Aftab Kazi</title>
+    <meta name="description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
+    <link rel="canonical" href="https://aftabkazi.com/neptune" />
+    <meta property="og:title" content="Contact | Aftab Kazi" />
+    <meta property="og:description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="stylesheet" href="/webfonts/font-awesome.css" />
+
+    <script>
+      import '../scripts/warp-entry';
+    </script>
+  </head>
+
+  <body class="ex-body ex-ct-body">
+    <WarpOverlay />
+    <LandingHeader />
+
+    <main class="ex-ct-main">
+      <div class="ex-ct-container">
+
+        <!-- ── Hero ────────────────────────────────────────────── -->
+        <header class="ex-ct-hero">
+          <span class="ex-ct-eyebrow">NEPTUNE — 01 / TRANSMISSION</span>
+          <h1 class="ex-ct-hero-title">Send a Signal</h1>
+          <p class="ex-ct-hero-desc">
+            Neptune sits 4.5 billion kilometres from the Sun. A signal from Voyager 2 took four hours to arrive. Yours will be faster. Open to freelance projects, collaborations, and conversations.
+          </p>
+        </header>
+
+        <!-- ── Two-column layout ────────────────────────────────── -->
+        <div class="ex-ct-layout">
+
+          <!-- ── Left — info panel ────────────────────────────── -->
+          <aside class="ex-ct-info">
+
+            <div class="ex-ct-info-block">
+              <span class="ex-ct-info-label">DIRECT LINE</span>
+              <a href="mailto:hello@aftabkazi.com" class="ex-ct-email-link">
+                hello@aftabkazi.com
+              </a>
+            </div>
+
+            <div class="ex-ct-info-block">
+              <span class="ex-ct-info-label">AVAILABILITY</span>
+              <p class="ex-ct-availability">
+                <span class="ex-ct-status-dot" aria-hidden="true"></span>
+                Open to new projects
+              </p>
+              <p class="ex-ct-availability-detail">
+                Based in [City, Country]. Working remotely worldwide.
+              </p>
+            </div>
+
+            <div class="ex-ct-info-block">
+              <span class="ex-ct-info-label">ELSEWHERE IN THE SYSTEM</span>
+              <ul class="ex-ct-socials" role="list">
+                {socials.map(s => (
+                  <li>
+                    <a href={s.href} class="ex-ct-social-link" target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                      <i class={`${s.icon} ex-ct-social-icon`} aria-hidden="true"></i>
+                      <span>{s.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="ex-ct-transmission-badge">
+              <span class="ex-ct-badge-label">SIGNAL SPEED</span>
+              <span class="ex-ct-badge-value">Usually within 48 hrs</span>
+            </div>
+
+          </aside>
+
+          <!-- ── Right — contact form ──────────────────────────── -->
+          <section class="ex-ct-form-panel" aria-label="Contact form">
+            <form
+              class="ex-ct-form"
+              name="contact"
+              method="POST"
+              action="/neptune/success"
+              onsubmit="return false;"
+              novalidate
+            >
+              <div class="ex-ct-form-row">
+                <div class="ex-ct-field">
+                  <label class="ex-ct-label" for="ct-name">Name</label>
+                  <input
+                    class="ex-ct-input"
+                    id="ct-name"
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    required
+                  />
+                </div>
+                <div class="ex-ct-field">
+                  <label class="ex-ct-label" for="ct-email">Email</label>
+                  <input
+                    class="ex-ct-input"
+                    id="ct-email"
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="ex-ct-field">
+                <label class="ex-ct-label" for="ct-subject">Subject</label>
+                <input
+                  class="ex-ct-input"
+                  id="ct-subject"
+                  type="text"
+                  name="subject"
+                  placeholder="What's this about?"
+                  required
+                />
+              </div>
+
+              <div class="ex-ct-field">
+                <label class="ex-ct-label" for="ct-message">Message</label>
+                <textarea
+                  class="ex-ct-input ex-ct-textarea"
+                  id="ct-message"
+                  name="message"
+                  rows="6"
+                  placeholder="Tell me about your project, idea, or just say hello."
+                  required
+                ></textarea>
+              </div>
+
+              <button class="ex-ct-submit" type="submit">
+                <span>TRANSMIT MESSAGE</span>
+                <span class="ex-ct-submit-arrow" aria-hidden="true">&rarr;</span>
+              </button>
+
+            </form>
+          </section>
+
+        </div>
+
+        <!-- ── Footer note ──────────────────────────────────────── -->
+        <div class="ex-ct-footer-note">
+          <span class="ex-ct-footer-line"></span>
+          <p class="ex-ct-footer-text">
+            Signal destination: Neptune, 8th planet, 4.5 × 10<sup>9</sup> km from origin.
+          </p>
+          <span class="ex-ct-footer-line"></span>
+        </div>
+
+      </div>
+    </main>
+
+    <LandingFooter />
+  </body>
+</html>

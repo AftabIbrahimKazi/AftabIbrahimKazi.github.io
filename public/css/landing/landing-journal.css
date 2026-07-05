@@ -1,0 +1,143 @@
+/* landing-journal.css — Journal section component styles */
+
+/* ================================
+   TOP HALF — Rules
+   ================================ */
+
+/* PACKAGE EXCEPTION — swiper 11.x
+   Violation: injects base CSS for .swiper, .swiper-wrapper, .swiper-slide, .swiper-pagination-bullet
+   Decision: accepted — overridden below via .lp-jn-* scoped selectors
+   Reviewed by: developer */
+
+/* ── Section override ────────────────────────────────────── */
+
+.lp-section.lp-section--journal {
+  padding: 0;
+}
+
+/* ── Planet canvas ───────────────────────────────────────── */
+
+/* ── CTA link ────────────────────────────────────────────── */
+
+.lp-journal-cta {
+  letter-spacing: var(--ex-tracking-lg);
+  transition: color var(--ex-duration-slow) ease;
+}
+.lp-journal-cta:hover { color: var(--ex-color-white); }
+
+/* ── Swiper internals ────────────────────────────────────── */
+
+.lp-jn-swiper                    { flex: 1; }
+.lp-jn-swiper .swiper-wrapper    { align-items: stretch; }
+.lp-jn-swiper .swiper-slide      { height: auto; }
+
+/* ── Cards ───────────────────────────────────────────────── */
+
+.lp-jn-card {
+  transition: border-color var(--ex-duration-slow) ease;
+}
+.lp-jn-card:hover { border-color: var(--ex-color-accent-mid); }
+
+.lp-jn-card-img-wrap { aspect-ratio: 16 / 9; }
+
+.lp-jn-card-img { transition: transform var(--ex-duration-slow) ease; }
+.lp-jn-card:hover .lp-jn-card-img { transform: scale(1.04); }
+
+/* ── Category colours ────────────────────────────────────── */
+
+.lp-jn-card-cat { letter-spacing: var(--ex-tracking-lg); }
+.lp-jn-card-cat.lp-jn-card-cat--dev  { color: var(--ex-color-cat-development); }
+.lp-jn-card-cat.lp-jn-card-cat--tech { color: var(--ex-color-cat-technology); }
+.lp-jn-card-cat.lp-jn-card-cat--des  { color: var(--ex-color-cat-design); }
+.lp-jn-card-cat.lp-jn-card-cat--oss  { color: var(--ex-color-cat-life); }
+
+/* ── Date ────────────────────────────────────────────────── */
+
+.lp-jn-card-date { letter-spacing: var(--ex-tracking-sm); }
+
+/* ── Title ───────────────────────────────────────────────── */
+
+.lp-jn-card-title {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  letter-spacing: var(--ex-tracking-tight);
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ── Excerpt ─────────────────────────────────────────────── */
+
+.lp-jn-card-excerpt {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  flex: 1;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+/* ── Read-more link ──────────────────────────────────────── */
+
+.lp-jn-card-read {
+  transition: color var(--ex-duration-slow) ease, gap var(--ex-duration-fast) ease;
+}
+.lp-jn-card-read:hover                { gap: var(--ex-space-sm); }
+.lp-jn-card-read.lp-jn-card-read--dev  { color: var(--ex-color-cat-development); }
+.lp-jn-card-read.lp-jn-card-read--tech { color: var(--ex-color-cat-technology); }
+.lp-jn-card-read.lp-jn-card-read--des  { color: var(--ex-color-cat-design); }
+.lp-jn-card-read.lp-jn-card-read--oss  { color: var(--ex-color-cat-life); }
+
+/* ── Nav arrows ──────────────────────────────────────────── */
+
+.lp-jn-arrow {
+  border-color: var(--ex-color-border-faint);
+  transition: border-color var(--ex-duration-slow) ease, color var(--ex-duration-fast) ease;
+}
+.lp-jn-arrow:hover { border-color: var(--ex-color-accent); color: var(--ex-color-accent); }
+
+/* ── Swiper pagination ───────────────────────────────────── */
+
+.lp-jn-pagination.swiper-pagination {
+  bottom: auto;
+  display: flex;
+  gap: var(--ex-space-xs);
+  justify-content: center;
+  margin-top: var(--ex-space-md);
+  position: relative;
+  width: 100%;
+}
+.lp-jn-pagination .swiper-pagination-bullet {
+  background: var(--ex-color-border-faint);
+  border-radius: var(--ex-border-radius-full);
+  height: var(--ex-size-8);
+  opacity: 1;
+  transition: background var(--ex-duration-fast) ease, width var(--ex-duration-fast) ease;
+  width: var(--ex-size-8);
+}
+.lp-jn-pagination .swiper-pagination-bullet-active {
+  background: var(--ex-color-accent);
+  width: var(--ex-size-xxxs);
+}
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+  .lp-journal-hero   { padding: 0 var(--ex-space-md) var(--ex-space-xl) var(--ex-space-md); }
+  .lp-journal-orb    { display: none; }
+  .lp-journal-slider { padding: 0 var(--ex-space-md) var(--ex-space-xl); }
+  .lp-jn-arrow       { display: none; }
+}
+
+/* Small — Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .lp-journal-orb { display: none; }
+}
+
+/* Medium — Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-journal-orb { height: var(--ex-size-sm); right: var(--ex-space-lg); top: var(--ex-space-md); width: var(--ex-size-sm); }
+}

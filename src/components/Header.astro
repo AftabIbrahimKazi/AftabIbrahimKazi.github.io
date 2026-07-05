@@ -1,0 +1,111 @@
+---
+// src/components/Header.astro
+import { Icon } from "astro-icon/components";
+---
+
+<header>
+  <section class="ex-header-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <div class="ex-logo">
+            <a href="/">
+              <div class="ex-logo-wrapper">
+                <Icon name="lucide:orbit" class="ex-icon" />
+                <ul class="ex-list-style">
+                  <li>EXO SPACE</li>
+                  <li>Planatarium.inc</li>
+                </ul>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-5">
+          <nav class="ex-nav-links">
+            <a href="/">Home</a>
+            <a href="/">About Us</a>
+            <a href="/">BLOGS</a>
+            <a href="/">FAQ</a>
+            <a href="/">Contact Us</a>
+            <a href="/">Whats New!</a>
+          </nav>
+        </div>
+
+        <div class="col-3">
+          <div class="ex-search-bar">
+            <form id="ex-search-form-js" action="#" method="POST">
+              <input
+                type="search"
+                name="search"
+                placeholder="Search"
+                class=""
+                required
+              />
+              <button type="submit" class="ex-submit-btn" aria-label="Search">
+                <Icon name="lucide:search" class="ex-icon" />
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-1">
+          <div id="ex-user-profile-dropdown-menu-js">
+            <button class="ex-user-profile-btn-js" data-menu-btn="off">
+              <div class="ex-icon-wrapper">
+                <Icon name="lucide:user" class="ex-icon" />
+              </div>
+            </button>
+            <div class="ex-dropdown-menu-js" data-menu-state="closed">
+              <ul class="ex-list-style">
+                <li>
+                  <span>Anchor Tag Hover Sound</span>
+                  <button
+                    id="ex-hover-anchor-toggle-btn-js"
+                    class="ex-toggle-btn"
+                    data-sound-state="playing"
+                  >
+                    <div class="ex-icon-wrapper"></div>
+                  </button>
+                </li>
+                <li>
+                  <span>Button HoverSound</span>
+                  <button
+                    id="ex-hover-btn-toggle-js"
+                    class="ex-toggle-btn"
+                    data-sound-state="playing"
+                  >
+                    <div class="ex-icon-wrapper"></div>
+                  </button>
+                </li>
+                <li>
+                  <span>Anchor Tag Click Sound</span>
+                  <button
+                    id="ex-click-anchor-toggle-btn-js"
+                    class="ex-toggle-btn"
+                    data-sound-state="playing"
+                  >
+                    <div class="ex-icon-wrapper"></div>
+                  </button>
+                </li>
+                <li>
+                  <span>Button Click Sound</span>
+                  <button
+                    id="ex-click-btn-toggle-btn-js"
+                    class="ex-toggle-btn"
+                    data-sound-state="playing"
+                  >
+                    <div class="ex-icon-wrapper"></div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- sound effects -->
+          <audio id="mySound" src="/audio/hover.mp3"></audio>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>

@@ -1,0 +1,46 @@
+---
+// src/components/LandingHeader.astro
+---
+
+<header class="lp-header d-flex align-items-center fixed-top z-[20] gap-[var(--ex-space-lg)] py-[var(--ex-space-xs)] px-[var(--ex-space-xl)]">
+
+  <!-- Logo -->
+  <a href="/" class="lp-logo d-flex align-items-center flex-shrink-0 gap-[var(--ex-space-sm)] text-decoration-none">
+    <span class="lp-logo-mark border-[2px_solid_var(--ex-color-accent-mid)] fs-[var(--ex-font-size-md)] fw-[var(--ex-font-weight-heavy)] py-0 px-[var(--ex-space-xxs)] text-[var(--ex-color-accent)]">AK</span>
+    <div class="lp-logo-text d-flex flex-column gap-[2px]">
+      <span class="lp-logo-name fs-[var(--ex-font-size-xxs)] fw-[var(--ex-heading-font-weight)] text-[var(--ex-color-white)]">AFTAB KAZI</span>
+      <span class="lp-logo-role fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-para-font-weight)] text-[var(--ex-color-white-dim)]">DIGITAL CREATOR</span>
+    </div>
+  </a>
+
+  <!-- Nav -->
+  <nav class="lp-nav d-flex align-items-center gap-[4vw] ms-auto">
+    <a href="#lp-beat-01" class="lp-nav-link position-relative fs-[var(--ex-font-size-xxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-white-mid)] text-decoration-none">ABOUT</a>
+    <a href="/sol"        class="lp-nav-link position-relative fs-[var(--ex-font-size-xxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-white-mid)] text-decoration-none">WORK</a>
+    <a href="/sol?target=mercury"   class="lp-nav-link position-relative fs-[var(--ex-font-size-xxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-white-mid)] text-decoration-none">JOURNAL</a>
+    <a href="/uranus"    class="lp-nav-link position-relative fs-[var(--ex-font-size-xxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-white-mid)] text-decoration-none">LAB</a>
+    <a href="/neptune"   class="lp-nav-link position-relative fs-[var(--ex-font-size-xxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-white-mid)] text-decoration-none">CONTACT</a>
+  </nav>
+
+  <!-- Section indicator -->
+  <div class="lp-section-badge flex-shrink-0 fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-font-weight-medium)] text-[var(--ex-color-accent)] text-nowrap w-[var(--ex-size-default)]" id="lp-section-badge">
+    <span id="lp-section-label">01 &mdash; ORIGIN</span>
+  </div>
+
+</header>
+
+<!-- Vertical dot nav -->
+<nav class="lp-dot-nav d-flex flex-column position-fixed right-[var(--ex-space-lg)] top-[50%] z-[20] gap-[var(--ex-space-sm)] translate-middle-y" aria-label="Section navigation">
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="true"  data-beat="0" aria-label="Origin"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="1" aria-label="The Story"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="2" aria-label="The System"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="3" aria-label="Featured"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="4" aria-label="The Work"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="5" aria-label="Journal"></button>
+  <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="6" aria-label="The Journey"></button>
+</nav>
+
+<script>
+  import '../scripts/ui/landing/LandingDotNav';
+  import '../scripts/ui/landing/LandingHeaderHide';
+</script>

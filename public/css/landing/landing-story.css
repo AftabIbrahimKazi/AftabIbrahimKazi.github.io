@@ -1,0 +1,42 @@
+/* landing-story.css — The Story section component styles */
+
+/* ================================
+   TOP HALF — Rules
+   ================================ */
+
+/* ── Layout ──────────────────────────────────────────────── */
+
+.lp-about  { gap: 6vw; grid-template-columns: 1fr 1fr; }
+
+.lp-skills { grid-template-columns: 1fr 1fr; }
+
+/* ── Skill group label ───────────────────────────────────── */
+
+.lp-skill-group-label { letter-spacing: var(--ex-tracking-xl); }
+
+/* ── Skill tag ───────────────────────────────────────────── */
+
+.lp-skill-tag {
+  border-radius: var(--ex-border-radius-full);
+  letter-spacing: var(--ex-tracking-sm);
+}
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+  .lp-about  { gap: var(--ex-space-xl); grid-template-columns: 1fr; }
+  .lp-skills { grid-template-columns: 1fr; }
+}
+
+/* Small — Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .lp-about { gap: var(--ex-space-xl); grid-template-columns: 1fr; }
+}
+
+/* Medium — Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-about { gap: 4vw; }
+}

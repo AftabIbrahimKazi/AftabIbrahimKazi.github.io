@@ -1,0 +1,40 @@
+{
+  "name": "planetarium",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@iconify-json/lucide": "^1.2.93",
+    "@strata-packages/modal": "^1.0.1",
+    "@strata-packages/offcanvas": "^1.0.0",
+    "@triforge/animation-core": "^0.1.0",
+    "@triforge/compositor-core": "^0.1.0",
+    "@triforge/core-types": "^0.1.0",
+    "@triforge/curve-core": "^0.1.0",
+    "@triforge/geometry-nodes": "^0.1.0",
+    "@triforge/keyframe": "^0.1.0",
+    "@triforge/modifier-core": "^0.1.0",
+    "@triforge/particle-core": "^0.1.0",
+    "@triforge/radius-parametric-geometry": "^0.1.0",
+    "@triforge/shader-core": "^0.1.0",
+    "@triforge/uv-core": "^0.1.0",
+    "@triforge/volume-core": "^0.1.0",
+    "astro": "^6.4.8",
+    "astro-icon": "^1.1.5",
+    "gsap": "^3.14.2",
+    "jeasings": "^0.0.16",
+    "strata-css": "^1.4.10",
+    "swiper": "^12.2.0",
+    "three": "^0.183.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.183.1",
+    "playwright": "^1.61.1"
+  }
+}

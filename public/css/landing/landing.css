@@ -1,0 +1,159 @@
+/* landing.css — styles for the nebula landing page */
+
+/* ── Canvas layers ──────────────────────────────────────────── */
+
+#ex-nebula-canvas {
+  display: block;
+  height: 100%;
+  inset: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 0;
+}
+
+/* ── Body overrides ─────────────────────────────────────────── */
+
+.ex-landing-body {
+  background: var(--ex-color-black);
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ── Scroll container ───────────────────────────────────────── */
+
+.lp-main {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  z-index: 1;
+}
+.lp-main::-webkit-scrollbar { display: none; }
+
+/* ── Sections ───────────────────────────────────────────────── */
+
+.lp-section {
+  min-height: 100vh;
+  padding: var(--ex-space-xxxl) 6vw;
+}
+
+/* ── Shared typography ──────────────────────────────────────── */
+
+.lp-label {
+  color: var(--ex-color-accent);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  letter-spacing: var(--ex-tracking-xl);
+  /* margin-bottom: var(--ex-space-md); */
+  opacity: var(--ex-opacity-high);
+}
+
+.lp-heading {
+  color: var(--ex-color-white);
+
+  font-size: var(--ex-font-size-xxl);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-tight);
+  /* margin: 0 0 var(--ex-space-md); */
+}
+
+.lp-heading--hero  { font-size: var(--ex-font-size-xxxl); }
+.lp-heading--large { font-size: var(--ex-font-size-xxl); }
+
+.lp-accent { color: var(--ex-color-accent); }
+
+.lp-body {
+  color: var(--ex-color-nebula-body);
+
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  /* margin: 0 0 var(--ex-space-lg); */
+}
+
+/* ── Content positioning (beats 03/04) ──────────────────────── */
+
+.lp-content {
+  max-width: var(--ex-size-540);
+  animation: lp-fade-in var(--ex-duration-lg) ease both;
+}
+.lp-content--bottom-right { text-align: right; margin-left: auto; }
+.lp-content--center       { text-align: center; }
+
+/* ── ══════════════════════════════════════════════════════════ */
+/* ── BEAT 01 — Identity + Stats                                 */
+/* ── ══════════════════════════════════════════════════════════ */
+
+.lp-beat01 {
+  gap: 4vw;
+  grid-template-columns: 1fr 1fr;
+  max-width: var(--ex-size-1200);
+}
+
+.lp-divider-gold {
+  background: linear-gradient(to right, var(--ex-color-accent), var(--ex-color-accent-dim));
+  height: 2px;
+  margin: var(--ex-space-md) 0;
+  width: var(--ex-size-xs);
+}
+
+.lp-beat01-stats {
+  background: var(--ex-color-border-faint);
+  border: 1px solid var(--ex-color-border-faint);
+  gap: 1px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.lp-stat {
+  background: var(--ex-transparent);
+  gap: var(--ex-space-xs);
+  padding: var(--ex-space-lg) var(--ex-space-md);
+  transition: background-color var(--ex-duration-slow) ease, color var(--ex-duration-mid) ease;
+}
+.lp-stat:hover { background: var(--ex-color-accent-dim); }
+
+.lp-stat-icon {
+  color: var(--ex-color-white-mid);
+  height: var(--ex-size-32);
+  margin-bottom: var(--ex-space-xs);
+  width: var(--ex-size-32);
+}
+
+.lp-stat-num {
+
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-font-weight-heavy);
+  color: var(--ex-color-white);
+}
+
+.lp-stat-label {
+
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-font-weight-semibold);
+  letter-spacing: var(--ex-tracking-xl);
+  color: var(--ex-color-nebula-label);
+}
+
+.lp-stat-desc {
+
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-para-font-weight);
+  color: var(--ex-color-nebula-muted);
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+
+@keyframes lp-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+   BOTTOM HALF — Media Queries
+   ================================ */
+
+/* Extra Small — Portrait phones */
+@media (max-width: 575.98px) {
+}

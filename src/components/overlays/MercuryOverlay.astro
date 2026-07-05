@@ -1,0 +1,296 @@
+---
+// src/components/overlays/MercuryOverlay.astro
+// 10 sections — layout data-attributes drive CSS positioning.
+// Sections match MERCURY_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
+
+const articles = [
+  {
+    id:       'building-3d-web-experiences',
+    readTime: '8 min read',
+    category: 'DEVELOPMENT',
+    title:    'Building 3D Web Experiences with Performance in Mind',
+    excerpt:  'Optimizing real-time 3D for the web without compromising on quality. From draw calls to texture compression — every decision counted.',
+    date:     'May 12, 2025',
+    body: [
+      'Real-time 3D on the web is a performance negotiation. Every frame is a budget — geometry, shaders, lights, draw calls — and you are constantly deciding what to cut. The mistake most developers make is treating performance as something you address after the creative work is done. It is not. It is a design constraint that shapes every decision from the start.',
+      'The biggest wins on this project came from geometry. Reducing triangle counts aggressively on assets that were never seen up close, merging static meshes to collapse draw calls, and switching instanced rendering for repeated objects. Three.js makes instancing accessible but it is easy to leave performance on the table if you do not profile first. Chrome DevTools and Spector.js became daily tools.',
+      'Textures were the second battleground. Uncompressed 4K textures will tank mobile instantly. Basis Universal compressed formats cut texture memory by up to 8x with near-zero perceptible quality loss. The pipeline to generate them added build time but the runtime results were non-negotiable. Every texture in this portfolio went through that process.',
+      'Shader complexity is seductive. GLSL gives you enormous expressive power and it is tempting to pack more and more into a fragment shader. The discipline here was to profile every shader on mid-range hardware, not just the development machine. A shader that runs at 60fps on an M2 MacBook Pro can bring a budget Android to its knees. Write lean, profile often, and accept the tradeoffs honestly.',
+      'The final lesson: set your performance targets before you write a line of code. For this site the target was 60fps on a mid-range device with a 4G connection. Everything else was negotiable. That constraint — held firmly through the whole build — produced better creative decisions than open-ended exploration ever would have.',
+    ],
+  },
+  {
+    id:       'visual-hierarchy-immersive',
+    readTime: '6 min read',
+    category: 'DESIGN',
+    title:    'Creating Visual Hierarchy in Immersive Environments',
+    excerpt:  'How to guide attention and storytelling in complex, interactive worlds where the camera moves and context shifts constantly.',
+    date:     'May 04, 2025',
+    body: [
+      'Traditional design hierarchy relies on a fixed canvas. Size, weight, contrast, and position work because the layout stays still. In a 3D environment the camera moves, the user can look anywhere, and context shifts with every frame. The rules do not change — but the way you apply them does.',
+      'The most important lesson from building this portfolio was: reduce competition. A 3D scene with rich geometry, dynamic lighting, and animated elements is already loud. Every piece of UI you place on top needs to earn its presence. The Mercury panels use deliberately minimal typography — a label, a title, a short paragraph. Not because minimalism is aesthetic, but because anything more would fight the scene and lose.',
+      'Positioning panels against viewport edges — left, right, bottom, center — was a layout system decision as much as a design one. It kept the planet in view at all times. The user never loses the spatial context that makes the experience feel grounded. The content informs the scene; it does not replace it.',
+      'Contrast in immersive environments is not just light versus dark. It is also motion versus stillness. The panel is static. The planet rotates. That contrast alone draws the eye to the text without needing a heavy border or drop shadow. When the environment does the work, the UI can afford to be quiet.',
+      'The scroll-driven camera path was the last piece. By moving the camera to new angles as the user scrolls, each section of text gets a fresh visual context. The same planet, seen from six different angles, feels like six different discoveries. That rhythm — content, then a new view, then content again — is the closest thing to pacing that 3D environments allow.',
+    ],
+  },
+  {
+    id:       'stack-behind-my-universe',
+    readTime: '10 min read',
+    category: 'TECHNOLOGY',
+    title:    'The Stack Behind My Universe',
+    excerpt:  'A look at the tools, frameworks and tech that power this portfolio. Astro, Three.js, GLSL, and the decisions that tied them together.',
+    date:     'Apr 28, 2025',
+    body: [
+      'Every technology decision in a portfolio is a statement. Not just about what you know, but about what you think good engineering looks like. This site is built with Astro 6, Three.js, TypeScript, GLSL shaders, and a custom CSS utility system called strata. Here is why each one ended up in the stack.',
+      'Astro was the easy decision. For a content-focused site that also needs interactive islands, there is nothing better. Zero JavaScript by default, server-side rendering, and a component model that supports any framework in the same project. The warp navigation between planets is a client-side GSAP animation — an Astro island, nothing more. Everything else is static HTML.',
+      'Three.js for the 3D layer is also unsurprising, but the decision was deliberate. WebGPU is the future, but Three.js has the ecosystem, the documentation, and the maturity. For a portfolio that needed to ship and run reliably across devices, it was the right call. The planet surfaces use custom GLSL shaders — vertex displacement for surface terrain, fragment shaders for atmospheric scattering and ring shadows on Saturn.',
+      'TypeScript throughout, with strict mode enabled. The controllers and animation managers are typed end-to-end. This felt like overhead in the first week and essential infrastructure by week four. A 3D scene with scroll cameras, GSAP timelines, Swiper instances, warp navigation, and planet-switching state is too much moving state to manage without types.',
+      'Strata CSS is my own utility framework — an ongoing project that this portfolio both uses and showcases. It generates only the CSS you use, works across any framework, and supports cascade layers cleanly. Building the portfolio forced me to stress-test it in a real production context, which surfaced bugs and design gaps that synthetic tests never would have found.',
+      'The decision I am most uncertain about is not in the stack — it is the folder structure. Splitting CSS into per-planet overlay files made sense for isolation but the total CSS surface area is larger than I would like. The next iteration will experiment with CSS Modules or stricter scoping to bring that under control.',
+    ],
+  },
+  {
+    id:       'lessons-10-years-digital',
+    readTime: '10 min read',
+    category: 'LIFE',
+    title:    'Lessons From 10 Years in the Digital Space',
+    excerpt:  'Reflections on the journey, mistakes, wins and everything in between. What a decade of building actually teaches you.',
+    date:     'Apr 20, 2025',
+    body: [
+      'Ten years in this industry is long enough to see the same patterns cycle back around with new names. Long enough to have made the same mistakes twice and, on good days, to have caught them the third time. Here is what I actually learned — not the lessons that look good in a conference talk, but the ones that changed how I work.',
+      'Shipping something imperfect teaches you more than perfecting something unshipped. This is not an original observation, but I needed to prove it to myself twice. The first version of this portfolio was technically stronger than anything I had built before, and I sat on it for eight months adding features. The version you are in now shipped in three months. The gap between them is not quality — it is clarity. Constraints force decisions. Open-ended time does not.',
+      'The clients who push back most on your process are often the ones you learn the most from. Frustrating in the moment, useful in retrospect. Being forced to explain why a technical decision matters — in plain language, to someone who does not care about the engineering — is one of the best tests of whether you actually understand it yourself.',
+      'Specialisation is a trap dressed as a strategy. The developers who have paid me most consistently are not the ones who specialised early — they are the ones who stayed curious long enough to develop genuine range. Frontend, backend, 3D, animation, performance, accessibility, design systems. None of these are separate careers. They are facets of the same problem: making things that work for people.',
+      'The tools change but the skills compound. Three.js will be replaced by something. Astro will evolve beyond recognition. The ability to read a codebase you did not write, debug something you have never seen before, and ship something under pressure — those skills are cumulative and they do not deprecate. Invest in them deliberately.',
+      'Finally: document your thinking, not just your code. The hardest part of picking up an old project is not understanding what the code does. It is understanding why it does it that way, what alternatives were considered, and what constraints were active at the time. Comments, commit messages, and handover notes are acts of generosity to your future self.',
+    ],
+  },
+];
+---
+
+<!-- ── Section 1 — Journal intro ──────────────────────────── -->
+<div class="ex-mercury-section" data-layout="bottom-center">
+  <span class="ex-mercury-section-label">MERCURY — JOURNAL</span>
+  <h2 class="ex-heading ex-mercury-section-title">Writing from the Field</h2>
+  <p class="ex-para ex-mercury-body">
+    Development, design, and the journey of building in the digital space.
+    Honest takes, hard lessons, and the thinking behind the work.
+  </p>
+  <div class="ex-mercury-stats-row">
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">4</span>
+      <span class="ex-mercury-stat-pill-label">Articles</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">Monthly</span>
+      <span class="ex-mercury-stat-pill-label">Cadence</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">34 min</span>
+      <span class="ex-mercury-stat-pill-label">Total read time</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Section 2 — Article 1 ──────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="right">
+  <span class="ex-mercury-section-label">{articles[0].category} · {articles[0].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[0].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[0].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[0].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
+  </div>
+  <button class="ex-mercury-read-link" data-article-id="0" data-article-side="left">Read article →</button>
+</div>
+
+<!-- ── Section 3 — Article 2 ──────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="top-left">
+  <span class="ex-mercury-section-label">{articles[1].category} · {articles[1].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[1].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[1].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[1].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
+  </div>
+  <button class="ex-mercury-read-link" data-article-id="1" data-article-side="right">Read article →</button>
+</div>
+
+<!-- ── Section 4 — Article 3 ──────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="bottom-right">
+  <span class="ex-mercury-section-label">{articles[2].category} · {articles[2].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[2].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[2].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[2].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
+  </div>
+  <button class="ex-mercury-read-link" data-article-id="2" data-article-side="left">Read article →</button>
+</div>
+
+<!-- ── Section 5 — Article 4 ──────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="bottom-left">
+  <span class="ex-mercury-section-label">{articles[3].category} · {articles[3].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[3].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[3].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[3].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
+  </div>
+  <button class="ex-mercury-read-link" data-article-id="3" data-article-side="right">Read article →</button>
+</div>
+
+<!-- ── Section 6 — Topics ─────────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="left">
+  <span class="ex-mercury-section-label">TOPICS COVERED</span>
+  <h2 class="ex-heading ex-mercury-section-title">What Gets Written About</h2>
+  <p class="ex-para ex-mercury-body">
+    Four lenses on the same craft — every piece connects back to building things that last.
+  </p>
+  <div class="ex-mercury-stats-row">
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">Development</span>
+      <span class="ex-mercury-stat-pill-label">Code &amp; architecture</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">Design</span>
+      <span class="ex-mercury-stat-pill-label">Visual craft</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">Technology</span>
+      <span class="ex-mercury-stat-pill-label">Stack &amp; tools</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">Life</span>
+      <span class="ex-mercury-stat-pill-label">The bigger picture</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Section 7 — Writing philosophy ────────────────────── -->
+<div class="ex-mercury-section" data-layout="right">
+  <span class="ex-mercury-section-label">THE APPROACH</span>
+  <h2 class="ex-heading ex-mercury-section-title">Written to Last, Not to Trend</h2>
+  <p class="ex-para ex-mercury-body">
+    Every piece here is written slowly. No hot takes for clicks. The goal is to
+    share what actually happened — what broke, what worked, and what the decision
+    looked like before hindsight made it obvious.
+  </p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number">10+</span>
+    <span class="ex-mercury-fact-label">Years of experience behind the writing</span>
+  </div>
+</div>
+
+<!-- ── Section 8 — Archive stats ─────────────────────────── -->
+<div class="ex-mercury-section" data-layout="top-left">
+  <span class="ex-mercury-section-label">BY THE NUMBERS</span>
+  <h2 class="ex-heading ex-mercury-section-title">The Archive So Far</h2>
+  <p class="ex-para ex-mercury-body">
+    Small but deliberate. Every article is a full commitment — researched, written,
+    and edited until it earns its place here.
+  </p>
+  <div class="ex-mercury-stats-row">
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">4</span>
+      <span class="ex-mercury-stat-pill-label">Published articles</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">~6,200</span>
+      <span class="ex-mercury-stat-pill-label">Words written</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">2025</span>
+      <span class="ex-mercury-stat-pill-label">First published</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Section 9 — Newsletter ─────────────────────────────── -->
+<div class="ex-mercury-section" data-layout="bottom-right">
+  <span class="ex-mercury-section-label">STAY IN ORBIT</span>
+  <h2 class="ex-heading ex-mercury-section-title">Get the writing delivered.</h2>
+  <p class="ex-para ex-mercury-body">
+    New articles land in your inbox the moment they're published. No spam, no noise —
+    just the next piece when it's ready.
+  </p>
+  <form class="ex-mercury-form" onsubmit="return false;">
+    <input
+      class="ex-mercury-input"
+      type="email"
+      placeholder="your@email.com"
+      aria-label="Email address"
+      autocomplete="email"
+    />
+    <button class="ex-mercury-btn" type="submit">SUBSCRIBE →</button>
+  </form>
+</div>
+
+<!-- ── Section 10 — Close / navigate ──────────────────────── -->
+<div class="ex-mercury-section" data-layout="center">
+  <span class="ex-mercury-section-label">10 — NAVIGATE</span>
+  <h2 class="ex-heading ex-mercury-section-title">Explore More of the System</h2>
+  <p class="ex-para ex-mercury-body">
+    Mercury is just one stop. Each planet in this system holds a different corner of the work —
+    from live projects to experiments to commercial builds.
+  </p>
+  <div class="ex-mercury-stats-row">
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">9</span>
+      <span class="ex-mercury-stat-pill-label">Planets to explore</span>
+    </div>
+    <div class="ex-mercury-stat-pill">
+      <span class="ex-mercury-stat-pill-value">∞</span>
+      <span class="ex-mercury-stat-pill-label">Things to discover</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Article data for sidebar ───────────────────────────── -->
+<script type="application/json" id="ex-mercury-articles-data" is:inline set:html={JSON.stringify(articles)}></script>
+
+<script>
+  import StrataOffcanvas from '@strata-packages/offcanvas';
+
+  function init(): void {
+    const dataEl       = document.getElementById('ex-mercury-articles-data');
+    const sidebarLeft  = document.getElementById('ex-mercury-sidebar-left');
+    const sidebarRight = document.getElementById('ex-mercury-sidebar-right');
+
+    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+
+    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+
+    const articles: { category: string; title: string; date: string; readTime: string; body: string[] }[] =
+      JSON.parse(dataEl.textContent ?? '[]');
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-article-id]');
+      if (!btn) return;
+      const a = articles[parseInt(btn.dataset.articleId ?? '', 10)];
+      if (!a) return;
+
+      const side     = btn.dataset.articleSide === 'right' ? 'right' : 'left';
+      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
+      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
+      const suffix   = side === 'right' ? 'right' : 'left';
+
+      const catEl   = document.getElementById(`ex-mercury-sidebar-cat-${suffix}`);
+      const titleEl = document.getElementById(`ex-mercury-sidebar-title-${suffix}`);
+      const metaEl  = document.getElementById(`ex-mercury-sidebar-meta-${suffix}`);
+      const bodyEl  = document.getElementById(`ex-mercury-sidebar-body-${suffix}`);
+
+      if (catEl)   catEl.textContent   = a.category;
+      if (titleEl) titleEl.textContent = a.title;
+      if (metaEl)  metaEl.textContent  = `${a.date} · ${a.readTime}`;
+      if (bodyEl)  bodyEl.innerHTML    = a.body.map(p => `<p>${p}</p>`).join('');
+
+      StrataOffcanvas.open(sidebar);
+      setTimeout(() => closeBtn?.focus(), 60);
+    });
+  }
+
+  init();
+</script>

@@ -1,0 +1,233 @@
+/* ================================================================
+   EXPLORE OVERLAY — src/styles/explore-overlay.css
+   Handles the fixed scrollable layer that sits between the
+   3D canvas (z:0) and the Header (z:100).
+   ================================================================ */
+
+
+/* ---- Layer Foundation ---- */
+
+#ex-content-overlay {
+  /* Exactly one viewport tall, full width */
+  height: 100dvh;
+  left: 0;
+
+  /* Scroll container — the overlay itself scrolls */
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  /* No pointer-events until open; prevents dead zones over canvas */
+  pointer-events: none;
+
+  position: fixed;
+  scroll-behavior: smooth;
+
+  /* Scrollbar hidden — preserves scroll functionality without visual distraction */
+  scrollbar-width: none;
+
+  top: 0;
+
+  /* Tell the browser: handle vertical panning natively, give us horizontal.
+     Without this, iOS Safari intercepts horizontal swipes as scroll before
+     any JS pointer event fires — the swiper never sees them.              */
+  touch-action: pan-y;
+
+  /* Off-screen by default — GSAP will animate this */
+  transform: translateY(100%);
+
+  width: 100%;
+
+  /* Promote to its own compositor layer — keeps x/y GSAP transforms smooth */
+  will-change: transform;
+
+  /* Above canvas, below header */
+  z-index: 10;
+}
+
+#ex-content-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+/* Open state — re-enable pointer-events on the overlay container */
+#ex-content-overlay[data-overlay-state="open"] {
+  pointer-events: auto;
+}
+
+
+/* ---- Hero Section — The Transparent Window ---- */
+
+.ex-overlay-hero {
+  /* Content layout — scroll hint sits at bottom-center */
+  align-items: center;
+
+  /* Fully transparent — canvas renders visually through this */
+  background: transparent;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Exactly one viewport tall — the "portal" showing the 3D scene */
+  height: 100dvh;
+
+  justify-content: flex-end;
+  padding-bottom: var(--ex-space-xl);
+
+  /* CRITICAL: passes all clicks/double-clicks down to the canvas */
+  pointer-events: none;
+
+  position: relative;
+  width: 100%;
+}
+
+
+/* ---- Scroll Hint ---- */
+
+.ex-overlay-scroll-hint {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.ex-overlay-scroll-hint-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-lg);
+  opacity: var(--ex-opacity-low);
+  text-transform: uppercase;
+}
+
+.ex-overlay-scroll-hint .ex-icon {
+  color: var(--ex-text-body);
+  font-size: var(--ex-font-size-xxs);
+  opacity: var(--ex-opacity-low);
+}
+
+
+/* ---- Content Sections ---- */
+
+.ex-overlay-section {
+  /* Solid background — hides the canvas once user scrolls past the hero */
+  background-color: var(--ex-bg-body);
+  color: var(--ex-text-body);
+  min-height: 100dvh;
+  padding: var(--ex-space-xxxl) 0 var(--ex-space-xl);
+
+  /* Content sections DO receive pointer events */
+  pointer-events: auto;
+
+  transition: background-color var(--ex-duration-slow) ease, color var(--ex-duration-mid) ease;
+  width: 100%;
+}
+
+.ex-overlay-section--entry {
+  /* A gentle top gradient blends the transparent hero into the solid content */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--ex-bg-body) 120px
+  );
+  padding-top: var(--ex-space-xl);
+}
+
+
+/* ---- Entry Header ---- */
+
+.ex-overlay-entry-header {
+  border-bottom: 1px solid var(--ex-border-color);
+  margin-bottom: var(--ex-space-xl);
+  padding: 0 0 var(--ex-space-lg);
+}
+
+.ex-overlay-planet-name {
+  color: var(--ex-heading-text-color);
+  font-size: var(--ex-font-size-xxl);
+  font-weight: var(--ex-heading-font-weight);
+  margin: 0 0 var(--ex-space-xs);
+}
+
+.ex-overlay-planet-tagline {
+  font-size: var(--ex-font-size-default);
+  letter-spacing: var(--ex-tracking-sm);
+  margin: 0;
+  opacity: var(--ex-opacity-mid);
+}
+
+/* ---- Nav Hint (prev + scroll + next combined row) ---- */
+
+.ex-overlay-nav-hint {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+}
+
+.ex-overlay-nav-prev,
+.ex-overlay-nav-next {
+  align-items: center;
+  color: var(--ex-text-body);
+  display: flex;
+  flex-direction: row;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  gap: 0.4rem;
+  letter-spacing: var(--ex-tracking-md);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ---- Per-Planet Name Accent Colors ---- */
+
+#ex-content-overlay[data-planet="ex-sun-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-mercury-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-mercury-hi), var(--ex-color-mercury-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-earth-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-mars-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-mars-hi), var(--ex-color-mars-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-jupiter-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-saturn-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-saturn-hi), var(--ex-color-saturn-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-uranus-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-uranus-hi), var(--ex-color-uranus-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+#ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}

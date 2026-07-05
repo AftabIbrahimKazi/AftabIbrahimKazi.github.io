@@ -1,0 +1,73 @@
+---
+// src/layouts/Landing.astro
+import '../styles/strata.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import WarpOverlay     from '../components/WarpOverlay.astro';
+import LandingHeader   from '../components/LandingHeader.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title       = 'Exo Space Planetarium',
+  description = 'Explore our solar system in an interactive 3D planetarium built with Astro and Three.js.',
+  canonical   = Astro.url.href,
+  ogImage     = '/images/og-default.jpg',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-ex-theme="dark" data-st-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/landing/landing.css" />
+    <link rel="stylesheet" href="/css/landing/landing-header.css" />
+    <link rel="stylesheet" href="/css/landing/landing-footer.css" />
+    <link rel="stylesheet" href="/css/landing/landing-story.css" />
+    <link rel="stylesheet" href="/css/landing/landing-explore.css" />
+    <link rel="stylesheet" href="/css/landing/landing-work.css" />
+    <link rel="stylesheet" href="/css/landing/landing-comm.css" />
+    <link rel="stylesheet" href="/css/landing/landing-journal.css" />
+
+    <script>
+      import '../scripts/landing-entry';
+    </script>
+    <script>
+      import '../scripts/warp-entry';
+    </script>
+  </head>
+  <body class="ex-body ex-landing-body">
+
+    <!-- Nebula canvas — full screen, behind everything -->
+    <canvas id="ex-nebula-canvas"></canvas>
+
+    <WarpOverlay />
+    <LandingHeader />
+
+    <slot />
+
+  </body>
+</html>

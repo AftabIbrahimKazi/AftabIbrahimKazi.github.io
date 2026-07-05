@@ -1,0 +1,8 @@
+Note:
+the files,
+1. basis_transcoder.js
+2. basis_transcoder.wasm
+
+come from dir: "node_modules/three/examples/jsm/libs/basis/"
+this are used in "import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';"
+for compressing an HDR file.

@@ -1,0 +1,183 @@
+---
+// src/components/overlays/UranusOverlay.astro — Concepts / Creative Direction
+
+const items = [
+  {
+    category: 'CONCEPT',
+    title:    '[Concept Name]',
+    meta:     '[Medium] · [Stage]',
+    body: [
+      'Placeholder — describe a speculative concept. What is it exploring? What question is it asking? Concepts do not need a pitch — they need a clear point of view. What is yours?',
+      'What would this concept become if it had a brief? A product, a campaign, an installation, a piece of software? Concepts are most compelling when the distance between "speculative" and "real" is short — when you can see exactly what would need to happen to make it exist.',
+      'What does this concept say about how you think? The best speculative work is not random — it reveals a set of values, an obsession, a question you keep returning to. What does this one reveal about you? Update this placeholder with your actual concept.',
+    ],
+  },
+  {
+    category: 'CONCEPT',
+    title:    '[Concept Name]',
+    meta:     '[Medium] · [Stage]',
+    body: [
+      'Placeholder — a second concept. Could be a UI direction, a speculative product, a motion piece, or a design fiction. Describe what you are imagining and what it would become if it had a brief and a budget.',
+      'What inspired it? The best concepts have a traceable origin — an observation, a frustration, an accidental discovery, a "what if" that refused to go away. Describe where this one came from.',
+      'Is this in progress? Archived? Waiting for a collaborator? The status of a concept matters — it tells a reader whether this is live speculation or closed research. Be honest about where it stands. Update this placeholder.',
+    ],
+  },
+  {
+    category: 'CONCEPT',
+    title:    '[Concept Name]',
+    meta:     '[Medium] · [Stage]',
+    body: [
+      'Placeholder — a third concept. Something in motion, interaction, or a generative system. Describe the idea in one sentence, then describe what you would need to make it real. Budget? Collaborator? Time? A specific technology becoming accessible?',
+      'What is the single constraint that is holding this concept back? Sometimes the most interesting concepts are the ones that are one technological leap away from being possible. What would change if that constraint disappeared?',
+      'What form does this concept currently exist in? A sketch, a prototype, a written brief, a working demo? Whatever form it takes, describe it. Concepts with artefacts are more compelling than concepts that exist only as ideas. Update this placeholder.',
+    ],
+  },
+  {
+    category: 'CONCEPT',
+    title:    '[Concept Name]',
+    meta:     '[Medium] · WIP',
+    body: [
+      'Placeholder — a fourth concept. This space is a sketchbook, not a portfolio. Unfinished is allowed here. What direction are you heading in that you have not committed to yet? What are you circling that you have not landed on?',
+      'What makes this concept different from your other work? Concepts in this section should show range — different media, different scales, different problems. If your other concepts are digital, this one might be physical. If they are product-oriented, this one might be more speculative.',
+      'Who would you want to work on this with? Sometimes the most useful thing a concept page does is attract the right collaborator. Who has the missing piece — the technology, the budget, the distribution, the audience? Update this placeholder with your actual fourth concept.',
+    ],
+  },
+];
+---
+
+<!-- 01 — Overview -->
+<div class="ex-uranus-section" data-layout="bottom-center">
+  <span class="ex-uranus-section-label">01 — Concepts</span>
+  <h2 class="ex-heading ex-uranus-section-title">The Speculative Space</h2>
+  <p class="ex-para ex-uranus-body">Work that doesn't have a client yet. Concepts, prototypes, unreleased ideas, and creative direction explored for its own sake. Placeholder — update with your conceptual work.</p>
+  <div class="ex-uranus-stats-row">
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">[N] concepts</span><span class="ex-uranus-stat-pill-label">In progress</span></div>
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Ongoing</span><span class="ex-uranus-stat-pill-label">Always open</span></div>
+  </div>
+</div>
+
+<!-- 02 — Concept 1 -->
+<div class="ex-uranus-section" data-layout="bottom-right">
+  <span class="ex-uranus-section-label">02 — Concept</span>
+  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
+  <p class="ex-para ex-uranus-body">Placeholder — describe a speculative concept. What is it exploring? What question is it asking? Concepts don't need a pitch — they need a clear point of view. What's yours?</p>
+  <div class="ex-uranus-key-fact">
+    <span class="ex-uranus-fact-number">[Medium]</span>
+    <span class="ex-uranus-fact-label">Format explored</span>
+  </div>
+  <button class="ex-uranus-detail-link" data-item-id="0" data-item-side="left" data-planet="uranus">Explore concept →</button>
+</div>
+
+<!-- 03 — Concept 2 -->
+<div class="ex-uranus-section" data-layout="top-left">
+  <span class="ex-uranus-section-label">03 — Concept</span>
+  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
+  <p class="ex-para ex-uranus-body">Placeholder — a second concept. Could be a UI direction, a speculative product, a motion piece, or a design fiction. Describe what you're imagining and what it would become if it had a brief.</p>
+  <div class="ex-uranus-key-fact">
+    <span class="ex-uranus-fact-number">[Stage]</span>
+    <span class="ex-uranus-fact-label">Early / prototype / spec</span>
+  </div>
+  <button class="ex-uranus-detail-link" data-item-id="1" data-item-side="right" data-planet="uranus">Explore concept →</button>
+</div>
+
+<!-- 04 — Concept 3 -->
+<div class="ex-uranus-section" data-layout="right">
+  <span class="ex-uranus-section-label">04 — Concept</span>
+  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
+  <p class="ex-para ex-uranus-body">Placeholder — a third concept. Something in motion, interaction, or a generative system. Describe the idea in one sentence, and what you'd need to make it real. Budget? Collaborator? Time?</p>
+  <div class="ex-uranus-stats-row">
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">[Type]</span><span class="ex-uranus-stat-pill-label">Category</span></div>
+  </div>
+  <button class="ex-uranus-detail-link" data-item-id="2" data-item-side="left" data-planet="uranus">Explore concept →</button>
+</div>
+
+<!-- 05 — Design Fiction -->
+<div class="ex-uranus-section" data-layout="bottom-left">
+  <span class="ex-uranus-section-label">05 — Design Fiction</span>
+  <h2 class="ex-heading ex-uranus-section-title">What If?</h2>
+  <p class="ex-para ex-uranus-body">Placeholder — describe a design fiction or speculative brief you've invented for yourself. A product for 2035. An interface for a physical world that doesn't exist yet. What are you imagining?</p>
+  <div class="ex-uranus-key-fact">
+    <span class="ex-uranus-fact-number">Speculative</span>
+    <span class="ex-uranus-fact-label">Not for sale — yet</span>
+  </div>
+</div>
+
+<!-- 06 — Concept 4 -->
+<div class="ex-uranus-section" data-layout="top-left">
+  <span class="ex-uranus-section-label">06 — Concept</span>
+  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
+  <p class="ex-para ex-uranus-body">Placeholder — a fourth concept. This space is a sketchbook, not a portfolio. Unfinished is allowed here. What direction are you heading in that you haven't committed to yet?</p>
+  <div class="ex-uranus-key-fact">
+    <span class="ex-uranus-fact-number">WIP</span>
+    <span class="ex-uranus-fact-label">In development</span>
+  </div>
+  <button class="ex-uranus-detail-link" data-item-id="3" data-item-side="right" data-planet="uranus">Explore concept →</button>
+</div>
+
+<!-- 07 — Ideation -->
+<div class="ex-uranus-section" data-layout="right">
+  <span class="ex-uranus-section-label">07 — Ideation</span>
+  <h2 class="ex-heading ex-uranus-section-title">How Concepts Form</h2>
+  <p class="ex-para ex-uranus-body">Concepts usually start in a notes app, not a design tool. I collect images, write fragments, and let things sit until the pattern becomes clear. Most die. A few turn into something real. Placeholder — describe your ideation process.</p>
+  <div class="ex-uranus-stats-row">
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Collect</span><span class="ex-uranus-stat-pill-label">Phase 1</span></div>
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Sit</span><span class="ex-uranus-stat-pill-label">Phase 2</span></div>
+  </div>
+</div>
+
+<!-- 08 — CTA -->
+<div class="ex-uranus-section" data-layout="center">
+  <span class="ex-uranus-section-label">08 — Collaborate</span>
+  <h2 class="ex-heading ex-uranus-section-title">Like What You See?</h2>
+  <p class="ex-para ex-uranus-body">If a concept here interests you — commission it, fund it, or just talk about it. Some of the best work starts as a strange idea shared at the right moment. Neptune is where that conversation starts.</p>
+  <div class="ex-uranus-stats-row">
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Neptune</span><span class="ex-uranus-stat-pill-label">Start talking</span></div>
+  </div>
+</div>
+
+<!-- ── Item data for sidebar ───────────────────────────────────── -->
+<script type="application/json" id="ex-uranus-items-data" is:inline set:html={JSON.stringify(items)}></script>
+
+<script>
+  import StrataOffcanvas from '@strata-packages/offcanvas';
+
+  function init(): void {
+    const dataEl       = document.getElementById('ex-uranus-items-data');
+    const sidebarLeft  = document.getElementById('ex-uranus-sidebar-left');
+    const sidebarRight = document.getElementById('ex-uranus-sidebar-right');
+
+    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+
+    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+
+    const items: { category: string; title: string; meta: string; body: string[] }[] =
+      JSON.parse(dataEl.textContent ?? '[]');
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
+      if (!btn || btn.dataset.planet !== 'uranus') return;
+      const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
+      if (!item) return;
+
+      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
+      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
+      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
+
+      const catEl   = document.getElementById(`ex-uranus-sidebar-cat-${side}`);
+      const titleEl = document.getElementById(`ex-uranus-sidebar-title-${side}`);
+      const metaEl  = document.getElementById(`ex-uranus-sidebar-meta-${side}`);
+      const bodyEl  = document.getElementById(`ex-uranus-sidebar-body-${side}`);
+
+      if (catEl)   catEl.textContent   = item.category;
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl)  metaEl.textContent  = item.meta;
+      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
+
+      StrataOffcanvas.open(sidebar);
+      setTimeout(() => closeBtn?.focus(), 60);
+    });
+  }
+
+  init();
+</script>

@@ -1,0 +1,55 @@
+# Exo Space Planetarium: Technical Blueprint
+
+## 🌌 Project Vision
+Exo Space Planetarium is a high-fidelity, interactive 3D solar system simulation. It leverages **Astro** for modular UI components and **Three.js** for a custom-built planetary engine that utilizes realistic orbital mechanics and shader-based lighting.
+
+## 🛠️ Core Tech Stack
+* **Framework:** Astro (Static Site Generation + Hydrated Components).
+* **3D Graphics:** Three.js with GSAP for high-performance animation.
+* **Styling:** CSS Variables (theming) and Bootstrap 5 (layout).
+* **Icons:** `astro-icon` with the Lucide library.
+
+---
+
+## 📐 Development & Coding Standards
+Strict adherence to these patterns is required to maintain the project's structural integrity:
+
+### 1. Naming Conventions (The "ct-" Protocol)
+* **Logic Hooks (JS/TS):** Use the `ct{Action}Js` suffix for functions (e.g., `ctThemeToggleJs`, `ctSoundBoxJs`).
+* **3D/Canvas Elements:** Use the `-ts` suffix for IDs and classes related to the Three.js environment (e.g., `#ct-main-canvas-ts`, `.ct-3d-container-ts`).
+* **General UI:** All project-specific classes must be prefixed with `ct-` (e.g., `.ct-body`, `.ct-logo-wrapper`).
+
+### 2. State & Theming
+* **Theme Management:** The system uses a `data-ct-theme` attribute on the `<html>` tag.
+* **Variable Usage:** Use colors and transitions defined in `variables.css`. Do not hardcode values.
+* **Transitions:** Apply `var(--ct-transition-color-and-background)` for smooth theme shifts.
+
+---
+
+## 🚀 Architectural Map
+| Directory | Purpose | Key Files |
+| :--- | :--- | :--- |
+| `src/scripts/` | Core 3D Logic | `main.ts` (PlanetariumEngine) |
+| `src/components/` | Modular UI | `Scene.astro`, `Header.astro`, `Footer.astro` |
+| `src/layouts/` | Global Wrapper | `Main.astro` |
+| `src/styles/` | Design System | `variables.css`, `main.css` |
+| `public/js/` | Client Interaction | `main.js` (DOM listeners) |
+
+---
+
+## 🧠 Technical Deep Dive: `PlanetariumEngine`
+The `PlanetariumEngine` class is the primary controller for the 3D environment:
+
+### Orbital Pivot Logic
+Planets are parented to a `Pivot` object (e.g., `mercuryPivot`) at `(0,0,0)`. Rotating the pivot handles the orbit, while rotating the planet mesh handles its day/night cycle.
+
+### Custom Shader Modifications
+Planets use `MeshStandardMaterial` with `onBeforeCompile` to inject a `uSunPos` uniform, allowing shaders to calculate dynamic shadows relative to the Sun.
+
+### Animation Hooks
+* **GSAP:** Handles frame-independent rotations and atmospheric "pulses".
+* **Atmosphere:** Glow effects are sprites named with the `ct-{planet}-glow-js` convention.
+
+---
+
+**Note to AI:** When generating new Astro components, ensure they use the `ct-` prefix for all classes. When modifying `main.ts`, follow the `Pivot` structure for all celestial bodies to ensure orbital consistency.

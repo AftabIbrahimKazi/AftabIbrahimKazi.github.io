@@ -1,0 +1,64 @@
+---
+// src/components/LandingFooter.astro
+---
+
+<footer class="lp-footer d-flex flex-column overflow-hidden position-relative">
+
+  <!-- full-bleed background image behind hero + bar -->
+  <img class="lp-footer-bg d-block object-fit-cover object-position-[center_30%] position-absolute left-[0] top-[0] z-[0] w-100 h-100" src="/images/footer.png" alt="" aria-hidden="true" loading="lazy" />
+
+  <!-- ── CTA hero ──────────────────────────────────────────────── -->
+  <div class="lp-footer-hero-body d-flex flex-column align-items-center text-center position-relative z-2 gap-[var(--ex-space-xl)] pt-[130px] px-[var(--ex-space-xl)] pb-[160px]">
+    <span class="lp-footer-eyebrow fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-heading-font-weight)] text-[var(--ex-color-accent)]">READY TO EXPLORE?</span>
+    <h2 class="lp-footer-title fs-[clamp(2rem,4.5vw,3.25rem)] fw-[var(--ex-heading-font-weight)] text-[var(--ex-color-white)]">
+      Nine worlds in orbit,<span class="ex-line-break"></span> each with a tale.<span class="ex-line-break"></span>
+      <em class="lp-footer-title-em d-block text-[var(--ex-color-accent)]">Pick your planet & set full sail.</em>
+    </h2>
+    <a href="/sol" class="lp-footer-btn rounded-pill btn-outline-primary gap-[var(--ex-space-md)] text-[var(--ex-color-white)] bg-[var(--ex-color-footer-btn-bg)] pt-[var(--ex-space-xxs)] pe-[var(--ex-space-xxs)] pb-[var(--ex-space-xxs)] ps-[var(--ex-space-sm)]">
+      <span class="fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-heading-font-weight)] text-[var(--ex-color-white)]">START THE JOURNEY</span>
+      <span class="lp-footer-btn-icon d-flex align-items-center justify-content-center h-[var(--ex-size-25)] w-[var(--ex-size-25)] text-[var(--ex-color-black)] bg-[var(--ex-color-accent)]" aria-hidden="true">
+        <i class="fa-solid fa-arrow-right"></i>
+      </span>
+    </a>
+  </div>
+
+  <!-- ── Bar ──────────────────────────────────────────────────── -->
+  <div class="lp-footer-bar position-relative z-2 py-[var(--ex-space-md)] px-[var(--ex-space-xl)]">
+    <div class="lp-footer-bar-inner d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-[var(--ex-space-md)]">
+
+      <div class="lp-footer-brand d-flex align-items-center flex-shrink-0 gap-[var(--ex-space-sm)]">
+        <svg class="lp-footer-brand-icon flex-shrink-0 h-[var(--ex-size-36)] w-[var(--ex-size-36)] text-[var(--ex-color-accent)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="9" fill="currentColor" opacity="0.15" />
+          <circle cx="18" cy="18" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
+          <ellipse cx="18" cy="18" rx="16" ry="5.5" fill="none" stroke="currentColor" stroke-width="1.8"
+                   transform="rotate(-22 18 18)" />
+        </svg>
+        <div>
+          <p class="lp-footer-brand-name fs-[var(--ex-font-size-xxs)] fw-[var(--ex-heading-font-weight)] m-0 text-[var(--ex-color-white-mid)]">Exo Space</p>
+          <p class="lp-footer-brand-tag fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-para-font-weight)] m-0 mt-[2px] text-[var(--ex-color-nebula-muted)]">Exploring the universe, one discovery at a time.</p>
+        </div>
+      </div>
+
+      <nav class="lp-footer-nav d-flex flex-wrap justify-content-center flex-grow-1 gap-[var(--ex-space-lg)]" aria-label="Footer">
+        <a href="/sol?target=mercury">Journal</a>
+        <a href="/sol?target=sun">About</a>
+        <a href="#" aria-disabled="true">Terms &amp; Conditions</a>
+        <a href="#" aria-disabled="true">Privacy Policy</a>
+        <a href="/neptune">Contact</a>
+      </nav>
+
+      <div class="lp-footer-meta d-flex flex-column flex-shrink-0 align-items-center gap-[var(--ex-space-xs)]">
+        <div class="lp-footer-social d-flex gap-[var(--ex-space-md)]">
+          <a href="https://github.com/AftabIbrahimKazi" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/aftab-kazi-715b88193/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <span class="lp-footer-copy fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-para-font-weight)] text-[var(--ex-color-nebula-muted)]">&copy; 2026 Aftab Kazi. All rights reserved.</span>
+      </div>
+
+    </div>
+  </div>
+
+</footer>

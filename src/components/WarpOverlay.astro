@@ -1,0 +1,27 @@
+---
+// src/components/WarpOverlay.astro
+// Drop into any layout to get warp transitions + scene veil.
+// WarpRouter (warp-entry.ts) must also be imported in the same layout.
+---
+<canvas id="ex-warp-canvas" data-canvas-state="active"></canvas>
+<div id="ex-warp-veil" data-veil-state="hidden"></div>
+<div id="ex-canvas-vignette"></div>
+
+<style is:global>
+  #ex-warp-canvas {
+    display: block;
+    height: 100%;
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+
+  #ex-warp-veil {
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+  }
+
+</style>

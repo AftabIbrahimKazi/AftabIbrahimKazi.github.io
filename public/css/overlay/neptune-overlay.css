@@ -1,0 +1,362 @@
+/* neptune-overlay.css */
+
+#ex-content-overlay[data-planet="ex-neptune-js"] { background: transparent; }
+
+#ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-section,
+#ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-section--entry {
+  background: transparent; min-height: unset; padding: 0;
+}
+
+#ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-entry-header {
+  background-color: var(--ex-color-neptune-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--ex-border-radius-outer); padding: var(--ex-space-md) var(--ex-space-lg);
+  border-bottom: none; margin-bottom: 0; display: inline-block;
+}
+
+#ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ── Section base ───────────────────────────────────────────── */
+
+.ex-neptune-section {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(0, 4, 22, 0.80);
+  border-left: 2px solid var(--ex-color-neptune-border);
+  border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-md);
+  justify-content: center;
+  max-width: var(--ex-size-420);
+  min-height: auto;
+  padding: var(--ex-space-lg) var(--ex-space-xl);
+  position: relative;
+}
+
+/* ── Section layout variants ────────────────────────────────── */
+
+.ex-neptune-section[data-layout="bottom-center"] {
+  align-items: center;
+  border-bottom: 2px solid var(--ex-color-neptune-border);
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0 0;
+  margin: calc(100dvh * 0.55) auto 0;
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+.ex-neptune-section[data-layout="bottom-right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 2px solid var(--ex-color-neptune-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-neptune-section[data-layout="top-left"] {
+  margin-right: auto;
+  margin-top: var(--ex-space-xl);
+}
+
+.ex-neptune-section[data-layout="right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 2px solid var(--ex-color-neptune-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-neptune-section[data-layout="bottom-left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-neptune-section[data-layout="left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-neptune-section[data-layout="center"] {
+  align-items: center;
+  border-left: none;
+  border-radius: 0 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer);
+  border-top: 2px solid var(--ex-color-neptune-border);
+  margin: calc(100dvh * 0.2) auto var(--ex-space-xxl);
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+/* ── Form section — wider panel ─────────────────────────────── */
+
+.ex-neptune-section--form {
+  max-width: var(--ex-size-540);
+}
+
+/* ── Section typography ─────────────────────────────────────── */
+
+.ex-neptune-section-label {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--ex-color-neptune-label);
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-xl);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.ex-neptune-section-title {
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--ex-font-size-md);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-neptune-body {
+  color: var(--ex-text-body);
+  font-size: var(--ex-font-size-default);
+  opacity: var(--ex-opacity-body);
+}
+
+/* ── Key fact ───────────────────────────────────────────────── */
+
+.ex-neptune-key-fact {
+  border-top: 1px solid var(--ex-color-neptune-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  padding-top: var(--ex-space-sm);
+}
+
+.ex-neptune-fact-number {
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-neptune-fact-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+/* ── Stats row / pill ───────────────────────────────────────── */
+
+.ex-neptune-stats-row {
+  border-top: 1px solid var(--ex-color-neptune-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ex-space-xs);
+  padding-top: var(--ex-space-sm);
+}
+
+.ex-neptune-stat-pill {
+  background-color: var(--ex-color-white-faint);
+  border: 1px solid var(--ex-color-neptune-border);
+  border-radius: var(--ex-border-radius-full);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  padding: var(--ex-space-xs) var(--ex-space-default);
+}
+
+.ex-neptune-stat-pill-value {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-neptune-stat-pill-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+/* ── Direct email link ──────────────────────────────────────── */
+
+.ex-neptune-email-link {
+  -webkit-background-clip: text;
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-lg);
+  font-weight: var(--ex-heading-font-weight);
+  text-decoration: none;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-email-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Availability ───────────────────────────────────────────── */
+
+.ex-neptune-availability {
+  align-items: center;
+  display: flex;
+  gap: var(--ex-space-xs);
+}
+
+.ex-neptune-status-dot {
+  background: #4ade80;
+  border-radius: var(--ex-border-radius-round);
+  display: inline-block;
+  flex-shrink: 0;
+  height: var(--ex-size-8);
+  width: var(--ex-size-8);
+}
+
+.ex-neptune-status-text {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-font-weight-medium);
+}
+
+/* ── Social links ───────────────────────────────────────────── */
+
+.ex-neptune-socials {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ex-neptune-social-link {
+  align-items: center;
+  border: 1px solid var(--ex-color-neptune-border);
+  border-radius: var(--ex-border-radius-outer);
+  color: var(--ex-text-body);
+  display: flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-para-font-weight);
+  gap: var(--ex-space-sm);
+  opacity: var(--ex-opacity-body);
+  padding: var(--ex-space-sm) var(--ex-space-default);
+  text-decoration: none;
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-social-link:hover {
+  border-color: var(--ex-color-neptune-hi);
+  opacity: 1;
+}
+
+.ex-neptune-social-icon {
+  color: var(--ex-color-neptune-hi);
+  font-size: var(--ex-font-size-default);
+  width: var(--ex-space-default);
+}
+
+/* ── Contact form ───────────────────────────────────────────── */
+
+.ex-neptune-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-md);
+}
+
+.ex-neptune-form-row {
+  display: grid;
+  gap: var(--ex-space-sm);
+  grid-template-columns: 1fr 1fr;
+}
+
+.ex-neptune-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+}
+
+.ex-neptune-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-font-weight-medium);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-neptune-input {
+  background: var(--ex-color-white-a05);
+  border: 1px solid var(--ex-color-neptune-border);
+  border-radius: var(--ex-border-radius-outer);
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-sm);
+  font-weight: var(--ex-para-font-weight);
+  padding: var(--ex-space-xs) var(--ex-space-sm);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: 100%;
+}
+
+.ex-neptune-input::placeholder {
+  color: var(--ex-text-body);
+  opacity: var(--ex-opacity-faint);
+}
+
+.ex-neptune-input:focus {
+  background: var(--ex-color-white-a06);
+  border-color: var(--ex-color-neptune-hi);
+  outline: none;
+}
+
+.ex-neptune-input:focus-visible {
+  outline: 2px solid var(--ex-color-neptune-border);
+  outline-offset: 2px;
+}
+
+.ex-neptune-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* ── Submit button ──────────────────────────────────────────── */
+
+.ex-neptune-submit {
+  align-items: center;
+  align-self: flex-start;
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  border: none;
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-white);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-sm);
+  letter-spacing: var(--ex-tracking-md);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-submit:hover { opacity: var(--ex-opacity-body); }
+
+.ex-neptune-submit:focus-visible {
+  outline: 2px solid var(--ex-color-neptune-border);
+  outline-offset: 2px;
+}

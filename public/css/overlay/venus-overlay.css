@@ -1,0 +1,325 @@
+/* venus-overlay.css — Acid clouds · Dense atmosphere theme */
+
+#ex-content-overlay[data-planet="ex-venus-js"] { background: transparent; }
+
+#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-section,
+#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-section--entry {
+  background: transparent; min-height: unset; padding: 0;
+}
+
+#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-entry-header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--ex-color-venus-bg);
+  border-bottom: none;
+  border-radius: var(--ex-border-radius-outer);
+  display: inline-block;
+  margin-bottom: 0;
+  padding: var(--ex-space-md) var(--ex-space-lg);
+}
+
+#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-planet-name {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Section base ────────────────────────────────────────────── */
+
+.ex-venus-section {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(18, 9, 0, 0.86);
+  border-left: 2px solid var(--ex-color-venus-border);
+  border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-md);
+  justify-content: center;
+  max-width: var(--ex-size-420);
+  min-height: auto;
+  padding: var(--ex-space-lg) var(--ex-space-xl);
+  position: relative;
+}
+
+/* ── Layout variants ─────────────────────────────────────────── */
+
+.ex-venus-section[data-layout="bottom-center"] {
+  align-items: center;
+  border-bottom: 2px solid var(--ex-color-venus-border);
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0 0;
+  margin: calc(100dvh * 0.55) auto 0;
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+.ex-venus-section[data-layout="bottom-right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 2px solid var(--ex-color-venus-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-venus-section[data-layout="top-left"] {
+  margin-right: auto;
+  margin-top: var(--ex-space-xl);
+}
+
+.ex-venus-section[data-layout="right"] {
+  border-left: none;
+  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
+  border-right: 2px solid var(--ex-color-venus-border);
+  margin-left: auto;
+  margin-right: var(--ex-space-md);
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-venus-section[data-layout="bottom-left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.3);
+}
+
+.ex-venus-section[data-layout="left"] {
+  margin-right: auto;
+  margin-top: calc(100dvh * 0.2);
+}
+
+.ex-venus-section[data-layout="center"] {
+  align-items: center;
+  border-left: none;
+  border-radius: 0 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer);
+  border-top: 2px solid var(--ex-color-venus-border);
+  margin: calc(100dvh * 0.2) auto var(--ex-space-xxl);
+  max-width: var(--ex-size-xxl);
+  text-align: center;
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+
+.ex-venus-section-label {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--ex-color-venus-label);
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-xl);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.ex-venus-section-title {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--ex-font-size-md);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-venus-body {
+  color: var(--ex-text-body);
+  font-size: var(--ex-font-size-default);
+  opacity: var(--ex-opacity-body);
+}
+
+/* ── Key fact ────────────────────────────────────────────────── */
+
+.ex-venus-key-fact {
+  border-top: 1px solid var(--ex-color-venus-border-inner);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  padding-top: var(--ex-space-sm);
+}
+
+.ex-venus-fact-number {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-venus-fact-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+/* ── Stats row — 2-col dense grid (atmospheric density) ─────── */
+
+.ex-venus-stats-row {
+  border-top: 1px solid var(--ex-color-venus-border-inner);
+  display: grid;
+  gap: var(--ex-space-xs);
+  grid-template-columns: 1fr 1fr;
+  padding-top: var(--ex-space-sm);
+}
+
+.ex-venus-stat-pill {
+  background-color: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-outer);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  padding: var(--ex-space-xs) var(--ex-space-sm);
+}
+
+.ex-venus-stat-pill-value {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-venus-stat-pill-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-venus-stat-pill--hot .ex-venus-stat-pill-value { color: var(--ex-color-venus-orange); }
+.ex-venus-stat-pill--pressure .ex-venus-stat-pill-value { color: var(--ex-color-venus-hi); }
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+
+.ex-venus-sidebar {
+  --st-offcanvas-width: min(520px, 100vw);
+  --st-bg:              rgba(22, 10, 0, 0.94);
+  --st-border:          transparent;
+  --st-duration:        var(--ex-duration-slow);
+  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(60, 28, 0, 0.94);
+  border-top: 2px solid var(--ex-color-venus-hi);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.ex-venus-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-venus-border); }
+.ex-venus-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-venus-border); }
+
+.ex-venus-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-venus-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-venus-sidebar-header {
+  border-bottom: 1px solid var(--ex-color-venus-border);
+  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
+  position: relative;
+}
+
+.ex-venus-sidebar-close {
+  background: var(--ex-color-white-faint);
+  border: 1px solid var(--ex-color-venus-border);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-lg);
+  top: var(--ex-space-lg);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+
+.ex-venus-sidebar-close:hover {
+  background: var(--ex-color-venus-border);
+  border-color: var(--ex-color-venus-hi);
+}
+
+.ex-venus-sidebar-cat {
+  -webkit-background-clip: text;
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-venus-sidebar-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-lg);
+  font-weight: var(--ex-heading-font-weight);
+  line-height: 1.3;
+  margin-bottom: var(--ex-space-xs);
+}
+
+.ex-venus-sidebar-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-venus-sidebar-body {
+  flex: 1;
+  padding: var(--ex-space-lg);
+}
+
+.ex-venus-sidebar-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  line-height: 1.75;
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-venus-sidebar-body p:last-child { margin-bottom: 0; }
+
+/* ── Detail link ─────────────────────────────────────────────── */
+
+.ex-venus-detail-link {
+  -webkit-background-clip: text;
+  align-items: center;
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  gap: var(--ex-space-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  margin-top: var(--ex-space-sm);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-venus-detail-link:hover { opacity: var(--ex-opacity-mid); }
