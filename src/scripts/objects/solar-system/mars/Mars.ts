@@ -24,7 +24,7 @@ export class Mars {
     (this as any).pivot = pivot;
 
     const geometry    = new THREE.SphereGeometry(0.7, 64, 64);
-    const marsTexture = this.loader.load('/textures/solarsystem/planets/mars/8k_mars.jpg');
+    const marsTexture = this.loader.load('/textures/solarsystem/planets/mars/8k_mars.avif');
     marsTexture.colorSpace = THREE.SRGBColorSpace;
     marsTexture.anisotropy = 16;
 
@@ -37,7 +37,7 @@ export class Mars {
     this.mesh.name = 'ex-mars-js';
 
     const cloudGeometry = new THREE.SphereGeometry(0.7015, 64, 64);
-    const dustTexture   = this.loader.load('/textures/solarsystem/planets/mars/mars-cloud-texture.jpg');
+    const dustTexture   = this.loader.load('/textures/solarsystem/planets/mars/mars-cloud-texture.avif');
     dustTexture.colorSpace = THREE.SRGBColorSpace;
     dustTexture.anisotropy = 16;
 
@@ -56,7 +56,7 @@ export class Mars {
     marsAtmosphere.name = 'ex-mars-atmosphere-js';
     this.mesh.add(marsAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const marsGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x8b5a3a, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false });
     const marsGlow = new THREE.Sprite(marsGlowMaterial);
     marsGlow.scale.set(2.8, 2.8, 2.8);

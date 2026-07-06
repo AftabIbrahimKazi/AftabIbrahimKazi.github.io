@@ -24,7 +24,7 @@ export class Jupiter {
     (this as any).pivot = pivot;
 
     const geometry       = new THREE.SphereGeometry(1.5, 64, 64);
-    const jupiterTexture = this.loader.load('/textures/solarsystem/planets/jupiter/8k_jupiter.jpg');
+    const jupiterTexture = this.loader.load('/textures/solarsystem/planets/jupiter/8k_jupiter.avif');
     jupiterTexture.colorSpace = THREE.SRGBColorSpace;
     jupiterTexture.anisotropy = 16;
     jupiterTexture.wrapS = jupiterTexture.wrapT = THREE.RepeatWrapping;
@@ -38,7 +38,7 @@ export class Jupiter {
     this.mesh.name = 'ex-jupiter-js';
 
     const cloudGeometry = new THREE.SphereGeometry(1.5015, 64, 64);
-    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/jupiter/8k_jupiter.jpg');
+    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/jupiter/8k_jupiter.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
     cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
@@ -58,7 +58,7 @@ export class Jupiter {
     jupiterAtmosphere.name = 'ex-jupiter-atmosphere-js';
     this.mesh.add(jupiterAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const jupiterGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x8a6040, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
     const jupiterGlow = new THREE.Sprite(jupiterGlowMaterial);
     jupiterGlow.scale.set(5.0, 5.0, 5.0);
@@ -70,9 +70,9 @@ export class Jupiter {
     this.mesh.userData['_jupiterCloudPan']   = jupiterClouds.pan;
   }
 
-  /** Live UV-offset uniforms for the surface texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the surface texture â€” keyframe x/y to pan. */
   get surfacePan(): Record<string, number> { return this.mesh.userData['_jupiterSurfacePan']; }
 
-  /** Live UV-offset uniforms for the cloud texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the cloud texture â€” keyframe x/y to pan. */
   get cloudPan(): Record<string, number> { return this.mesh.userData['_jupiterCloudPan']; }
 }

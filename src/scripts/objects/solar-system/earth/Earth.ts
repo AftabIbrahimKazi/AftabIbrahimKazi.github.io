@@ -25,12 +25,14 @@ export class Earth {
     (this as any).pivot = pivot;
 
     const geometry             = new THREE.SphereGeometry(0.9, 64, 64);
-    const earthDayTexture      = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_daymap.jpg');
+    const earthDayTexture      = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_daymap.avif');
     earthDayTexture.colorSpace = THREE.SRGBColorSpace;
     earthDayTexture.anisotropy = 16;
-    const earthSpecularTexture = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_specular_map.jpg');
+    const earthSpecularTexture = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_specular_map.avif');
+    const earthNormalTexture   = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_normal_map.jpg');
+    earthNormalTexture.anisotropy = 16;
 
-    const earthMaterial = buildEarthSurfaceMaterial(earthDayTexture, earthSpecularTexture);
+    const earthMaterial = buildEarthSurfaceMaterial(earthDayTexture, earthSpecularTexture, earthNormalTexture);
 
     (this as any).mesh = new THREE.Mesh(geometry, earthMaterial);
     this.mesh.renderOrder = 1;
@@ -39,7 +41,7 @@ export class Earth {
     this.mesh.name = 'ex-earth-js';
 
     const cloudGeometry = new THREE.SphereGeometry(0.9015, 64, 64);
-    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_clouds.jpg');
+    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_clouds.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
 
@@ -51,7 +53,7 @@ export class Earth {
     this.mesh.add(earthCloud);
 
     const nightGeometry     = new THREE.SphereGeometry(0.901, 64, 64);
-    const earthNightTexture = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_nightmap.jpg');
+    const earthNightTexture = this.loader.load('/textures/solarsystem/planets/earth/8k_earth_nightmap.avif');
     earthNightTexture.colorSpace = THREE.SRGBColorSpace;
     earthNightTexture.anisotropy = 16;
 
@@ -70,7 +72,7 @@ export class Earth {
     earthAtmosphere.name = 'ex-earth-atmosphere-js';
     this.mesh.add(earthAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const earthGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x224488, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
     const earthGlow = new THREE.Sprite(earthGlowMaterial);
     earthGlow.scale.set(2.8, 2.8, 2.8);

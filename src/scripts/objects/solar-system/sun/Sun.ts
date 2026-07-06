@@ -18,11 +18,11 @@ export class Sun {
 
   private _build(): void {
     const sunColor   = new THREE.Color(0xfff3c4);
-    const sunTexture = this.loader.load('/textures/solarsystem/star/sun/sun-texture.jpg');
+    const sunTexture = this.loader.load('/textures/solarsystem/star/sun/sun-texture.avif');
     sunTexture.wrapS = sunTexture.wrapT = THREE.RepeatWrapping;
     sunTexture.colorSpace = THREE.SRGBColorSpace;
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const geometry    = new THREE.SphereGeometry(2, 64, 64);
 
     const sunSurface = buildSunSurfaceMaterial(sunTexture);
@@ -53,7 +53,7 @@ export class Sun {
     this.mesh.userData['_sunRays']       = sunRays;
   }
 
-  /** Live UV-offset uniforms for the sun texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the sun texture â€” keyframe x/y to pan. */
   get surfacePan(): Record<string, number> { return this.mesh.userData['_sunSurfacePan']; }
 
   get blur(): THREE.Sprite { return this.mesh.userData['_sunBlur']; }

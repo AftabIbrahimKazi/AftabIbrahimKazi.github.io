@@ -27,7 +27,7 @@ export class Saturn {
     const geometry = new THREE.SphereGeometry(SATURN_RADIUS, 64, 64);
     geometry.scale(1, 0.902, 1);
 
-    const saturnTexture = this.loader.load('/textures/solarsystem/planets/saturn/8k_saturn.jpg');
+    const saturnTexture = this.loader.load('/textures/solarsystem/planets/saturn/8k_saturn.avif');
     saturnTexture.colorSpace = THREE.SRGBColorSpace;
     saturnTexture.anisotropy = 16;
     saturnTexture.wrapS = saturnTexture.wrapT = THREE.RepeatWrapping;
@@ -42,7 +42,7 @@ export class Saturn {
 
     const cloudGeometry = new THREE.SphereGeometry(SATURN_RADIUS + 0.0015, 64, 64);
     cloudGeometry.scale(1, 0.902, 1);
-    const cloudTexture = this.loader.load('/textures/solarsystem/planets/saturn/8k_saturn.jpg');
+    const cloudTexture = this.loader.load('/textures/solarsystem/planets/saturn/8k_saturn.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
     cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
@@ -63,7 +63,7 @@ export class Saturn {
     saturnAtmosphere.name = 'ex-saturn-atmosphere-js';
     this.mesh.add(saturnAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const saturnGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x9a8050, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
     const saturnGlow = new THREE.Sprite(saturnGlowMaterial);
     saturnGlow.scale.set(4.2, 4.2, 4.2);
@@ -93,9 +93,9 @@ export class Saturn {
     this.mesh.userData['_saturnCloudPan']   = saturnClouds.pan;
   }
 
-  /** Live UV-offset uniforms for the surface texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the surface texture â€” keyframe x/y to pan. */
   get surfacePan(): Record<string, number> { return this.mesh.userData['_saturnSurfacePan']; }
 
-  /** Live UV-offset uniforms for the cloud texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the cloud texture â€” keyframe x/y to pan. */
   get cloudPan(): Record<string, number> { return this.mesh.userData['_saturnCloudPan']; }
 }

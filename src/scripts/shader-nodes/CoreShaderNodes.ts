@@ -261,6 +261,31 @@ export function buildAcesToneMapNodes(color: OutputSocket): OutputSocket {
   return combined.output('Color');
 }
 
+export interface NightAmbientConfig {
+  /** Surface texture colour socket (ImageTexture.Color) — night side shows its dim detail. */
+  color: OutputSocket;
+  /** Terminator socket from buildTerminatorNodes (1 = day, 0 = night). */
+  terminator: OutputSocket;
+  /** Ambient strength on the night side. Default 0.05. */
+  strength?: number;
+}
+
+/**
+ * Night-side ambient fill — restores the dim texture-lit night hemisphere the
+ * planets had as MeshStandardMaterials receiving the scene AmbientLight.
+ * PrincipledBSDF's uAmbientColor uniform (shader-core 0.3.0+) cannot do this
+ * here: the surface graphs multiply the whole lit result by the terminator,
+ * which zeroes any in-BSDF ambient exactly where it is needed. This chain adds
+ * `texture × strength × (1 − terminator)` after the terminator multiply, so
+ * the night side reads as dim surface detail instead of pitch black.
+ */
+export function buildNightAmbient(config: NightAmbientConfig): OutputSocket {
+  const nightBlend = new ShaderMath({ mode: 'SUBTRACT', a: 1.0, b: config.terminator });
+  const dimmed     = new VectorMath({ mode: 'SCALE', vector: config.color, scale: config.strength ?? 0 });
+  const night      = new VectorMath({ mode: 'SCALE', vector: dimmed.output('Vector'), scale: nightBlend.output('Value') });
+  return night.output('Vector');
+}
+
 export interface TerminatorConfig {
   fromMin: number;
   fromMax: number;
