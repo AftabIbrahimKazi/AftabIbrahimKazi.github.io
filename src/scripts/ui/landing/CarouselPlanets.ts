@@ -41,7 +41,7 @@ const RADIUS: Record<string, number> = {
   neptune: 0.528,
 };
 
-const SUN_GLOW_URL = '/textures/solarsystem/star/sun/radial-glow-5.png';
+const SUN_GLOW_URL = '/textures/solarsystem/star/sun/radial-glow-5.avif';
 
 interface CanvasOptions {
   size:             number;
@@ -83,14 +83,14 @@ export class CarouselPlanets {
       const tilt    = THREE.MathUtils.degToRad(TILT[planet] ?? 0);
       const hasRing = planet === 'saturn' && !!opts.ring;
 
-      // Camera distance: fits the planet (or its ring span, if present) at ~92% of the frame height at FOV 50°.
+      // Camera distance: fits the planet (or its ring span, if present) at ~92% of the frame height at FOV 50Â°.
       const frameRadius = hasRing ? radius * (SATURN_RING_OUTER / 1.25) * 1.05 : radius;
       const dist   = frameRadius / (0.85 * Math.tan(THREE.MathUtils.degToRad(25)));
       const camZ   = dist * 0.92;
       const camY   = dist * 0.20;
 
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setSize(size, size, false); // false: skip inline style — CSS controls the displayed size responsively
+      renderer.setSize(size, size, false); // false: skip inline style â€” CSS controls the displayed size responsively
       renderer.setPixelRatio(dpr);
       renderer.setClearColor(0x000000, 0);
       renderer.outputColorSpace    = THREE.SRGBColorSpace;
@@ -142,16 +142,16 @@ export class CarouselPlanets {
       (mesh.material as THREE.MeshStandardMaterial).metalness = 0.0;
       (mesh.material as THREE.MeshStandardMaterial).needsUpdate = true;
 
-      // Cloud / haze layers — matching each planet class's cloud setup.
+      // Cloud / haze layers â€” matching each planet class's cloud setup.
       const cloudDef: { url: string; mat: THREE.MeshStandardMaterialParameters } | null =
         planet === 'earth'
-          ? { url: '/textures/solarsystem/planets/earth/8k_earth_clouds.jpg',
+          ? { url: '/textures/solarsystem/planets/earth/8k_earth_clouds.avif',
               mat: { alphaMap: null, transparent: true, opacity: 1.0, alphaTest: 0.05, roughness: 0.75, metalness: 0.0, depthWrite: false } }
         : planet === 'venus'
-          ? { url: '/textures/solarsystem/planets/venus/venus-cloud-texture.jpg',
+          ? { url: '/textures/solarsystem/planets/venus/venus-cloud-texture.avif',
               mat: { color: new THREE.Color(0xffe8a0), transparent: true, opacity: 0.75, roughness: 1.0, metalness: 0.0, depthWrite: false } }
         : planet === 'mars'
-          ? { url: '/textures/solarsystem/planets/mars/mars-cloud-texture.jpg',
+          ? { url: '/textures/solarsystem/planets/mars/mars-cloud-texture.avif',
               mat: { emissive: new THREE.Color(0xffd4a0), emissiveIntensity: 0.75, color: new THREE.Color(0xffd4a0),
                      transparent: true, opacity: 0.25, alphaMap: null, alphaTest: 0.05, roughness: 1.0, metalness: 0.0, depthWrite: false } }
         : null;
@@ -169,7 +169,7 @@ export class CarouselPlanets {
         mesh.userData['cloudMesh'] = cloudMesh;
       }
 
-      // Fresnel atmosphere rim — triforge node graph, matches the per-planet atmosphere builders.
+      // Fresnel atmosphere rim â€” triforge node graph, matches the per-planet atmosphere builders.
       const atmoColor = ATMO_COLOR[planet] ?? new THREE.Color(0.5, 0.7, 1.0);
       const atmoGeo   = new THREE.SphereGeometry(radius * atmoScale, 64, 64);
       const atmoMat   = buildCarouselAtmosphereMaterial(atmoColor, atmoIntensity);
@@ -215,7 +215,7 @@ export class CarouselPlanets {
         ambientIntensity: 0.10, lightPos: [-4, 2.2, 1.5], lightIntensity: 2.4, ring: true }, loader, dpr);
   }
 
-  // Driven by LandingRenderLoop — no private requestAnimationFrame chain here.
+  // Driven by LandingRenderLoop â€” no private requestAnimationFrame chain here.
   update(elapsed: number): void {
     for (const { mesh, renderer, scene, camera } of this._entries) {
       mesh.rotation.y = elapsed * 0.2;

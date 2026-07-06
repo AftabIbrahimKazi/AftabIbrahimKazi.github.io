@@ -22,7 +22,7 @@
     "@triforge/modifier-core": "^0.1.0",
     "@triforge/particle-core": "^0.1.0",
     "@triforge/radius-parametric-geometry": "^0.1.0",
-    "@triforge/shader-core": "^0.1.0",
+    "@triforge/shader-core": "^0.3.0",
     "@triforge/uv-core": "^0.1.0",
     "@triforge/volume-core": "^0.1.0",
     "astro": "^6.4.8",

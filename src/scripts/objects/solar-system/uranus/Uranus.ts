@@ -27,7 +27,7 @@ export class Uranus {
     const geometry = new THREE.SphereGeometry(URANUS_RADIUS, 64, 64);
     geometry.scale(1, 0.977, 1);
 
-    const uranusTexture = this.loader.load('/textures/solarsystem/planets/uranus/2k_uranus.jpg');
+    const uranusTexture = this.loader.load('/textures/solarsystem/planets/uranus/2k_uranus.avif');
     uranusTexture.colorSpace = THREE.SRGBColorSpace;
     uranusTexture.anisotropy = 16;
     uranusTexture.wrapS = uranusTexture.wrapT = THREE.RepeatWrapping;
@@ -42,7 +42,7 @@ export class Uranus {
 
     const cloudGeometry = new THREE.SphereGeometry(URANUS_RADIUS + 0.0015, 64, 64);
     cloudGeometry.scale(1, 0.977, 1);
-    const cloudTexture = this.loader.load('/textures/solarsystem/planets/uranus/2k_uranus.jpg');
+    const cloudTexture = this.loader.load('/textures/solarsystem/planets/uranus/2k_uranus.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
     cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
@@ -63,7 +63,7 @@ export class Uranus {
     uranusAtmosphere.name = 'ex-uranus-atmosphere-js';
     this.mesh.add(uranusAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const uranusGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x5ecfcf, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false });
     const uranusGlow = new THREE.Sprite(uranusGlowMaterial);
     uranusGlow.scale.set(1.8, 1.8, 1.8);
@@ -111,9 +111,9 @@ export class Uranus {
     this.mesh.userData['_uranusCloudPan']   = uranusClouds.pan;
   }
 
-  /** Live UV-offset uniforms for the surface texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the surface texture â€” keyframe x/y to pan. */
   get surfacePan(): Record<string, number> { return this.mesh.userData['_uranusSurfacePan']; }
 
-  /** Live UV-offset uniforms for the cloud texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the cloud texture â€” keyframe x/y to pan. */
   get cloudPan(): Record<string, number> { return this.mesh.userData['_uranusCloudPan']; }
 }

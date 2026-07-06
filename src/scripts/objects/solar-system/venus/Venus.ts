@@ -24,7 +24,7 @@ export class Venus {
     (this as any).pivot = pivot;
 
     const geometry     = new THREE.SphereGeometry(0.8, 64, 64);
-    const venusTexture = this.loader.load('/textures/solarsystem/planets/venus/venus-texture.jpg');
+    const venusTexture = this.loader.load('/textures/solarsystem/planets/venus/venus-texture.avif');
     venusTexture.colorSpace = THREE.SRGBColorSpace;
     venusTexture.anisotropy = 16;
 
@@ -37,7 +37,7 @@ export class Venus {
     this.mesh.name = 'ex-venus-js';
 
     const cloudGeometry = new THREE.SphereGeometry(0.8015, 64, 64);
-    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/venus/venus-cloud-texture.jpg');
+    const cloudTexture  = this.loader.load('/textures/solarsystem/planets/venus/venus-cloud-texture.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
 
@@ -56,7 +56,7 @@ export class Venus {
     venusAtmosphere.name = 'ex-venus-atmosphere-js';
     this.mesh.add(venusAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const venusGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0xfff5eb, transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending, depthWrite: false });
     const venusGlow = new THREE.Sprite(venusGlowMaterial);
     venusGlow.scale.set(2.8, 2.8, 2.8);

@@ -27,7 +27,7 @@ export class Neptune {
     const geometry = new THREE.SphereGeometry(NEPTUNE_RADIUS, 64, 64);
     geometry.scale(1, 0.983, 1);
 
-    const neptuneTexture = this.loader.load('/textures/solarsystem/planets/neptune/2k_neptune.jpg');
+    const neptuneTexture = this.loader.load('/textures/solarsystem/planets/neptune/2k_neptune.avif');
     neptuneTexture.colorSpace = THREE.SRGBColorSpace;
     neptuneTexture.anisotropy = 16;
     neptuneTexture.wrapS = neptuneTexture.wrapT = THREE.RepeatWrapping;
@@ -42,7 +42,7 @@ export class Neptune {
 
     const cloudGeometry = new THREE.SphereGeometry(NEPTUNE_RADIUS + 0.0015, 64, 64);
     cloudGeometry.scale(1, 0.983, 1);
-    const cloudTexture = this.loader.load('/textures/solarsystem/planets/neptune/2k_neptune.jpg');
+    const cloudTexture = this.loader.load('/textures/solarsystem/planets/neptune/2k_neptune.avif');
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.anisotropy = 16;
     cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
@@ -63,7 +63,7 @@ export class Neptune {
     neptuneAtmosphere.name = 'ex-neptune-atmosphere-js';
     this.mesh.add(neptuneAtmosphere);
 
-    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.png');
+    const glowTexture = this.loader.load('/textures/solarsystem/star/sun/radial-glow-5.avif');
     const neptuneGlowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x2255cc, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
     const neptuneGlow = new THREE.Sprite(neptuneGlowMaterial);
     neptuneGlow.scale.set(1.76, 1.76, 1.76);
@@ -77,9 +77,9 @@ export class Neptune {
     this.mesh.userData['_neptuneCloudPan']   = neptuneClouds.pan;
   }
 
-  /** Live UV-offset uniforms for the surface texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the surface texture â€” keyframe x/y to pan. */
   get surfacePan(): Record<string, number> { return this.mesh.userData['_neptuneSurfacePan']; }
 
-  /** Live UV-offset uniforms for the cloud texture — keyframe x/y to pan. */
+  /** Live UV-offset uniforms for the cloud texture â€” keyframe x/y to pan. */
   get cloudPan(): Record<string, number> { return this.mesh.userData['_neptuneCloudPan']; }
 }

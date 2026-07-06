@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/earth/EarthSurface.ts
 
 import * as THREE from 'three';
-import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, SeparateRGB, Gamma, MaterialOutput } from '@triforge/shader-core';
-import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, SeparateRGB, NormalMap, Gamma, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Earth surface — triforge node-graph port of the original
@@ -17,40 +17,46 @@ import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength } from '../../
  * material is added as an Emission node. The Gamma node approximates the
  * tone-mapping + sRGB output conversion of the standard material pipeline.
  *
- * Not ported: the tangent-space normal map (normalScale 0.75) — triforge's
- * NormalMap node is a procedural height-gradient node and cannot consume a
- * tangent-space normal texture. A Bump node driven by day-map luminance
- * stands in for it. Flagged in handover.md.
+ * Terrain relief: the original tangent-space normal map (normalScale 0.75),
+ * restored via shader-core 0.3.0's rewritten NormalMap node (tangent-space
+ * decode with a derivative cotangent frame). Replaces the interim TextureBump
+ * stand-in that derived relief from day-map luminance.
  */
-export function buildEarthSurfaceMaterial(dayTexture: THREE.Texture, specularTexture: THREE.Texture): THREE.ShaderMaterial {
+export function buildEarthSurfaceMaterial(dayTexture: THREE.Texture, specularTexture: THREE.Texture, normalTexture: THREE.Texture): THREE.ShaderMaterial {
   const { terminator } = buildTerminatorNodes({ fromMin: -0.4, fromMax: 0.4 });
 
   const dayTex    = new ImageTexture({ uniformName: 'uDayTex' });
   const roughness = new SeparateRGB({ color: new ImageTexture({ uniformName: 'uRoughTex' }).output('Color') });
 
-  // Terrain relief — day-map luminance as a height map (approximation: ocean
-  // vs land brightness, not true elevation data).
-  const bumpStrength = buildBumpFadeStrength({ strength: 0.15, fadeStart: 5, fadeEnd: 14 });
-  const bump   = new TextureBump({ uniformName: 'uEarthBumpTex', strength: bumpStrength, distance: 0.015, texelSize: 1.0 / 512.0, lod: 0.0 });
+  const normalTex = new ImageTexture({ uniformName: 'uNormalTex' });
+  const normal    = new NormalMap({ color: normalTex.output('Color'), strength: 0.75 });
 
   const surface  = new PrincipledBSDF({
     baseColor: dayTex.output('Color'),
     roughness: roughness.output('G'),
     metallic: 0.0,
-    normal: bump.output('Normal'),
+    normal: normal.output('Normal'),
   });
   const emissive = new Emission({ color: [1, 1, 1] as unknown as string, strength: 0.0275 });
   const lit      = new AddShader({ shader1: surface.output('BSDF'), shader2: emissive.output('BSDF') });
 
-  const shadowed = new VectorMath({ mode: 'SCALE', vector: lit.output('BSDF'), scale: terminator });
-  const encoded  = new Gamma({ color: shadowed.output('Vector'), gamma: 1.0 / 1.75 });
+  const shadowed     = new VectorMath({ mode: 'SCALE', vector: lit.output('BSDF'), scale: terminator });
+  const nightAmbient = buildNightAmbient({ color: dayTex.output('Color'), terminator });
+  const filled       = new AddShader({ shader1: shadowed.output('Vector'), shader2: nightAmbient });
+  const encoded      = new Gamma({ color: filled.output('BSDF'), gamma: 1.0 / 1.75 });
 
-  const out = new MaterialOutput({ surface: encoded.output('Color') });
+  const toShader = new Emission({ color: encoded.output('Color'), strength: 1.0 });
+  const out = new MaterialOutput({ surface: toShader.output('BSDF') });
   out.compile();
 
-  out.material!.uniforms['uDayTex']   = { value: dayTexture };
-  out.material!.uniforms['uEarthBumpTex'] = { value: dayTexture };
-  out.material!.uniforms['uRoughTex'] = { value: specularTexture };
+  // Neutralise the library's default in-BSDF ambient (0.3.0+) — the day side was
+  // tuned without it, and the terminator multiply zeroes it at night anyway;
+  // night fill comes from buildNightAmbient instead.
+  (out.material!.uniforms['uAmbientColor']!.value as THREE.Vector3).set(0, 0, 0);
+
+  out.material!.uniforms['uDayTex']    = { value: dayTexture };
+  out.material!.uniforms['uRoughTex']  = { value: specularTexture };
+  out.material!.uniforms['uNormalTex'] = { value: normalTexture };
 
   return out.material!;
 }

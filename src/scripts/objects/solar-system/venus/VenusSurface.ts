@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Gamma, MaterialOutput } from '@triforge/shader-core';
-import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength } from '../../../shader-nodes/CoreShaderNodes';
+import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Venus surface — triforge node-graph port of the original
@@ -35,11 +35,19 @@ export function buildVenusSurfaceMaterial(venusTexture: THREE.Texture): THREE.Sh
   const emissive = new Emission({ color: '#fff5eb', strength: 0.025 });
   const lit      = new AddShader({ shader1: surface.output('BSDF'), shader2: emissive.output('BSDF') });
 
-  const shadowed = new VectorMath({ mode: 'SCALE', vector: lit.output('BSDF'), scale: terminator });
-  const encoded  = new Gamma({ color: shadowed.output('Vector'), gamma: 1.0 / 1.75 });
+  const shadowed     = new VectorMath({ mode: 'SCALE', vector: lit.output('BSDF'), scale: terminator });
+  const nightAmbient = buildNightAmbient({ color: surfaceTex.output('Color'), terminator });
+  const filled       = new AddShader({ shader1: shadowed.output('Vector'), shader2: nightAmbient });
+  const encoded      = new Gamma({ color: filled.output('BSDF'), gamma: 1.0 / 1.75 });
 
-  const out = new MaterialOutput({ surface: encoded.output('Color') });
+  const toShader = new Emission({ color: encoded.output('Color'), strength: 1.0 });
+  const out = new MaterialOutput({ surface: toShader.output('BSDF') });
   out.compile();
+
+  // Neutralise the library's default in-BSDF ambient (0.3.0+) — the day side was
+  // tuned without it, and the terminator multiply zeroes it at night anyway;
+  // night fill comes from buildNightAmbient instead.
+  (out.material!.uniforms['uAmbientColor']!.value as THREE.Vector3).set(0, 0, 0);
 
   out.material!.uniforms['uVenusTex'] = { value: venusTexture };
   out.material!.uniforms['uVenusBumpTex'] = { value: venusTexture };
