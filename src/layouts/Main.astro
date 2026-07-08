@@ -1,7 +1,10 @@
 ---
 // src/layouts/Main.astro
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+// Legacy pre-LandingHeader/LandingFooter components — no longer used on this
+// layout (was bleeding through uncontrolled on mobile viewports). Left
+// commented out, not deleted, in case they're reused elsewhere later.
+// import Header from "../components/Header.astro";
+// import Footer from "../components/Footer.astro";
 import Scene from "../components/Scene.astro";
 import ContentOverlay from "../components/overlays/ContentOverlay.astro";
 import WarpOverlay from "../components/WarpOverlay.astro";
@@ -79,7 +82,8 @@ const themeValue = isDark ? "dark" : "light";
     <div id="ex-top-sensor-js"></div>
     <Scene />
     <ContentOverlay />
-    <Header />
+    <!-- Legacy header — see commented-out import above. Kept for future reuse. -->
+    <!-- <Header /> -->
 
     <main>
       <slot />
@@ -118,6 +122,7 @@ const themeValue = isDark ? "dark" : "light";
       </button>
     </div>
 
-    <Footer />
+    <!-- Legacy footer — see commented-out import above. Kept for future reuse. -->
+    <!-- <Footer /> -->
   </body>
 </html>
