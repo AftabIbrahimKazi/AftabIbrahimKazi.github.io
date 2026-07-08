@@ -25,66 +25,85 @@ export interface ScrollCameraConfig {
 export const MERCURY_SCROLL_PATH: ScrollCameraConfig = {
   planetKey:       'ex-mercury-js',
   disableControls: false,
+  // Same full 0°→360° orbit as before, radius breathes inward toward the
+  // middle of the scroll (R=5 at start/end, R=1.8 at the halfway point) for
+  // a much more immersive close pass, while still tracing one continuous
+  // circular path start to end.
+  //
+  // lookAt is also nudged off-center during the close waypoints — offset
+  // along each waypoint's own camera-right vector (derived from its orbit
+  // angle: right = (z/R, 0, -x/R)), scaled by the same sin(pi*t) profile as
+  // the radius dip (0 at the wide entry/exit shots, max at S6). This aims
+  // the camera slightly past the planet on its right side, which reads on
+  // screen as the planet drifting left — clearing the right side of the
+  // frame for the right-aligned content cards without moving the orbit path.
   waypoints: [
     {
-      // S1 — The Swift Messenger: standard focus, eye level
+      // S1 — Journal intro: 0° — R5, no lookAt shift (entry framing, unchanged)
       at:     0,
-      offset: { x: 2,     y: 0.4,  z: 3.2  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      offset: { x: 0,     y: 0.0,  z: 5.0    },
+      lookAt: { x: 0,     y: 0,    z: 0      },
     },
     {
-      // S2 — Orbit & Speed: pull back wide, elevated — planet small against stars
+      // S2 — Article 1: 36° — R4.011
       at:     0.10,
-      offset: { x: 5,     y: 3.5,  z: 8    },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      offset: { x: 2.357, y: 0.0,  z: 3.245  },
+      lookAt: { x: 0.150, y: 0,    z: -0.109 },
     },
     {
-      // S3 — Iron Core: low angle looking up — dramatic underside view
+      // S3 — Article 2: 72° — R3.118
       at:     0.20,
-      offset: { x: 1.5,   y: -3,   z: 2.5  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      offset: { x: 2.966, y: 0.0,  z: 0.964  },
+      lookAt: { x: 0.109, y: 0,    z: -0.336 },
     },
     {
-      // S4 — Day & Night: side-on showing terminator line
-      at:     0.32,
-      offset: { x: -0.5,  y: 0.2,  z: 2.8  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S4 — Article 3: 108° — R2.412
+      at:     0.30,
+      offset: { x: 2.294, y: 0.0,  z: -0.745 },
+      lookAt: { x: -0.150, y: 0,   z: -0.462 },
     },
     {
-      // S5 — Spin-Orbit: top-down angled — see the orbital plane
-      at:     0.44,
-      offset: { x: 0.5,   y: 4.5,  z: 2.5  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S5 — Article 4: 144° — R1.957
+      at:     0.40,
+      offset: { x: 1.150, y: 0.0,  z: -1.583 },
+      lookAt: { x: -0.462, y: 0,   z: -0.336 },
     },
     {
-      // S6 — Caloris Basin: very close, surface-skimming low angle
-      at:     0.55,
-      offset: { x: 0.8,   y: -1.2, z: 1.6  },
-      lookAt: { x: 0,     y: -0.2, z: 0    },
+      // S6 — Topics: 180° — R1.8, closest point of the orbit — immersive close pass,
+      // largest lookAt shift so the planet clears the right-aligned cards
+      at:     0.50,
+      offset: { x: 0,     y: 0.0,  z: -1.8   },
+      lookAt: { x: -0.6,  y: 0,    z: 0      },
     },
     {
-      // S7 — Shrinking Planet: medium elevated — full surface visible
-      at:     0.65,
-      offset: { x: 2.5,   y: 1.5,  z: 3.5  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S7 — Writing philosophy: 216° — R1.957
+      at:     0.60,
+      offset: { x: -1.150, y: 0.0, z: -1.583 },
+      lookAt: { x: -0.462, y: 0,   z: 0.336  },
     },
     {
-      // S8 — Magnetic Field: three-quarter from opposite side
-      at:     0.75,
-      offset: { x: -2.5,  y: 1,    z: 2.5  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S8 — Archive stats: 252° — R2.412
+      at:     0.70,
+      offset: { x: -2.294, y: 0.0, z: -0.745 },
+      lookAt: { x: -0.150, y: 0,   z: 0.462  },
     },
     {
-      // S9 — Polar Ice: above looking down at pole
-      at:     0.85,
-      offset: { x: 0.3,   y: 3.5,  z: 1.2  },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S9 — Newsletter: 288° — R3.118
+      at:     0.80,
+      offset: { x: -2.966, y: 0.0, z: 0.964  },
+      lookAt: { x: 0.109,  y: 0,   z: 0.336  },
     },
     {
-      // S10 — Exploration: wide cinematic pull-back
-      at:     0.95,
-      offset: { x: 7,     y: 2.5,  z: 10   },
-      lookAt: { x: 0,     y: 0,    z: 0    },
+      // S10 — Navigate: 324° — R4.011
+      at:     0.90,
+      offset: { x: -2.357, y: 0.0, z: 3.245  },
+      lookAt: { x: 0.150,  y: 0,   z: 0.109  },
+    },
+    {
+      // Full circle closes exactly back at the S1 start point — R5, no lookAt shift
+      at:     1.00,
+      offset: { x: 0,     y: 0.0,  z: 5.0    },
+      lookAt: { x: 0,     y: 0,    z: 0      },
     },
   ],
 };

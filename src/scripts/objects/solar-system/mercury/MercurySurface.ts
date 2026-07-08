@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/mercury/MercurySurface.ts
 
 import * as THREE from 'three';
-import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Gamma, MaterialOutput } from '@triforge/shader-core';
-import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Bump, Gamma, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes, buildBumpFadeStrength, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Mercury surface — triforge node-graph port of the original
@@ -26,10 +26,10 @@ export function buildMercurySurfaceMaterial(mercuryTexture: THREE.Texture): THRE
   // Mercury). Two chained octaves: coarse crater basins + fine regolith grain.
   // Fine detail fades out earlier — it is sub-pixel long before the basins are.
   const coarseStrength = buildBumpFadeStrength({ strength: 0.15, fadeStart: 5, fadeEnd: 15 });
-  const coarse = new TextureBump({ uniformName: 'uMercuryBumpTex', strength: coarseStrength, distance: 0.015, texelSize: 1.0 / 128.0, lod: 4.0 });
+  const coarse = new Bump({ method: 'uv-offset', uniformName: 'uMercuryBumpTex', strength: coarseStrength, distance: 0.015, texelSize: 1.0 / 128.0, lod: 4.0 });
 
   const fineStrength = buildBumpFadeStrength({ strength: 0.05, fadeStart: 1, fadeEnd: 5 });
-  const bump = new TextureBump({ uniformName: 'uMercuryBumpTex2', strength: fineStrength, distance: 0.015, texelSize: 1.0 / 512.0, lod: 1.0, normal: coarse.output('Normal') });
+  const bump = new Bump({ method: 'uv-offset', uniformName: 'uMercuryBumpTex2', strength: fineStrength, distance: 0.015, texelSize: 1.0 / 512.0, lod: 1.0, normal: coarse.output('Normal') });
 
   const surface  = new PrincipledBSDF({
     baseColor: surfaceTex.output('Color'),

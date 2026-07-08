@@ -25,6 +25,10 @@ const PAGE_COLORS: Record<string, [number, number, number]> = {
 
 const DEFAULT_COLOR: [number, number, number] = [1.0, 0.95, 0.78];
 
+// How long the veil holds fully opaque on entry before the reverse warp is
+// allowed to show through — gives the scene a moment to finish its first frame.
+const WARP_VEIL_HOLD_MS = 220;
+
 function pageColor(path: string): [number, number, number] {
   const [stripped, query] = path.split('?');
   const target = new URLSearchParams(query ?? '').get('target');
@@ -54,6 +58,16 @@ export class WarpRouter {
         this._playEntry();
       }
     });
+
+    // pagehide fires before the page is hidden/suspended into bfcache — force the
+    // veil opaque synchronously so whatever DOM snapshot gets frozen is already
+    // covered. Without this, a restored bfcache page paints its frozen
+    // veil-transparent state before pageshow's persisted handler above re-covers
+    // it, producing the same flash this whole state machine exists to prevent.
+    window.addEventListener('pagehide', () => {
+      const veil = this._veil();
+      if (veil) veil.dataset.veilState = 'instant-on';
+    });
   }
 
   private static _veil(): HTMLElement | null {
@@ -66,13 +80,18 @@ export class WarpRouter {
     // Color matches the page we just arrived on — include search so ?target= is resolved
     this._warp.setColor(...pageColor(window.location.pathname + window.location.search));
 
-    // Veil starts opaque (covers scene), fades out after warp reveals
+    // Veil starts opaque (covers scene, matches its default markup state so the
+    // very first paint is already covered — no gap waiting on this script to run),
+    // fades out after warp reveals, then rests on the fully-hidden terminal state.
     const veil = this._veil();
     if (veil) {
       veil.dataset.veilState = 'instant-on';
       setTimeout(() => {
         veil.dataset.veilState = 'fading-out';
-      }, 220);
+        veil.addEventListener('transitionend', () => {
+          veil.dataset.veilState = 'hidden';
+        }, { once: true });
+      }, WARP_VEIL_HOLD_MS);
     }
 
     // Start the render loop for the reverse warp

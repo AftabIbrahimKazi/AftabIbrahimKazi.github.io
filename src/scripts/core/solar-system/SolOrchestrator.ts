@@ -56,13 +56,32 @@ export class SolOrchestrator {
     // the scene. The warp canvas runs on its own renderer so it plays
     // unaffected during compilation.
     this._engine.renderer.compileAsync(this._engine.scene, this._engine.camera).then(() => {
-      this._loop.start();
+      // The Sun sits at the world origin, far from any planet's snap
+      // position above — it's outside the frustum just compiled, so its
+      // shader (surface + glow sprites) would otherwise lazy-compile the
+      // first time a scroll camera orbit swings around to face it,
+      // causing a mid-scroll stutter. Compile it too, from a temporary
+      // camera pose, before restoring the real position — nothing is
+      // rendered to screen yet, so this swap is invisible.
+      const savedPos    = this._engine.camera.position.clone();
+      const savedTarget = this._controllers.camera.controls.target.clone();
 
-      new ExploreOverlayController(
-        s.mercury, s.venus, s.earth, s.mars, s.jupiter, s.saturn, s.uranus, s.neptune, s.sun,
-      );
+      this._engine.camera.position.set(0, 20, 40);
+      this._engine.camera.lookAt(0, 0, 0);
 
-      if (targetParam) this._enterExploreMode(targetParam);
+      this._engine.renderer.compileAsync(this._engine.scene, this._engine.camera).then(() => {
+        this._engine.camera.position.copy(savedPos);
+        this._controllers.camera.controls.target.copy(savedTarget);
+        this._engine.camera.lookAt(savedTarget);
+
+        this._loop.start();
+
+        new ExploreOverlayController(
+          s.mercury, s.venus, s.earth, s.mars, s.jupiter, s.saturn, s.uranus, s.neptune, s.sun,
+        );
+
+        if (targetParam) this._enterExploreMode(targetParam);
+      });
     });
   }
 

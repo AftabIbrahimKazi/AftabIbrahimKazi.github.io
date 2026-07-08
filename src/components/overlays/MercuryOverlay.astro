@@ -102,11 +102,11 @@ const articles = [
     <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[0].date}</span>
     <span class="ex-mercury-fact-label">Published</span>
   </div>
-  <button class="ex-mercury-read-link" data-article-id="0" data-article-side="left">Read article →</button>
+  <button class="ex-mercury-read-link" data-article-id="0">Read article →</button>
 </div>
 
 <!-- ── Section 3 — Article 2 ──────────────────────────────── -->
-<div class="ex-mercury-section" data-layout="top-left">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">{articles[1].category} · {articles[1].readTime}</span>
   <h2 class="ex-heading ex-mercury-section-title">{articles[1].title}</h2>
   <p class="ex-para ex-mercury-body">{articles[1].excerpt}</p>
@@ -114,11 +114,11 @@ const articles = [
     <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[1].date}</span>
     <span class="ex-mercury-fact-label">Published</span>
   </div>
-  <button class="ex-mercury-read-link" data-article-id="1" data-article-side="right">Read article →</button>
+  <button class="ex-mercury-read-link" data-article-id="1">Read article →</button>
 </div>
 
 <!-- ── Section 4 — Article 3 ──────────────────────────────── -->
-<div class="ex-mercury-section" data-layout="bottom-right">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">{articles[2].category} · {articles[2].readTime}</span>
   <h2 class="ex-heading ex-mercury-section-title">{articles[2].title}</h2>
   <p class="ex-para ex-mercury-body">{articles[2].excerpt}</p>
@@ -126,11 +126,11 @@ const articles = [
     <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[2].date}</span>
     <span class="ex-mercury-fact-label">Published</span>
   </div>
-  <button class="ex-mercury-read-link" data-article-id="2" data-article-side="left">Read article →</button>
+  <button class="ex-mercury-read-link" data-article-id="2">Read article →</button>
 </div>
 
 <!-- ── Section 5 — Article 4 ──────────────────────────────── -->
-<div class="ex-mercury-section" data-layout="bottom-left">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">{articles[3].category} · {articles[3].readTime}</span>
   <h2 class="ex-heading ex-mercury-section-title">{articles[3].title}</h2>
   <p class="ex-para ex-mercury-body">{articles[3].excerpt}</p>
@@ -138,11 +138,11 @@ const articles = [
     <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[3].date}</span>
     <span class="ex-mercury-fact-label">Published</span>
   </div>
-  <button class="ex-mercury-read-link" data-article-id="3" data-article-side="right">Read article →</button>
+  <button class="ex-mercury-read-link" data-article-id="3">Read article →</button>
 </div>
 
 <!-- ── Section 6 — Topics ─────────────────────────────────── -->
-<div class="ex-mercury-section" data-layout="left">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">TOPICS COVERED</span>
   <h2 class="ex-heading ex-mercury-section-title">What Gets Written About</h2>
   <p class="ex-para ex-mercury-body">
@@ -184,7 +184,7 @@ const articles = [
 </div>
 
 <!-- ── Section 8 — Archive stats ─────────────────────────── -->
-<div class="ex-mercury-section" data-layout="top-left">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">BY THE NUMBERS</span>
   <h2 class="ex-heading ex-mercury-section-title">The Archive So Far</h2>
   <p class="ex-para ex-mercury-body">
@@ -208,7 +208,7 @@ const articles = [
 </div>
 
 <!-- ── Section 9 — Newsletter ─────────────────────────────── -->
-<div class="ex-mercury-section" data-layout="bottom-right">
+<div class="ex-mercury-section" data-layout="right">
   <span class="ex-mercury-section-label">STAY IN ORBIT</span>
   <h2 class="ex-heading ex-mercury-section-title">Get the writing delivered.</h2>
   <p class="ex-para ex-mercury-body">
@@ -252,19 +252,36 @@ const articles = [
 
 <script>
   import StrataOffcanvas from '@strata-packages/offcanvas';
+  import { MercuryProgressStrip } from '../../scripts/ui/solar-system/MercuryProgressStrip';
 
   function init(): void {
-    const dataEl       = document.getElementById('ex-mercury-articles-data');
-    const sidebarLeft  = document.getElementById('ex-mercury-sidebar-left');
-    const sidebarRight = document.getElementById('ex-mercury-sidebar-right');
+    new MercuryProgressStrip().init();
 
-    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+    const dataEl   = document.getElementById('ex-mercury-articles-data');
+    const panel    = document.getElementById('ex-mercury-article-panel');
+    const closeBtn = panel?.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]') ?? null;
 
-    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
-    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    if (!dataEl || !panel) return;
+
+    const catEl   = document.getElementById('ex-mercury-article-panel-cat');
+    const titleEl = document.getElementById('ex-mercury-article-panel-title');
+    const metaEl  = document.getElementById('ex-mercury-article-panel-meta');
+    const bodyEl  = document.getElementById('ex-mercury-article-panel-body');
 
     const articles: { category: string; title: string; date: string; readTime: string; body: string[] }[] =
       JSON.parse(dataEl.textContent ?? '[]');
+
+    // The package fires these regardless of how the panel was dismissed
+    // (close button, backdrop, Escape) — relaying them tells the progress
+    // strip when to switch between section and article-paragraph pagination.
+    document.addEventListener('st:offcanvas:open', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:mercury-article-open'));
+    });
+    document.addEventListener('st:offcanvas:close', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:mercury-article-close'));
+    });
 
     document.addEventListener('click', (e: MouseEvent) => {
       const btn = (e.target as Element).closest<HTMLElement>('[data-article-id]');
@@ -272,22 +289,12 @@ const articles = [
       const a = articles[parseInt(btn.dataset.articleId ?? '', 10)];
       if (!a) return;
 
-      const side     = btn.dataset.articleSide === 'right' ? 'right' : 'left';
-      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
-      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
-      const suffix   = side === 'right' ? 'right' : 'left';
-
-      const catEl   = document.getElementById(`ex-mercury-sidebar-cat-${suffix}`);
-      const titleEl = document.getElementById(`ex-mercury-sidebar-title-${suffix}`);
-      const metaEl  = document.getElementById(`ex-mercury-sidebar-meta-${suffix}`);
-      const bodyEl  = document.getElementById(`ex-mercury-sidebar-body-${suffix}`);
-
       if (catEl)   catEl.textContent   = a.category;
       if (titleEl) titleEl.textContent = a.title;
       if (metaEl)  metaEl.textContent  = `${a.date} · ${a.readTime}`;
       if (bodyEl)  bodyEl.innerHTML    = a.body.map(p => `<p>${p}</p>`).join('');
 
-      StrataOffcanvas.open(sidebar);
+      StrataOffcanvas.open(panel);
       setTimeout(() => closeBtn?.focus(), 60);
     });
   }

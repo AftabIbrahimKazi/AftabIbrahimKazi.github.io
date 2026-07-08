@@ -76,36 +76,12 @@
   text-align: center;
 }
 
-.ex-mercury-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-mercury-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-mercury-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-mercury-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-mercury-border);
   margin-left: auto;
   margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-mercury-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-mercury-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -282,44 +258,62 @@
 .ex-mercury-btn:hover { opacity: var(--ex-opacity-high); }
 
 /* ================================================================
-   ARTICLE SIDEBAR
-   Fixed sibling outside #ex-content-overlay — avoids transform
-   containing-block issues from will-change: transform on parent.
+   ARTICLE PANEL — slides up from the bottom, full-bleed and immersive
+   (no boxed sidebar chrome). Position, the translateY slide, and the
+   open/close transition all come from @strata-packages/offcanvas's own
+   [data-st-side="bottom"] + [aria-hidden] rules (offcanvas.css) — this
+   block only adds the visual styling and overrides the package's
+   height token for a taller sheet.
    ================================================================ */
 
-.ex-mercury-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              var(--ex-color-mercury-bg);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.ex-mercury-article-panel {
+  --st-bg:               var(--ex-color-mercury-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   overflow: hidden;
+  pointer-events: none;
 }
 
-.ex-mercury-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-mercury-border); }
-.ex-mercury-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-mercury-border); }
+/* XL and above (≥1200px) — enough room that the panel can go fully
+   transparent/immersive without its own text overlapping the section
+   content behind it. Below that (XS/SM/MD/LG) the background above stays. */
+@media (min-width: 1200px) {
+  .ex-mercury-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.ex-mercury-article-panel-inner,
+.ex-mercury-article-panel-header,
+.ex-mercury-article-panel-body,
+.ex-mercury-article-panel-close {
+  pointer-events: auto;
+}
 
 /* ── Scrollable inner container ── */
-.ex-mercury-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
+/* display/flex-direction/height/overflow-y now come from strata utilities
+   (d-flex flex-column h-100 overflow-y-auto) on the element itself — only
+   the properties with no strata utility equivalent stay here. */
+.ex-mercury-article-panel-inner {
   overscroll-behavior: contain;
-  scrollbar-width: thin;
   scrollbar-color: var(--ex-color-mercury-border) transparent;
+  scrollbar-width: thin;
 }
 
 /* ── Header ── */
-.ex-mercury-sidebar-header {
+.ex-mercury-article-panel-header {
   border-bottom: 1px solid var(--ex-color-mercury-border-inner);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
+  padding: var(--ex-space-xl) var(--ex-space-xxl) var(--ex-space-md) var(--ex-size-sm);
   position: relative;
 }
 
-.ex-mercury-sidebar-close {
+.ex-mercury-article-panel-close {
   background: var(--ex-color-mercury-pill-bg);
   border: 1px solid var(--ex-color-mercury-border-inner);
   border-radius: var(--ex-border-radius-round);
@@ -328,66 +322,271 @@
   font-size: var(--ex-font-size-default);
   height: var(--ex-size-36);
   position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
-  left: unset;
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
   transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
   width: var(--ex-size-36);
 }
-.ex-mercury-sidebar-close:hover {
+.ex-mercury-article-panel-close:hover {
   background: var(--ex-color-mercury-border);
   border-color: var(--ex-color-mercury-hi);
 }
 
-.ex-mercury-sidebar-cat {
+.ex-mercury-article-panel-cat {
+  background: linear-gradient(to right, var(--ex-color-mercury-hi), var(--ex-color-mercury-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   display: block;
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
   font-weight: var(--ex-heading-font-weight);
   letter-spacing: var(--ex-tracking-xl);
-  text-transform: uppercase;
-  background: linear-gradient(to right, var(--ex-color-mercury-hi), var(--ex-color-mercury-lo));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   margin-bottom: var(--ex-space-sm);
   padding-right: var(--ex-size-40);
+  text-transform: uppercase;
 }
 
-.ex-mercury-sidebar-title {
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
-  font-weight: var(--ex-heading-font-weight);
+.ex-mercury-article-panel-title {
   color: var(--ex-text-body);
-  line-height: 1.3;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
   margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
 }
 
-.ex-mercury-sidebar-meta {
+.ex-mercury-article-panel-meta {
+  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
   font-weight: var(--ex-para-font-weight);
   letter-spacing: var(--ex-tracking-sm);
-  text-transform: uppercase;
-  color: var(--ex-text-body);
   opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
 }
 
 /* ── Body ── */
-.ex-mercury-sidebar-body {
+.ex-mercury-article-panel-body {
   flex: 1;
-  padding: var(--ex-space-lg);
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) var(--ex-space-xl) var(--ex-space-xl) var(--ex-size-sm);
 }
 
-.ex-mercury-sidebar-body p {
+.ex-mercury-article-panel-body p {
+  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-default);
   font-weight: var(--ex-para-font-weight);
-  color: var(--ex-text-body);
-  opacity: var(--ex-opacity-body);
-  line-height: 1.75;
   margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
 }
 
-.ex-mercury-sidebar-body p:last-child { margin-bottom: 0; }
+.ex-mercury-article-panel-body p:last-child { margin-bottom: 0; }
 
+/* ================================================================
+   MERCURY — PROGRESS STRIP
+   Dual role: section pagination (default) / article paragraph nav
+   (Stage 4 activates data-mode="article"). Fixed to the viewport so
+   it persists across the whole scroll independent of overlay scroll.
+   ================================================================ */
+
+.ex-mercury-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-mercury-js"] ~ .ex-mercury-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-mercury-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  /* Above the article panel's default offcanvas z-index (1045) — the panel
+     covers the bottom 85% of the viewport, which overlaps the strip's
+     vertically-centered position, and it must stay clickable on top of it
+     for paragraph navigation while the panel is open. */
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-mercury-js"] ~ .ex-mercury-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-mercury-progress-line {
+  background-color: var(--ex-color-mercury-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-mercury-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  /* Fixed-length first track (matches the bullet's own width) instead of
+     "auto" — auto-sized columns combined with the bullet's old negative
+     margin computed a slightly different column width per item (each
+     button is an independent grid), causing the text column to drift
+     left/right row to row. A fixed track removes that variance entirely. */
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mercury-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-mercury-progress-bullet {
+  background-color: var(--ex-color-mercury-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-mercury-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mercury-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mercury-progress-item[data-swapping="true"] .ex-mercury-progress-number,
+.ex-mercury-progress-item[data-swapping="true"] .ex-mercury-progress-label {
+  opacity: 0;
+}
+
+.ex-mercury-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-mercury-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-mercury-progress-item[data-active="true"] .ex-mercury-progress-bullet {
+  background-color: var(--ex-color-mercury-hi);
+  transform: scale(1.6);
+}
+
+.ex-mercury-progress-item[data-active="true"] .ex-mercury-progress-number {
+  background: linear-gradient(to right, var(--ex-color-mercury-hi), var(--ex-color-mercury-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   MERCURY — RESPONSIVE
+   Breakpoints match the project convention (css-standards.md RULE 17).
+   Placed after the base rules above so the overrides win the cascade.
+   ================================================================ */
+
+/* ── XS: strip has no room at all — hide it and the backdrop entirely,
+   sections and the article panel fall back to plain full-width margins ── */
+@media (max-width: 575.98px) {
+  .ex-mercury-section {
+    margin-left: var(--ex-space-md);
+    margin-right: var(--ex-space-md);
+    max-width: calc(100% - var(--ex-space-xl));
+  }
+
+  .ex-mercury-section[data-layout="bottom-center"],
+  .ex-mercury-section[data-layout="center"] {
+    max-width: calc(100% - var(--ex-space-xl));
+  }
+
+  .ex-mercury-progress-strip,
+  .ex-mercury-progress-backdrop {
+    display: none;
+  }
+
+  .ex-mercury-article-panel-header,
+  .ex-mercury-article-panel-body {
+    padding-left: var(--ex-space-xl);
+  }
+}
+
+/* ── SM: strip shows bullets only — numbers/labels hidden, narrow backdrop ── */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-mercury-section {
+    max-width: calc(100% - var(--ex-space-xxl));
+  }
+
+  .ex-mercury-progress-backdrop { width: var(--ex-space-xxxl); }
+
+  .ex-mercury-progress-number,
+  .ex-mercury-progress-label {
+    display: none;
+  }
+
+  .ex-mercury-article-panel-header,
+  .ex-mercury-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+/* ── MD: strip shows number only — label hidden, medium backdrop/offset ── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-mercury-section {
+    max-width: calc(100% - var(--ex-space-xxl));
+  }
+
+  .ex-mercury-progress-backdrop { width: var(--ex-size-md); }
+
+  .ex-mercury-progress-label {
+    display: none;
+  }
+
+  .ex-mercury-article-panel-header,
+  .ex-mercury-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

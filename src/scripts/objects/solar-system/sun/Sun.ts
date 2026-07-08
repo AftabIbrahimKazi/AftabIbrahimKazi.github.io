@@ -31,16 +31,24 @@ export class Sun {
     this.scene.add(this.mesh);
     this.mesh.name = 'ex-sun-js';
 
+    // raycast disabled on all three glow sprites below — they scale up to
+    // 13.5-26 units against a radius-2 sphere, so left pickable they'd make
+    // the hover tooltip trigger far outside the visible star.
+    const noopRaycast = (): void => {};
+
     const blurMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: sunColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: true });
     const sunBlur = new THREE.Sprite(blurMaterial);
+    sunBlur.raycast = noopRaycast;
     this.mesh.add(sunBlur);
 
     const haloMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: sunColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false });
     const sunHalo = new THREE.Sprite(haloMaterial);
+    sunHalo.raycast = noopRaycast;
     this.mesh.add(sunHalo);
 
     const rayMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: sunColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false });
     const sunRays = new THREE.Sprite(rayMaterial);
+    sunRays.raycast = noopRaycast;
     this.mesh.add(sunRays);
 
     const sunLight = new THREE.PointLight(0xfff5eb, 50, 200, 1.15);

@@ -12,33 +12,23 @@ import SunOverlay     from './SunOverlay.astro';
 ---
 
 <!-- ══════════════════════════════════════════════════════════════
-     MERCURY sidebars
+     MERCURY article panel — single bottom slide-up sheet (replaces the
+     old left/right offcanvas pair). data-st-side="bottom" is natively
+     supported by @strata-packages/offcanvas — its own CSS drives the
+     translateY slide purely off aria-hidden, so no custom state
+     attribute or transition is needed here.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-mercury-sidebar-left" class="ex-mercury-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Article">
-  <div class="ex-mercury-sidebar-inner">
-    <div class="ex-mercury-sidebar-header">
-      <button class="ex-mercury-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close article">
+<div id="ex-mercury-article-panel" class="ex-mercury-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Article">
+  <div class="ex-mercury-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-mercury-article-panel-header">
+      <button class="ex-mercury-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close article">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-mercury-sidebar-cat"  id="ex-mercury-sidebar-cat-left"></span>
-      <h2 class="ex-mercury-sidebar-title"  id="ex-mercury-sidebar-title-left"></h2>
-      <p class="ex-mercury-sidebar-meta"    id="ex-mercury-sidebar-meta-left"></p>
+      <span class="ex-mercury-article-panel-cat"   id="ex-mercury-article-panel-cat"></span>
+      <h2 class="ex-mercury-article-panel-title"   id="ex-mercury-article-panel-title"></h2>
+      <p class="ex-mercury-article-panel-meta"     id="ex-mercury-article-panel-meta"></p>
     </div>
-    <div class="ex-mercury-sidebar-body" id="ex-mercury-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-mercury-sidebar-right" class="ex-mercury-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Article">
-  <div class="ex-mercury-sidebar-inner">
-    <div class="ex-mercury-sidebar-header">
-      <button class="ex-mercury-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close article">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-mercury-sidebar-cat"  id="ex-mercury-sidebar-cat-right"></span>
-      <h2 class="ex-mercury-sidebar-title"  id="ex-mercury-sidebar-title-right"></h2>
-      <p class="ex-mercury-sidebar-meta"    id="ex-mercury-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-mercury-sidebar-body" id="ex-mercury-sidebar-body-right"></div>
+    <div class="ex-mercury-article-panel-body" id="ex-mercury-article-panel-body"></div>
   </div>
 </div>
 
@@ -300,3 +290,67 @@ import SunOverlay     from './SunOverlay.astro';
   </section>
 
 </div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MERCURY progress strip — top-level sibling of #ex-content-overlay
+     (same reason as the sidebars above: a position:fixed element nested
+     inside the overlay is fixed to that transformed/scrolling ancestor,
+     not the viewport, and would drift as the overlay scrolls).
+     Visibility is driven purely by the overlay's own data-attribute
+     values via the sibling selector below — no JS show/hide needed.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-mercury-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-mercury-progress-strip" class="ex-mercury-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-mercury-progress-line"></span>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">01</span>
+    <span class="ex-mercury-progress-label">Intro</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">02</span>
+    <span class="ex-mercury-progress-label">Development</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">03</span>
+    <span class="ex-mercury-progress-label">Design</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">04</span>
+    <span class="ex-mercury-progress-label">Technology</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">05</span>
+    <span class="ex-mercury-progress-label">Life</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">06</span>
+    <span class="ex-mercury-progress-label">Topics</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">07</span>
+    <span class="ex-mercury-progress-label">Approach</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">08</span>
+    <span class="ex-mercury-progress-label">Archive</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="8" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">09</span>
+    <span class="ex-mercury-progress-label">Subscribe</span>
+  </button>
+  <button class="ex-mercury-progress-item" type="button" data-section-index="9" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mercury-progress-bullet"></span>
+    <span class="ex-mercury-progress-number">10</span>
+    <span class="ex-mercury-progress-label">Navigate</span>
+  </button>
+</nav>

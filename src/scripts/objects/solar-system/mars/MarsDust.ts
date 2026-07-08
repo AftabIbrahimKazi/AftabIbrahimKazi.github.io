@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/mars/MarsDust.ts
 
 import * as THREE from 'three';
-import { ImageTexture, VectorMath, ShaderMath, Gamma, Emission, SeparateRGB } from '@triforge/shader-core';
-import { RgbaOutput, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, VectorMath, ShaderMath, Gamma, Emission, SeparateRGB, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Mars dust layer — triforge node-graph port of the original
@@ -27,10 +27,10 @@ export function buildMarsDustMaterial(dustTexture: THREE.Texture): THREE.ShaderM
   const alphaMap = new SeparateRGB({ color: dustTex.output('Color') });
   const alpha    = new ShaderMath({ mode: 'MULTIPLY', a: alphaMap.output('G'), b: 0.25 });
 
-  const out = new RgbaOutput({ color: dust.output('BSDF'), alpha: alpha.output('Value') });
+  const blended = new MixShader({ fac: alpha.output('Value'), shader1: new TransparentBSDF().output('BSDF'), shader2: dust.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
   // Thin shell above the surface sphere — below depth precision at far
   // camera distances, causing z-fighting speckle. Bias depth toward camera.

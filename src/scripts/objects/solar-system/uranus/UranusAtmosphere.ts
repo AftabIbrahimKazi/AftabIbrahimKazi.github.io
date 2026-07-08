@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/uranus/UranusAtmosphere.ts
 
 import * as THREE from 'three';
-import { VectorMath, ShaderMath, Emission } from '@triforge/shader-core';
-import { RgbaOutput, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { VectorMath, ShaderMath, Emission, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Uranus atmosphere — triforge node-graph port of the original onBeforeCompile GLSL:
@@ -27,10 +27,10 @@ export function buildUranusAtmosphereMaterial(): THREE.ShaderMaterial {
   const glow      = new Emission({ color: [0.45, 0.85, 0.88] as unknown as string, strength: intensity.output('Value') });
   const alpha     = new ShaderMath({ mode: 'MULTIPLY', a: intensity.output('Value'), b: 1.5 });
 
-  const out = new RgbaOutput({ color: glow.output('BSDF'), alpha: alpha.output('Value') });
+  const blended = new MixShader({ fac: alpha.output('Value'), shader1: new TransparentBSDF().output('BSDF'), shader2: glow.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
 
   return out.material!;

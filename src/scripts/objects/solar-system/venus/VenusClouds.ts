@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/venus/VenusClouds.ts
 
 import * as THREE from 'three';
-import { ImageTexture, VectorMath, Gamma, Emission } from '@triforge/shader-core';
-import { RgbaOutput, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, VectorMath, Gamma, Emission, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Venus cloud layer — triforge node-graph port of the original
@@ -24,10 +24,10 @@ export function buildVenusCloudMaterial(cloudTexture: THREE.Texture): THREE.Shad
 
   const clouds = new Emission({ color: tinted.output('Vector'), strength: terminator });
 
-  const out = new RgbaOutput({ color: clouds.output('BSDF'), alpha: 0.75 });
+  const blended = new MixShader({ fac: 0.75, shader1: new TransparentBSDF().output('BSDF'), shader2: clouds.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
   // Thin shell above the surface sphere — below depth precision at far
   // camera distances, causing z-fighting speckle. Bias depth toward camera.

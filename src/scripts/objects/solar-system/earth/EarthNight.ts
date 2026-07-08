@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/earth/EarthNight.ts
 
 import * as THREE from 'three';
-import { ImageTexture, ShaderMath, Gamma, Emission } from '@triforge/shader-core';
-import { RgbaOutput, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, ShaderMath, Gamma, Emission, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Earth night-lights layer — triforge node-graph port of the original
@@ -25,10 +25,10 @@ export function buildEarthNightMaterial(nightTexture: THREE.Texture): THREE.Shad
   const lights     = new Emission({ color: encodedTex.output('Color'), strength: nightBlend.output('Value') });
   const alpha      = new ShaderMath({ mode: 'MULTIPLY', a: nightBlend.output('Value'), b: 0.75 });
 
-  const out = new RgbaOutput({ color: lights.output('BSDF'), alpha: alpha.output('Value') });
+  const blended = new MixShader({ fac: alpha.output('Value'), shader1: new TransparentBSDF().output('BSDF'), shader2: lights.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
   // Thin shell above the surface sphere — below depth precision at far
   // camera distances, causing z-fighting speckle. Bias depth toward camera.

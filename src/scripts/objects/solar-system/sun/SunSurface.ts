@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/sun/SunSurface.ts
 
 import * as THREE from 'three';
-import { Geometry, ImageTexture, VectorMath, ShaderMath, Emission, MixRGB, Gamma, MapRange, Clamp } from '@triforge/shader-core';
-import { RgbaOutput, UvPan, buildAcesToneMapNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { Geometry, ImageTexture, VectorMath, ShaderMath, Emission, MixRGB, Gamma, MapRange, Clamp, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildUvPan, buildAcesToneMapNodes } from '../../../shader-nodes/CoreShaderNodes';
 import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
@@ -24,8 +24,8 @@ import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 export function buildSunSurfaceMaterial(sunTexture: THREE.Texture): PannableMaterial {
   const geometry = new Geometry();
 
-  const uvPan      = new UvPan();
-  const surfaceTex = new ImageTexture({ uniformName: 'uSunTex', vector: uvPan.output('UV') });
+  const uvPan      = buildUvPan();
+  const surfaceTex = new ImageTexture({ uniformName: 'uSunTex', vector: uvPan.vector });
 
   // emissive 0xff8800 × intensity 10 × toneMappingExposure 2.0
   const tinted  = new VectorMath({ mode: 'MULTIPLY', vector: surfaceTex.output('Color'), vectorB: [1.0, 2.5, 15.0] });
@@ -50,11 +50,11 @@ export function buildSunSurfaceMaterial(sunTexture: THREE.Texture): PannableMate
     mode: 'SMOOTHSTEP', clamp: true,
   });
 
-  const out = new RgbaOutput({ color: whitened.output('Color'), alpha: alpha.output('Result') });
+  const blended = new MixShader({ fac: alpha.output('Result'), shader1: new TransparentBSDF().output('BSDF'), shader2: new Emission({ color: whitened.output('Color'), strength: 1.0 }).output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.uniforms['uSunTex'] = { value: sunTexture };
 
-  return { material: out.material!, pan: uvPan.parameters as Record<string, number> };
+  return { material: out.material!, pan: uvPan.pan };
 }

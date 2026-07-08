@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Gamma, MaterialOutput } from '@triforge/shader-core';
-import { UvPan, buildTerminatorNodes, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
+import { buildUvPan, buildTerminatorNodes, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
 import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
@@ -25,8 +25,8 @@ import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 export function buildJupiterSurfaceMaterial(jupiterTexture: THREE.Texture): PannableMaterial {
   const { terminator } = buildTerminatorNodes({ fromMin: -0.4, fromMax: 0.4 });
 
-  const uvPan      = new UvPan();
-  const surfaceTex = new ImageTexture({ uniformName: 'uJupiterTex', vector: uvPan.output('UV') });
+  const uvPan      = buildUvPan();
+  const surfaceTex = new ImageTexture({ uniformName: 'uJupiterTex', vector: uvPan.vector });
 
   const surface  = new PrincipledBSDF({
     baseColor: surfaceTex.output('Color'),
@@ -54,5 +54,5 @@ export function buildJupiterSurfaceMaterial(jupiterTexture: THREE.Texture): Pann
 
   out.material!.uniforms['uJupiterTex'] = { value: jupiterTexture };
 
-  return { material: out.material!, pan: uvPan.parameters as Record<string, number> };
+  return { material: out.material!, pan: uvPan.pan };
 }
