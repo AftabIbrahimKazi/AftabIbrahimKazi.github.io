@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/mars/MarsSurface.ts
 
 import * as THREE from 'three';
-import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Gamma, MaterialOutput } from '@triforge/shader-core';
-import { TextureBump, buildTerminatorNodes, buildBumpFadeStrength, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, PrincipledBSDF, Emission, AddShader, VectorMath, Bump, Gamma, MaterialOutput } from '@triforge/shader-core';
+import { buildTerminatorNodes, buildBumpFadeStrength, buildNightAmbient } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
  * Mars surface â€” triforge node-graph port of the original
@@ -24,7 +24,7 @@ export function buildMarsSurfaceMaterial(marsTexture: THREE.Texture): THREE.Shad
 
   // Terrain relief â€” texture luminance as a height map.
   const bumpStrength = buildBumpFadeStrength({ strength: 0.15, fadeStart: 5, fadeEnd: 14 });
-  const bump   = new TextureBump({ uniformName: 'uMarsBumpTex', strength: bumpStrength, distance: 0.015, texelSize: 1.0 / 512.0, lod: 0.0 });
+  const bump   = new Bump({ method: 'uv-offset', uniformName: 'uMarsBumpTex', strength: bumpStrength, distance: 0.015, texelSize: 1.0 / 512.0, lod: 0.0 });
 
   const surface  = new PrincipledBSDF({
     baseColor: surfaceTex.output('Color'),

@@ -1,8 +1,8 @@
 // src/scripts/objects/solar-system/jupiter/JupiterClouds.ts
 
 import * as THREE from 'three';
-import { ImageTexture, Gamma, Emission } from '@triforge/shader-core';
-import { RgbaOutput, UvPan, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
+import { ImageTexture, Gamma, Emission, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildUvPan, buildTerminatorNodes } from '../../../shader-nodes/CoreShaderNodes';
 import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 
 /**
@@ -20,16 +20,16 @@ import type { PannableMaterial } from '../../../shader-nodes/CoreShaderNodes';
 export function buildJupiterCloudMaterial(cloudTexture: THREE.Texture): PannableMaterial {
   const { terminator } = buildTerminatorNodes({ fromMin: -0.4, fromMax: 0.4 });
 
-  const uvPan      = new UvPan();
-  const cloudTex   = new ImageTexture({ uniformName: 'uCloudTex', vector: uvPan.output('UV') });
+  const uvPan      = buildUvPan();
+  const cloudTex   = new ImageTexture({ uniformName: 'uCloudTex', vector: uvPan.vector });
   const encodedTex = new Gamma({ color: cloudTex.output('Color'), gamma: 1.0 / 1.75 });
 
   const clouds = new Emission({ color: encodedTex.output('Color'), strength: terminator });
 
-  const out = new RgbaOutput({ color: clouds.output('BSDF'), alpha: 0.4 });
+  const blended = new MixShader({ fac: 0.4, shader1: new TransparentBSDF().output('BSDF'), shader2: clouds.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
   out.material!.blending    = THREE.AdditiveBlending;
   // The cloud shell sits 0.0015 above a 1.5-radius surface — below depth
@@ -40,5 +40,5 @@ export function buildJupiterCloudMaterial(cloudTexture: THREE.Texture): Pannable
   out.material!.polygonOffsetUnits  = -2;
   out.material!.uniforms['uCloudTex'] = { value: cloudTexture };
 
-  return { material: out.material!, pan: uvPan.parameters as Record<string, number> };
+  return { material: out.material!, pan: uvPan.pan };
 }

@@ -52,7 +52,19 @@ interface CanvasOptions {
   lightPos?:        [number, number, number];
   lightIntensity?:  number;
   ring?:            boolean;
+  /** Enable crater/terrain relief on planets that define a bump scale below. */
+  bump?:            boolean;
 }
+
+// Bump scale per planet — three.js's stock MeshStandardMaterial.bumpMap uses
+// screen-space dFdx/dFdy on raw texture values, unrelated in magnitude to the
+// node-graph Bump.strength values on the real solar-system surfaces, so these
+// are tuned independently by visual inspection. Reuses the colour texture as
+// the height source — same approach the real Mercury surface used before its
+// node-graph port to a dedicated Bump/TextureBump node.
+const BUMP_SCALE: Record<string, number> = {
+  mercury: 0.22,
+};
 
 // Saturn ring inner/outer radii, matching objects/Saturn.ts.
 const SATURN_RING_INNER = 1.39;
@@ -140,6 +152,13 @@ export class CarouselPlanets {
       (mesh.material as THREE.MeshStandardMaterial).map      = texture;
       (mesh.material as THREE.MeshStandardMaterial).roughness = 0.75;
       (mesh.material as THREE.MeshStandardMaterial).metalness = 0.0;
+
+      const bumpScale = BUMP_SCALE[planet];
+      if (opts.bump && bumpScale) {
+        (mesh.material as THREE.MeshStandardMaterial).bumpMap   = texture;
+        (mesh.material as THREE.MeshStandardMaterial).bumpScale = bumpScale;
+      }
+
       (mesh.material as THREE.MeshStandardMaterial).needsUpdate = true;
 
       // Cloud / haze layers â€” matching each planet class's cloud setup.
@@ -209,7 +228,7 @@ export class CarouselPlanets {
       { size: 120 }, loader, dpr);
     this._initCanvases(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-journal-orb'),
       { size: 300, exposure: 1.2, atmoScale: 1.008, atmoIntensity: 0.9,
-        ambientIntensity: 0.08, lightPos: [-4, 2.0, 1], lightIntensity: 2.0 }, loader, dpr);
+        ambientIntensity: 0.08, lightPos: [-4, 2.0, 1], lightIntensity: 2.0, bump: true }, loader, dpr);
     this._initCanvases(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-comm-orb'),
       { size: 520, exposure: 1.3, atmoScale: 1.01, atmoIntensity: 1.0,
         ambientIntensity: 0.10, lightPos: [-4, 2.2, 1.5], lightIntensity: 2.4, ring: true }, loader, dpr);

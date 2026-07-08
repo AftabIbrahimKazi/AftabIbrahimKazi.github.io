@@ -15,16 +15,19 @@
 
 import * as THREE from 'three';
 import {
-  ProcessNode,
   ShaderMath,
   VectorMath,
   MapRange,
   Clamp,
   SeparateRGB,
   CombineRGB,
+  TransparentBSDF,
+  MixShader,
+  Emission,
+  MaterialOutput,
+  ShaderScript,
 } from '@triforge/shader-core';
-import type { CompileContext, OutputSocket, InputSocket } from '@triforge/shader-core';
-import { RgbaOutput } from '../shader-nodes/CoreShaderNodes';
+import type { OutputSocket } from '@triforge/shader-core';
 
 interface WarpStarfieldInputs {
   speed?:   number;
@@ -35,54 +38,7 @@ interface WarpStarfieldInputs {
   color?:   [number, number, number];
 }
 
-/**
- * Perspective warp star field. Stars live at world positions on a repeating
- * layer grid; the camera flies forward along Z and each star is projected via
- * perspective division. The trail is the segment between the star's current
- * and previous screen positions — near stars fly fast (long trails), far
- * stars barely move. Emitted GLSL is the original WarpTransition shader loop,
- * verbatim.
- *
- * Outputs: Color (summed star RGB), Lum (summed luminance), Radius (screen
- * distance from centre, aspect-corrected), RadiusNorm (Radius / aspect), and
- * Speed / Opacity / Fade uniform passthroughs for the composition graph.
- */
-export class WarpStarfield extends ProcessNode {
-  get nodeType(): string { return 'WarpStarfield'; }
-  get metadata() {
-    return { label: 'Warp Starfield', category: 'Texture', color: '#203a6a', cost: 'high' as const };
-  }
-
-  private readonly _inputs: Record<string, InputSocket<unknown>>;
-  private readonly _outputs: Record<string, OutputSocket>;
-
-  constructor(inputs: WarpStarfieldInputs = {}) {
-    super('WarpStarfield');
-    this._inputs = this.createInputs(inputs as unknown as Record<string, unknown>, {
-      speed:   ['float', inputs.speed   ?? 0.0],
-      time:    ['float', inputs.time    ?? 0.0],
-      aspect:  ['float', inputs.aspect  ?? 1.0],
-      opacity: ['float', inputs.opacity ?? 0.0],
-      fade:    ['float', inputs.fade    ?? 1.0],
-      color:   ['color', inputs.color   ?? [1.0, 0.95, 0.78]],
-    });
-    this._outputs = this.createOutputs({
-      Color:      'color',
-      Tint:       'color',
-      Lum:        'float',
-      Radius:     'float',
-      RadiusNorm: 'float',
-      Speed:      'float',
-      Opacity:    'float',
-      Fade:       'float',
-    });
-  }
-
-  getInputSockets(): Record<string, InputSocket<unknown>> { return this._inputs; }
-  getOutputSockets(): Record<string, OutputSocket> { return this._outputs; }
-
-  compileDefs(): string {
-    return `
+const WARP_STARFIELD_DEFS = `
 vec3 _ex_warpHash33(vec3 p) {
   p = fract(p * vec3(0.1031, 0.1030, 0.0973));
   p += dot(p, p.yxz + 33.33);
@@ -200,36 +156,61 @@ vec4 _ex_warpStars(vec2 pUv, float speed, float time, vec3 tint) {
 
   return vec4(col, totalLum);
 }`;
-  }
 
-  compileCall(ctx: CompileContext): string {
-    const speed   = ctx.resolveInput(this._inputs['speed']);
-    const time    = ctx.resolveInput(this._inputs['time']);
-    const aspect  = ctx.resolveInput(this._inputs['aspect']);
-    const opacity = ctx.resolveInput(this._inputs['opacity']);
-    const fade    = ctx.resolveInput(this._inputs['fade']);
-    const color   = ctx.resolveInput(this._inputs['color']);
+const WARP_STARFIELD_GLSL = `
+vec2 puv = (vUv - 0.5) * vec2(aspect, 1.0);
+vec4 sf = _ex_warpStars(puv, speed, time, color);
+Color = sf.rgb;
+Tint = color;
+Lum = sf.a;
+Radius = length(puv);
+RadiusNorm = Radius / aspect;
+Speed = speed;
+Opacity = opacity;
+Fade = fade;
+`;
 
-    const outColor      = ctx.outputVar(this, 'Color');
-    const outTint       = ctx.outputVar(this, 'Tint');
-    const outLum        = ctx.outputVar(this, 'Lum');
-    const outRadius     = ctx.outputVar(this, 'Radius');
-    const outRadiusNorm = ctx.outputVar(this, 'RadiusNorm');
-    const outSpeed      = ctx.outputVar(this, 'Speed');
-    const outOpacity    = ctx.outputVar(this, 'Opacity');
-    const outFade       = ctx.outputVar(this, 'Fade');
-
-    return `vec2 _ex_warpPuv = (vUv - 0.5) * vec2(${aspect}, 1.0);
-vec4 _ex_warpSf = _ex_warpStars(_ex_warpPuv, ${speed}, ${time}, ${color});
-vec3 ${outColor} = _ex_warpSf.rgb;
-vec3 ${outTint} = ${color};
-float ${outLum} = _ex_warpSf.a;
-float ${outRadius} = length(_ex_warpPuv);
-float ${outRadiusNorm} = ${outRadius} / ${aspect};
-float ${outSpeed} = ${speed};
-float ${outOpacity} = ${opacity};
-float ${outFade} = ${fade};`;
-  }
+/**
+ * Perspective warp star field. Stars live at world positions on a repeating
+ * layer grid; the camera flies forward along Z and each star is projected via
+ * perspective division. The trail is the segment between the star's current
+ * and previous screen positions — near stars fly fast (long trails), far
+ * stars barely move.
+ *
+ * Built on ShaderScript (the library's OSL-Script-node equivalent) rather than
+ * a hand-rolled ProcessNode subclass — the 16-layer × 3×3-cell raymarch loop
+ * still can't be expressed as composable nodes (no node graph has loops), but
+ * ShaderScript auto-generates the socket/uniform wiring, so no custom
+ * class-shell boilerplate is needed around the GLSL itself.
+ *
+ * Outputs: Color (summed star RGB), Lum (summed luminance), Radius (screen
+ * distance from centre, aspect-corrected), RadiusNorm (Radius / aspect), and
+ * Speed / Opacity / Fade uniform passthroughs for the composition graph.
+ */
+function buildWarpStarfield(inputs: WarpStarfieldInputs = {}): ShaderScript {
+  return new ShaderScript({
+    label: 'Warp Starfield',
+    defs: WARP_STARFIELD_DEFS,
+    glsl: WARP_STARFIELD_GLSL,
+    inputs: {
+      speed:   ['float', inputs.speed   ?? 0.0],
+      time:    ['float', inputs.time    ?? 0.0],
+      aspect:  ['float', inputs.aspect  ?? 1.0],
+      opacity: ['float', inputs.opacity ?? 0.0],
+      fade:    ['float', inputs.fade    ?? 1.0],
+      color:   ['color', inputs.color   ?? [1.0, 0.95, 0.78]],
+    },
+    outputs: {
+      Color:      'color',
+      Tint:       'color',
+      Lum:        'float',
+      Radius:     'float',
+      RadiusNorm: 'float',
+      Speed:      'float',
+      Opacity:    'float',
+      Fade:       'float',
+    },
+  });
 }
 
 export interface WarpMaterialHandle {
@@ -261,7 +242,7 @@ function buildSmoothstep(value: OutputSocket, edge0: number, edge1: number, toMi
  *   alpha  = clamp((lum * 2.5 + glow * 0.8) * fade + opacity, 0, 1)
  */
 export function buildWarpMaterial(aspect: number): WarpMaterialHandle {
-  const stars = new WarpStarfield({ aspect });
+  const stars = buildWarpStarfield({ aspect });
 
   // Central core glow (builds at warp peak)
   const glowBase = buildSmoothstep(stars.output('Radius'), 0.0, 0.55, 1.0, 0.0);
@@ -303,10 +284,10 @@ export function buildWarpMaterial(aspect: number): WarpMaterialHandle {
   const alphaVeil = new ShaderMath({ mode: 'ADD', a: alphaFade.output('Value'), b: stars.output('Opacity') });
   const alpha     = new Clamp({ value: alphaVeil.output('Value'), min: 0.0, max: 1.0 });
 
-  const out = new RgbaOutput({ color: colFinal.output('Vector'), alpha: alpha.output('Result') });
+  const blended = new MixShader({ fac: alpha.output('Result'), shader1: new TransparentBSDF().output('BSDF'), shader2: new Emission({ color: colFinal.output('Vector'), strength: 1.0 }).output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthTest   = false;
 
   return { material: out.material!, parameters: stars.parameters };

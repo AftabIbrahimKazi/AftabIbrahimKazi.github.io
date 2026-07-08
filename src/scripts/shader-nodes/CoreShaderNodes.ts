@@ -1,8 +1,6 @@
 // src/scripts/shader-nodes/CoreShaderNodes.ts
 
 import {
-  OutputNode,
-  ProcessNode,
   Geometry,
   CameraData,
   VectorMath,
@@ -11,42 +9,10 @@ import {
   ShaderMath,
   SeparateRGB,
   CombineRGB,
+  Mapping,
+  TextureCoordinate,
 } from '@triforge/shader-core';
-import type { CompileContext, OutputSocket, InputSocket } from '@triforge/shader-core';
-
-interface RgbaOutputInputs {
-  color: OutputSocket;
-  alpha: OutputSocket | number;
-}
-
-/**
- * Terminal node with per-fragment alpha — MaterialOutput hardcodes alpha to 1.0,
- * which cannot express fresnel- or terminator-driven transparency.
- */
-export class RgbaOutput extends OutputNode {
-  get nodeType(): string { return 'RgbaOutput'; }
-  get metadata() {
-    return { label: 'RGBA Output', category: 'Output', color: '#a06030', cost: 'low' as const };
-  }
-
-  private readonly _inputs: Record<string, InputSocket<unknown>>;
-
-  constructor(inputs: RgbaOutputInputs) {
-    super('RgbaOutput');
-    this._inputs = this.createInputs(inputs as unknown as Record<string, unknown>, {
-      color: ['color', [0, 0, 0], true],
-      alpha: ['float', 1.0],
-    });
-  }
-
-  getInputSockets(): Record<string, InputSocket<unknown>> { return this._inputs; }
-
-  compileCall(ctx: CompileContext): string {
-    const color = ctx.resolveInput(this._inputs['color']);
-    const alpha = ctx.resolveInput(this._inputs['alpha']);
-    return `gl_FragColor = vec4(${color}, ${alpha});`;
-  }
-}
+import type { OutputSocket } from '@triforge/shader-core';
 
 export interface PannableMaterial {
   material: import('three').ShaderMaterial;
@@ -54,150 +20,46 @@ export interface PannableMaterial {
   pan: Record<string, number>;
 }
 
-interface UvPanInputs {
-  x?: number;
-  y?: number;
+export interface UvPanHandle {
+  /** Feed into ImageTexture.vector — vec3 Mapping output narrows to vec2 at the connection point. */
+  vector: OutputSocket;
+  /** Live { x, y } — keyframe these exactly like the old UvPan node's parameters. */
+  pan: Record<string, number>;
 }
 
 /**
- * UV offset node — replaces THREE.Texture.offset panning, which raw
- * ShaderMaterials ignore. No triforge node can do this: `vector` sockets are
- * vec2 but every transform node (incl. Mapping) outputs vec3 `color`, so
- * nothing can legally feed ImageTexture.vector. x/y are float inputs →
- * live uniforms, animatable via node.parameters after compile()
- * (keyframe-compatible, replaces map.offset tracks).
+ * UV offset via the canonical TextureCoordinate → Mapping graph (shader-core
+ * 0.2.1+, finding #2 resolved: vector/color sockets now implicitly convert at
+ * connection points) plus 0.4.0's per-component parameter aliases (finding #8
+ * resolved: `parameters['location.x']` is now a live single-axis uniform,
+ * animatable via KeyframeTrack — the old project-local UvPan node existed
+ * only because neither fix had shipped yet).
+ *
+ * Mapping computes `vector - location`; the old UvPan computed `vUv + vec2(x, y)`.
+ * This wrapper negates on read/write so `pan.x`/`pan.y` keep the exact same
+ * sign convention external callers (KeyframeTrack in *Animation.ts) already
+ * depend on — zero changes needed at call sites.
  */
-export class UvPan extends ProcessNode {
-  get nodeType(): string { return 'UvPan'; }
-  get metadata() {
-    return { label: 'UV Pan', category: 'Vector', color: '#4a3a8a', cost: 'low' as const };
-  }
-
-  private readonly _inputs: Record<string, InputSocket<unknown>>;
-  private readonly _outputs: Record<string, OutputSocket>;
-
-  constructor(inputs: UvPanInputs = {}) {
-    super('UvPan');
-    this._inputs = this.createInputs(inputs as unknown as Record<string, unknown>, {
-      x: ['float', inputs.x ?? 0.0],
-      y: ['float', inputs.y ?? 0.0],
-    });
-    this._outputs = this.createOutputs({ UV: 'vector' });
-  }
-
-  getInputSockets(): Record<string, InputSocket<unknown>> { return this._inputs; }
-  getOutputSockets(): Record<string, OutputSocket> { return this._outputs; }
-
-  compileDefs(): string { return ''; }
-
-  compileCall(ctx: CompileContext): string {
-    const x = ctx.resolveInput(this._inputs['x']);
-    const y = ctx.resolveInput(this._inputs['y']);
-    return `vec2 ${ctx.outputVar(this, 'UV')} = vUv + vec2(${x}, ${y});`;
-  }
-}
-
-interface TextureBumpInputs {
-  /** sampler2D uniform name — must NOT collide with an ImageTexture uniform;
-   *  assign the texture on material.uniforms[uniformName] after compile(). */
-  uniformName: string;
-  /** UV source; defaults to vUv. */
-  vector?: OutputSocket;
-  strength?: OutputSocket | number;
-  distance?: OutputSocket | number;
-  /** Finite-difference offset in UV units (≈ 1–2 texels of the height texture). */
-  texelSize?: OutputSocket | number;
-  /** Mip level to sample height from — higher = smoother height field
-   *  (pre-averaged by mipmapping), killing per-texel noise in the relief. */
-  lod?: OutputSocket | number;
-  /** Base normal to perturb — chain another TextureBump's Normal output here
-   *  for multi-octave relief. Defaults to the geometry normal. */
-  normal?: OutputSocket;
-}
-
-/**
- * Texture bump via UV-space finite differences — replaces the stock Bump
- * node, whose dFdx/dFdy height derivatives are unstable at both extremes:
- * speckle at minification (far) and texel-seam flicker at magnification
- * (near). Sampling the height texture at uv ± texelSize gives a gradient
- * that is independent of screen sampling — stable under camera motion.
- * Height = RGBtoBW luminance of the sample; tangent frame and
- * strength × distance × 50 scaling match the stock Bump node, so existing
- * tuned values carry over unchanged.
- */
-export class TextureBump extends ProcessNode {
-  get nodeType(): string { return 'TextureBump'; }
-  get metadata() {
-    return { label: 'Texture Bump', category: 'Vector', color: '#4a3a8a', cost: 'medium' as const };
-  }
-
-  static instanceSpecificDef = true;
-
-  readonly uniformName: string;
-  private readonly _inputs: Record<string, InputSocket<unknown>>;
-  private readonly _outputs: Record<string, OutputSocket>;
-
-  constructor(inputs: TextureBumpInputs) {
-    super('TextureBump');
-    this.uniformName = inputs.uniformName;
-    this._inputs = this.createInputs(inputs as unknown as Record<string, unknown>, {
-      vector:    ['vector', null],
-      strength:  ['float', typeof inputs.strength === 'number' ? inputs.strength : 1.0],
-      distance:  ['float', typeof inputs.distance === 'number' ? inputs.distance : 1.0],
-      texelSize: ['float', typeof inputs.texelSize === 'number' ? inputs.texelSize : 1.0 / 512.0],
-      lod:       ['float', typeof inputs.lod === 'number' ? inputs.lod : 3.0],
-      normal:    ['color', null],
-    });
-    this._outputs = this.createOutputs({ Normal: 'color' });
-  }
-
-  getInputSockets(): Record<string, InputSocket<unknown>> { return this._inputs; }
-  getOutputSockets(): Record<string, OutputSocket> { return this._outputs; }
-
-  compileDefs(): string {
-    return `uniform sampler2D ${this.uniformName};
-vec3 _ex_textureBump_${this.id}(vec2 uv, float eps, float strength, float distance, float lod, vec3 N) {
-  // texture2DLodEXT → textureLod on WebGL2 (three.js compatibility define).
-  // Sampling an explicit mip gives a pre-averaged, noise-free height field.
-  float hpu = dot(texture2DLodEXT(${this.uniformName}, uv + vec2(eps, 0.0), lod).rgb, vec3(0.2126, 0.7152, 0.0722));
-  float hmu = dot(texture2DLodEXT(${this.uniformName}, uv - vec2(eps, 0.0), lod).rgb, vec3(0.2126, 0.7152, 0.0722));
-  float hpv = dot(texture2DLodEXT(${this.uniformName}, uv + vec2(0.0, eps), lod).rgb, vec3(0.2126, 0.7152, 0.0722));
-  float hmv = dot(texture2DLodEXT(${this.uniformName}, uv - vec2(0.0, eps), lod).rgb, vec3(0.2126, 0.7152, 0.0722));
-
-  // Height gradient in UV space — finite differences, screen-independent
-  float dhdu = (hpu - hmu) / (2.0 * eps);
-  float dhdv = (hpv - hmv) / (2.0 * eps);
-
-  // World-space tangent and bitangent from UV Jacobian (cotangent frame,
-  // derivatives of smooth varyings only — stable)
-  vec3 dPdx = dFdx(vPosition);
-  vec3 dPdy = dFdy(vPosition);
-  vec2 dUdx = dFdx(vUv);
-  vec2 dUdy = dFdy(vUv);
-  float det    = dUdx.x * dUdy.y - dUdx.y * dUdy.x;
-  float sgn    = sign(det);
-  float invDet = sgn / max(abs(det), 1e-6);
-  vec3 T = normalize((dUdy.y * dPdx - dUdx.y * dPdy) * invDet);
-  vec3 B = normalize(cross(N, T)) * sgn;
-
-  float scale = strength * distance * 50.0;
-  return normalize(N - T * dhdu * scale - B * dhdv * scale);
-}`;
-  }
-
-  compileCall(ctx: CompileContext): string {
-    const uv = this._inputs['vector']!.connection
-      ? ctx.outputVar(this._inputs['vector']!.connection!.node, this._inputs['vector']!.connection!.name)
-      : 'vUv';
-    const strength = ctx.resolveInput(this._inputs['strength']);
-    const distance = ctx.resolveInput(this._inputs['distance']);
-    const texel    = ctx.resolveInput(this._inputs['texelSize']);
-    const lod      = ctx.resolveInput(this._inputs['lod']);
-    const normal   = this._inputs['normal']!.connection
-      ? ctx.outputVar(this._inputs['normal']!.connection!.node, this._inputs['normal']!.connection!.name)
-      : 'normalize(vNormal)';
-    return `vec3 ${ctx.outputVar(this, 'Normal')} = _ex_textureBump_${this.id}(${uv}, ${texel}, ${strength}, ${distance}, ${lod}, ${normal});`;
-  }
+export function buildUvPan(): UvPanHandle {
+  const mapping = new Mapping({ vector: new TextureCoordinate().output('UV') });
+  const pan: Record<string, number> = {};
+  Object.defineProperties(pan, {
+    x: {
+      enumerable: true,
+      // location.x is a per-axis alias onto a vec3 uniform — shader-core types
+      // parameters as a union across all node kinds; this node's axis aliases are
+      // always float-valued.
+      get: () => -(mapping.parameters['location.x'] as number),
+      set: (v: number) => { mapping.parameters['location.x'] = -v; },
+    },
+    y: {
+      enumerable: true,
+      // See location.x above — same axis-alias/float guarantee.
+      get: () => -(mapping.parameters['location.y'] as number),
+      set: (v: number) => { mapping.parameters['location.y'] = -v; },
+    },
+  });
+  return { vector: mapping.output('Vector'), pan };
 }
 
 export interface BumpFadeConfig {

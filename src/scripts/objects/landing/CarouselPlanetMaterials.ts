@@ -4,8 +4,8 @@
 // atmoVert/atmoFrag + the carousel sun onBeforeCompile injection).
 
 import * as THREE from 'three';
-import { Geometry, ImageTexture, VectorMath, ShaderMath, Emission, MixRGB, Gamma, MapRange, Clamp } from '@triforge/shader-core';
-import { RgbaOutput, buildAcesToneMapNodes } from '../../shader-nodes/CoreShaderNodes';
+import { Geometry, ImageTexture, VectorMath, ShaderMath, Emission, MixRGB, Gamma, MapRange, Clamp, TransparentBSDF, MixShader, MaterialOutput } from '@triforge/shader-core';
+import { buildAcesToneMapNodes } from '../../shader-nodes/CoreShaderNodes';
 
 /**
  * Fresnel atmosphere rim for carousel planets — node port of the original GLSL:
@@ -28,10 +28,10 @@ export function buildCarouselAtmosphereMaterial(color: THREE.Color, intensity: n
   const strength  = new ShaderMath({ mode: 'MULTIPLY', a: fresnel.output('Value'), b: intensity });
   const glow      = new Emission({ color: [color.r, color.g, color.b] as unknown as string, strength: strength.output('Value') });
 
-  const out = new RgbaOutput({ color: glow.output('BSDF'), alpha: fresnel.output('Value') });
+  const blended = new MixShader({ fac: fresnel.output('Value'), shader1: new TransparentBSDF().output('BSDF'), shader2: glow.output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.depthWrite  = false;
   out.material!.side        = THREE.FrontSide;
   out.material!.blending    = THREE.AdditiveBlending;
@@ -78,10 +78,10 @@ export function buildCarouselSunMaterial(sunTexture: THREE.Texture): THREE.Shade
     mode: 'SMOOTHSTEP', clamp: true,
   });
 
-  const out = new RgbaOutput({ color: whitened.output('Color'), alpha: alpha.output('Result') });
+  const blended = new MixShader({ fac: alpha.output('Result'), shader1: new TransparentBSDF().output('BSDF'), shader2: new Emission({ color: whitened.output('Color'), strength: 1.0 }).output('BSDF') });
+  const out = new MaterialOutput({ surface: blended.output('BSDF') });
   out.compile();
 
-  out.material!.transparent = true;
   out.material!.uniforms['uCarouselSunTex'] = { value: sunTexture };
 
   return out.material!;
