@@ -292,7 +292,7 @@
   --ex-size-lg:     300px;
   --ex-size-xl:     400px;
   --ex-size-xxl:    520px;
-  --ex-size-xxxl:   640px;
+  --ex-size-xxxl:   740px;
 
   /* fixed size scale — specific values (ordinal naming does not scale to these granularities) */
   --ex-size-6:      6px;
@@ -313,6 +313,11 @@
   --ex-size-560:  560px;
   --ex-size-1200: 1200px;
   --ex-size-1280: 1280px;
+
+  /* viewport-relative scroll headroom — space past the last scrollable
+     item so scrollIntoView() has room to reach its target position */
+  --ex-scroll-headroom-sm: 40dvh;
+  --ex-scroll-headroom-lg: 50dvh;
 
   /* border radius */
   --ex-border-radius-outer: 10px;

@@ -86,7 +86,7 @@ export class MercuryProgressStrip {
 
     this._swapLabels((item, i) => ({
       number: String(i + 1).padStart(2, '0'),
-      label:  'Read',
+      label:  this.paragraphs[i]?.dataset.topic || 'Read',
       inRange: i < this.paragraphs.length,
     }));
 

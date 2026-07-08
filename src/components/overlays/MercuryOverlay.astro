@@ -5,66 +5,120 @@
 
 const articles = [
   {
-    id:       'building-3d-web-experiences',
+    id:       'strata-a-css-framework-i-actually-wanted',
+    readTime: '9 min read',
+    category: 'FRAMEWORK',
+    title:    'Strata: A CSS Utility Framework I Actually Wanted to Use',
+    excerpt:  'Why I built my own utility-class CSS framework instead of reaching for Tailwind or Bootstrap — and what shipping a real site on top of it taught me.',
+    date:     'Jul 09, 2026',
+    body: [
+      'Strata started as an annoyance, not an ambition. I kept reaching for utility-class frameworks and running into the same wall: either the class list ballooned into unreadable noise, or the framework fought me the moment I needed an arbitrary value that wasn’t in its scale. I wanted something that generated only the CSS a project actually used, supported arbitrary values as a first-class citizen — not a bolted-on escape hatch — and stayed out of my way with cascade layers instead of specificity wars.',
+      'The core idea is simple: scan the markup for utility-shaped class names, generate exactly those rules, and nothing else. No 400kb reset stylesheet shipped "just in case." This site’s entire utility layer — flex layouts, spacing, color, sizing — is Strata output, and there is no separate CSS framework dependency sitting alongside it. That was the whole point: prove it could carry a real, visually ambitious project, not just a demo page.',
+      'Arbitrary values were the feature I cared most about, and also the one that caused the most trouble. `gap-[var(--ex-space-md)]` needs to resolve at build time against whatever token the project defines, including responsive variants like `gap-sm-[...]`. Getting that right — and then getting it right *again* for the responsive prefix cases — took until version 1.4.5 to fully land. Before that it was a documented limitation in this project’s own findings log, worked around with hand-written CSS in the meantime.',
+      'Shipping a production site on your own framework is a forcing function no unit test replicates. Building this portfolio surfaced real bugs: a `rounded-pill` layer ordering mismatch, `bg-[...]` resolving to `background-color` when a full `background` shorthand was expected, spacing arbitrary values not replacing underscores correctly. None of these showed up in isolated testing. They showed up because I was using Strata under deadline pressure, the same way any consumer of the library would.',
+      'The bugs that stung most were the caching ones — a module-level result cache that could memoize a `null` lookup for a class token that hadn’t appeared in scanned content yet, silently failing to generate CSS for that class on every subsequent build until the dev server restarted. That is not a "write more tests" problem, it is a "dogfood the thing in anger" problem. You do not find a bug like that by testing the framework. You find it by hitting it at 11pm trying to ship a landing page section.',
+      'Strata is still evolving, and quickly — between the version that shipped this site’s first pages and the one running today, a whole batch of gaps closed: `grid-template-columns` and `grid-template-rows` got arbitrary support, `font-style` utilities landed, `col-auto` started working. None of that came from a roadmap meeting. It came from hitting the missing piece mid-build and fixing it before moving on. That is the actual development loop: a framework that earns its footprint by generating less, not more, and that gets battle-tested by a real site rather than a synthetic benchmark suite.',
+    ],
+    topics: ['The Wall', 'The Idea', 'Arbitrary Values', 'Real Bugs Found', 'The Cache Bug', 'Still Evolving'],
+  },
+  {
+    id:       'triforge-a-blender-style-shader-graph-for-three-js',
+    readTime: '11 min read',
+    category: 'ENGINE',
+    title:    'Triforge: A Blender-Style Shader Graph for Three.js',
+    excerpt:  'Every planet material on this site compiles from a node graph, not hand-written GLSL. Here is why I built a Blender-workflow shader system for the web, and what it still cannot do.',
+    date:     'Jul 09, 2026',
+    body: [
+      'Every planet surface, atmosphere, and ring in this solar system is defined as a graph of nodes — `PrincipledBSDF`, `ImageTexture`, `Mapping`, `Emission` — the same vocabulary Blender\'s Shading workspace uses. Triforge compiles that graph into a `THREE.ShaderMaterial` at build time. I did not want to hand-write nine planets\' worth of GLSL, and I did not want a black-box material library either. A node graph gives me both: readable material definitions and full control over the compiled output when something needs to be custom.',
+      '`@triforge/shader-core` is the center of the suite — a GLSL shader library for Three.js explicitly built around a Blender workflow: texture coordinates flow through mapping and transform nodes into a BSDF, then out through a material output, mirroring the exact graph shape you\'d wire in Blender\'s node editor. `@triforge/keyframe` drives animation on top of it, `@triforge/geometry-nodes` handles procedural scatter (the asteroid belt), and five more packages — `animation-core`, `compositor-core`, `curve-core`, `particle-core`, `modifier-core`, `uv-core`, `volume-core` — are staged for the rest of the suite as this project needs them.',
+      'Building a real site on top of an early node-graph library means you find the gaps Blender never has to think about, because Blender does not compile to GLSL for a live WebGL context. `MaterialOutput` originally hardcoded alpha to 1.0 — a graph could not express fresnel- or terminator-driven transparency at all, forcing a project-local `RgbaOutput` escape-hatch node. `ImageTexture.vector` could not accept anything, because every transform node output a vec3 `color` while `vector` sockets are vec2 — the canonical Blender panning graph (`TextureCoordinate → Mapping → ImageTexture`) was simply not expressible, so I wrote a custom `UvPan` node with raw float uniforms instead.',
+      'The compiled materials also had no scene-light integration by design — a `ShaderMaterial` only renders what its graph explicitly computes, so a scene `AmbientLight` contributed nothing. Post-conversion, planet night hemispheres that used to get a dim ambient fill under `MeshStandardMaterial` went pitch black under the compiled graph, and Jupiter/Saturn/Uranus/Neptune needed hand-tuned `nightTint` emission constants just to look intentional rather than broken.',
+      'I logged every one of these as a numbered finding in the library\'s own `FINDINGS.md`, filed them upstream, and migrated the planetarium forward as each fix published — alpha sockets widened to vec4 in 0.3.0, the vector/color socket conversion and an `ambient` input on `PrincipledBSDF` both landing shortly after. Some are still open: emission-only graphs (every planet atmosphere — fresnel × terminator drives both glow and alpha) still have no alpha path because only `PrincipledBSDF` got one, so `RgbaOutput` cannot be retired yet; and `Mapping`\'s vector parameters aren\'t component-animatable, so the project-local `UvPan` node still exists for the same reason.',
+      'I also found and reported a GLSL injection path: `ImageTexture`/`EnvironmentTexture` interpolated a caller-supplied `uniformName` straight into shader source with no validation — same vulnerability class as a patched `Attribute` node, just missed in that sweep. Every current consumer, including this site, hardcodes its uniform names, so it was not exploitable here — but it violated the library\'s own stated rule against interpolating unvalidated strings into GLSL, and it got the same one-line `assertGlslIdentifier` fix once flagged.',
+      'None of this makes the library "done" — it makes it real. A shader graph system that only had to survive its own test suite would look cleaner and prove less. This one has nine live materials, a warp transition, and a carousel running on it in production, and every rough edge got sanded down because something on this site actually hit it.',
+    ],
+    topics: ['The Graph', 'The Suite', 'The Alpha Gap', 'No Ambient Light', 'Fixes Shipped', 'GLSL Injection', 'Still Real'],
+  },
+  {
+    id:       'why-i-built-my-own-tools-instead-of-just-using-what-exists',
     readTime: '8 min read',
-    category: 'DEVELOPMENT',
-    title:    'Building 3D Web Experiences with Performance in Mind',
-    excerpt:  'Optimizing real-time 3D for the web without compromising on quality. From draw calls to texture compression — every decision counted.',
-    date:     'May 12, 2025',
+    category: 'ORIGIN STORY',
+    title:    'Why I Built My Own Tools Instead of Just Using What Exists',
+    excerpt:  'Tailwind and Bootstrap exist. Three.js material libraries exist. Here is the actual reasoning behind building Strata and Triforge anyway — not "not invented here," a real gap I kept hitting.',
+    date:     'Jul 09, 2026',
     body: [
-      'Real-time 3D on the web is a performance negotiation. Every frame is a budget — geometry, shaders, lights, draw calls — and you are constantly deciding what to cut. The mistake most developers make is treating performance as something you address after the creative work is done. It is not. It is a design constraint that shapes every decision from the start.',
-      'The biggest wins on this project came from geometry. Reducing triangle counts aggressively on assets that were never seen up close, merging static meshes to collapse draw calls, and switching instanced rendering for repeated objects. Three.js makes instancing accessible but it is easy to leave performance on the table if you do not profile first. Chrome DevTools and Spector.js became daily tools.',
-      'Textures were the second battleground. Uncompressed 4K textures will tank mobile instantly. Basis Universal compressed formats cut texture memory by up to 8x with near-zero perceptible quality loss. The pipeline to generate them added build time but the runtime results were non-negotiable. Every texture in this portfolio went through that process.',
-      'Shader complexity is seductive. GLSL gives you enormous expressive power and it is tempting to pack more and more into a fragment shader. The discipline here was to profile every shader on mid-range hardware, not just the development machine. A shader that runs at 60fps on an M2 MacBook Pro can bring a budget Android to its knees. Write lean, profile often, and accept the tradeoffs honestly.',
-      'The final lesson: set your performance targets before you write a line of code. For this site the target was 60fps on a mid-range device with a 4G connection. Everything else was negotiable. That constraint — held firmly through the whole build — produced better creative decisions than open-ended exploration ever would have.',
+      'The honest answer to "why did you build your own CSS framework and your own shader system" is not "existing tools are bad." Tailwind is excellent. Three.js material workflows are mature. The honest answer is narrower: I kept hitting the same two specific walls on real projects, and working around them project after project cost more, cumulatively, than building the tool once.',
+      'The CSS wall was arbitrary values. Every utility framework treats arbitrary values as an escape hatch bolted onto a fixed scale, not a first-class feature. The moment a project needed `gap-[var(--custom-token)]` with a responsive prefix, I was back to hand-written CSS anyway — which defeats the entire point of a utility layer. Strata\'s whole premise is that arbitrary-value support and scale-based utilities are the same feature, not two tiers of citizenship.',
+      'The shader wall was expressiveness versus control. Off-the-shelf Three.js materials (`MeshStandardMaterial`, `MeshPhysicalMaterial`) are a fixed parameter set — you get what the API exposes and nothing else. Hand-written `ShaderMaterial` GLSL is total control but zero structure — every material becomes a bespoke, unmaintainable string of shader code. Triforge exists because I wanted Blender\'s node-graph mental model — composable, inspectable, swappable nodes — compiling down to real GLSL, not a fixed parameter list and not an opaque string.',
+      'Building both as real, published npm packages rather than internal project utilities was a deliberate constraint, not a vanity move. An internal helper only has to satisfy the one call site that uses it. A published package has to hold up under a version number, a changelog, and a consumer who does not have the context you have in your head. That discipline is what forces you to actually solve the general problem instead of papering over the specific one in front of you.',
+      'It also means every project I build afterward compounds instead of starting over. This portfolio is the first project both tools have had to survive in full production use, at the same time, under a real deadline. Every gap that surfaced here — and there were plenty — is a gap the next project I build will not hit, because it is fixed in the library, not in a one-off workaround buried in this repo.',
+      'That is the actual case for building your own tools: not that the existing ones are wrong, but that the compounding return on fixing something at the root, once, in public, under a version number, is worth more over time than fixing it quietly in every project that happens to need it.',
     ],
+    topics: ['The Honest Answer', 'The CSS Wall', 'The Shader Wall', 'Why Publish It', 'Compounding Returns', 'The Real Case'],
   },
   {
-    id:       'visual-hierarchy-immersive',
-    readTime: '6 min read',
-    category: 'DESIGN',
-    title:    'Creating Visual Hierarchy in Immersive Environments',
-    excerpt:  'How to guide attention and storytelling in complex, interactive worlds where the camera moves and context shifts constantly.',
-    date:     'May 04, 2025',
+    id:       'this-site-runs-on-my-own-open-source-work',
+    readTime: '7 min read',
+    category: 'CASE STUDY',
+    title:    'This Site Runs on My Own Open-Source Work',
+    excerpt:  'Every surface, every gradient, every planet on this page compiles from Strata and Triforge — my own two public packages. The portfolio is the proof, not the pitch.',
+    date:     'Jul 09, 2026',
     body: [
-      'Traditional design hierarchy relies on a fixed canvas. Size, weight, contrast, and position work because the layout stays still. In a 3D environment the camera moves, the user can look anywhere, and context shifts with every frame. The rules do not change — but the way you apply them does.',
-      'The most important lesson from building this portfolio was: reduce competition. A 3D scene with rich geometry, dynamic lighting, and animated elements is already loud. Every piece of UI you place on top needs to earn its presence. The Mercury panels use deliberately minimal typography — a label, a title, a short paragraph. Not because minimalism is aesthetic, but because anything more would fight the scene and lose.',
-      'Positioning panels against viewport edges — left, right, bottom, center — was a layout system decision as much as a design one. It kept the planet in view at all times. The user never loses the spatial context that makes the experience feel grounded. The content informs the scene; it does not replace it.',
-      'Contrast in immersive environments is not just light versus dark. It is also motion versus stillness. The panel is static. The planet rotates. That contrast alone draws the eye to the text without needing a heavy border or drop shadow. When the environment does the work, the UI can afford to be quiet.',
-      'The scroll-driven camera path was the last piece. By moving the camera to new angles as the user scrolls, each section of text gets a fresh visual context. The same planet, seen from six different angles, feels like six different discoveries. That rhythm — content, then a new view, then content again — is the closest thing to pacing that 3D environments allow.',
+      'It would be easy to write "I built a CSS framework and a shader system" as a bullet point on a resume and move on. This page is the alternative to that bullet point. There is no separate CSS framework loaded here — the entire utility layer, every `d-flex`, every `gap-[...]`, every arbitrary spacing and color value across every planet page, compiles from Strata. There is no material library from npm either — every planet surface, atmosphere, ring, and the warp transition itself compile from Triforge node graphs.',
+      'That constraint was deliberate from the start, not a happy accident discovered afterward. Building a portfolio that runs entirely on your own tools means you cannot quietly patch around a limitation with a competing library when you hit one — you either fix the tool or you ship something broken. That pressure is exactly why both packages moved as fast as they did during this build: `strata-css` went through multiple patch versions closing arbitrary-value and layer-ordering gaps mid-project, and `@triforge/shader-core` went through a documented sequence of alpha-socket, ambient-lighting, and UV-transform fixes for the same reason.',
+      'The Three.js foundation under Triforge deserves its own mention: this is not a from-scratch renderer, it is a purpose-built node-graph compiler sitting on top of Three.js, targeting the exact Blender-workflow mental model — texture coordinate, mapping, BSDF, material output — used to define all nine planet materials plus the warp starfield and the carousel\'s eight mini-renderers. Astro 6 hosts it all as a true MPA: every planet is its own route, the warp transition is the connective tissue between them, and the 3D scene only boots on the pages that need it.',
+      'The proof this arrangement offers a recruiter or a technical reviewer is different from a code sample. A code sample shows you can write a function. A site that visibly runs on two of your own published packages, with real version history and a real findings log of bugs found and fixed under production pressure, shows you can own a piece of infrastructure long enough for it to mature — and that you\'ll fix the actual root cause instead of quietly working around it in the one place it happened to bite.',
+      'It is also, practically, a live demo that updates itself. Every time Strata or Triforge ships a fix, this site is running it in production the next time it deploys. There is no separate "demo project" that goes stale while the real work happens elsewhere. The demo and the work are the same repository.',
     ],
+    topics: ['No Separate Framework', 'Deliberate Constraint', 'Astro + Triforge', 'The Real Proof', 'A Living Demo'],
   },
   {
-    id:       'stack-behind-my-universe',
-    readTime: '10 min read',
-    category: 'TECHNOLOGY',
-    title:    'The Stack Behind My Universe',
-    excerpt:  'A look at the tools, frameworks and tech that power this portfolio. Astro, Three.js, GLSL, and the decisions that tied them together.',
-    date:     'Apr 28, 2025',
+    id:       'the-ghost-planet-bug',
+    readTime: '9 min read',
+    category: 'POSTMORTEM',
+    title:    'The Ghost Planet Bug: When Nine Planets Went Untextured Overnight',
+    excerpt:  'A shader-core version bump silently broke fragment compilation on every planet surface, with zero console errors. Here is how it was found and fixed.',
+    date:     'Jul 09, 2026',
     body: [
-      'Every technology decision in a portfolio is a statement. Not just about what you know, but about what you think good engineering looks like. This site is built with Astro 6, Three.js, TypeScript, GLSL shaders, and a custom CSS utility system called strata. Here is why each one ended up in the stack.',
-      'Astro was the easy decision. For a content-focused site that also needs interactive islands, there is nothing better. Zero JavaScript by default, server-side rendering, and a component model that supports any framework in the same project. The warp navigation between planets is a client-side GSAP animation — an Astro island, nothing more. Everything else is static HTML.',
-      'Three.js for the 3D layer is also unsurprising, but the decision was deliberate. WebGPU is the future, but Three.js has the ecosystem, the documentation, and the maturity. For a portfolio that needed to ship and run reliably across devices, it was the right call. The planet surfaces use custom GLSL shaders — vertex displacement for surface terrain, fragment shaders for atmospheric scattering and ring shadows on Saturn.',
-      'TypeScript throughout, with strict mode enabled. The controllers and animation managers are typed end-to-end. This felt like overhead in the first week and essential infrastructure by week four. A 3D scene with scroll cameras, GSAP timelines, Swiper instances, warp navigation, and planet-switching state is too much moving state to manage without types.',
-      'Strata CSS is my own utility framework — an ongoing project that this portfolio both uses and showcases. It generates only the CSS you use, works across any framework, and supports cascade layers cleanly. Building the portfolio forced me to stress-test it in a real production context, which surfaced bugs and design gaps that synthetic tests never would have found.',
-      'The decision I am most uncertain about is not in the stack — it is the folder structure. Splitting CSS into per-planet overlay files made sense for isolation but the total CSS surface area is larger than I would like. The next iteration will experiment with CSS Modules or stricter scoping to bring that under control.',
+      'The symptom was blunt: after bumping `@triforge/shader-core`, every planet in the solar system scene rendered untextured — flat, ghostly spheres with no surface detail. No console error. No thrown exception. No red text anywhere. The build passed. The dev server ran clean. The planets were just gone, silently, which is the worst kind of bug because there is no stack trace pointing at the cause.',
+      'The root cause was a socket contract change between versions: `MaterialOutput.surface` had started requiring a vec4 shader socket, where the previous version accepted vec3. Every one of the eight planet surface graphs in this project fed it a vec3 `Gamma` color output — valid under the old contract, silently invalid under the new one. The fragment shader was failing to compile, and because the failure happened inside a compiled `ShaderMaterial`\'s GLSL, not inside JavaScript, nothing in the normal dev console surfaced it as an application error.',
+      'Finding it meant stepping outside the usual debugging loop. Console errors, breakpoints, and React/Astro devtools are all built around JavaScript exceptions — this failure lived entirely inside GPU shader compilation, a layer those tools do not instrument by default. The actual signal was buried in the WebGL context\'s shader-compile log, which only surfaces if you go looking for it specifically, and the fix required tracing the exact socket type expectations through the new version\'s `MaterialOutput` node rather than guessing from the visual symptom alone.',
+      'The fix was small once located: wrap every planet\'s final color through an `Emission` pass-through node before it reaches `MaterialOutput`, producing a valid vec4 instead of the raw vec3. Same visual output, correct socket type. While in there, I also caught and fixed a second, unrelated problem the same investigation surfaced: several planets had hardcoded per-planet night-tint emission constants that had been tuned back when the scene still had ambient light reaching night hemispheres — with that ambient path since removed, the night sides were reading as dim colored fog instead of true black. Zeroed the default ambient strength and let night hemispheres render correctly dark.',
+      'The lesson that stuck: a version bump on a library with a compiled-shader boundary needs a visual regression pass, not just "the build passed and no errors printed." Silent GPU-side failures do not announce themselves in any of the places developers are trained to look first. Since this incident, every triforge upgrade on this project gets an explicit before/after screenshot comparison across all nine planets before it ships — a rule that exists specifically because this bug got as far as it did before anyone noticed the surfaces were gone.',
     ],
+    topics: ['The Symptom', 'The Root Cause', 'Finding It', 'The Fix', 'The Lesson'],
   },
   {
-    id:       'lessons-10-years-digital',
-    readTime: '10 min read',
-    category: 'LIFE',
-    title:    'Lessons From 10 Years in the Digital Space',
-    excerpt:  'Reflections on the journey, mistakes, wins and everything in between. What a decade of building actually teaches you.',
-    date:     'Apr 20, 2025',
+    id:       'building-the-warp-router',
+    readTime: '8 min read',
+    category: 'ARCHITECTURE',
+    title:    'Building the Warp Router: A Site-Wide Page Transition in a Multi-Page App',
+    excerpt:  'Every click on this site plays a fullscreen GLSL warp-speed effect before the page actually navigates. Here is how that works inside a real MPA, not an SPA.',
+    date:     'Jul 09, 2026',
     body: [
-      'Ten years in this industry is long enough to see the same patterns cycle back around with new names. Long enough to have made the same mistakes twice and, on good days, to have caught them the third time. Here is what I actually learned — not the lessons that look good in a conference talk, but the ones that changed how I work.',
-      'Shipping something imperfect teaches you more than perfecting something unshipped. This is not an original observation, but I needed to prove it to myself twice. The first version of this portfolio was technically stronger than anything I had built before, and I sat on it for eight months adding features. The version you are in now shipped in three months. The gap between them is not quality — it is clarity. Constraints force decisions. Open-ended time does not.',
-      'The clients who push back most on your process are often the ones you learn the most from. Frustrating in the moment, useful in retrospect. Being forced to explain why a technical decision matters — in plain language, to someone who does not care about the engineering — is one of the best tests of whether you actually understand it yourself.',
-      'Specialisation is a trap dressed as a strategy. The developers who have paid me most consistently are not the ones who specialised early — they are the ones who stayed curious long enough to develop genuine range. Frontend, backend, 3D, animation, performance, accessibility, design systems. None of these are separate careers. They are facets of the same problem: making things that work for people.',
-      'The tools change but the skills compound. Three.js will be replaced by something. Astro will evolve beyond recognition. The ability to read a codebase you did not write, debug something you have never seen before, and ship something under pressure — those skills are cumulative and they do not deprecate. Invest in them deliberately.',
-      'Finally: document your thinking, not just your code. The hardest part of picking up an old project is not understanding what the code does. It is understanding why it does it that way, what alternatives were considered, and what constraints were active at the time. Comments, commit messages, and handover notes are acts of generosity to your future self.',
+      'This site is a true multi-page app — Astro 6, every planet its own route, full page loads between them, no client-side router. Getting a fullscreen warp-speed transition to play consistently across that architecture, on every single link click, is a different problem than it would be in an SPA where a router already owns the navigation lifecycle. `WarpRouter` has to own both halves of every navigation itself: what happens the instant before the page unloads, and what happens the instant after the next page\'s first paint.',
+      'The forward half intercepts every internal `<a href>` click site-wide with a single capturing click listener, filters out anything that should not be warped — new-tab, download, modifier-key clicks, external URLs, `mailto:`/`tel:` links, anchors — and for everything else calls `preventDefault`, sets the warp\'s glow color to match the destination page, fades a fullscreen veil in, plays the forward warp animation, and only then sets `window.location.href` in the animation\'s completion callback. The destination color comes from a `PAGE_COLORS` map keyed by route, and — because this same router also has to cover Mercury\'s `/sol?target=mercury` deep-link pattern — it resolves `?target=` query params against that same map before falling back to the path itself.',
+      'The reverse half is the harder problem, because a fresh page load has no "previous page" context to animate out of — it has to fake continuity from a cold start. Every page calls `WarpRouter.init()` on load, which immediately plays a reverse warp using the current page\'s own color and holds a fullscreen veil opaque for a short, deliberately named `WARP_VEIL_HOLD_MS` (220ms) before fading it out — giving the 3D scene one full frame to actually finish initializing before it is revealed, rather than exposing whatever half-loaded state exists the instant the script runs.',
+      'The bfcache case is what actually broke first in practice. Back/forward navigation in a browser does not reload the page — it restores a frozen DOM snapshot from the browser\'s cache, and that snapshot can include whatever transient veil state was on screen when the page was suspended. Without explicit handling, a restored page would flash its frozen, veil-transparent state before any script had a chance to re-cover it. The fix runs on two events: `pagehide` synchronously forces the veil to a fully-opaque `instant-on` state right before the page is frozen into cache, guaranteeing whatever gets snapshotted is already covered; `pageshow` with `event.persisted === true` re-triggers the full reverse-warp entry sequence exactly as if it were a fresh load.',
+      'One structural decision paid for itself repeatedly: the veil\'s state lives entirely in a single `data-veilState` attribute (`instant-on` / `fading-in` / `fading-out` / `hidden`), driven purely by CSS transitions, with the terminal `hidden` state only ever set from a real `transitionend` event rather than a fixed timeout. That closed a subtle bug where the veil could rest indefinitely on the transient `fading-out` name if a transition got interrupted — the state machine now always settles on a name that accurately describes what is on screen, verified with headless Chromium sampling `getComputedStyle` at the exact moment of navigation commit.',
     ],
+    topics: ['The MPA Problem', 'The Forward Half', 'The Reverse Half', 'The bfcache Case', 'One Clean State'],
+  },
+  {
+    id:       'maintaining-packages-i-depend-on',
+    readTime: '9 min read',
+    category: 'MAINTENANCE',
+    title:    'Maintaining Packages I Depend On',
+    excerpt:  'Shipping a real product on top of your own early-stage npm packages turns every bug your users would hit into a bug you hit first, at the worst possible time.',
+    date:     'Jul 09, 2026',
+    body: [
+      'There is a specific kind of pressure that only shows up when you are both the maintainer and the first real consumer of a library. A bug filed by an external user is a report you can schedule around. A bug you hit yourself, at 11pm, three sections into building a page that is due tomorrow, is a bug you have to actually understand and fix before you can keep moving. Building this portfolio on Strata and Triforge — both still early-stage, both under active development — put me in that position constantly, and it changed how I think about maintaining open-source software.',
+      'The clearest example is a security-class finding I caught in Triforge\'s own shader-core package: `ImageTexture` and `EnvironmentTexture` both interpolated a caller-supplied `uniformName` string directly into generated GLSL source, with no validation — the exact same vulnerability class an earlier patch had already fixed on a different node (`Attribute`), just missed in that original sweep. A hostile `uniformName` value could inject arbitrary GLSL into the compiled shader. Every current consumer of the library, including this site, hardcodes its uniform names, so it was not actually exploitable in production here — but finding it meant auditing every place a string reaches generated shader source, not just the one place a previous patch had already touched, and applying the same `assertGlslIdentifier` guard consistently rather than trusting that one fix meant the whole surface was covered.',
+      'A second real bug came from a subtler place: a stale in-memory cache. Strata\'s CSS generator holds a module-level result cache for the lifetime of the dev process — if an arbitrary utility class was looked up once before it existed in scanned content, the cache would memoize a `null` result for that exact class token, and every subsequent build would return that cached `null` immediately, silently, without ever re-running the actual pattern match that would now succeed. The class simply never generated CSS again until the dev server restarted. That is not a bug a unit test catches, because a unit test does not simulate a developer typing a class name into a file before saving it. It is a bug you only find by actually building something under real editing conditions.',
+      'The upstream discipline that made both of these fixable rather than just workaround-able was keeping a running, dated findings log — not a vague "known issues" note, but a numbered list with reproduction steps, root cause analysis, the specific file and line, and a status (open / partially resolved / resolved-and-verified-on-the-published-version, not just resolved-in-the-monorepo). Several Triforge findings went through exactly that lifecycle: reported, fixed in the monorepo, and only marked resolved here after being re-verified against the actual published npm version — because a fix that exists in a git branch but has not shipped yet is not a fix a consumer can rely on.',
+      'The uncomfortable but useful realization is that shipping a real product on your own infrastructure removes your ability to be vague with yourself about whether something is "basically done." Either the graph compiles clean across all nine planets and `astro build` passes, or it does not. Either the arbitrary CSS class generates on save, or it silently doesn\'t. Maintaining tools this way — under the same deadline pressure any other consumer would feel — is a slower way to hit 1.0, but it is the only way I have found to actually trust that a fix works, rather than hoping it does.',
+    ],
+    topics: ['Maintainer Pressure', 'The Security Bug', 'The Cache Bug', 'The Findings Log', 'The Realization'],
   },
 ];
 ---
@@ -74,20 +128,21 @@ const articles = [
   <span class="ex-mercury-section-label">MERCURY — JOURNAL</span>
   <h2 class="ex-heading ex-mercury-section-title">Writing from the Field</h2>
   <p class="ex-para ex-mercury-body">
-    Development, design, and the journey of building in the digital space.
-    Honest takes, hard lessons, and the thinking behind the work.
+    Two open-source packages, the reasoning behind building them, and the real
+    incidents from shipping this site on top of them — untextured planets,
+    a page-transition router, and the bugs found maintaining my own tools.
   </p>
   <div class="ex-mercury-stats-row">
     <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">4</span>
+      <span class="ex-mercury-stat-pill-value ex-mercury-counter" data-count-to="7">0</span>
       <span class="ex-mercury-stat-pill-label">Articles</span>
     </div>
     <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">Monthly</span>
-      <span class="ex-mercury-stat-pill-label">Cadence</span>
+      <span class="ex-mercury-stat-pill-value ex-mercury-counter" data-count-to="2">0</span>
+      <span class="ex-mercury-stat-pill-label">Open-source packages</span>
     </div>
     <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">34 min</span>
+      <span class="ex-mercury-stat-pill-value ex-mercury-counter" data-count-to="61" data-count-suffix=" min">0 min</span>
       <span class="ex-mercury-stat-pill-label">Total read time</span>
     </div>
   </div>
@@ -141,95 +196,45 @@ const articles = [
   <button class="ex-mercury-read-link" data-article-id="3">Read article →</button>
 </div>
 
-<!-- ── Section 6 — Topics ─────────────────────────────────── -->
+<!-- ── Section 6 — Article 5 ──────────────────────────────── -->
 <div class="ex-mercury-section" data-layout="right">
-  <span class="ex-mercury-section-label">TOPICS COVERED</span>
-  <h2 class="ex-heading ex-mercury-section-title">What Gets Written About</h2>
-  <p class="ex-para ex-mercury-body">
-    Four lenses on the same craft — every piece connects back to building things that last.
-  </p>
-  <div class="ex-mercury-stats-row">
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">Development</span>
-      <span class="ex-mercury-stat-pill-label">Code &amp; architecture</span>
-    </div>
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">Design</span>
-      <span class="ex-mercury-stat-pill-label">Visual craft</span>
-    </div>
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">Technology</span>
-      <span class="ex-mercury-stat-pill-label">Stack &amp; tools</span>
-    </div>
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">Life</span>
-      <span class="ex-mercury-stat-pill-label">The bigger picture</span>
-    </div>
-  </div>
-</div>
-
-<!-- ── Section 7 — Writing philosophy ────────────────────── -->
-<div class="ex-mercury-section" data-layout="right">
-  <span class="ex-mercury-section-label">THE APPROACH</span>
-  <h2 class="ex-heading ex-mercury-section-title">Written to Last, Not to Trend</h2>
-  <p class="ex-para ex-mercury-body">
-    Every piece here is written slowly. No hot takes for clicks. The goal is to
-    share what actually happened — what broke, what worked, and what the decision
-    looked like before hindsight made it obvious.
-  </p>
+  <span class="ex-mercury-section-label">{articles[4].category} · {articles[4].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[4].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[4].excerpt}</p>
   <div class="ex-mercury-key-fact">
-    <span class="ex-mercury-fact-number">10+</span>
-    <span class="ex-mercury-fact-label">Years of experience behind the writing</span>
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[4].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
   </div>
+  <button class="ex-mercury-read-link" data-article-id="4">Read article →</button>
 </div>
 
-<!-- ── Section 8 — Archive stats ─────────────────────────── -->
+<!-- ── Section 7 — Article 6 ──────────────────────────────── -->
 <div class="ex-mercury-section" data-layout="right">
-  <span class="ex-mercury-section-label">BY THE NUMBERS</span>
-  <h2 class="ex-heading ex-mercury-section-title">The Archive So Far</h2>
-  <p class="ex-para ex-mercury-body">
-    Small but deliberate. Every article is a full commitment — researched, written,
-    and edited until it earns its place here.
-  </p>
-  <div class="ex-mercury-stats-row">
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">4</span>
-      <span class="ex-mercury-stat-pill-label">Published articles</span>
-    </div>
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">~6,200</span>
-      <span class="ex-mercury-stat-pill-label">Words written</span>
-    </div>
-    <div class="ex-mercury-stat-pill">
-      <span class="ex-mercury-stat-pill-value">2025</span>
-      <span class="ex-mercury-stat-pill-label">First published</span>
-    </div>
+  <span class="ex-mercury-section-label">{articles[5].category} · {articles[5].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[5].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[5].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[5].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
   </div>
+  <button class="ex-mercury-read-link" data-article-id="5">Read article →</button>
 </div>
 
-<!-- ── Section 9 — Newsletter ─────────────────────────────── -->
+<!-- ── Section 8 — Article 7 ──────────────────────────────── -->
 <div class="ex-mercury-section" data-layout="right">
-  <span class="ex-mercury-section-label">STAY IN ORBIT</span>
-  <h2 class="ex-heading ex-mercury-section-title">Get the writing delivered.</h2>
-  <p class="ex-para ex-mercury-body">
-    New articles land in your inbox the moment they're published. No spam, no noise —
-    just the next piece when it's ready.
-  </p>
-  <form class="ex-mercury-form" onsubmit="return false;">
-    <input
-      class="ex-mercury-input"
-      type="email"
-      placeholder="your@email.com"
-      aria-label="Email address"
-      autocomplete="email"
-    />
-    <button class="ex-mercury-btn" type="submit">SUBSCRIBE →</button>
-  </form>
+  <span class="ex-mercury-section-label">{articles[6].category} · {articles[6].readTime}</span>
+  <h2 class="ex-heading ex-mercury-section-title">{articles[6].title}</h2>
+  <p class="ex-para ex-mercury-body">{articles[6].excerpt}</p>
+  <div class="ex-mercury-key-fact">
+    <span class="ex-mercury-fact-number ex-mercury-fact-number--sm">{articles[6].date}</span>
+    <span class="ex-mercury-fact-label">Published</span>
+  </div>
+  <button class="ex-mercury-read-link" data-article-id="6">Read article →</button>
 </div>
 
-<!-- ── Section 10 — Close / navigate ──────────────────────── -->
+<!-- ── Section 9 — Close / navigate ───────────────────────── -->
 <div class="ex-mercury-section" data-layout="center">
-  <span class="ex-mercury-section-label">10 — NAVIGATE</span>
+  <span class="ex-mercury-section-label">09 — NAVIGATE</span>
   <h2 class="ex-heading ex-mercury-section-title">Explore More of the System</h2>
   <p class="ex-para ex-mercury-body">
     Mercury is just one stop. Each planet in this system holds a different corner of the work —
@@ -247,15 +252,39 @@ const articles = [
   </div>
 </div>
 
+<!-- ── Section 10 — Newsletter (true last stop) ───────────── -->
+<div class="ex-mercury-section" data-layout="center">
+  <span class="ex-mercury-subscribe-icon"><i class="fa-solid fa-satellite-dish"></i></span>
+  <span class="ex-mercury-section-label">STAY IN ORBIT</span>
+  <h2 class="ex-heading ex-mercury-section-title">Get the writing delivered.</h2>
+  <p class="ex-para ex-mercury-body">
+    New articles land in your inbox the moment they're published. No spam, no noise —
+    just the next piece when it's ready.
+  </p>
+  <form class="ex-mercury-form" onsubmit="return false;">
+    <i class="fa-solid fa-envelope ex-mercury-form-icon"></i>
+    <input
+      class="ex-mercury-input"
+      type="email"
+      placeholder="your@email.com"
+      aria-label="Email address"
+      autocomplete="email"
+    />
+    <button class="ex-mercury-btn" type="submit">SUBSCRIBE →</button>
+  </form>
+</div>
+
 <!-- ── Article data for sidebar ───────────────────────────── -->
 <script type="application/json" id="ex-mercury-articles-data" is:inline set:html={JSON.stringify(articles)}></script>
 
 <script>
   import StrataOffcanvas from '@strata-packages/offcanvas';
   import { MercuryProgressStrip } from '../../scripts/ui/solar-system/MercuryProgressStrip';
+  import { MercuryIntroCounters } from '../../scripts/ui/solar-system/MercuryIntroCounters';
 
   function init(): void {
     new MercuryProgressStrip().init();
+    new MercuryIntroCounters().init();
 
     const dataEl   = document.getElementById('ex-mercury-articles-data');
     const panel    = document.getElementById('ex-mercury-article-panel');
@@ -268,8 +297,20 @@ const articles = [
     const metaEl  = document.getElementById('ex-mercury-article-panel-meta');
     const bodyEl  = document.getElementById('ex-mercury-article-panel-body');
 
-    const articles: { category: string; title: string; date: string; readTime: string; body: string[] }[] =
+    const articles: { id: string; category: string; title: string; date: string; readTime: string; body: string[]; topics: string[] }[] =
       JSON.parse(dataEl.textContent ?? '[]');
+
+    const openArticle = (a: typeof articles[number]): void => {
+      if (catEl)   catEl.textContent   = a.category;
+      if (titleEl) titleEl.textContent = a.title;
+      if (metaEl)  metaEl.textContent  = `${a.date} · ${a.readTime}`;
+      if (bodyEl)  bodyEl.innerHTML    = a.body
+        .map((p, i) => `<p data-topic="${(a.topics[i] ?? '').replace(/"/g, '&quot;')}">${p}</p>`)
+        .join('');
+
+      StrataOffcanvas.open(panel);
+      setTimeout(() => closeBtn?.focus(), 60);
+    };
 
     // The package fires these regardless of how the panel was dismissed
     // (close button, backdrop, Escape) — relaying them tells the progress
@@ -288,15 +329,16 @@ const articles = [
       if (!btn) return;
       const a = articles[parseInt(btn.dataset.articleId ?? '', 10)];
       if (!a) return;
-
-      if (catEl)   catEl.textContent   = a.category;
-      if (titleEl) titleEl.textContent = a.title;
-      if (metaEl)  metaEl.textContent  = `${a.date} · ${a.readTime}`;
-      if (bodyEl)  bodyEl.innerHTML    = a.body.map(p => `<p>${p}</p>`).join('');
-
-      StrataOffcanvas.open(panel);
-      setTimeout(() => closeBtn?.focus(), 60);
+      openArticle(a);
     });
+
+    // Deep-link support: /sol?target=mercury&article=<id> auto-opens that
+    // article's panel once the page has settled (matches landing Beat 06 links).
+    const deepLinkId = new URLSearchParams(window.location.search).get('article');
+    if (deepLinkId) {
+      const match = articles.find((a) => a.id === deepLinkId);
+      if (match) setTimeout(() => openArticle(match), 400);
+    }
   }
 
   init();

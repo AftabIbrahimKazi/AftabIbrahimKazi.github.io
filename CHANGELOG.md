@@ -4,6 +4,25 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.1.0] — 2026-07-09
+
+### Added
+- Replaced the 4 placeholder Mercury journal articles with 7 real, recruiter-facing blog posts: Strata deep-dive, Triforge deep-dive, why the two tools were built, this site as proof-of-dogfooding, the ghost-planet-bug postmortem, the warp router architecture writeup, and package-maintenance lessons.
+- `MercuryIntroCounters.ts` — IntersectionObserver-driven count-up animation for the Mercury intro section's stat pills.
+- `?article=<id>` deep-link support on `/sol?target=mercury`, auto-opening the matching article panel.
+- `--ex-scroll-headroom-sm`/`-lg` tokens plus scroll-container padding fixing a bug where the last Mercury section/paragraph could never reach its `scrollIntoView` target, which read as the scroll abruptly ending.
+- Real per-paragraph topic labels on the article progress-strip pagination (previously all read "Read").
+- Landing page Beat 06 journal carousel expanded from 5 hardcoded cards to 7, each deep-linking to its matching Mercury article.
+
+### Changed
+- Reordered Mercury's 10 scroll sections: removed the obsolete Topics/Approach/Archive sections, moved Subscribe (newsletter) to the true final position instead of second-to-last, and centered + restyled the Subscribe section (merged input/button into one pill, added an icon accent).
+- Progress-strip section labels in `ContentOverlay.astro` updated to match the new section order.
+
+### Fixed
+- Corrupted UTF-8 mojibake (`â€¢`, `â€”`, `â”€â”€`) in `src/pages/index.astro`, restored to proper `•`, `—`, `──` characters.
+
+---
+
 ## [0.0.2] — 2026-07-08
 
 ### Fixed
