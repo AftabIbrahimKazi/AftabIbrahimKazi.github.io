@@ -536,6 +536,17 @@
 }
 .ex-venus-btn:hover { opacity: var(--ex-opacity-high); }
 
+.ex-venus-form-note {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  margin-top: var(--ex-space-xs);
+  min-height: 1em;
+  opacity: var(--ex-opacity-faint);
+  text-align: center;
+}
+
 /* ================================================================
    VENUS — PROJECT DETAIL CARD (Section 3+)
    Full centered card carrying a project's complete summary — the section
@@ -645,6 +656,12 @@
   transition: opacity var(--ex-duration-fast) ease;
 }
 .ex-venus-project-visit-btn:hover { opacity: var(--ex-opacity-high); }
+
+.ex-venus-project-visit-btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: var(--ex-opacity-faint);
+  pointer-events: none;
+}
 
 .ex-venus-project-details-btn {
   align-items: center;

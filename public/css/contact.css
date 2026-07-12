@@ -291,6 +291,15 @@
   outline-offset: 2px;
 }
 
+.ex-ct-submit-note {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  min-height: 1em;
+  opacity: var(--ex-opacity-faint);
+}
+
 /* ── Footer note ────────────────────────────────────────────── */
 
 .ex-ct-footer-note {
@@ -312,5 +321,19 @@
   font-weight: var(--ex-para-font-weight);
   letter-spacing: var(--ex-tracking-sm);
   opacity: var(--ex-opacity-faint);
-  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────
+   Breakpoint matches the project convention (css-standards.md RULE 17).
+   ── */
+
+@media (max-width: 767.98px) {
+  .ex-ct-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ex-ct-form-row {
+    grid-template-columns: 1fr;
+  }
 }

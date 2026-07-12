@@ -5,38 +5,38 @@
 
 const items = [
   {
-    id:       'product-1',
+    id:       'orbit-ui',
     category: 'PRODUCT',
-    title:    '[Product Name]',
-    meta:     '[Price] · [Platform]',
+    title:    'Orbit UI',
+    meta:     '$49 · Figma',
     body: [
-      'Placeholder — describe your flagship product. What is it, who is it for, and what makes it worth buying? A theme, a Figma kit, a component library, an icon set — be specific about the format and what is included.',
-      'What problem does this product solve? The best digital products have a clear job to be done. Describe the specific situation a buyer is in when this product is exactly what they need. That specificity is what turns a visitor into a customer.',
-      'What is included? Document the contents: number of components, file formats, included variants, update access, support terms. Buyers at this stage are close to purchasing — they need detail, not persuasion. Update this placeholder with your actual product.',
+      'Orbit UI is a 120-component Figma kit built for SaaS dashboards — the exact component set this planetarium\'s own admin-style overlays were prototyped from, cleaned up and generalised for reuse. Auto-layout throughout, dark and light variants on every component.',
+      'Built for the specific situation of starting a new SaaS product screen and not wanting to rebuild data tables, filter bars, and settings panels from scratch for the fifth time. It is not a general-purpose UI kit — it is the specific 20% of components that SaaS dashboards need over and over.',
+      'Includes: 120 components across 8 categories, both theme variants, a Figma variables setup for quick rebranding, and lifetime update access. Licensed for commercial use on unlimited client projects.',
     ],
     topics: ['The Product', 'The Problem It Solves', "What's Included"],
   },
   {
-    id:       'product-2',
+    id:       'nightfall',
     category: 'PRODUCT',
-    title:    '[Product Name]',
-    meta:     '[Price] · Includes [N] assets',
+    title:    'Nightfall',
+    meta:     '$39 · Includes 6 page templates',
     body: [
-      'Placeholder — a second product. This could be a template system, a motion pack, or a documentation framework. Different format, different audience, different use case from your first product.',
-      'Who is this for? The more specific the target buyer, the better the product sells. "Designers who use Figma for SaaS products" is more useful than "designers." Define your audience and address them directly in this description.',
-      'What does the buyer walk away with immediately? Describe the experience of downloading and opening this product. Is it plug-and-play or does it require configuration? Is there documentation? What does the onboarding look like? Update this placeholder.',
+      'Nightfall is a dark-mode Astro starter theme — six page templates (landing, blog index, article, pricing, about, contact) built on the same cascade-layer CSS architecture this site uses, no Tailwind or CSS-in-JS dependency.',
+      'Built for developers who want a real starting codebase, not a Figma file to translate themselves. "A freelance developer who wants a production-ready Astro base instead of starting from a blank astro.config" is the specific buyer this serves.',
+      'Fully plug-and-play: clone, `npm install`, `npm run dev`. Comes with a documented content-collection schema for the blog templates and a short setup guide — no configuration required to see it running.',
     ],
     topics: ['The Format', 'The Buyer', 'The Onboarding'],
   },
   {
-    id:       'product-3',
+    id:       'glyphset',
     category: 'PRODUCT',
-    title:    '[Product Name]',
-    meta:     '[Price] · [N] files included',
+    title:    'Glyphset',
+    meta:     '$19 · 200 icons included',
     body: [
-      'Placeholder — a third product. Icon pack, Notion template, email kit, Webflow template. Each product in your catalogue should serve a different need so buyers have a reason to purchase multiple items.',
-      'What differentiates this from what is already available? Crowded markets require a clear differentiator. Describe what makes this product the right choice over existing alternatives — quality, scope, specificity, aesthetic, or price.',
-      'What is the licence? Commercial use, personal use, extended licence for client work? Licence terms are a purchase blocker — be clear upfront. Describe the exact terms and any restrictions. Update this placeholder with your actual product details.',
+      'Glyphset is a 200-icon set drawn at a single consistent stroke weight and corner radius — SVG, PNG, and an Astro-ready icon-component wrapper included, built to solve the specific annoyance of mixing icon packs from three different sources and having nothing visually match.',
+      'The differentiator against the many free icon packs already out there: every icon in this set was drawn by hand for this specific stroke system, not auto-generated or assembled from mismatched sources — visual consistency across all 200 is the entire pitch.',
+      'Licensed for commercial use, including client projects and products you resell, with no attribution required. An extended licence for icon-pack resale specifically is available on request.',
     ],
     topics: ['The Catalogue Gap', 'The Differentiator', 'The Licence'],
   },
@@ -47,10 +47,10 @@ const items = [
 <div class="ex-saturn-section" data-layout="bottom-center">
   <span class="ex-saturn-section-label">PRODUCTS</span>
   <h2 class="ex-saturn-section-title ex-heading">Things<span class="ex-line-break"></span>for Sale.</h2>
-  <p class="ex-para ex-saturn-body">Themes, templates, UI kits, and digital assets built for other designers and developers. Products that encode the same standards I hold in client work. Placeholder — update with your actual product catalogue.</p>
+  <p class="ex-para ex-saturn-body">Themes, templates, UI kits, and digital assets built for other designers and developers. Products that encode the same standards I hold in client work.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">[N] products</span><span class="ex-saturn-stat-pill-label">Available</span></div>
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">[Platform]</span><span class="ex-saturn-stat-pill-label">Where to buy</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">3 products</span><span class="ex-saturn-stat-pill-label">Available</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Gumroad</span><span class="ex-saturn-stat-pill-label">Where to buy</span></div>
   </div>
   <button class="ex-saturn-intro-cta" type="button" data-scroll-next>
     BROWSE PRODUCTS
@@ -61,10 +61,10 @@ const items = [
 <!-- ── Section 2 — Product 1 ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">02 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">[Product Name]</h2>
-  <p class="ex-para ex-saturn-body">Placeholder — describe your flagship product. What it is, who it's for, what makes it worth buying. A theme, a Figma kit, a component library, an icon set. Describe the value clearly.</p>
+  <h2 class="ex-heading ex-saturn-section-title">Orbit UI</h2>
+  <p class="ex-para ex-saturn-body">A 120-component Figma kit for SaaS dashboards — data tables, filter bars, and settings panels in dark and light variants, so the fifth new dashboard screen doesn't start from a blank canvas.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">[Price]</span>
+    <span class="ex-saturn-fact-number">$49</span>
     <span class="ex-saturn-fact-label">One-time purchase</span>
   </div>
   <button class="ex-saturn-detail-link" type="button" data-item-id="0" data-planet="saturn">Product details →</button>
@@ -73,11 +73,11 @@ const items = [
 <!-- ── Section 3 — Product 2 ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">03 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">[Product Name]</h2>
-  <p class="ex-para ex-saturn-body">Placeholder — a second product. Could be a template system, a motion pack, or a documentation framework. Describe what's included, what problem it solves, and who it's designed for.</p>
+  <h2 class="ex-heading ex-saturn-section-title">Nightfall</h2>
+  <p class="ex-para ex-saturn-body">A dark-mode Astro starter theme — six page templates on the same cascade-layer CSS architecture this site uses, no framework dependency. Clone, install, and it's running.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">[Price]</span>
-    <span class="ex-saturn-fact-label">Includes [N] assets</span>
+    <span class="ex-saturn-fact-number">$39</span>
+    <span class="ex-saturn-fact-label">Includes 6 templates</span>
   </div>
   <button class="ex-saturn-detail-link" type="button" data-item-id="1" data-planet="saturn">Product details →</button>
 </div>
@@ -85,11 +85,11 @@ const items = [
 <!-- ── Section 4 — Product 3 ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">04 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">[Product Name]</h2>
-  <p class="ex-para ex-saturn-body">Placeholder — a third product. Icon pack, Notion template, email kit, Webflow template. Describe the scope and what differentiates it from what's already out there.</p>
+  <h2 class="ex-heading ex-saturn-section-title">Glyphset</h2>
+  <p class="ex-para ex-saturn-body">A 200-icon set drawn at one consistent stroke weight and corner radius — SVG, PNG, and an Astro-ready component wrapper, so nothing looks mismatched against the rest of the UI.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">[N] files</span><span class="ex-saturn-stat-pill-label">Included</span></div>
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">[Format]</span><span class="ex-saturn-stat-pill-label">File type</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">200 icons</span><span class="ex-saturn-stat-pill-label">Included</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">SVG + PNG</span><span class="ex-saturn-stat-pill-label">File type</span></div>
   </div>
   <button class="ex-saturn-detail-link" type="button" data-item-id="2" data-planet="saturn">Product details →</button>
 </div>
@@ -98,7 +98,7 @@ const items = [
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">05 — OFFER</span>
   <h2 class="ex-heading ex-saturn-section-title">What's Included</h2>
-  <p class="ex-para ex-saturn-body">All products come with documentation, update access, and a licence for commercial use. Placeholder — describe your licensing, update policy, and any support you offer with products.</p>
+  <p class="ex-para ex-saturn-body">All products come with documentation, lifetime update access, and a licence for commercial use — including client work, no attribution required.</p>
   <div class="ex-saturn-key-fact">
     <span class="ex-saturn-fact-number">Commercial</span>
     <span class="ex-saturn-fact-label">Licence included</span>
@@ -109,9 +109,9 @@ const items = [
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">06 — CUSTOM</span>
   <h2 class="ex-heading ex-saturn-section-title">Need Something Bespoke?</h2>
-  <p class="ex-para ex-saturn-body">Products are starting points. If you need a theme modified, a template system extended, or a design kit built to your brand, I offer custom product development. Placeholder — update with your custom terms.</p>
+  <p class="ex-para ex-saturn-body">Products are starting points. If you need a theme modified, a template system extended, or a design kit built to your brand, I offer custom product development on a project basis.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">From [Price]</span>
+    <span class="ex-saturn-fact-number">From $150</span>
     <span class="ex-saturn-fact-label">Custom product work</span>
   </div>
 </div>
@@ -120,10 +120,10 @@ const items = [
 <div class="ex-saturn-section" data-layout="right">
   <span class="ex-saturn-section-label">07 — REVIEWS</span>
   <h2 class="ex-heading ex-saturn-section-title">What Customers Say</h2>
-  <p class="ex-para ex-saturn-body">Placeholder — add a customer review or two here. Real words from real buyers carry more weight than any copy you write about your own products. Aggregate rating, number of sales, top review snippet.</p>
+  <p class="ex-para ex-saturn-body">Early buyers on Orbit UI and Nightfall — reviews will fill in as the storefront gets more traffic. Real feedback carries more weight than any copy written here, so this section grows honestly, not artificially.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">[Rating] / 5</span>
-    <span class="ex-saturn-fact-label">[N] reviews</span>
+    <span class="ex-saturn-fact-number">New storefront</span>
+    <span class="ex-saturn-fact-label">Reviews coming soon</span>
   </div>
 </div>
 
@@ -131,9 +131,9 @@ const items = [
 <div class="ex-saturn-section" data-layout="center">
   <span class="ex-saturn-section-label">08 — SHOP</span>
   <h2 class="ex-heading ex-saturn-section-title">Browse the Store</h2>
-  <p class="ex-para ex-saturn-body">All products are available on [Platform — Gumroad, Lemonsqueezy, etc.]. Instant download after purchase. Questions before buying? Reach out at Neptune and I'll answer the same day.</p>
+  <p class="ex-para ex-saturn-body">All products are available on Gumroad. Instant download after purchase. Questions before buying? Reach out at Neptune and I'll answer the same day.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">[Platform]</span><span class="ex-saturn-stat-pill-label">Store</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Gumroad</span><span class="ex-saturn-stat-pill-label">Store</span></div>
     <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Instant</span><span class="ex-saturn-stat-pill-label">Delivery</span></div>
   </div>
 </div>

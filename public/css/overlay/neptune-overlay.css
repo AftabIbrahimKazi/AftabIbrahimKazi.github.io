@@ -365,6 +365,16 @@
   outline-offset: 2px;
 }
 
+.ex-neptune-submit-note {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  margin-top: var(--ex-space-xs);
+  min-height: 1em;
+  opacity: var(--ex-opacity-faint);
+}
+
 /* ================================================================
    NEPTUNE — PROGRESS STRIP
    Sections-only (no article panel — see NeptuneOverlay.astro's comment).

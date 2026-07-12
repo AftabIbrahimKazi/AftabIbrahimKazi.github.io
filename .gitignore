@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# project-local AI tooling (not published)
+coding-standards/
+skills/
+.claude/

@@ -261,17 +261,21 @@ const articles = [
     New articles land in your inbox the moment they're published. No spam, no noise —
     just the next piece when it's ready.
   </p>
-  <form class="ex-mercury-form" onsubmit="return false;">
+  <form class="ex-mercury-form" id="ex-mercury-subscribe-form">
     <i class="fa-solid fa-envelope ex-mercury-form-icon"></i>
     <input
       class="ex-mercury-input"
+      id="ex-mercury-subscribe-email"
       type="email"
+      name="email"
       placeholder="your@email.com"
       aria-label="Email address"
       autocomplete="email"
+      required
     />
-    <button class="ex-mercury-btn" type="submit">SUBSCRIBE →</button>
+    <button class="ex-mercury-btn" id="ex-mercury-subscribe-submit" type="submit">SUBSCRIBE →</button>
   </form>
+  <p class="ex-mercury-form-note" id="ex-mercury-subscribe-note" role="status" aria-live="polite"></p>
 </div>
 
 <!-- ── Article data for sidebar ───────────────────────────── -->
@@ -339,6 +343,25 @@ const articles = [
       const match = articles.find((a) => a.id === deepLinkId);
       if (match) setTimeout(() => openArticle(match), 400);
     }
+
+    // Static GitHub Pages hosting has no mailing-list backend to submit this
+    // form to — the mailto: fallback opens the visitor's own email client
+    // with a subscribe request, matching the Neptune/Venus contact forms.
+    const subscribeForm  = document.getElementById('ex-mercury-subscribe-form') as HTMLFormElement | null;
+    const subscribeInput = document.getElementById('ex-mercury-subscribe-email') as HTMLInputElement | null;
+    const subscribeNote  = document.getElementById('ex-mercury-subscribe-note');
+
+    subscribeForm?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      if (!subscribeForm.reportValidity() || !subscribeInput || !subscribeNote) return;
+
+      const email  = subscribeInput.value;
+      const body   = `Please add me to the mailing list.\n\nEmail: ${email}`;
+      const mailto = `mailto:hello@aftabkazi.com?subject=${encodeURIComponent('Newsletter signup')}&body=${encodeURIComponent(body)}`;
+
+      subscribeNote.textContent = "Your email app should open with this request ready to send. If nothing opens, email hello@aftabkazi.com directly.";
+      window.location.href = mailto;
+    });
   }
 
   init();

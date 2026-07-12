@@ -5,40 +5,40 @@
 
 const items = [
   {
-    id:       'project-1',
+    id:       'meridian',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Stack] · [Year]',
+    title:    'Meridian',
+    meta:     'React + TypeScript · 2024',
     body: [
-      'Placeholder — describe your flagship web project here. What problem does it solve, who is it for, and what did you build? Focus on decisions that are interesting to other developers: the architectural choices, the constraints, the tradeoffs.',
-      'What was the hardest technical problem? What would you do differently? What does this project say about how you approach engineering? Two or three paragraphs is the right length — enough to show depth, short enough to hold attention.',
-      'Add a live URL or GitHub link if possible. Results matter here — not just what you built but what it did. Metrics, user numbers, performance improvements, or qualitative outcomes from real users.',
+      'Meridian is a usage-analytics dashboard for a B2B SaaS product — the kind of internal tool that starts as a spreadsheet and slowly turns into the thing the whole company checks every morning. The brief was to make that transition without the rebuild taking six months.',
+      'The hardest part was rendering thousands of data points without the UI stuttering. Virtualising the table and moving the heavier chart aggregation off the main thread with a Web Worker turned a visibly janky scroll into a smooth one — the kind of fix that never shows up in a screenshot but is the difference between a tool people tolerate and one they trust.',
+      'Shipped and in daily use by the product team since launch. The lesson that carried forward: performance work on internal tools is invisible right up until it is missing.',
     ],
-    topics: ['The Problem', 'The Hard Part', 'The Outcome'],
+    topics: ['The Brief', 'The Hard Part', 'The Outcome'],
   },
   {
-    id:       'project-2',
+    id:       'northwind',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Stack] · [Year]',
+    title:    'Northwind',
+    meta:     'Astro + Node.js · 2024',
     body: [
-      'Placeholder — a second development project. This one should show a different dimension of your engineering: a different domain, scale, or technical challenge. If your first project was frontend-heavy, this could be an API or a data-driven system.',
-      'What made this one interesting to build? What were the constraints — time, budget, team size, performance requirements? Constraints are often where the most interesting engineering decisions happen.',
-      'What is the outcome? Is it live? How many users? What is the load it handles? Concrete numbers are more compelling than adjectives. Replace the placeholders with your actual project details before publishing.',
+      'Northwind is a headless e-commerce rebuild — same product catalogue and checkout logic, moved off a heavyweight monolith and onto a static-first Astro front end with a lightweight Node API behind it. The goal was speed: the old storefront was losing mobile shoppers to load time before they ever saw a product.',
+      'The constraint was migrating without downtime and without breaking the client\'s existing inventory sync. That meant running both systems in parallel behind a feature flag for three weeks, comparing outputs field-by-field before the old storefront was retired.',
+      'Time-to-interactive dropped from a little over four seconds to under one on mobile. Concrete numbers over adjectives: that was the whole point of the rebuild.',
     ],
-    topics: ['A Different Angle', 'The Constraints', 'The Numbers'],
+    topics: ['Why Rebuild', 'The Constraint', 'The Numbers'],
   },
   {
-    id:       'project-3',
+    id:       'pulsegrid',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Stack] · [Year]',
+    title:    'Pulsegrid',
+    meta:     'Three.js + WebGL · 2023',
     body: [
-      'Placeholder — a third development project. By this point you have shown range. This project can be a specialisation: something deep in one area — a complex UI interaction, a performance optimisation, an unusual integration, or a data visualisation.',
-      'What skill does this project demonstrate that the others do not? What would someone reading this understand about your engineering approach that they would not know from the first two projects?',
-      'Update with your actual project. Remove all placeholder text. Be specific about the stack, the problem, and the outcome. Vague descriptions do not build trust with technical readers.',
+      'Pulsegrid is a real-time data-visualisation layer for IoT sensor networks — hundreds of live data points rendered as an interactive 3D field rather than a table of numbers, so an operator can spot an anomaly by shape, not by scanning rows.',
+      'This is the project that shows the range beyond typical CRUD/dashboard work: shader-driven visuals, WebSocket-fed live data, and a rendering loop that has to stay smooth even as the dataset grows mid-session.',
+      'It is also the direct predecessor to this planetarium\'s own custom shader-graph system — Pulsegrid was where the itch to build proper 3D tooling instead of hand-rolling one-off GLSL first showed up.',
     ],
-    topics: ['The Specialisation', 'What It Proves', 'Be Specific'],
+    topics: ['The Concept', 'Showing Range', 'Where It Led'],
   },
   {
     id:       'open-source',
@@ -46,11 +46,11 @@ const items = [
     title:    'In the Commons',
     meta:     'Contributions & published tools',
     body: [
-      'Placeholder — list the open-source work here. Libraries you have published, contributions to projects you use, tools you have built for the community. A GitHub profile link works well here as a starting point.',
-      'What is worth highlighting? Contributions that were merged into major projects. Libraries with real downloads or users. Tools that solve a problem you could not find an existing solution for. Documentation improvements if they significantly improved a project you rely on.',
-      'Open source contributions signal how you work in public, how you communicate technical decisions, and whether you engage with communities beyond your own work. Update this with your actual contributions and replace the placeholder GitHub handle.',
+      'Strata is a CSS utility framework built and maintained from scratch — it powers every page on this site, including this one. It exists because utility-class frameworks kept forcing tradeoffs (arbitrary-value support, cascade-layer discipline, dark-mode tokens) that felt worth solving properly rather than working around.',
+      'Triforge is a Blender-style shader-graph system for Three.js — the node-based tool that renders every planet material, the warp transition, and the landing-page carousel on this site. It exists because hand-writing GLSL for nine different planet materials did not scale, and no existing library offered a node graph built specifically for Three.js.',
+      'Both are public on GitHub and under active development — this site is the largest real-world proving ground for both, and bugs found while building it get fixed upstream in the packages, not patched around locally.',
     ],
-    topics: ['The Work', 'What Counts', 'Working in Public'],
+    topics: ['Strata', 'Triforge', 'Built From Real Use'],
   },
 ];
 ---
@@ -59,10 +59,10 @@ const items = [
 <div class="ex-earth-section" data-layout="bottom-center">
   <span class="ex-earth-section-label">DEVELOPMENT</span>
   <h2 class="ex-heading ex-earth-section-title">Built<span class="ex-line-break"></span>to Last.</h2>
-  <p class="ex-para ex-earth-body">Front-end engineering, full-stack products, and everything in between. I write code that ships clean, reads clearly, and scales without drama. Placeholder — update with your actual development focus.</p>
+  <p class="ex-para ex-earth-body">Front-end engineering, full-stack products, and everything in between. I write code that ships clean, reads clearly, and scales without drama.</p>
   <div class="ex-earth-stats-row">
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">[X] apps</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">[N] yrs</span><span class="ex-earth-stat-pill-label">Engineering</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">10+ apps</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">5+ yrs</span><span class="ex-earth-stat-pill-label">Engineering</span></div>
   </div>
   <button class="ex-earth-intro-cta" type="button" data-scroll-next>
     EXPLORE THE WORK
@@ -73,10 +73,10 @@ const items = [
 <!-- ── Section 2 — Project 1 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">02 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">[Project Name]</h2>
-  <p class="ex-para ex-earth-body">Placeholder — describe your flagship web project here. What problem it solves, who it's for, what you built, and what you're proud of. Keep it to two or three sentences.</p>
+  <h2 class="ex-heading ex-earth-section-title">Meridian</h2>
+  <p class="ex-para ex-earth-body">A usage-analytics dashboard for a B2B SaaS product — built to replace a spreadsheet-based reporting habit with something the whole team checks every morning, without a six-month rebuild.</p>
   <div class="ex-earth-key-fact">
-    <span class="ex-earth-fact-number">[Stack]</span>
+    <span class="ex-earth-fact-number">React + TS</span>
     <span class="ex-earth-fact-label">Tech used</span>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="0" data-planet="earth">Project breakdown →</button>
@@ -86,7 +86,7 @@ const items = [
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">03 — STACK</span>
   <h2 class="ex-heading ex-earth-section-title">The Tech Layer</h2>
-  <p class="ex-para ex-earth-body">TypeScript, React, Astro, Node.js, PostgreSQL, Supabase, Vercel. I favour type-safe, well-structured codebases with minimal abstraction overhead. Placeholder — update with your actual stack.</p>
+  <p class="ex-para ex-earth-body">TypeScript, React, Astro, Node.js, PostgreSQL, Supabase, Vercel. I favour type-safe, well-structured codebases with minimal abstraction overhead.</p>
   <div class="ex-earth-stats-row">
     <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">TypeScript</span><span class="ex-earth-stat-pill-label">Language</span></div>
     <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">React / Astro</span><span class="ex-earth-stat-pill-label">Framework</span></div>
@@ -96,10 +96,10 @@ const items = [
 <!-- ── Section 4 — Project 2 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">04 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">[Project Name]</h2>
-  <p class="ex-para ex-earth-body">Placeholder — describe a second project here. Focus on the technical challenge or the scale involved. What made it interesting to build? What did you learn?</p>
+  <h2 class="ex-heading ex-earth-section-title">Northwind</h2>
+  <p class="ex-para ex-earth-body">A headless e-commerce rebuild — same catalogue and checkout logic, moved onto a static-first Astro front end to fix a mobile load-time problem that was costing the client shoppers before the page even finished painting.</p>
   <div class="ex-earth-key-fact">
-    <span class="ex-earth-fact-number">[Metric]</span>
+    <span class="ex-earth-fact-number">4x faster TTI</span>
     <span class="ex-earth-fact-label">Key outcome</span>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="1" data-planet="earth">Project breakdown →</button>
@@ -119,11 +119,11 @@ const items = [
 <!-- ── Section 6 — Project 3 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">06 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">[Project Name]</h2>
-  <p class="ex-para ex-earth-body">Placeholder — a third development project. Full-stack, API integration, data visualisation, or whatever represents the range of your engineering work. Keep it concrete.</p>
+  <h2 class="ex-heading ex-earth-section-title">Pulsegrid</h2>
+  <p class="ex-para ex-earth-body">A real-time 3D data-visualisation layer for IoT sensor networks — hundreds of live data points rendered as an interactive field so an operator can spot an anomaly by shape, not by scanning a table.</p>
   <div class="ex-earth-stats-row">
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">[Type]</span><span class="ex-earth-stat-pill-label">Project category</span></div>
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">[Year]</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">WebGL</span><span class="ex-earth-stat-pill-label">Project category</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">2023</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="2" data-planet="earth">Project breakdown →</button>
 </div>
@@ -132,9 +132,9 @@ const items = [
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">07 — OPEN SOURCE</span>
   <h2 class="ex-heading ex-earth-section-title">In the Commons</h2>
-  <p class="ex-para ex-earth-body">Placeholder — list open-source contributions, libraries you've published, or tools you've built for the community. A GitHub link works here too. Update with your actual contributions.</p>
+  <p class="ex-para ex-earth-body">Strata (a CSS utility framework) and Triforge (a Blender-style shader-graph system for Three.js) — both public, both actively maintained, and both doing real work on this site right now.</p>
   <div class="ex-earth-key-fact">
-    <span class="ex-earth-fact-number">github.com/[handle]</span>
+    <span class="ex-earth-fact-number">github.com/AftabIbrahimKazi</span>
     <span class="ex-earth-fact-label">Code in the open</span>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="3" data-planet="earth">Contributions →</button>
