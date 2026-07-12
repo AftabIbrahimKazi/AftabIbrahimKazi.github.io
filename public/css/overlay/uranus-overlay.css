@@ -1,6 +1,11 @@
-/* uranus-overlay.css — Sideways planet · Cold distant theme */
+/* uranus-overlay.css — Sideways planet · Cold distant theme
+   Color palette: pale cyan → teal — rgba(100,220,230) → rgba(30,140,150)
+   Evokes: ice, distance, cold remove */
 
-#ex-content-overlay[data-planet="ex-uranus-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-uranus-js"] {
+  background: transparent;
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-uranus-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-uranus-js"] .ex-overlay-section--entry {
@@ -15,6 +20,7 @@
   border-radius: var(--ex-border-radius-outer);
   display: inline-block;
   margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
   padding: var(--ex-space-md) var(--ex-space-lg);
 }
 
@@ -25,7 +31,9 @@
   color: transparent;
 }
 
-/* ── Section base — narrow, cold, remote ─────────────────────── */
+/* ================================================================
+   URANUS — SECTION LAYOUT SYSTEM (narrow, cold, remote)
+   ================================================================ */
 
 .ex-uranus-section {
   backdrop-filter: blur(14px);
@@ -35,15 +43,13 @@
   border-radius: 0 var(--ex-border-radius-inner) var(--ex-border-radius-inner) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: 360px;
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
-
-/* ── Layout variants ─────────────────────────────────────────── */
 
 .ex-uranus-section[data-layout="bottom-center"] {
   align-items: center;
@@ -55,36 +61,11 @@
   text-align: center;
 }
 
-.ex-uranus-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-inner) 0 0 var(--ex-border-radius-inner);
-  border-right: 2px solid var(--ex-color-uranus-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-uranus-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-uranus-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-inner) 0 0 var(--ex-border-radius-inner);
   border-right: 2px solid var(--ex-color-uranus-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-uranus-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-uranus-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -98,7 +79,9 @@
   text-align: center;
 }
 
-/* ── Typography ──────────────────────────────────────────────── */
+/* ================================================================
+   URANUS — TYPOGRAPHY
+   ================================================================ */
 
 .ex-uranus-section-label {
   background: none;
@@ -128,14 +111,13 @@
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact ────────────────────────────────────────────────── */
-
+/* ── Key fact ── */
 .ex-uranus-key-fact {
-  border-top: 1px solid var(--ex-color-uranus-border);
+  border-top: 1px solid var(--ex-color-uranus-border-inner);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-uranus-fact-number {
@@ -157,24 +139,23 @@
   text-transform: uppercase;
 }
 
-/* ── Stats row / pill ────────────────────────────────────────── */
-
+/* ── Stats row / pill ── */
 .ex-uranus-stats-row {
-  border-top: 1px solid var(--ex-color-uranus-border);
+  border-top: 1px solid var(--ex-color-uranus-border-inner);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-uranus-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-uranus-border);
+  background-color: var(--ex-color-uranus-pill-bg);
+  border: 1px solid var(--ex-color-uranus-border-inner);
   border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
 }
 
 .ex-uranus-stat-pill-value {
@@ -193,118 +174,13 @@
   text-transform: uppercase;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────── */
-
-.ex-uranus-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(0, 10, 14, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(0, 32, 42, 0.94);
-  border-top: 2px solid var(--ex-color-uranus-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-
-.ex-uranus-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-uranus-border); }
-.ex-uranus-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-uranus-border); }
-
-.ex-uranus-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--ex-color-uranus-border) transparent;
-  scrollbar-width: thin;
-}
-
-.ex-uranus-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-uranus-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
-  position: relative;
-}
-
-.ex-uranus-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-uranus-border);
-  border-radius: var(--ex-border-radius-round);
-  color: var(--ex-text-body);
-  cursor: pointer;
-  font-size: var(--ex-font-size-default);
-  height: var(--ex-size-36);
-  position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
-  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
-  width: var(--ex-size-36);
-}
-
-.ex-uranus-sidebar-close:hover {
-  background: var(--ex-color-uranus-border);
-  border-color: var(--ex-color-uranus-hi);
-}
-
-.ex-uranus-sidebar-cat {
-  -webkit-background-clip: text;
-  background: linear-gradient(to right, var(--ex-color-uranus-hi), var(--ex-color-uranus-lo));
-  background-clip: text;
-  color: transparent;
-  display: block;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-heading-font-weight);
-  letter-spacing: var(--ex-tracking-xl);
-  margin-bottom: var(--ex-space-sm);
-  padding-right: var(--ex-size-40);
-  text-transform: uppercase;
-}
-
-.ex-uranus-sidebar-title {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
-  font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
-  margin-bottom: var(--ex-space-xs);
-}
-
-.ex-uranus-sidebar-meta {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-para-font-weight);
-  letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
-  text-transform: uppercase;
-}
-
-.ex-uranus-sidebar-body {
-  flex: 1;
-  padding: var(--ex-space-lg);
-}
-
-.ex-uranus-sidebar-body p {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-default);
-  font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
-  margin-bottom: var(--ex-space-md);
-  opacity: var(--ex-opacity-body);
-}
-
-.ex-uranus-sidebar-body p:last-child { margin-bottom: 0; }
-
-/* ── Detail link ─────────────────────────────────────────────── */
-
+/* ── Detail link ── */
 .ex-uranus-detail-link {
-  -webkit-background-clip: text;
   align-items: center;
   background: linear-gradient(to right, var(--ex-color-uranus-hi), var(--ex-color-uranus-lo));
+  -webkit-background-clip: text;
   background-clip: text;
+  border: none;
   color: transparent;
   cursor: pointer;
   display: inline-flex;
@@ -318,5 +194,315 @@
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
-
 .ex-uranus-detail-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Intro CTA ── */
+.ex-uranus-intro-cta {
+  align-items: center;
+  background: var(--ex-color-uranus-pill-bg);
+  border: 1px solid var(--ex-color-uranus-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-uranus-hi);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-lg);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-uranus-intro-cta:hover { border-color: var(--ex-color-uranus-hi); opacity: var(--ex-opacity-high); }
+
+.ex-uranus-intro-cta-arrow { display: inline-flex; }
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, same pattern as the
+   Mercury/Venus/Sun/Earth/Mars/Jupiter/Saturn panels.
+   ================================================================ */
+
+.ex-uranus-article-panel {
+  --st-bg:               var(--ex-color-uranus-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 1200px) {
+  .ex-uranus-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.ex-uranus-article-panel-inner,
+.ex-uranus-article-panel-header,
+.ex-uranus-article-panel-body,
+.ex-uranus-article-panel-close {
+  pointer-events: auto;
+}
+
+.ex-uranus-article-panel-inner {
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-uranus-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-uranus-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-uranus-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
+  position: relative;
+}
+
+.ex-uranus-article-panel-close {
+  background: var(--ex-color-uranus-pill-bg);
+  border: 1px solid var(--ex-color-uranus-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+.ex-uranus-article-panel-close:hover {
+  background: var(--ex-color-uranus-border);
+  border-color: var(--ex-color-uranus-hi);
+}
+
+.ex-uranus-article-panel-cat {
+  background: linear-gradient(to right, var(--ex-color-uranus-hi), var(--ex-color-uranus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-uranus-article-panel-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+  margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
+}
+
+.ex-uranus-article-panel-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-uranus-article-panel-body {
+  flex: 1;
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
+}
+
+.ex-uranus-article-panel-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-uranus-article-panel-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================
+   URANUS — PROGRESS STRIP
+   ================================================================ */
+
+.ex-uranus-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-uranus-js"] ~ .ex-uranus-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-uranus-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-uranus-js"] ~ .ex-uranus-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-uranus-progress-line {
+  background-color: var(--ex-color-uranus-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-uranus-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-uranus-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-uranus-progress-bullet {
+  background-color: var(--ex-color-uranus-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-uranus-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-uranus-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-uranus-progress-item[data-swapping="true"] .ex-uranus-progress-number,
+.ex-uranus-progress-item[data-swapping="true"] .ex-uranus-progress-label {
+  opacity: 0;
+}
+
+.ex-uranus-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-uranus-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-uranus-progress-item[data-active="true"] .ex-uranus-progress-bullet {
+  background-color: var(--ex-color-uranus-hi);
+  transform: scale(1.6);
+}
+
+.ex-uranus-progress-item[data-active="true"] .ex-uranus-progress-number {
+  background: linear-gradient(to right, var(--ex-color-uranus-hi), var(--ex-color-uranus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   URANUS — RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-uranus-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-uranus-progress-strip,
+  .ex-uranus-progress-backdrop {
+    display: none;
+  }
+
+  .ex-uranus-article-panel-header,
+  .ex-uranus-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-uranus-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-uranus-progress-number,
+  .ex-uranus-progress-label {
+    display: none;
+  }
+
+  .ex-uranus-article-panel-header,
+  .ex-uranus-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-uranus-progress-label {
+    display: none;
+  }
+
+  .ex-uranus-article-panel-header,
+  .ex-uranus-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

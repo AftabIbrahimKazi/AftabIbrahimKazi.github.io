@@ -1,10 +1,21 @@
-/* sun-overlay.css — Solar core · Firestorm theme */
+/* sun-overlay.css — Solar core · Firestorm theme
+   Color palette: white-gold → deep orange — rgba(255,200,80) → rgba(255,120,20)
+   Evokes: solar flare, corona, radiant heat */
 
-#ex-content-overlay[data-planet="ex-sun-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-sun-js"] {
+  background: transparent;
+  /* Scroll headroom: without this, the last section has nowhere left to
+     scroll to reach vertical center — scrollIntoView({block:'center'}) and
+     the progress-strip nav both clamp at max scrollTop before centering,
+     which reads as the scroll abruptly ending / kicking the user out. */
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-sun-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-sun-js"] .ex-overlay-section--entry {
-  background: transparent; min-height: unset; padding: 0;
+  background: transparent;
+  min-height: unset;
+  padding: 0;
 }
 
 #ex-content-overlay[data-planet="ex-sun-js"] .ex-overlay-entry-header {
@@ -15,6 +26,7 @@
   border-radius: var(--ex-border-radius-outer);
   display: inline-block;
   margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
   padding: var(--ex-space-md) var(--ex-space-lg);
 }
 
@@ -25,7 +37,9 @@
   color: transparent;
 }
 
-/* ── Section base ────────────────────────────────────────────── */
+/* ================================================================
+   SUN — SECTION LAYOUT SYSTEM
+   ================================================================ */
 
 .ex-sun-section {
   backdrop-filter: blur(18px);
@@ -35,11 +49,11 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
 
@@ -57,8 +71,6 @@
   width: 80%;
 }
 
-/* ── Layout variants ─────────────────────────────────────────── */
-
 .ex-sun-section[data-layout="bottom-center"] {
   align-items: center;
   border-bottom: 2px solid var(--ex-color-sun-border);
@@ -69,36 +81,11 @@
   text-align: center;
 }
 
-.ex-sun-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-sun-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-sun-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-sun-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-sun-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-sun-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-sun-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -112,7 +99,9 @@
   text-align: center;
 }
 
-/* ── Typography ──────────────────────────────────────────────── */
+/* ================================================================
+   SUN — TYPOGRAPHY
+   ================================================================ */
 
 .ex-sun-section-label {
   background: none;
@@ -142,129 +131,184 @@
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact — oversized numbers for solar scale ────────────── */
-
+/* ── Key Fact ── */
 .ex-sun-key-fact {
-  border-top: 1px solid var(--ex-color-sun-border);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
+  border-top: 1px solid var(--ex-color-sun-border-inner);
 }
 
 .ex-sun-fact-number {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
   background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxl);
-  font-weight: var(--ex-heading-font-weight);
-  line-height: 1.1;
 }
 
 .ex-sun-fact-label {
-  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxs);
   letter-spacing: var(--ex-tracking-md);
-  opacity: var(--ex-opacity-faint);
   text-transform: uppercase;
+  color: var(--ex-text-body);
+  opacity: var(--ex-opacity-faint);
 }
 
-/* ── Stats row / pill ────────────────────────────────────────── */
-
+/* ── Stats Row ── */
 .ex-sun-stats-row {
-  border-top: 1px solid var(--ex-color-sun-border);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
+  border-top: 1px solid var(--ex-color-sun-border-inner);
+  justify-content: center;
 }
 
 .ex-sun-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-sun-border);
-  border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
+  border: 1px solid var(--ex-color-sun-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  background-color: var(--ex-color-sun-pill-bg);
 }
 
 .ex-sun-stat-pill-value {
-  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-default);
   font-weight: var(--ex-heading-font-weight);
+  color: var(--ex-text-body);
 }
 
 .ex-sun-stat-pill-label {
-  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
   letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
   text-transform: uppercase;
+  color: var(--ex-text-body);
+  opacity: var(--ex-opacity-faint);
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────── */
+/* ── Detail link ── */
+.ex-sun-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ex-space-xxs);
+  margin-top: var(--ex-space-sm);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  letter-spacing: var(--ex-tracking-md);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: opacity var(--ex-duration-fast) ease;
+  cursor: pointer;
+  border: none;
+}
+.ex-sun-detail-link:hover { opacity: var(--ex-opacity-mid); }
 
-.ex-sun-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(25, 10, 0, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(70, 28, 0, 0.94);
-  border-top: 2px solid var(--ex-color-sun-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* ── Intro CTA ── */
+.ex-sun-intro-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ex-space-xs);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  border: 1px solid var(--ex-color-sun-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  background: var(--ex-color-sun-pill-bg);
+  color: var(--ex-color-sun-hi);
+  cursor: pointer;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-sun-intro-cta:hover { border-color: var(--ex-color-sun-hi); opacity: var(--ex-opacity-high); }
+
+.ex-sun-intro-cta-arrow { display: inline-flex; }
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, same pattern as the
+   Mercury/Venus panels. Position/slide/transition come from
+   @strata-packages/offcanvas's own [data-st-side="bottom"] rules.
+   ================================================================ */
+
+.ex-sun-article-panel {
+  --st-bg:               var(--ex-color-sun-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   overflow: hidden;
+  pointer-events: none;
 }
 
-.ex-sun-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-sun-border); }
-.ex-sun-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-sun-border); }
+/* XL and above (≥1200px) — enough room that the panel can go fully
+   transparent/immersive without its own text overlapping the section
+   content behind it. Below that (XS/SM/MD/LG) the background above stays. */
+@media (min-width: 1200px) {
+  .ex-sun-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
 
-.ex-sun-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
+.ex-sun-article-panel-inner,
+.ex-sun-article-panel-header,
+.ex-sun-article-panel-body,
+.ex-sun-article-panel-close {
+  pointer-events: auto;
+}
+
+.ex-sun-article-panel-inner {
   overscroll-behavior: contain;
   scrollbar-color: var(--ex-color-sun-border) transparent;
   scrollbar-width: thin;
 }
 
-.ex-sun-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-sun-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
+.ex-sun-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-sun-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
   position: relative;
 }
 
-.ex-sun-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-sun-border);
+.ex-sun-article-panel-close {
+  background: var(--ex-color-sun-pill-bg);
+  border: 1px solid var(--ex-color-sun-border-inner);
   border-radius: var(--ex-border-radius-round);
   color: var(--ex-text-body);
   cursor: pointer;
   font-size: var(--ex-font-size-default);
   height: var(--ex-size-36);
   position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
   transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
   width: var(--ex-size-36);
 }
-
-.ex-sun-sidebar-close:hover {
+.ex-sun-article-panel-close:hover {
   background: var(--ex-color-sun-border);
   border-color: var(--ex-color-sun-hi);
 }
 
-.ex-sun-sidebar-cat {
-  -webkit-background-clip: text;
+.ex-sun-article-panel-cat {
   background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   display: block;
@@ -277,16 +321,16 @@
   text-transform: uppercase;
 }
 
-.ex-sun-sidebar-title {
+.ex-sun-article-panel-title {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
+  font-size: var(--ex-font-size-xl);
   font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
   margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
 }
 
-.ex-sun-sidebar-meta {
+.ex-sun-article-panel-meta {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
@@ -296,42 +340,201 @@
   text-transform: uppercase;
 }
 
-.ex-sun-sidebar-body {
+.ex-sun-article-panel-body {
   flex: 1;
-  padding: var(--ex-space-lg);
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
 }
 
-.ex-sun-sidebar-body p {
+.ex-sun-article-panel-body p {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-default);
   font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
   margin-bottom: var(--ex-space-md);
   opacity: var(--ex-opacity-body);
 }
 
-.ex-sun-sidebar-body p:last-child { margin-bottom: 0; }
+.ex-sun-article-panel-body p:last-child { margin-bottom: 0; }
 
-/* ── Detail link ─────────────────────────────────────────────── */
+/* ================================================================
+   SUN — PROGRESS STRIP
+   Dual role: section pagination (default) / article paragraph nav.
+   Fixed to the viewport so it persists across the whole scroll
+   independent of overlay scroll.
+   ================================================================ */
 
-.ex-sun-detail-link {
-  -webkit-background-clip: text;
+.ex-sun-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-sun-js"] ~ .ex-sun-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-sun-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  /* Above the article panel's default offcanvas z-index (1045) — see
+     mercury-overlay.css's identical rule for the full reasoning. */
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-sun-js"] ~ .ex-sun-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-sun-progress-line {
+  background-color: var(--ex-color-sun-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-sun-progress-item {
   align-items: center;
-  background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
-  background-clip: text;
-  color: transparent;
+  background: none;
+  border: none;
   cursor: pointer;
-  display: inline-flex;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-sun-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-sun-progress-bullet {
+  background-color: var(--ex-color-sun-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-sun-progress-number {
+  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxs);
-  font-weight: var(--ex-font-weight-medium);
-  gap: var(--ex-space-xxs);
-  letter-spacing: var(--ex-tracking-md);
-  margin-top: var(--ex-space-sm);
-  text-decoration: none;
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-sun-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
 
-.ex-sun-detail-link:hover { opacity: var(--ex-opacity-mid); }
+.ex-sun-progress-item[data-swapping="true"] .ex-sun-progress-number,
+.ex-sun-progress-item[data-swapping="true"] .ex-sun-progress-label {
+  opacity: 0;
+}
+
+.ex-sun-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-sun-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-sun-progress-item[data-active="true"] .ex-sun-progress-bullet {
+  background-color: var(--ex-color-sun-hi);
+  transform: scale(1.6);
+}
+
+.ex-sun-progress-item[data-active="true"] .ex-sun-progress-number {
+  background: linear-gradient(to right, var(--ex-color-sun-hi), var(--ex-color-sun-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   SUN — RESPONSIVE
+   Breakpoints match the project convention (css-standards.md RULE 17).
+   Placed after the base rules above so the overrides win the cascade.
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-sun-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-sun-progress-strip,
+  .ex-sun-progress-backdrop {
+    display: none;
+  }
+
+  .ex-sun-article-panel-header,
+  .ex-sun-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-sun-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-sun-progress-number,
+  .ex-sun-progress-label {
+    display: none;
+  }
+
+  .ex-sun-article-panel-header,
+  .ex-sun-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-sun-progress-label {
+    display: none;
+  }
+
+  .ex-sun-article-panel-header,
+  .ex-sun-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

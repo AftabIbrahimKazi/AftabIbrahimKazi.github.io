@@ -1,20 +1,14 @@
-// src/scripts/ui/solar-system/MercuryProgressStrip.ts
-// Mercury-only left progress strip — dual role. In "sections" mode (default)
-// the 10 items paginate the scroll sections. When the article panel opens
-// (ct:mercury-article-open) the same 10 items relabel to paginate that
-// article's paragraphs instead, then relabel back on ct:mercury-article-close.
-// Active-item tracking is scroll-driven (nearest-to-center), the same
-// pattern PlanetScrollCamera already uses for overlay.scrollTop — not
-// IntersectionObserver, which needs its root to be the actual scrolling
-// element and is easy to silently break with rootMargin edge cases.
-// Scoped entirely to #ex-mercury-progress-strip / .ex-mercury-section /
-// #ex-mercury-article-panel-body — no effect on any other planet's overlay.
+// src/scripts/ui/solar-system/EarthProgressStrip.ts
+// Earth-only left progress strip — same dual-role pattern as
+// SunProgressStrip/VenusProgressStrip/MercuryProgressStrip (see those
+// files for the full rationale). Scoped entirely to
+// #ex-earth-progress-strip / .ex-earth-section / #ex-earth-article-panel-body.
 
 interface ItemLabel { number: string; label: string; }
 
 const LABEL_SWAP_MS = 160;
 
-export class MercuryProgressStrip {
+export class EarthProgressStrip {
 
   private strip:      HTMLElement | null;
   private items:       HTMLElement[];
@@ -28,20 +22,20 @@ export class MercuryProgressStrip {
   private originalLabels:  ItemLabel[]   = [];
 
   constructor() {
-    this.strip      = document.getElementById('ex-mercury-progress-strip');
-    this.items      = Array.from(document.querySelectorAll<HTMLElement>('.ex-mercury-progress-item'));
-    this.sections   = Array.from(document.querySelectorAll<HTMLElement>('.ex-mercury-section'));
+    this.strip      = document.getElementById('ex-earth-progress-strip');
+    this.items      = Array.from(document.querySelectorAll<HTMLElement>('.ex-earth-progress-item'));
+    this.sections   = Array.from(document.querySelectorAll<HTMLElement>('.ex-earth-section'));
     this.overlay    = document.getElementById('ex-content-overlay');
-    this.panelInner = document.querySelector<HTMLElement>('.ex-mercury-article-panel-inner');
-    this.panelBody  = document.getElementById('ex-mercury-article-panel-body');
+    this.panelInner = document.querySelector<HTMLElement>('.ex-earth-article-panel-inner');
+    this.panelBody  = document.getElementById('ex-earth-article-panel-body');
   }
 
   init(): void {
     if (!this.strip || !this.items.length || !this.sections.length || !this.overlay) return;
 
     this.originalLabels = this.items.map((item) => ({
-      number: item.querySelector('.ex-mercury-progress-number')?.textContent ?? '',
-      label:  item.querySelector('.ex-mercury-progress-label')?.textContent  ?? '',
+      number: item.querySelector('.ex-earth-progress-number')?.textContent ?? '',
+      label:  item.querySelector('.ex-earth-progress-label')?.textContent  ?? '',
     }));
 
     this._bindClicks();
@@ -73,8 +67,8 @@ export class MercuryProgressStrip {
   };
 
   private _bindPanelEvents(): void {
-    window.addEventListener('ct:mercury-article-open',  () => this._enterArticleMode());
-    window.addEventListener('ct:mercury-article-close', () => this._exitArticleMode());
+    window.addEventListener('ct:earth-article-open',  () => this._enterArticleMode());
+    window.addEventListener('ct:earth-article-close', () => this._exitArticleMode());
   }
 
   private _enterArticleMode(): void {
@@ -84,7 +78,7 @@ export class MercuryProgressStrip {
 
     this.paragraphs = Array.from(this.panelBody.querySelectorAll<HTMLElement>('p'));
 
-    this._swapLabels((item, i) => ({
+    this._swapLabels((_item, i) => ({
       number: String(i + 1).padStart(2, '0'),
       label:  this.paragraphs[i]?.dataset.topic || 'Read',
       inRange: i < this.paragraphs.length,
@@ -107,13 +101,12 @@ export class MercuryProgressStrip {
     this._recomputeActiveSection();
   }
 
-  /** Fades each dot's number/label out, swaps the text, then fades back in. */
   private _swapLabels(next: (item: HTMLElement, i: number) => { number: string; label: string; inRange: boolean }): void {
     this.items.forEach((item, i) => {
       item.dataset.swapping = 'true';
       window.setTimeout(() => {
-        const numberEl = item.querySelector<HTMLElement>('.ex-mercury-progress-number');
-        const labelEl  = item.querySelector<HTMLElement>('.ex-mercury-progress-label');
+        const numberEl = item.querySelector<HTMLElement>('.ex-earth-progress-number');
+        const labelEl  = item.querySelector<HTMLElement>('.ex-earth-progress-label');
         const result   = next(item, i);
         if (numberEl) numberEl.textContent = result.number;
         if (labelEl)  labelEl.textContent  = result.label;

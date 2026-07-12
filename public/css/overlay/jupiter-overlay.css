@@ -1,6 +1,11 @@
-/* jupiter-overlay.css — King of planets · Grand imperial theme */
+/* jupiter-overlay.css — King of planets · Grand imperial theme
+   Color palette: pale gold → bronze — rgba(230,190,130) → rgba(160,100,50)
+   Evokes: banded atmosphere, imperial scale, gravity */
 
-#ex-content-overlay[data-planet="ex-jupiter-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-jupiter-js"] {
+  background: transparent;
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-jupiter-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-jupiter-js"] .ex-overlay-section--entry {
@@ -15,6 +20,7 @@
   border-radius: var(--ex-border-radius-outer);
   display: inline-block;
   margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
   padding: var(--ex-space-md) var(--ex-space-lg);
 }
 
@@ -25,7 +31,9 @@
   color: transparent;
 }
 
-/* ── Section base — wide, grand, imperial ────────────────────── */
+/* ================================================================
+   JUPITER — SECTION LAYOUT SYSTEM (wide, grand, imperial)
+   ================================================================ */
 
 .ex-jupiter-section {
   backdrop-filter: blur(16px);
@@ -35,15 +43,13 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-lg);
+  gap: var(--ex-space-md);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-xl) var(--ex-space-xl);
+  padding: var(--ex-space-md) var(--ex-space-lg);
   position: relative;
 }
-
-/* ── Layout variants ─────────────────────────────────────────── */
 
 .ex-jupiter-section[data-layout="bottom-center"] {
   align-items: center;
@@ -55,36 +61,11 @@
   text-align: center;
 }
 
-.ex-jupiter-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-jupiter-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-jupiter-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-jupiter-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-jupiter-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-jupiter-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-jupiter-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -98,7 +79,9 @@
   text-align: center;
 }
 
-/* ── Typography ──────────────────────────────────────────────── */
+/* ================================================================
+   JUPITER — TYPOGRAPHY
+   ================================================================ */
 
 .ex-jupiter-section-label {
   background: none;
@@ -129,13 +112,12 @@
 }
 
 /* ── Key fact — colossal numbers befitting the largest planet ── */
-
 .ex-jupiter-key-fact {
-  border-top: 1px solid var(--ex-color-jupiter-border);
+  border-top: 1px solid var(--ex-color-jupiter-border-inner);
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  gap: var(--ex-space-xxs);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-jupiter-fact-number {
@@ -144,9 +126,8 @@
   background-clip: text;
   color: transparent;
   font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxl);
+  font-size: var(--ex-font-size-xl);
   font-weight: var(--ex-heading-font-weight);
-  line-height: 1.0;
 }
 
 .ex-jupiter-fact-label {
@@ -158,24 +139,23 @@
   text-transform: uppercase;
 }
 
-/* ── Stats row / pill ────────────────────────────────────────── */
-
+/* ── Stats row / pill ── */
 .ex-jupiter-stats-row {
-  border-top: 1px solid var(--ex-color-jupiter-border);
+  border-top: 1px solid var(--ex-color-jupiter-border-inner);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-jupiter-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-jupiter-border);
+  background-color: var(--ex-color-jupiter-pill-bg);
+  border: 1px solid var(--ex-color-jupiter-border-inner);
   border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
 }
 
 .ex-jupiter-stat-pill-value {
@@ -194,8 +174,7 @@
   text-transform: uppercase;
 }
 
-/* ── Band divider — atmospheric belt accent ──────────────────── */
-
+/* ── Band divider — atmospheric belt accent ── */
 .ex-jupiter-key-fact::before {
   background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo), var(--ex-color-jupiter-hi));
   content: '';
@@ -205,118 +184,13 @@
   width: 100%;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────── */
-
-.ex-jupiter-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(16, 10, 2, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(50, 30, 5, 0.94);
-  border-top: 2px solid var(--ex-color-jupiter-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-
-.ex-jupiter-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-jupiter-border); }
-.ex-jupiter-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-jupiter-border); }
-
-.ex-jupiter-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--ex-color-jupiter-border) transparent;
-  scrollbar-width: thin;
-}
-
-.ex-jupiter-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-jupiter-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
-  position: relative;
-}
-
-.ex-jupiter-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-jupiter-border);
-  border-radius: var(--ex-border-radius-round);
-  color: var(--ex-text-body);
-  cursor: pointer;
-  font-size: var(--ex-font-size-default);
-  height: var(--ex-size-36);
-  position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
-  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
-  width: var(--ex-size-36);
-}
-
-.ex-jupiter-sidebar-close:hover {
-  background: var(--ex-color-jupiter-border);
-  border-color: var(--ex-color-jupiter-hi);
-}
-
-.ex-jupiter-sidebar-cat {
-  -webkit-background-clip: text;
-  background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo));
-  background-clip: text;
-  color: transparent;
-  display: block;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-heading-font-weight);
-  letter-spacing: var(--ex-tracking-xl);
-  margin-bottom: var(--ex-space-sm);
-  padding-right: var(--ex-size-40);
-  text-transform: uppercase;
-}
-
-.ex-jupiter-sidebar-title {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
-  font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
-  margin-bottom: var(--ex-space-xs);
-}
-
-.ex-jupiter-sidebar-meta {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-para-font-weight);
-  letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
-  text-transform: uppercase;
-}
-
-.ex-jupiter-sidebar-body {
-  flex: 1;
-  padding: var(--ex-space-lg);
-}
-
-.ex-jupiter-sidebar-body p {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-default);
-  font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
-  margin-bottom: var(--ex-space-md);
-  opacity: var(--ex-opacity-body);
-}
-
-.ex-jupiter-sidebar-body p:last-child { margin-bottom: 0; }
-
-/* ── Detail link ─────────────────────────────────────────────── */
-
+/* ── Detail link ── */
 .ex-jupiter-detail-link {
-  -webkit-background-clip: text;
   align-items: center;
   background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo));
+  -webkit-background-clip: text;
   background-clip: text;
+  border: none;
   color: transparent;
   cursor: pointer;
   display: inline-flex;
@@ -330,5 +204,315 @@
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
-
 .ex-jupiter-detail-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Intro CTA ── */
+.ex-jupiter-intro-cta {
+  align-items: center;
+  background: var(--ex-color-jupiter-pill-bg);
+  border: 1px solid var(--ex-color-jupiter-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-jupiter-hi);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-lg);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-jupiter-intro-cta:hover { border-color: var(--ex-color-jupiter-hi); opacity: var(--ex-opacity-high); }
+
+.ex-jupiter-intro-cta-arrow { display: inline-flex; }
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, same pattern as the
+   Mercury/Venus/Sun/Earth/Mars panels.
+   ================================================================ */
+
+.ex-jupiter-article-panel {
+  --st-bg:               var(--ex-color-jupiter-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 1200px) {
+  .ex-jupiter-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.ex-jupiter-article-panel-inner,
+.ex-jupiter-article-panel-header,
+.ex-jupiter-article-panel-body,
+.ex-jupiter-article-panel-close {
+  pointer-events: auto;
+}
+
+.ex-jupiter-article-panel-inner {
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-jupiter-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-jupiter-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-jupiter-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
+  position: relative;
+}
+
+.ex-jupiter-article-panel-close {
+  background: var(--ex-color-jupiter-pill-bg);
+  border: 1px solid var(--ex-color-jupiter-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+.ex-jupiter-article-panel-close:hover {
+  background: var(--ex-color-jupiter-border);
+  border-color: var(--ex-color-jupiter-hi);
+}
+
+.ex-jupiter-article-panel-cat {
+  background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-jupiter-article-panel-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+  margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
+}
+
+.ex-jupiter-article-panel-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-jupiter-article-panel-body {
+  flex: 1;
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
+}
+
+.ex-jupiter-article-panel-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-jupiter-article-panel-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================
+   JUPITER — PROGRESS STRIP
+   ================================================================ */
+
+.ex-jupiter-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-jupiter-js"] ~ .ex-jupiter-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-jupiter-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-jupiter-js"] ~ .ex-jupiter-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-jupiter-progress-line {
+  background-color: var(--ex-color-jupiter-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-jupiter-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-jupiter-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-jupiter-progress-bullet {
+  background-color: var(--ex-color-jupiter-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-jupiter-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-jupiter-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-jupiter-progress-item[data-swapping="true"] .ex-jupiter-progress-number,
+.ex-jupiter-progress-item[data-swapping="true"] .ex-jupiter-progress-label {
+  opacity: 0;
+}
+
+.ex-jupiter-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-jupiter-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-jupiter-progress-item[data-active="true"] .ex-jupiter-progress-bullet {
+  background-color: var(--ex-color-jupiter-hi);
+  transform: scale(1.6);
+}
+
+.ex-jupiter-progress-item[data-active="true"] .ex-jupiter-progress-number {
+  background: linear-gradient(to right, var(--ex-color-jupiter-hi), var(--ex-color-jupiter-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   JUPITER — RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-jupiter-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-jupiter-progress-strip,
+  .ex-jupiter-progress-backdrop {
+    display: none;
+  }
+
+  .ex-jupiter-article-panel-header,
+  .ex-jupiter-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-jupiter-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-jupiter-progress-number,
+  .ex-jupiter-progress-label {
+    display: none;
+  }
+
+  .ex-jupiter-article-panel-header,
+  .ex-jupiter-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-jupiter-progress-label {
+    display: none;
+  }
+
+  .ex-jupiter-article-panel-header,
+  .ex-jupiter-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

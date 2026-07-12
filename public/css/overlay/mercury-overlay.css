@@ -26,6 +26,11 @@
 
 #ex-content-overlay[data-planet="ex-mercury-js"] {
   background: transparent;
+  /* Scroll headroom: without this, the last section has nowhere left to
+     scroll to reach vertical center — scrollIntoView({block:'center'}) and
+     the progress-strip nav both clamp at max scrollTop before centering,
+     which reads as the scroll abruptly ending / kicking the user out. */
+  padding-bottom: var(--ex-scroll-headroom-lg);
 }
 
 #ex-content-overlay[data-planet="ex-mercury-js"] .ex-overlay-section,
@@ -36,12 +41,10 @@
 }
 
 #ex-content-overlay[data-planet="ex-mercury-js"] .ex-overlay-entry-header {
-  background-color: var(--ex-color-mercury-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--ex-border-radius-outer);
   padding: var(--ex-space-md) var(--ex-space-lg);
   border-bottom: none;
+  margin-left: var(--ex-space-xxl);
   margin-bottom: 0;
   display: inline-block;
 }
@@ -58,11 +61,11 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
 
@@ -81,7 +84,6 @@
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-mercury-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -162,13 +164,14 @@
   gap: var(--ex-space-xs);
   padding-top: var(--ex-space-default);
   border-top: 1px solid var(--ex-color-mercury-border-inner);
+  justify-content: center;
 }
 
 .ex-mercury-stat-pill {
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
   border: 1px solid var(--ex-color-mercury-border-inner);
   border-radius: var(--ex-border-radius-full);
   background-color: var(--ex-color-mercury-pill-bg);
@@ -215,33 +218,62 @@
 }
 .ex-mercury-read-link:hover { opacity: var(--ex-opacity-mid); }
 
-/* ── Newsletter form ── */
+/* ── Subscribe section accent icon ── */
+.ex-mercury-subscribe-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ex-size-50);
+  height: var(--ex-size-50);
+  border-radius: var(--ex-border-radius-full);
+  background: var(--ex-color-mercury-pill-bg);
+  border: 1px solid var(--ex-color-mercury-border-inner);
+  color: var(--ex-color-mercury-hi);
+  font-size: var(--ex-font-size-lg);
+  margin-bottom: var(--ex-space-xxs);
+}
+
+/* ── Newsletter form — single merged pill (icon + input + button) ── */
 .ex-mercury-form {
   display: flex;
-  flex-direction: column;
-  gap: var(--ex-space-xs);
+  align-items: center;
+  gap: var(--ex-space-xxs);
   margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xxs);
+  border: 1px solid var(--ex-color-mercury-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  background: var(--ex-color-mercury-pill-bg);
+  transition: border-color var(--ex-duration-fast) ease;
+}
+.ex-mercury-form:focus-within { border-color: var(--ex-color-mercury-hi); }
+
+.ex-mercury-form-icon {
+  flex-shrink: 0;
+  color: var(--ex-color-mercury-hi);
+  font-size: var(--ex-font-size-xs);
+  padding-left: var(--ex-space-xs);
+  opacity: var(--ex-opacity-mid);
 }
 
 .ex-mercury-input {
-  background: var(--ex-color-mercury-pill-bg);
-  border: 1px solid var(--ex-color-mercury-border-inner);
-  border-radius: var(--ex-border-radius-full);
+  background: transparent;
+  border: none;
+  border-radius: 0;
   color: var(--ex-text-body);
+  flex: 1;
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-md);
-  width: 100%;
+  min-width: 0;
+  padding: var(--ex-space-xs) var(--ex-space-xxs);
   outline: none;
-  transition: border-color var(--ex-duration-fast) ease;
 }
 .ex-mercury-input::placeholder { color: var(--ex-text-body); opacity: var(--ex-opacity-faint); }
-.ex-mercury-input:focus { border-color: var(--ex-color-mercury-hi); }
 
 .ex-mercury-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   background: linear-gradient(to right, var(--ex-color-mercury-hi), var(--ex-color-mercury-lo));
   border: none;
   border-radius: var(--ex-border-radius-full);
@@ -309,7 +341,7 @@
 /* ── Header ── */
 .ex-mercury-article-panel-header {
   border-bottom: 1px solid var(--ex-color-mercury-border-inner);
-  padding: var(--ex-space-xl) var(--ex-space-xxl) var(--ex-space-md) var(--ex-size-sm);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
   position: relative;
 }
 
@@ -370,7 +402,10 @@
 .ex-mercury-article-panel-body {
   flex: 1;
   max-width: var(--ex-size-xxxl);
-  padding: var(--ex-space-xl) var(--ex-space-xl) var(--ex-space-xl) var(--ex-size-sm);
+  /* Same scroll-headroom fix as the section list below: the last paragraph
+     needs room past it to reach scrollIntoView's target position, otherwise
+     paragraph-pagination nav hits max scroll before it gets there. */
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
 }
 
 .ex-mercury-article-panel-body p {
@@ -532,15 +567,8 @@
 /* ── XS: strip has no room at all — hide it and the backdrop entirely,
    sections and the article panel fall back to plain full-width margins ── */
 @media (max-width: 575.98px) {
-  .ex-mercury-section {
-    margin-left: var(--ex-space-md);
-    margin-right: var(--ex-space-md);
-    max-width: calc(100% - var(--ex-space-xl));
-  }
-
-  .ex-mercury-section[data-layout="bottom-center"],
-  .ex-mercury-section[data-layout="center"] {
-    max-width: calc(100% - var(--ex-space-xl));
+  .ex-mercury-article-panel-close {
+    right: var(--ex-space-sm);
   }
 
   .ex-mercury-progress-strip,
@@ -550,18 +578,17 @@
 
   .ex-mercury-article-panel-header,
   .ex-mercury-article-panel-body {
-    padding-left: var(--ex-space-xl);
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-mercury-js"] .ex-overlay-entry-header {
+    margin: 0;
   }
 }
 
 /* ── SM: strip shows bullets only — numbers/labels hidden, narrow backdrop ── */
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .ex-mercury-section {
-    max-width: calc(100% - var(--ex-space-xxl));
-  }
-
-  .ex-mercury-progress-backdrop { width: var(--ex-space-xxxl); }
-
   .ex-mercury-progress-number,
   .ex-mercury-progress-label {
     display: none;
@@ -575,12 +602,6 @@
 
 /* ── MD: strip shows number only — label hidden, medium backdrop/offset ── */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .ex-mercury-section {
-    max-width: calc(100% - var(--ex-space-xxl));
-  }
-
-  .ex-mercury-progress-backdrop { width: var(--ex-size-md); }
-
   .ex-mercury-progress-label {
     display: none;
   }

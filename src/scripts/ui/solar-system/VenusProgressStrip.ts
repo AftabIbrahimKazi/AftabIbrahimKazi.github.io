@@ -1,20 +1,20 @@
-// src/scripts/ui/solar-system/MercuryProgressStrip.ts
-// Mercury-only left progress strip — dual role. In "sections" mode (default)
-// the 10 items paginate the scroll sections. When the article panel opens
-// (ct:mercury-article-open) the same 10 items relabel to paginate that
-// article's paragraphs instead, then relabel back on ct:mercury-article-close.
+// src/scripts/ui/solar-system/VenusProgressStrip.ts
+// Venus-only left progress strip — dual role. In "sections" mode (default)
+// the items paginate the scroll sections. When the article panel opens
+// (ct:venus-article-open) the same items relabel to paginate that
+// project's paragraphs instead, then relabel back on ct:venus-article-close.
 // Active-item tracking is scroll-driven (nearest-to-center), the same
 // pattern PlanetScrollCamera already uses for overlay.scrollTop — not
 // IntersectionObserver, which needs its root to be the actual scrolling
 // element and is easy to silently break with rootMargin edge cases.
-// Scoped entirely to #ex-mercury-progress-strip / .ex-mercury-section /
-// #ex-mercury-article-panel-body — no effect on any other planet's overlay.
+// Scoped entirely to #ex-venus-progress-strip / .ex-venus-section /
+// #ex-venus-article-panel-body — no effect on any other planet's overlay.
 
 interface ItemLabel { number: string; label: string; }
 
 const LABEL_SWAP_MS = 160;
 
-export class MercuryProgressStrip {
+export class VenusProgressStrip {
 
   private strip:      HTMLElement | null;
   private items:       HTMLElement[];
@@ -28,20 +28,20 @@ export class MercuryProgressStrip {
   private originalLabels:  ItemLabel[]   = [];
 
   constructor() {
-    this.strip      = document.getElementById('ex-mercury-progress-strip');
-    this.items      = Array.from(document.querySelectorAll<HTMLElement>('.ex-mercury-progress-item'));
-    this.sections   = Array.from(document.querySelectorAll<HTMLElement>('.ex-mercury-section'));
+    this.strip      = document.getElementById('ex-venus-progress-strip');
+    this.items      = Array.from(document.querySelectorAll<HTMLElement>('.ex-venus-progress-item'));
+    this.sections   = Array.from(document.querySelectorAll<HTMLElement>('.ex-venus-section'));
     this.overlay    = document.getElementById('ex-content-overlay');
-    this.panelInner = document.querySelector<HTMLElement>('.ex-mercury-article-panel-inner');
-    this.panelBody  = document.getElementById('ex-mercury-article-panel-body');
+    this.panelInner = document.querySelector<HTMLElement>('.ex-venus-article-panel-inner');
+    this.panelBody  = document.getElementById('ex-venus-article-panel-body');
   }
 
   init(): void {
     if (!this.strip || !this.items.length || !this.sections.length || !this.overlay) return;
 
     this.originalLabels = this.items.map((item) => ({
-      number: item.querySelector('.ex-mercury-progress-number')?.textContent ?? '',
-      label:  item.querySelector('.ex-mercury-progress-label')?.textContent  ?? '',
+      number: item.querySelector('.ex-venus-progress-number')?.textContent ?? '',
+      label:  item.querySelector('.ex-venus-progress-label')?.textContent  ?? '',
     }));
 
     this._bindClicks();
@@ -73,8 +73,8 @@ export class MercuryProgressStrip {
   };
 
   private _bindPanelEvents(): void {
-    window.addEventListener('ct:mercury-article-open',  () => this._enterArticleMode());
-    window.addEventListener('ct:mercury-article-close', () => this._exitArticleMode());
+    window.addEventListener('ct:venus-article-open',  () => this._enterArticleMode());
+    window.addEventListener('ct:venus-article-close', () => this._exitArticleMode());
   }
 
   private _enterArticleMode(): void {
@@ -112,8 +112,8 @@ export class MercuryProgressStrip {
     this.items.forEach((item, i) => {
       item.dataset.swapping = 'true';
       window.setTimeout(() => {
-        const numberEl = item.querySelector<HTMLElement>('.ex-mercury-progress-number');
-        const labelEl  = item.querySelector<HTMLElement>('.ex-mercury-progress-label');
+        const numberEl = item.querySelector<HTMLElement>('.ex-venus-progress-number');
+        const labelEl  = item.querySelector<HTMLElement>('.ex-venus-progress-label');
         const result   = next(item, i);
         if (numberEl) numberEl.textContent = result.number;
         if (labelEl)  labelEl.textContent  = result.label;

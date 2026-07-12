@@ -110,177 +110,220 @@ export const MERCURY_SCROLL_PATH: ScrollCameraConfig = {
 
 export const VENUS_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-venus-js',
+  // Same continuous 0°→360° circular-orbit pattern as MERCURY_SCROLL_PATH
+  // above (see that config's comment for the derivation): radius breathes
+  // from R5 at the wide entry/exit shots to R1.85 at the halfway close pass,
+  // and lookAt shifts along each waypoint's camera-right vector (scaled by
+  // the same sin(pi*t) profile as the radius dip). 9 sections → 9 evenly-
+  // spaced waypoints (t step 1/9) plus a final closing waypoint back at the
+  // S1 start framing.
+  //
+  // Every section from S2 onward has its content right-aligned or centered
+  // (see venus-overlay.css layout rules), so a single positive-signed
+  // amplitude throughout (planet drifting left) clears all of them without
+  // ever flipping direction — except S1, whose intro copy is left-aligned.
+  // S1/close get a small negative-signed nudge (planet drifts right instead)
+  // to clear that one left-aligned block; the sign change happens smoothly
+  // through zero across the S1→S2 and S9→close spans, so the orbit never
+  // snaps.
   waypoints: [
     {
-      // S1 — Earth's Twin: standard focus, eye level
+      // S1 — Intro: 0° — R5, small negative shift — clears the left-aligned
+      // intro copy by drifting the planet slightly right
       at:     0,
-      offset: { x: 2.5,  y: 0.8,  z: 4   },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      offset: { x: 1.75,      y: 0.0, z: 5.0    },
+      lookAt: { x: 0,  y: 0,   z: 0      },
     },
     {
-      // S2 — Orbit & Brightness: pull far back, planet small against stars
-      at:     0.08,
-      offset: { x: 6,    y: 4,    z: 9   },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S2 — Coverflow overview: 40° — R3.906
+      at:     0.1,
+      offset: { x: 1.75,      y: 0.0, z: 1.75    },
+      lookAt: { x: 0,  y: 0,   z: 1.75      },
     },
     {
-      // S3 — Retrograde: top-down angled — orbital plane visible
-      at:     0.17,
-      offset: { x: 0.5,  y: 5,    z: 3   },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S3 — Project 1 (Lumen): 80° — R2.943
+      at:     0.2,
+      offset: { x: 0,      y: 0.0, z: 5.0    },
+      lookAt: { x: 0.0,  y: 0,   z: 0      },
     },
     {
-      // S4 — Greenhouse Inferno: side-on, terminator dramatically lit
-      at:     0.26,
-      offset: { x: -0.5, y: 0.5,  z: 3.5 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S4 — Project 2 (Solstice): 120° — R2.229
+      at:     0.3,
+      offset: { x: 0.0,  y: 0.0, z: 0.0 },
+      lookAt: { x: 0.0, y: 0,   z: 0.0 },
     },
     {
-      // S5 — Sulfuric Clouds: front-facing, cloud bands fully lit
-      at:     0.35,
-      offset: { x: 3,    y: 1.5,  z: 4.5 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S5 — Project 3 (Nimbus): 160° — R1.849, close pass
+      at:     0.4,
+      offset: { x: 0.0,  y: 5, z: 5 },
+      lookAt: { x: 0.0, y: 0,   z: 5.0 },
     },
     {
-      // S6 — Volcanoes: surface-skimming low angle
-      at:     0.44,
-      offset: { x: 0.8,  y: -1.5, z: 2   },
-      lookAt: { x: 0,    y: -0.3, z: 0   },
+      // S6 — Project 4 (Aurora): 200° — R1.849, close pass
+      at:     0.5,
+      offset: { x: 0, y: 0, z: 5 },
+      lookAt: { x: -0.75, y: 0,   z: 0.0  },
     },
     {
-      // S7 — No Plate Tectonics: medium elevated, full disk
-      at:     0.53,
-      offset: { x: 3,    y: 2.5,  z: 4.5 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S7 — Project 5 (Kinetic): 240° — R2.229
+      at:     0.6,
+      offset: { x: 0, y: 5, z: 5 },
+      lookAt: { x: -1.15, y: 0,   z: 0.5  },
     },
     {
-      // S8 — Highland Continents: swing to opposite side, elevated
-      at:     0.62,
-      offset: { x: -3,   y: 2,    z: 3   },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S8 — Navigate: 280° — R2.943
+      at:     0.7,
+      offset: { x: 5, y: 5, z: 5  },
+      lookAt: { x: -0.25,  y: 0,   z: 0.25  },
     },
     {
-      // S9 — Could Have Had Life: three-quarter, brightly lit side
-      at:     0.70,
-      offset: { x: 2,    y: 0.5,  z: 3.5 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // S9 — Closing CTA: 320° — R3.906
+      at:     0.8,
+      offset: { x: 0, y: 5, z: 5 },
+      lookAt: { x: -1.5,  y: 0,   z: 0.5  },
     },
     {
-      // S10 — The Atmosphere: side view, hazy limb visible
-      at:     0.78,
-      offset: { x: -1,   y: 1,    z: 3.5 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
-    },
-    {
-      // S11 — Phosphine: close medium, front facing
-      at:     0.87,
-      offset: { x: 2.5,  y: 0.8,  z: 3.2 },
-      lookAt: { x: 0,    y: 0,    z: 0   },
-    },
-    {
-      // S12 — Exploration: wide cinematic pull-back
-      at:     0.95,
-      offset: { x: 8,    y: 3,    z: 12  },
-      lookAt: { x: 0,    y: 0,    z: 0   },
+      // Full circle closes exactly back at the S1 start framing — R5, same
+      // small negative shift as S1
+      at:     1.0,
+      offset: { x: 0,      y: 0.0, z: 5.0    },
+      lookAt: { x: 0.0,  y: 0,   z: 0      },
     },
   ],
 };
 
 export const EARTH_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-earth-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH (see that
+  // config's comment) — no lookAt shift (Earth's 8 sections, like Sun's,
+  // don't share a single content alignment), radius scaled for Earth's
+  // radius-0.9 sphere: R breathes from 3.5 (wide) to 1.6 (close pass at t=0.5).
   waypoints: [
-    { at: 0,    offset: { x: 2.5,  y: 0.8,  z: 4   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 5,    y: 3,    z: 7   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 0.5,  y: 4,    z: 2.5 }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: -0.5, y: 0.5,  z: 3.5 }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 3,    y: 1.5,  z: 4.5 }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 0.8,  y: -1.5, z: 2   }, lookAt: { x: 0, y: -0.3, z: 0 } },
-    { at: 0.75, offset: { x: -2.5, y: 1,    z: 3   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 7,    y: 3,    z: 10  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0,     offset: { x: 0,      y: 0.6, z: 3.5    }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 1.933,  y: 0.6, z: 1.933  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 2.086,  y: 0.6, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 1.168,  y: 0.6, z: -1.168  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 0.6, z: -1.6     }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -1.168, y: 0.6, z: -1.168  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -2.086, y: 0.6, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -1.933, y: 0.6, z: 1.933   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 0.6, z: 3.5      }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const MARS_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-mars-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH/EARTH_SCROLL_PATH
+  // (see SUN_SCROLL_PATH's comment) — no lookAt shift, radius scaled for
+  // Mars's radius-0.7 sphere: R breathes from 2.8 (wide) to 1.3 (close pass).
   waypoints: [
-    { at: 0,    offset: { x: 2,    y: 0.5,  z: 3   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 4.5,  y: 3,    z: 6   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 0.5,  y: 4,    z: 2.5 }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: -0.5, y: 0.3,  z: 3   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 3,    y: 1.5,  z: 4   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 0.8,  y: -1.2, z: 1.8 }, lookAt: { x: 0, y: -0.2, z: 0 } },
-    { at: 0.75, offset: { x: -2,   y: 1,    z: 2.5 }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 6,    y: 2.5,  z: 9   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0,     offset: { x: 0,      y: 0.5, z: 2.8    }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 1.545,  y: 0.5, z: 1.545  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 1.669,  y: 0.5, z: 0       }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 0.934,  y: 0.5, z: -0.934 }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 0.5, z: -1.3    }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -0.934, y: 0.5, z: -0.934 }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -1.669, y: 0.5, z: 0       }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -1.545, y: 0.5, z: 1.545  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 0.5, z: 2.8      }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const JUPITER_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-jupiter-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH (see that
+  // config's comment) — no lookAt shift, radius scaled for Jupiter's
+  // radius-1.5 sphere: R breathes from 6 (wide) to 2.7 (close pass).
   waypoints: [
-    { at: 0,    offset: { x: 10,   y: 4,    z: 15  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 18,   y: 8,    z: 25  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 2,    y: 12,   z: 10  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: -2,   y: 1,    z: 12  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 8,    y: -4,   z: 10  }, lookAt: { x: 0, y: -1, z: 0 } },
-    { at: 0.62, offset: { x: -12,  y: 5,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.75, offset: { x: 5,    y: 2,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 22,   y: 8,    z: 32  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0,     offset: { x: 0,      y: 1.2, z: 6      }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 3.315,  y: 1.2, z: 3.315  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 3.578,  y: 1.2, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 2.003,  y: 1.2, z: -2.003  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 1.2, z: -2.7     }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -2.003, y: 1.2, z: -2.003  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -3.578, y: 1.2, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -3.315, y: 1.2, z: 3.315   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 1.2, z: 6         }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const SATURN_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-saturn-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH (see that
+  // config's comment) — no lookAt shift, radius scaled to clear Saturn's
+  // radius-1.25 sphere plus its ring (extends well past the sphere):
+  // R breathes from 6.5 (wide) to 3.5 (close pass, still outside the ring).
   waypoints: [
-    { at: 0,    offset: { x: 12,   y: 5,    z: 18  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 20,   y: 8,    z: 28  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 0,    y: 16,   z: 8   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: -4,   y: 1,    z: 16  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 10,   y: 3,    z: 16  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 14,   y: -3,   z: 12  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.75, offset: { x: -14,  y: 4,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 24,   y: 10,   z: 35  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0,     offset: { x: 0,      y: 1.6, z: 6.5    }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 3.591,  y: 1.6, z: 3.591  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 3.876,  y: 1.6, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 2.170,  y: 1.6, z: -2.170  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 1.6, z: -3.5     }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -2.170, y: 1.6, z: -2.170  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -3.876, y: 1.6, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -3.591, y: 1.6, z: 3.591   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 1.6, z: 6.5       }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const URANUS_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-uranus-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH (see that
+  // config's comment) — no lookAt shift, radius scaled for Uranus's
+  // radius-0.545 sphere: R breathes from 2.4 (wide) to 1.1 (close pass).
   waypoints: [
-    { at: 0,    offset: { x: 5,    y: 2,    z: 8   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 9,    y: 5,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 0,    y: 9,    z: 5   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: 5,    y: -3,   z: 6   }, lookAt: { x: 0, y: -0.5, z: 0 } },
-    { at: 0.50, offset: { x: -5,   y: 1,    z: 7   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 4,    y: 3,    z: 7   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.75, offset: { x: -3,   y: 4,    z: 6   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 12,   y: 5,    z: 18  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0,     offset: { x: 0,      y: 0.5, z: 2.4    }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 1.325,  y: 0.5, z: 1.325  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 1.430,  y: 0.5, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 0.801,  y: 0.5, z: -0.801  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 0.5, z: -1.1     }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -0.801, y: 0.5, z: -0.801  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -1.430, y: 0.5, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -1.325, y: 0.5, z: 1.325   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 0.5, z: 2.4       }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const NEPTUNE_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-neptune-js',
+  // Same continuous circular-orbit pattern as SUN_SCROLL_PATH (see that
+  // config's comment) — no lookAt shift, radius scaled for Neptune's
+  // radius-0.528 sphere: R breathes from 2.3 (wide) to 1.1 (close pass).
+  // Only 5 sections (vs. 8 elsewhere — Neptune is a short contact page),
+  // so waypoints step by t = 1/5 instead of 1/8.
   waypoints: [
-    { at: 0,    offset: { x: 5,    y: 2,    z: 8   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 10,   y: 5,    z: 15  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 0.5,  y: -3,   z: 6   }, lookAt: { x: 0, y: -0.3, z: 0 } },
-    { at: 0.38, offset: { x: -1,   y: 0.5,  z: 7   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 4,    y: 1.5,  z: 7   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 0.5,  y: 5,    z: 4   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.75, offset: { x: -4,   y: 1,    z: 5   }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 13,   y: 5,    z: 20  }, lookAt: { x: 0, y: 0, z: 0 } },
+    // R = 2.3 − 1.2·sin(πt), angle = 360°·t
+    { at: 0,   offset: { x: 0,      y: 0.4, z: 2.3     }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.2, offset: { x: 1.516,  y: 0.4, z: 0.493   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.4, offset: { x: 0.681,  y: 0.4, z: -0.938  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.6, offset: { x: -0.681, y: 0.4, z: -0.938  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.8, offset: { x: -1.516, y: 0.4, z: 0.493   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.0, offset: { x: 0,      y: 0.4, z: 2.3     }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 
 export const SUN_SCROLL_PATH: ScrollCameraConfig = {
   planetKey: 'ex-sun-js',
+  // Same continuous circular-orbit pattern as MERCURY_SCROLL_PATH/VENUS_SCROLL_PATH
+  // (see MERCURY_SCROLL_PATH's comment for the derivation), scaled up for the
+  // Sun's radius-2 sphere (vs. 0.5-0.8 for the rocky planets): radius breathes
+  // from R14 at the wide entry/exit shots to R6 at the halfway close pass.
+  // Sun's 8 sections alternate left/right/center content placement (unlike
+  // Mercury/Venus's single right-aligned convention), so no per-waypoint
+  // lookAt shift is applied here — a plain centered orbit, one continuous
+  // circle, 8 evenly-spaced waypoints (t step 1/8) plus a closing waypoint
+  // back at the S1 start framing.
   waypoints: [
-    { at: 0,    offset: { x: 12,   y: 5,    z: 20  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.12, offset: { x: 5,    y: 3,    z: 12  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.25, offset: { x: 15,   y: -3,   z: 15  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.38, offset: { x: -8,   y: 4,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.50, offset: { x: 0,    y: 14,   z: 10  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.62, offset: { x: 10,   y: 2,    z: 14  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.75, offset: { x: -10,  y: 5,    z: 15  }, lookAt: { x: 0, y: 0, z: 0 } },
-    { at: 0.92, offset: { x: 25,   y: 10,   z: 38  }, lookAt: { x: 0, y: 0, z: 0 } },
+    // R = 14 − 8·sin(πt), angle = 360°·t — R14 wide shot down to R6 close pass at t=0.5
+    { at: 0,     offset: { x: 0,      y: 3, z: 14      }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.125, offset: { x: 7.735,  y: 3, z: 7.735   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.25,  offset: { x: 8.343,  y: 3, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.375, offset: { x: 4.673,  y: 3, z: -4.673  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.50,  offset: { x: 0,      y: 3, z: -6       }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.625, offset: { x: -4.673, y: 3, z: -4.673  }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.75,  offset: { x: -8.343, y: 3, z: 0        }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 0.875, offset: { x: -7.735, y: 3, z: 7.735   }, lookAt: { x: 0, y: 0, z: 0 } },
+    { at: 1.00,  offset: { x: 0,      y: 3, z: 14       }, lookAt: { x: 0, y: 0, z: 0 } },
   ],
 };
 

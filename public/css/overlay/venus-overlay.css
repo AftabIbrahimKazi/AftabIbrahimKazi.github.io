@@ -1,72 +1,69 @@
-/* venus-overlay.css — Acid clouds · Dense atmosphere theme */
+/* ================================================================
+   VENUS OVERLAY
+   Color palette: gold/orange — rgba(240,200,80) → rgba(180,120,20)
+   Evokes: dense sulfuric atmosphere, greenhouse haze
+   ================================================================ */
 
-#ex-content-overlay[data-planet="ex-venus-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-venus-js"] {
+  background: transparent;
+  /* Scroll headroom: without this, the last section has nowhere left to
+     scroll to reach vertical center — scrollIntoView({block:'center'}) and
+     the progress-strip nav both clamp at max scrollTop before centering,
+     which reads as the scroll abruptly ending / kicking the user out. */
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-section--entry {
-  background: transparent; min-height: unset; padding: 0;
+  background: transparent;
+  min-height: unset;
+  padding: 0;
 }
 
+/* Removed entirely — Venus's own Section 1 already carries the planet's
+   name/intro copy, so the shared generic name+tagline header (used as a
+   default by the other planets) was redundant here. */
 #ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-entry-header {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background-color: var(--ex-color-venus-bg);
-  border-bottom: none;
-  border-radius: var(--ex-border-radius-outer);
-  display: inline-block;
-  margin-bottom: 0;
-  padding: var(--ex-space-md) var(--ex-space-lg);
+  display: none;
 }
 
-#ex-content-overlay[data-planet="ex-venus-js"] .ex-overlay-planet-name {
-  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* ── Section base ────────────────────────────────────────────── */
+/* ================================================================
+   VENUS — SECTION LAYOUT SYSTEM
+   ================================================================ */
 
 .ex-venus-section {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background-color: rgba(18, 9, 0, 0.86);
+  background-color: rgba(18, 9, 0, 0.84);
   border-left: 2px solid var(--ex-color-venus-border);
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
 
-/* ── Layout variants ─────────────────────────────────────────── */
-
+/* Section 1 (intro) only — no card chrome, left-aligned typography,
+   positioned at the same vertical offset the boxed version used. */
 .ex-venus-section[data-layout="bottom-center"] {
-  align-items: center;
-  border-bottom: 2px solid var(--ex-color-venus-border);
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0 0;
-  margin: calc(100dvh * 0.55) auto 0;
-  max-width: var(--ex-size-xxl);
-  text-align: center;
+  align-items: flex-start;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  gap: var(--ex-space-md);
+  margin: calc(100dvh * 0.4) auto 0 var(--ex-space-xxl);
+  max-width: var(--ex-size-xl);
+  padding: 0;
+  text-align: left;
 }
 
-.ex-venus-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-venus-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-venus-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
+.ex-venus-section[data-layout="bottom-center"] .ex-venus-section-title {
+  font-size: var(--ex-font-size-xxxl);
 }
 
 .ex-venus-section[data-layout="right"] {
@@ -74,18 +71,57 @@
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-venus-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
   margin-top: calc(100dvh * 0.2);
 }
 
-.ex-venus-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
+/* Coverflow (Section 2) — full-width, no card chrome, same as the hero.
+   Shifted right of center (margin-left auto with a fixed right margin,
+   instead of margin: 0 auto) so the fanned-out left-side cards clear the
+   fixed progress strip's screen space instead of rendering under it. */
+.ex-venus-section[data-layout="coverflow"] {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  gap: var(--ex-space-md);
+  margin: calc(100dvh * 0.3) var(--ex-space-xxl) 0 auto;
+  max-width: var(--ex-size-1280);
+  padding: 0;
+  width: 100%;
 }
 
-.ex-venus-section[data-layout="left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.2);
+/* Full project detail (Section 3+) — the section itself carries no card
+   chrome (transparent, like hero/coverflow); .ex-venus-project-card below
+   is the actual visible surface. */
+.ex-venus-section[data-layout="project"] {
+  align-items: center;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  margin: calc(100dvh * 0.2) auto;
+  max-width: var(--ex-size-1280);
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* Sections 4-7 — same card, left-aligned instead of centered (Section 3
+   stays centered as the one exception). Shifted right of center the same
+   way the coverflow section is, so left-aligned content clears the fixed
+   progress strip's screen space. */
+.ex-venus-section[data-layout="project"][data-align="left"] {
+  align-items: flex-start;
+  margin: calc(100dvh * 0.2) var(--ex-space-xxl) 0 auto;
+  text-align: left;
+}
+
+.ex-venus-section[data-layout="project"][data-align="left"] .ex-venus-project-stats {
+  justify-content: flex-start;
+}
+
+.ex-venus-section[data-layout="project"][data-align="left"] .ex-venus-project-actions {
+  justify-content: flex-start;
 }
 
 .ex-venus-section[data-layout="center"] {
@@ -98,7 +134,9 @@
   text-align: center;
 }
 
-/* ── Typography ──────────────────────────────────────────────── */
+/* ================================================================
+   VENUS — TYPOGRAPHY
+   ================================================================ */
 
 .ex-venus-section-label {
   background: none;
@@ -128,63 +166,451 @@
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact ────────────────────────────────────────────────── */
-
+/* ── Key Fact ── */
 .ex-venus-key-fact {
-  border-top: 1px solid var(--ex-color-venus-border-inner);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
+  border-top: 1px solid var(--ex-color-venus-border-inner);
 }
 
 .ex-venus-fact-number {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
   background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xl);
-  font-weight: var(--ex-heading-font-weight);
 }
 
 .ex-venus-fact-label {
-  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxs);
   letter-spacing: var(--ex-tracking-md);
-  opacity: var(--ex-opacity-faint);
   text-transform: uppercase;
+  color: var(--ex-text-body);
+  opacity: var(--ex-opacity-faint);
 }
 
-/* ── Stats row — 2-col dense grid (atmospheric density) ─────── */
-
+/* ── Stats Row ── */
 .ex-venus-stats-row {
-  border-top: 1px solid var(--ex-color-venus-border-inner);
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  grid-template-columns: 1fr 1fr;
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
+  border-top: 1px solid var(--ex-color-venus-border-inner);
+  justify-content: center;
 }
 
 .ex-venus-stat-pill {
-  background-color: var(--ex-color-venus-pill-bg);
-  border: 1px solid var(--ex-color-venus-border-inner);
-  border-radius: var(--ex-border-radius-outer);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-sm);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  background-color: var(--ex-color-venus-pill-bg);
 }
 
 .ex-venus-stat-pill-value {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-heading-font-weight);
+  color: var(--ex-text-body);
+}
+
+.ex-venus-stat-pill-label {
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  color: var(--ex-text-body);
+  opacity: var(--ex-opacity-faint);
+}
+
+.ex-venus-stat-pill--hot .ex-venus-stat-pill-value { color: var(--ex-color-venus-orange); }
+.ex-venus-stat-pill--pressure .ex-venus-stat-pill-value { color: var(--ex-color-venus-hi); }
+
+/* ── Fact number size modifier ── */
+.ex-venus-fact-number--sm {
+  font-size: var(--ex-font-size-md);
+}
+
+/* ── Read link ── */
+.ex-venus-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ex-space-xxs);
+  margin-top: var(--ex-space-sm);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  letter-spacing: var(--ex-tracking-md);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: opacity var(--ex-duration-fast) ease;
+  cursor: pointer;
+  border: none;
+}
+.ex-venus-read-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Intro CTA (Section 1) ── */
+.ex-venus-intro-cta {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--ex-color-venus-label);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  gap: var(--ex-space-sm);
+  letter-spacing: var(--ex-tracking-md);
+  margin-top: var(--ex-space-sm);
+  padding: 0;
+  text-transform: uppercase;
+  transition: gap var(--ex-duration-fast) ease;
+}
+.ex-venus-intro-cta:hover { gap: var(--ex-space-md); }
+
+.ex-venus-intro-cta-arrow {
+  align-items: center;
+  background: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-color-venus-hi);
+  display: inline-flex;
+  height: var(--ex-size-36);
+  justify-content: center;
+  width: var(--ex-size-36);
+}
+
+/* ================================================================
+   VENUS — FEATURED WORK COVERFLOW (Section 2)
+   Swiper instance built via the shared createCoverflowSwiper() preset
+   (src/scripts/ui/shared/CoverflowSwiper.ts) — perspective/3D transforms
+   come from Swiper's own effect-coverflow module; this block only styles
+   the card chrome and the section-local hint/nav.
+   ================================================================ */
+
+.ex-venus-coverflow-hint {
+  color: var(--ex-color-venus-label);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ex-space-xxs);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-left: var(--ex-space-xxl);
+  text-transform: uppercase;
+}
+
+.swiper.ex-venus-coverflow {
+  padding: 0 0 0 var(--ex-space-xxxl);
+  /* Perspective on the container is what gives Swiper's coverflow
+     transforms actual depth instead of a flat scale/skew. */
+  perspective: 1400px;
+  width: 100%;
+}
+
+/* Normally added by Swiper's own effect-coverflow CSS (via its
+   `swiper-3d` container class) — set explicitly here since the custom
+   arc-curve path (createCoverflowSwiper's `arcCurve` option) skips that
+   module and writes translate3d/rotateY straight onto each slide itself. */
+.ex-venus-coverflow .swiper-wrapper {
+  transform-style: preserve-3d;
+}
+
+.ex-venus-coverflow-card {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--ex-color-venus-border);
+  border-radius: var(--ex-border-radius-outer);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: border-color var(--ex-duration-fast) ease, box-shadow var(--ex-duration-fast) ease;
+  width: var(--ex-size-lg);
+}
+
+/* Swiper's own effect-coverflow module adds this class to the centered
+   slide — no extra JS needed to know which card is "active". */
+.ex-venus-coverflow-card.swiper-slide-active {
+  border-color: var(--ex-color-venus-hi);
+  box-shadow: 0 0 0 1px var(--ex-color-venus-hi), 0 var(--ex-space-sm) var(--ex-space-xxl) rgba(240, 200, 80, 0.18);
+}
+
+.ex-venus-coverflow-card-index {
+  align-items: center;
+  background: rgba(8, 7, 9, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  height: var(--ex-size-32);
+  justify-content: center;
+  left: var(--ex-space-sm);
+  position: absolute;
+  top: var(--ex-space-sm);
+  width: var(--ex-size-32);
+  z-index: 2;
+}
+
+/* Full-bleed media — fills the entire card, text is overlaid on top of it
+   (not stacked below it) via the gradient + absolute text block. */
+.ex-venus-coverflow-card-media {
+  background: linear-gradient(135deg, rgba(240, 200, 80, 0.14), rgba(20, 10, 0, 0.6));
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.ex-venus-coverflow-card-media img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.ex-venus-coverflow-card-image-placeholder {
+  align-items: center;
+  color: var(--ex-color-venus-hi);
+  display: flex;
+  height: 100%;
+  font-size: var(--ex-font-size-xl);
+  justify-content: center;
+  opacity: var(--ex-opacity-faint);
+  width: 100%;
+}
+
+/* Bottom-up dark fade so overlaid text stays legible over any image. */
+.ex-venus-coverflow-card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(8, 7, 9, 0.92) 0%,
+    rgba(8, 7, 9, 0.75) 28%,
+    rgba(8, 7, 9, 0.25) 55%,
+    transparent 75%
+  );
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ex-venus-coverflow-card-text {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+  left: 0;
+  padding: var(--ex-space-md);
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.ex-venus-coverflow-card-title {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-default);
   font-weight: var(--ex-heading-font-weight);
 }
 
-.ex-venus-stat-pill-label {
+.ex-venus-coverflow-card-theme {
+  color: var(--ex-color-venus-label);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-md);
+  text-transform: uppercase;
+}
+
+.ex-venus-coverflow-nav {
+  display: flex;
+  gap: var(--ex-space-sm);
+  justify-content: center;
+}
+
+.ex-venus-carousel-arrow {
+  align-items: center;
+  background: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  display: flex;
+  height: var(--ex-size-40);
+  justify-content: center;
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-40);
+}
+.ex-venus-carousel-arrow:hover {
+  background: var(--ex-color-venus-border);
+  border-color: var(--ex-color-venus-hi);
+}
+.ex-venus-carousel-arrow.swiper-button-disabled {
+  cursor: default;
+  opacity: var(--ex-opacity-faint);
+}
+
+/* ── Subscribe/contact section accent icon ── */
+.ex-venus-subscribe-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ex-size-50);
+  height: var(--ex-size-50);
+  border-radius: var(--ex-border-radius-full);
+  background: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  color: var(--ex-color-venus-hi);
+  font-size: var(--ex-font-size-lg);
+  margin-bottom: var(--ex-space-xxs);
+}
+
+/* ── Contact form — single merged pill (icon + input + button) ── */
+.ex-venus-form {
+  display: flex;
+  align-items: center;
+  gap: var(--ex-space-xxs);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xxs);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  background: var(--ex-color-venus-pill-bg);
+  transition: border-color var(--ex-duration-fast) ease;
+}
+.ex-venus-form:focus-within { border-color: var(--ex-color-venus-hi); }
+
+.ex-venus-form-icon {
+  flex-shrink: 0;
+  color: var(--ex-color-venus-hi);
+  font-size: var(--ex-font-size-xs);
+  padding-left: var(--ex-space-xs);
+  opacity: var(--ex-opacity-mid);
+}
+
+.ex-venus-input {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--ex-text-body);
+  flex: 1;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  min-width: 0;
+  padding: var(--ex-space-xs) var(--ex-space-xxs);
+  outline: none;
+}
+.ex-venus-input::placeholder { color: var(--ex-text-body); opacity: var(--ex-opacity-faint); }
+
+.ex-venus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  border: none;
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-black);
+  cursor: pointer;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-lg);
+  padding: var(--ex-space-xs) var(--ex-space-md);
+  transition: opacity var(--ex-duration-fast) ease;
+  white-space: nowrap;
+}
+.ex-venus-btn:hover { opacity: var(--ex-opacity-high); }
+
+/* ================================================================
+   VENUS — PROJECT DETAIL CARD (Section 3+)
+   Full centered card carrying a project's complete summary — the section
+   wrapper itself is transparent (see [data-layout="project"] above), this
+   is the actual visible surface.
+   ================================================================ */
+
+.ex-venus-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: var(--ex-space-md);
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xxl) var(--ex-space-xl);
+}
+
+.ex-venus-project-eyebrow {
+  color: var(--ex-color-venus-label);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-xl);
+  text-transform: uppercase;
+}
+
+.ex-venus-project-title {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--ex-font-size-xxl);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-venus-project-subtitle {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-font-weight-medium);
+  margin-top: calc(-1 * var(--ex-space-sm));
+  opacity: var(--ex-opacity-mid);
+}
+
+.ex-venus-project-desc {
+  color: var(--ex-text-body);
+  font-size: var(--ex-font-size-default);
+  max-width: var(--ex-size-xxl);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-venus-project-stats {
+  border-top: 1px solid var(--ex-color-venus-border-inner);
+  display: flex;
+  gap: var(--ex-space-xxl);
+  justify-content: center;
+  padding-top: var(--ex-space-md);
+  width: 100%;
+}
+
+.ex-venus-project-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-xxs);
+}
+
+.ex-venus-project-stat-value {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-lg);
+  font-weight: var(--ex-heading-font-weight);
+}
+
+.ex-venus-project-stat-label {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
@@ -193,66 +619,126 @@
   text-transform: uppercase;
 }
 
-.ex-venus-stat-pill--hot .ex-venus-stat-pill-value { color: var(--ex-color-venus-orange); }
-.ex-venus-stat-pill--pressure .ex-venus-stat-pill-value { color: var(--ex-color-venus-hi); }
-
-/* ── Sidebar ─────────────────────────────────────────────────── */
-
-.ex-venus-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(22, 10, 0, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(60, 28, 0, 0.94);
-  border-top: 2px solid var(--ex-color-venus-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
+.ex-venus-project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ex-space-sm);
+  justify-content: center;
+  margin-top: var(--ex-space-xs);
 }
 
-.ex-venus-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-venus-border); }
-.ex-venus-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-venus-border); }
+.ex-venus-project-visit-btn {
+  align-items: center;
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  border: none;
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-black);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  padding: var(--ex-space-sm) var(--ex-space-lg);
+  text-decoration: none;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+.ex-venus-project-visit-btn:hover { opacity: var(--ex-opacity-high); }
 
-.ex-venus-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
+.ex-venus-project-details-btn {
+  align-items: center;
+  background: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-font-weight-medium);
+  gap: var(--ex-space-xxs);
+  letter-spacing: var(--ex-tracking-md);
+  padding: var(--ex-space-sm) var(--ex-space-lg);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+}
+.ex-venus-project-details-btn:hover {
+  background: var(--ex-color-venus-border);
+  border-color: var(--ex-color-venus-hi);
+}
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, full-bleed and immersive
+   (no boxed sidebar chrome). Position, the translateY slide, and the
+   open/close transition all come from @strata-packages/offcanvas's own
+   [data-st-side="bottom"] + [aria-hidden] rules (offcanvas.css) — this
+   block only adds the visual styling and overrides the package's
+   height token for a taller sheet.
+   ================================================================ */
+
+/* Always opaque — unlike Mercury's article panel, Venus's project sections
+   (from Section 3 on) are full centered cards that sit in the same screen
+   region the panel opens over, so a transparent/immersive panel at wide
+   viewports let the section behind it show through and visually collide
+   with the panel's own header. */
+.ex-venus-article-panel {
+  --st-bg:               var(--ex-color-venus-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ex-venus-article-panel-inner,
+.ex-venus-article-panel-header,
+.ex-venus-article-panel-body,
+.ex-venus-article-panel-close {
+  pointer-events: auto;
+}
+
+/* ── Scrollable inner container ── */
+/* display/flex-direction/height/overflow-y now come from strata utilities
+   (d-flex flex-column h-100 overflow-y-auto) on the element itself — only
+   the properties with no strata utility equivalent stay here. */
+.ex-venus-article-panel-inner {
   overscroll-behavior: contain;
   scrollbar-color: var(--ex-color-venus-border) transparent;
   scrollbar-width: thin;
 }
 
-.ex-venus-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-venus-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
+/* ── Header ── */
+.ex-venus-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-venus-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
   position: relative;
 }
 
-.ex-venus-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-venus-border);
+.ex-venus-article-panel-close {
+  background: var(--ex-color-venus-pill-bg);
+  border: 1px solid var(--ex-color-venus-border-inner);
   border-radius: var(--ex-border-radius-round);
   color: var(--ex-text-body);
   cursor: pointer;
   font-size: var(--ex-font-size-default);
   height: var(--ex-size-36);
   position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
   transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
   width: var(--ex-size-36);
 }
-
-.ex-venus-sidebar-close:hover {
+.ex-venus-article-panel-close:hover {
   background: var(--ex-color-venus-border);
   border-color: var(--ex-color-venus-hi);
 }
 
-.ex-venus-sidebar-cat {
-  -webkit-background-clip: text;
+.ex-venus-article-panel-cat {
   background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   display: block;
@@ -265,16 +751,16 @@
   text-transform: uppercase;
 }
 
-.ex-venus-sidebar-title {
+.ex-venus-article-panel-title {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
+  font-size: var(--ex-font-size-xl);
   font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
   margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
 }
 
-.ex-venus-sidebar-meta {
+.ex-venus-article-panel-meta {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
@@ -284,42 +770,257 @@
   text-transform: uppercase;
 }
 
-.ex-venus-sidebar-body {
+/* ── Body ── */
+.ex-venus-article-panel-body {
   flex: 1;
-  padding: var(--ex-space-lg);
+  max-width: var(--ex-size-xxxl);
+  /* Same scroll-headroom fix as the section list below: the last paragraph
+     needs room past it to reach scrollIntoView's target position, otherwise
+     paragraph-pagination nav hits max scroll before it gets there. */
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
 }
 
-.ex-venus-sidebar-body p {
+.ex-venus-article-panel-body p {
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-default);
   font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
   margin-bottom: var(--ex-space-md);
   opacity: var(--ex-opacity-body);
 }
 
-.ex-venus-sidebar-body p:last-child { margin-bottom: 0; }
+.ex-venus-article-panel-body p:last-child { margin-bottom: 0; }
 
-/* ── Detail link ─────────────────────────────────────────────── */
+/* ================================================================
+   VENUS — PROGRESS STRIP
+   Dual role: section pagination (default) / article paragraph nav
+   (activates data-mode="article"). Fixed to the viewport so it
+   persists across the whole scroll independent of overlay scroll.
+   ================================================================ */
 
-.ex-venus-detail-link {
-  -webkit-background-clip: text;
+.ex-venus-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-venus-js"] ~ .ex-venus-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-venus-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  /* Above the article panel's default offcanvas z-index (1045) — the panel
+     covers the bottom 85% of the viewport, which overlaps the strip's
+     vertically-centered position, and it must stay clickable on top of it
+     for paragraph navigation while the panel is open. */
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-venus-js"] ~ .ex-venus-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-venus-progress-line {
+  background-color: var(--ex-color-venus-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-venus-progress-item {
   align-items: center;
-  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
-  background-clip: text;
-  color: transparent;
+  background: none;
+  border: none;
   cursor: pointer;
-  display: inline-flex;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  /* Fixed-length first track (matches the bullet's own width) instead of
+     "auto" — auto-sized columns combined with the bullet's own negative
+     margin computed a slightly different column width per item (each
+     button is an independent grid), causing the text column to drift
+     left/right row to row. A fixed track removes that variance entirely. */
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-venus-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-venus-progress-bullet {
+  background-color: var(--ex-color-venus-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-venus-progress-number {
+  color: var(--ex-text-body);
   font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxs);
-  font-weight: var(--ex-font-weight-medium);
-  gap: var(--ex-space-xxs);
-  letter-spacing: var(--ex-tracking-md);
-  margin-top: var(--ex-space-sm);
-  text-decoration: none;
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-venus-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
 
-.ex-venus-detail-link:hover { opacity: var(--ex-opacity-mid); }
+.ex-venus-progress-item[data-swapping="true"] .ex-venus-progress-number,
+.ex-venus-progress-item[data-swapping="true"] .ex-venus-progress-label {
+  opacity: 0;
+}
+
+.ex-venus-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-venus-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-venus-progress-item[data-active="true"] .ex-venus-progress-bullet {
+  background-color: var(--ex-color-venus-hi);
+  transform: scale(1.6);
+}
+
+.ex-venus-progress-item[data-active="true"] .ex-venus-progress-number {
+  background: linear-gradient(to right, var(--ex-color-venus-hi), var(--ex-color-venus-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   VENUS — RESPONSIVE
+   Breakpoints match the project convention (css-standards.md RULE 17).
+   Placed after the base rules above so the overrides win the cascade.
+   ================================================================ */
+
+/* ── XS: strip has no room at all — hide it and the backdrop entirely,
+   sections and the article panel fall back to plain full-width margins ── */
+@media (max-width: 575.98px) {
+  .ex-venus-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-venus-progress-strip,
+  .ex-venus-progress-backdrop {
+    display: none;
+  }
+
+  .ex-venus-article-panel-header,
+  .ex-venus-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  .ex-venus-section[data-layout="bottom-center"] {
+    margin-left: var(--ex-space-md);
+    margin-right: var(--ex-space-md);
+    max-width: none;
+  }
+
+  .ex-venus-section[data-layout="bottom-center"] .ex-venus-section-title {
+    font-size: var(--ex-font-size-xxl);
+  }
+
+  .ex-venus-section[data-layout="project"] {
+    padding: 0 var(--ex-space-md);
+  }
+
+  .ex-venus-project-card {
+    padding: var(--ex-space-xl) var(--ex-space-md);
+  }
+
+  .ex-venus-project-stats {
+    flex-wrap: wrap;
+    gap: var(--ex-space-md);
+  }
+
+  .ex-venus-coverflow-hint {
+    margin-left: var(--ex-space-md);
+  }
+
+  .ex-venus-coverflow-nav {
+    display: none;
+  }
+}
+
+/* ── Below `lg` (992px): the 3D fan is switched off in JS (arcBreakpoints —
+   see VenusOverlay.astro) in favour of a single-slide-per-view flat
+   carousel, so the card needs to fill the available width like a normal
+   carousel slide instead of sitting at its fixed desktop fan-card size. ── */
+@media (max-width: 991.98px) {
+  .swiper.ex-venus-coverflow {
+    padding: 0 var(--ex-space-md);
+  }
+
+  .ex-venus-coverflow-card {
+    width: 100%;
+  }
+}
+
+/* ── SM: strip shows bullets only — numbers/labels hidden, narrow backdrop ── */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-venus-progress-number,
+  .ex-venus-progress-label {
+    display: none;
+  }
+
+  .ex-venus-article-panel-header,
+  .ex-venus-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+/* ── MD: strip shows number only — label hidden, medium backdrop/offset ── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-venus-progress-label {
+    display: none;
+  }
+
+  .ex-venus-article-panel-header,
+  .ex-venus-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

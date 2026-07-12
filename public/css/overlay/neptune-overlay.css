@@ -1,6 +1,11 @@
-/* neptune-overlay.css */
+/* neptune-overlay.css — Contact · Deep blue signal theme
+   Color palette: cool blue → deep indigo — rgba(80,130,255) → rgba(20,50,180)
+   Evokes: distance, transmission, the outer dark */
 
-#ex-content-overlay[data-planet="ex-neptune-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-neptune-js"] {
+  background: transparent;
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-section--entry {
@@ -8,17 +13,27 @@
 }
 
 #ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-entry-header {
-  background-color: var(--ex-color-neptune-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-radius: var(--ex-border-radius-outer); padding: var(--ex-space-md) var(--ex-space-lg);
-  border-bottom: none; margin-bottom: 0; display: inline-block;
+  background-color: var(--ex-color-neptune-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--ex-border-radius-outer);
+  padding: var(--ex-space-md) var(--ex-space-lg);
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
+  display: inline-block;
 }
 
 #ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-planet-name {
   background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* ── Section base ───────────────────────────────────────────── */
+/* ================================================================
+   NEPTUNE — SECTION LAYOUT SYSTEM
+   ================================================================ */
 
 .ex-neptune-section {
   backdrop-filter: blur(16px);
@@ -28,15 +43,13 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
-
-/* ── Section layout variants ────────────────────────────────── */
 
 .ex-neptune-section[data-layout="bottom-center"] {
   align-items: center;
@@ -48,36 +61,11 @@
   text-align: center;
 }
 
-.ex-neptune-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-neptune-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-neptune-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-neptune-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-neptune-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-neptune-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-neptune-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -91,13 +79,14 @@
   text-align: center;
 }
 
-/* ── Form section — wider panel ─────────────────────────────── */
-
+/* ── Form section — wider panel ── */
 .ex-neptune-section--form {
   max-width: var(--ex-size-540);
 }
 
-/* ── Section typography ─────────────────────────────────────── */
+/* ================================================================
+   NEPTUNE — TYPOGRAPHY
+   ================================================================ */
 
 .ex-neptune-section-label {
   background: none;
@@ -127,14 +116,13 @@
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact ───────────────────────────────────────────────── */
-
+/* ── Key fact ── */
 .ex-neptune-key-fact {
-  border-top: 1px solid var(--ex-color-neptune-border);
+  border-top: 1px solid var(--ex-color-neptune-border-inner);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-neptune-fact-number {
@@ -156,24 +144,23 @@
   text-transform: uppercase;
 }
 
-/* ── Stats row / pill ───────────────────────────────────────── */
-
+/* ── Stats row / pill ── */
 .ex-neptune-stats-row {
-  border-top: 1px solid var(--ex-color-neptune-border);
+  border-top: 1px solid var(--ex-color-neptune-border-inner);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-neptune-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-neptune-border);
+  background-color: var(--ex-color-neptune-pill-bg);
+  border: 1px solid var(--ex-color-neptune-border-inner);
   border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
 }
 
 .ex-neptune-stat-pill-value {
@@ -192,8 +179,29 @@
   text-transform: uppercase;
 }
 
-/* ── Direct email link ──────────────────────────────────────── */
+/* ── Intro CTA ── */
+.ex-neptune-intro-cta {
+  align-items: center;
+  background: var(--ex-color-neptune-pill-bg);
+  border: 1px solid var(--ex-color-neptune-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-neptune-hi);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-lg);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-neptune-intro-cta:hover { border-color: var(--ex-color-neptune-hi); opacity: var(--ex-opacity-high); }
 
+.ex-neptune-intro-cta-arrow { display: inline-flex; }
+
+/* ── Direct email link ── */
 .ex-neptune-email-link {
   -webkit-background-clip: text;
   background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
@@ -209,8 +217,7 @@
 
 .ex-neptune-email-link:hover { opacity: var(--ex-opacity-mid); }
 
-/* ── Availability ───────────────────────────────────────────── */
-
+/* ── Availability ── */
 .ex-neptune-availability {
   align-items: center;
   display: flex;
@@ -233,8 +240,7 @@
   font-weight: var(--ex-font-weight-medium);
 }
 
-/* ── Social links ───────────────────────────────────────────── */
-
+/* ── Social links ── */
 .ex-neptune-socials {
   display: flex;
   flex-direction: column;
@@ -246,7 +252,7 @@
 
 .ex-neptune-social-link {
   align-items: center;
-  border: 1px solid var(--ex-color-neptune-border);
+  border: 1px solid var(--ex-color-neptune-border-inner);
   border-radius: var(--ex-border-radius-outer);
   color: var(--ex-text-body);
   display: flex;
@@ -271,8 +277,7 @@
   width: var(--ex-space-default);
 }
 
-/* ── Contact form ───────────────────────────────────────────── */
-
+/* ── Contact form ── */
 .ex-neptune-form {
   display: flex;
   flex-direction: column;
@@ -302,7 +307,7 @@
 
 .ex-neptune-input {
   background: var(--ex-color-white-a05);
-  border: 1px solid var(--ex-color-neptune-border);
+  border: 1px solid var(--ex-color-neptune-border-inner);
   border-radius: var(--ex-border-radius-outer);
   color: var(--ex-text-body);
   font-family: var(--ex-font-main);
@@ -325,7 +330,7 @@
 }
 
 .ex-neptune-input:focus-visible {
-  outline: 2px solid var(--ex-color-neptune-border);
+  outline: 2px solid var(--ex-color-neptune-border-inner);
   outline-offset: 2px;
 }
 
@@ -334,8 +339,7 @@
   resize: vertical;
 }
 
-/* ── Submit button ──────────────────────────────────────────── */
-
+/* ── Submit button ── */
 .ex-neptune-submit {
   align-items: center;
   align-self: flex-start;
@@ -357,6 +361,157 @@
 .ex-neptune-submit:hover { opacity: var(--ex-opacity-body); }
 
 .ex-neptune-submit:focus-visible {
-  outline: 2px solid var(--ex-color-neptune-border);
+  outline: 2px solid var(--ex-color-neptune-border-inner);
   outline-offset: 2px;
+}
+
+/* ================================================================
+   NEPTUNE — PROGRESS STRIP
+   Sections-only (no article panel — see NeptuneOverlay.astro's comment).
+   ================================================================ */
+
+.ex-neptune-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-neptune-js"] ~ .ex-neptune-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-neptune-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-neptune-js"] ~ .ex-neptune-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-neptune-progress-line {
+  background-color: var(--ex-color-neptune-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-neptune-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-neptune-progress-bullet {
+  background-color: var(--ex-color-neptune-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-neptune-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-neptune-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-neptune-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-neptune-progress-item[data-active="true"] .ex-neptune-progress-bullet {
+  background-color: var(--ex-color-neptune-hi);
+  transform: scale(1.6);
+}
+
+.ex-neptune-progress-item[data-active="true"] .ex-neptune-progress-number {
+  background: linear-gradient(to right, var(--ex-color-neptune-hi), var(--ex-color-neptune-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   NEPTUNE — RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-neptune-progress-strip,
+  .ex-neptune-progress-backdrop {
+    display: none;
+  }
+
+  #ex-content-overlay[data-planet="ex-neptune-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-neptune-progress-number,
+  .ex-neptune-progress-label {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-neptune-progress-label {
+    display: none;
+  }
 }
