@@ -4,6 +4,13 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.1.2] — 2026-07-12
+
+### Removed
+- AI session documents untracked from the repository (kept locally): `CLAUDE.md`, `handover.md`, `strata-findings.md`, `FINDINGS.md`, `PACKAGE-ISSUES.md`. Only `README.md` and `CHANGELOG.md` remain as public docs.
+
+---
+
 ## [0.1.1] — 2026-07-12
 
 ### Fixed
