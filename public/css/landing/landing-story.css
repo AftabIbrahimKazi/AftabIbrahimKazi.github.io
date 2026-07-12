@@ -27,8 +27,8 @@
 
 /* Extra Small — Portrait phones */
 @media (max-width: 575.98px) {
-  .lp-about  { gap: var(--ex-space-xl); grid-template-columns: 1fr; }
-  .lp-skills { grid-template-columns: 1fr; }
+  .lp-about  { gap: var(--ex-space-sm); grid-template-columns: 1fr; }
+  .lp-skills { gap: var(--ex-space-md); grid-template-columns: 1fr; }
 }
 
 /* Small — Landscape phones */

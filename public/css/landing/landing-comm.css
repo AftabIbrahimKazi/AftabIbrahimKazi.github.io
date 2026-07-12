@@ -8,6 +8,13 @@
    TOP HALF — Rules
    ================================ */
 
+/* ── Section ─────────────────────────────────────────────── */
+
+.lp-section.lp-section--comm {
+  padding-bottom: var(--ex-space-lg);
+  padding-top: var(--ex-space-lg);
+}
+
 /* ── Slide ───────────────────────────────────────────────── */
 
 .lp-comm-slide {
@@ -64,22 +71,44 @@
 
 /* Extra Small — Portrait phones */
 @media (max-width: 575.98px) {
-  .lp-comm-body  { grid-template-columns: 1fr; }
-  .lp-comm-stage { height: var(--ex-size-default); }
-  .lp-comm-orb   { height: var(--ex-size-default); width: var(--ex-size-default); }
+  .lp-comm { gap: var(--ex-space-sm); }
+  .lp-comm-body  { gap: var(--ex-space-sm); grid-template-columns: 1fr; }
+  .lp-comm-metrics-bar { display: none; }
   .lp-comm-slide { padding: var(--ex-space-lg) var(--ex-space-md); }
+  .lp-comm-slide-stats { display: none; }
+  .lp-comm-stage { display: none; }
 }
 
 /* Small — Landscape phones */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .lp-comm-body  { grid-template-columns: 1fr; }
-  .lp-comm-stage { height: var(--ex-size-lg); }
-  .lp-comm-orb   { height: var(--ex-size-lg); width: var(--ex-size-lg); }
+  .lp-comm-metrics-bar { display: none; }
+  .lp-comm-stage { height: var(--ex-size-default); }
+  .lp-comm-orb   { height: var(--ex-size-default); width: var(--ex-size-default); }
 }
 
 /* Medium — Tablets */
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .lp-section.lp-section--comm { padding-bottom: var(--ex-space-md); padding-top: var(--ex-space-md); }
   .lp-comm-body  { grid-template-columns: 1fr; }
-  .lp-comm-stage { height: var(--ex-size-xl); }
-  .lp-comm-orb   { height: var(--ex-size-xl); width: var(--ex-size-xl); }
+  .lp-comm-metrics-bar { display: none; }
+  .lp-comm-stage { height: var(--ex-size-default); }
+  .lp-comm-orb   { height: var(--ex-size-default); width: var(--ex-size-default); }
+  .lp-comm-rail  { align-items: center; flex-direction: row; position: static; }
+  .lp-comm-thumbs { flex-direction: row; }
+}
+
+/* Short viewports — laptop screens under ~950px tall */
+@media (max-height: 949.98px) and (min-width: 992px) {
+  .lp-comm .lp-heading { font-size: var(--ex-font-size-xl); }
+  .lp-comm-stage { height: var(--ex-size-420); }
+  .lp-comm-orb   { height: var(--ex-size-420); width: var(--ex-size-420); }
+}
+
+/* Very short viewports — under ~800px tall the full stack cannot fit */
+@media (max-height: 799.98px) {
+  .lp-section.lp-section--comm { padding-bottom: var(--ex-space-md); padding-top: var(--ex-space-md); }
+  .lp-comm-metrics-bar { display: none; }
+  .lp-comm-slide { gap: var(--ex-space-sm); padding: var(--ex-space-md) var(--ex-space-lg); }
+  .lp-comm-slide-title { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
 }

@@ -156,4 +156,7 @@
 
 /* Extra Small — Portrait phones */
 @media (max-width: 575.98px) {
+  .lp-section { padding: var(--ex-space-xl) 6vw; }
+  .lp-heading { font-size: var(--ex-font-size-xl); }
+  .lp-heading--hero { font-size: var(--ex-font-size-xxl); }
 }

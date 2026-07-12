@@ -4,6 +4,24 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.1.1] — 2026-07-12
+
+### Fixed
+- `/neptune` horizontal scroll at every breakpoint — the page never imported `strata.css`, so none of its header/footer utility classes were generated; also removed a `white-space: nowrap` on a full-sentence footer line and added the missing mobile media queries to `contact.css`.
+- `/neptune` Font Awesome icons invisible (stylesheet link pointed at a file that never existed), dead placeholder social links on both contact experiences, broken `og:image` (404) in both layouts, missing Twitter-card meta and favicon links, missing `robots.txt`.
+- Three dead forms (Neptune contact ×2, Venus email capture, Mercury newsletter) wired to a validated `mailto:` fallback — the only submission path on a static host.
+- Venus "VISIT PROJECT" buttons with `null` URLs now render visibly disabled instead of as dead links.
+- Every landing section now fits the viewport with no vertical overflow at all tested sizes (1920×1080 down to 375×667). The Commercial Work beat was taller than a 1080p screen; spacing compacted, and on short/narrow screens the Saturn stage shrinks, the thumbnail rail goes horizontal, and the key-metrics bar hides.
+
+### Changed
+- Remaining bracket-placeholder copy across Sun, Earth, Mars, Jupiter, Saturn, and Uranus overlays replaced with concrete example content.
+- Phone-size typography: landing headings step down one size scale.
+
+### Removed
+- `coding-standards/` untracked from the repository (local AI-session tooling, not site code); `skills/` and `.claude/` ignored likewise.
+
+---
+
 ## [0.1.0] — 2026-07-09
 
 ### Added

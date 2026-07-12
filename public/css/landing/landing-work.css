@@ -131,3 +131,8 @@
 @media (min-width: 768px) and (max-width: 991.98px) {
   .lp-repo-slide { grid-template-columns: 200px 1fr; }
 }
+
+/* Very short viewports — under ~800px tall */
+@media (max-height: 799.98px) {
+  .lp-section.lp-section--work { padding-bottom: var(--ex-space-md); padding-top: var(--ex-space-md); }
+}
