@@ -223,14 +223,15 @@ const projects = [
     </div>
 
     <div class="ex-venus-project-actions">
-      <a
-        class="ex-venus-project-visit-btn"
-        href={projects[1].demoUrl ?? '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
+      {projects[1].demoUrl ? (
+        <a class="ex-venus-project-visit-btn" href={projects[1].demoUrl} target="_blank" rel="noopener noreferrer">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      ) : (
+        <span class="ex-venus-project-visit-btn" aria-disabled="true" tabindex="-1">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      )}
       <button class="ex-venus-project-details-btn" type="button" data-article-id="1">
         VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -260,14 +261,15 @@ const projects = [
     </div>
 
     <div class="ex-venus-project-actions">
-      <a
-        class="ex-venus-project-visit-btn"
-        href={projects[2].demoUrl ?? '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
+      {projects[2].demoUrl ? (
+        <a class="ex-venus-project-visit-btn" href={projects[2].demoUrl} target="_blank" rel="noopener noreferrer">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      ) : (
+        <span class="ex-venus-project-visit-btn" aria-disabled="true" tabindex="-1">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      )}
       <button class="ex-venus-project-details-btn" type="button" data-article-id="2">
         VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -297,14 +299,15 @@ const projects = [
     </div>
 
     <div class="ex-venus-project-actions">
-      <a
-        class="ex-venus-project-visit-btn"
-        href={projects[3].demoUrl ?? '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
+      {projects[3].demoUrl ? (
+        <a class="ex-venus-project-visit-btn" href={projects[3].demoUrl} target="_blank" rel="noopener noreferrer">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      ) : (
+        <span class="ex-venus-project-visit-btn" aria-disabled="true" tabindex="-1">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      )}
       <button class="ex-venus-project-details-btn" type="button" data-article-id="3">
         VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -334,14 +337,15 @@ const projects = [
     </div>
 
     <div class="ex-venus-project-actions">
-      <a
-        class="ex-venus-project-visit-btn"
-        href={projects[4].demoUrl ?? '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
+      {projects[4].demoUrl ? (
+        <a class="ex-venus-project-visit-btn" href={projects[4].demoUrl} target="_blank" rel="noopener noreferrer">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      ) : (
+        <span class="ex-venus-project-visit-btn" aria-disabled="true" tabindex="-1">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      )}
       <button class="ex-venus-project-details-btn" type="button" data-article-id="4">
         VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -371,14 +375,15 @@ const projects = [
     </div>
 
     <div class="ex-venus-project-actions">
-      <a
-        class="ex-venus-project-visit-btn"
-        href={projects[5].demoUrl ?? '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
+      {projects[5].demoUrl ? (
+        <a class="ex-venus-project-visit-btn" href={projects[5].demoUrl} target="_blank" rel="noopener noreferrer">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      ) : (
+        <span class="ex-venus-project-visit-btn" aria-disabled="true" tabindex="-1">
+          VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </span>
+      )}
       <button class="ex-venus-project-details-btn" type="button" data-article-id="5">
         VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -415,17 +420,21 @@ const projects = [
     Full case studies, process notes, and finished work are available on
     request. Leave an email and a note on what you're looking for.
   </p>
-  <form class="ex-venus-form" onsubmit="return false;">
+  <form class="ex-venus-form" id="ex-venus-contact-form">
     <i class="fa-solid fa-envelope ex-venus-form-icon"></i>
     <input
       class="ex-venus-input"
+      id="ex-venus-contact-email"
       type="email"
+      name="email"
       placeholder="your@email.com"
       aria-label="Email address"
       autocomplete="email"
+      required
     />
-    <button class="ex-venus-btn" type="submit">GET IN TOUCH →</button>
+    <button class="ex-venus-btn" id="ex-venus-contact-submit" type="submit">GET IN TOUCH →</button>
   </form>
+  <p class="ex-venus-form-note" id="ex-venus-contact-note" role="status" aria-live="polite"></p>
 </div>
 
 <!-- ── Project data for article panel ─────────────────────── -->
@@ -569,6 +578,25 @@ const projects = [
       const match = projects.find((p) => p.id === deepLinkId);
       if (match) setTimeout(() => openProject(match), 400);
     }
+
+    // Static GitHub Pages hosting has no backend to submit this form to —
+    // the mailto: fallback opens the visitor's own email client, matching
+    // the pattern used on the Neptune contact page/overlay.
+    const contactForm  = document.getElementById('ex-venus-contact-form') as HTMLFormElement | null;
+    const contactInput = document.getElementById('ex-venus-contact-email') as HTMLInputElement | null;
+    const contactNote  = document.getElementById('ex-venus-contact-note');
+
+    contactForm?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      if (!contactForm.reportValidity() || !contactInput || !contactNote) return;
+
+      const email = contactInput.value;
+      const body  = `Requesting full case studies / process notes.\n\nReply to: ${email}`;
+      const mailto = `mailto:hello@aftabkazi.com?subject=${encodeURIComponent('Portfolio inquiry — Venus')}&body=${encodeURIComponent(body)}`;
+
+      contactNote.textContent = "Your email app should open with this message ready to send. If nothing opens, email hello@aftabkazi.com directly.";
+      window.location.href = mailto;
+    });
   }
 
   init();

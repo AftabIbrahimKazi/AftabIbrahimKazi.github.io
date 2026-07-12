@@ -5,50 +5,50 @@
 
 const items = [
   {
-    id:       'concept-1',
+    id:       'aftertouch',
     category: 'CONCEPT',
-    title:    '[Concept Name]',
-    meta:     '[Medium] · [Stage]',
+    title:    'Aftertouch',
+    meta:     'Haptic UI · Prototype',
     body: [
-      'Placeholder — describe a speculative concept. What is it exploring? What question is it asking? Concepts do not need a pitch — they need a clear point of view. What is yours?',
-      'What would this concept become if it had a brief? A product, a campaign, an installation, a piece of software? Concepts are most compelling when the distance between "speculative" and "real" is short — when you can see exactly what would need to happen to make it exist.',
-      'What does this concept say about how you think? The best speculative work is not random — it reveals a set of values, an obsession, a question you keep returning to. What does this one reveal about you? Update this placeholder with your actual concept.',
+      'Aftertouch asks what a UI feels like if pressure, not just position, is an input — a button that registers how hard it was pressed and responds differently to a tap versus a held, firm press. Most touch interfaces treat every tap as identical; this one does not.',
+      'If it had a brief: a media-player scrub bar where press pressure controls scrub speed, or a messaging app where a firm press on send triggers a "this is urgent" flag instead of a separate UI control. The distance from speculative to real is short — the Web Pressure/Force Touch APIs already exist on some devices, they are just almost never used for anything beyond a context menu.',
+      'What it reveals: an ongoing interest in inputs that go unused by default. Most interface work optimises the visual layer; this one is about optimising the layer underneath the finger.',
     ],
     topics: ['The Question', 'If It Had a Brief', 'What It Reveals'],
   },
   {
-    id:       'concept-2',
+    id:       'palimpsest',
     category: 'CONCEPT',
-    title:    '[Concept Name]',
-    meta:     '[Medium] · [Stage]',
+    title:    'Palimpsest',
+    meta:     'Interaction Design · Early sketch',
     body: [
-      'Placeholder — a second concept. Could be a UI direction, a speculative product, a motion piece, or a design fiction. Describe what you are imagining and what it would become if it had a brief and a budget.',
-      'What inspired it? The best concepts have a traceable origin — an observation, a frustration, an accidental discovery, a "what if" that refused to go away. Describe where this one came from.',
-      'Is this in progress? Archived? Waiting for a collaborator? The status of a concept matters — it tells a reader whether this is live speculation or closed research. Be honest about where it stands. Update this placeholder.',
+      'Palimpsest is a UI direction for collaborative documents where every edit stays visible as a fading layer underneath the current text, instead of being erased or hidden behind a version-history modal — the document\'s own history becomes part of its visual texture, like an actual palimpsest.',
+      'The origin: frustration with how invisible collaborative editing history usually is. Google Docs\' version history exists but is a separate view nobody opens; the interesting question was whether the history could live in the same view as the document, at low enough opacity to not distract.',
+      'Status: an early Figma sketch and a rough CSS proof-of-concept for the fade-layer effect, nothing built into a working editor yet. Waiting on the right small project to actually test it against real collaborative editing, not a static mockup.',
     ],
     topics: ['The Direction', 'The Origin', 'Current Status'],
   },
   {
-    id:       'concept-3',
+    id:       'weathervane',
     category: 'CONCEPT',
-    title:    '[Concept Name]',
-    meta:     '[Medium] · [Stage]',
+    title:    'Weathervane',
+    meta:     'Data Sonification · Concept',
     body: [
-      'Placeholder — a third concept. Something in motion, interaction, or a generative system. Describe the idea in one sentence, then describe what you would need to make it real. Budget? Collaborator? Time? A specific technology becoming accessible?',
-      'What is the single constraint that is holding this concept back? Sometimes the most interesting concepts are the ones that are one technological leap away from being possible. What would change if that constraint disappeared?',
-      'What form does this concept currently exist in? A sketch, a prototype, a written brief, a working demo? Whatever form it takes, describe it. Concepts with artefacts are more compelling than concepts that exist only as ideas. Update this placeholder.',
+      'Weathervane turns a live data stream — server error rates, in this concept — into ambient sound rather than a dashboard graph, so a developer working nearby can sense a problem building before they would ever glance at a monitor. One sentence: dashboards you hear, not just see.',
+      'The single blocking constraint: making the sound genuinely ambient rather than annoying is a sound-design problem, not an engineering one, and sound design at that level of subtlety is outside current expertise. If that constraint disappeared — a collaborator with real audio-design chops — this moves from concept to prototype fast.',
+      'Currently exists as a written concept brief and a rough Web Audio API proof-of-concept mapping a mock error-rate feed to pitch and rhythm — not yet something a listener would describe as pleasant.',
     ],
     topics: ['The Idea', 'The Blocking Constraint', 'Its Current Form'],
   },
   {
-    id:       'concept-4',
+    id:       'nocturne',
     category: 'CONCEPT',
-    title:    '[Concept Name]',
-    meta:     '[Medium] · WIP',
+    title:    'Nocturne',
+    meta:     'Design Fiction · WIP',
     body: [
-      'Placeholder — a fourth concept. This space is a sketchbook, not a portfolio. Unfinished is allowed here. What direction are you heading in that you have not committed to yet? What are you circling that you have not landed on?',
-      'What makes this concept different from your other work? Concepts in this section should show range — different media, different scales, different problems. If your other concepts are digital, this one might be physical. If they are product-oriented, this one might be more speculative.',
-      'Who would you want to work on this with? Sometimes the most useful thing a concept page does is attract the right collaborator. Who has the missing piece — the technology, the budget, the distribution, the audience? Update this placeholder with your actual fourth concept.',
+      'Nocturne is the sketchbook entry: a screen-free bedtime interface concept — a physical dial and ambient light instead of a phone app, for the specific job of winding down a nighttime routine without the blue-light, notification-laden problem a phone brings into the process. Not committed to yet, and deliberately unfinished here.',
+      'What makes it different from the rest: everything else in this section is a software interaction pattern. This one is physical-object-first, softer in scope, and closer to product design than interface design — the point of this section is to show that range exists, not just repeat the same kind of concept four times.',
+      'The missing piece is genuinely hardware: an industrial designer or a hardware prototyper who could take the physical-dial idea past a cardboard mockup. If that person is reading this, Neptune is where the conversation starts.',
     ],
     topics: ['The Sketchbook', 'Showing Range', 'The Right Collaborator'],
   },
@@ -59,9 +59,9 @@ const items = [
 <div class="ex-uranus-section" data-layout="bottom-center">
   <span class="ex-uranus-section-label">CONCEPTS</span>
   <h2 class="ex-heading ex-uranus-section-title">The Speculative<span class="ex-line-break"></span>Space.</h2>
-  <p class="ex-para ex-uranus-body">Work that doesn't have a client yet. Concepts, prototypes, unreleased ideas, and creative direction explored for its own sake. Placeholder — update with your conceptual work.</p>
+  <p class="ex-para ex-uranus-body">Work that doesn't have a client yet. Concepts, prototypes, unreleased ideas, and creative direction explored for its own sake.</p>
   <div class="ex-uranus-stats-row">
-    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">[N] concepts</span><span class="ex-uranus-stat-pill-label">In progress</span></div>
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">4 concepts</span><span class="ex-uranus-stat-pill-label">In progress</span></div>
     <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Ongoing</span><span class="ex-uranus-stat-pill-label">Always open</span></div>
   </div>
   <button class="ex-uranus-intro-cta" type="button" data-scroll-next>
@@ -73,10 +73,10 @@ const items = [
 <!-- ── Section 2 — Concept 1 ────────────────────────────────── -->
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">02 — CONCEPT</span>
-  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
-  <p class="ex-para ex-uranus-body">Placeholder — describe a speculative concept. What is it exploring? What question is it asking? Concepts don't need a pitch — they need a clear point of view. What's yours?</p>
+  <h2 class="ex-heading ex-uranus-section-title">Aftertouch</h2>
+  <p class="ex-para ex-uranus-body">A UI direction built on press pressure as an input, not just position — a button that reads a firm press differently from a tap. The hardware APIs already exist; almost nobody designs for them.</p>
   <div class="ex-uranus-key-fact">
-    <span class="ex-uranus-fact-number">[Medium]</span>
+    <span class="ex-uranus-fact-number">Interaction design</span>
     <span class="ex-uranus-fact-label">Format explored</span>
   </div>
   <button class="ex-uranus-detail-link" type="button" data-item-id="0" data-planet="uranus">Explore concept →</button>
@@ -85,10 +85,10 @@ const items = [
 <!-- ── Section 3 — Concept 2 ────────────────────────────────── -->
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">03 — CONCEPT</span>
-  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
-  <p class="ex-para ex-uranus-body">Placeholder — a second concept. Could be a UI direction, a speculative product, a motion piece, or a design fiction. Describe what you're imagining and what it would become if it had a brief.</p>
+  <h2 class="ex-heading ex-uranus-section-title">Palimpsest</h2>
+  <p class="ex-para ex-uranus-body">A collaborative-document UI where edit history stays visible as a fading layer beneath the current text, instead of hidden behind a version-history modal nobody opens.</p>
   <div class="ex-uranus-key-fact">
-    <span class="ex-uranus-fact-number">[Stage]</span>
+    <span class="ex-uranus-fact-number">Early sketch</span>
     <span class="ex-uranus-fact-label">Early / prototype / spec</span>
   </div>
   <button class="ex-uranus-detail-link" type="button" data-item-id="1" data-planet="uranus">Explore concept →</button>
@@ -97,10 +97,10 @@ const items = [
 <!-- ── Section 4 — Concept 3 ────────────────────────────────── -->
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">04 — CONCEPT</span>
-  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
-  <p class="ex-para ex-uranus-body">Placeholder — a third concept. Something in motion, interaction, or a generative system. Describe the idea in one sentence, and what you'd need to make it real. Budget? Collaborator? Time?</p>
+  <h2 class="ex-heading ex-uranus-section-title">Weathervane</h2>
+  <p class="ex-para ex-uranus-body">Dashboards you hear, not just see — a live data stream turned into ambient sound so a problem is sensed building before anyone glances at a monitor. Blocked on real sound-design expertise, not engineering.</p>
   <div class="ex-uranus-stats-row">
-    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">[Type]</span><span class="ex-uranus-stat-pill-label">Category</span></div>
+    <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Sonification</span><span class="ex-uranus-stat-pill-label">Category</span></div>
   </div>
   <button class="ex-uranus-detail-link" type="button" data-item-id="2" data-planet="uranus">Explore concept →</button>
 </div>
@@ -109,7 +109,7 @@ const items = [
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">05 — DESIGN FICTION</span>
   <h2 class="ex-heading ex-uranus-section-title">What If?</h2>
-  <p class="ex-para ex-uranus-body">Placeholder — describe a design fiction or speculative brief you've invented for yourself. A product for 2035. An interface for a physical world that doesn't exist yet. What are you imagining?</p>
+  <p class="ex-para ex-uranus-body">A screen-free bedtime interface — a physical dial and ambient light instead of a phone app, built around the specific problem of blue light and notifications undermining a wind-down routine.</p>
   <div class="ex-uranus-key-fact">
     <span class="ex-uranus-fact-number">Speculative</span>
     <span class="ex-uranus-fact-label">Not for sale — yet</span>
@@ -119,8 +119,8 @@ const items = [
 <!-- ── Section 6 — Concept 4 ────────────────────────────────── -->
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">06 — CONCEPT</span>
-  <h2 class="ex-heading ex-uranus-section-title">[Concept Name]</h2>
-  <p class="ex-para ex-uranus-body">Placeholder — a fourth concept. This space is a sketchbook, not a portfolio. Unfinished is allowed here. What direction are you heading in that you haven't committed to yet?</p>
+  <h2 class="ex-heading ex-uranus-section-title">Nocturne</h2>
+  <p class="ex-para ex-uranus-body">The sketchbook entry — physical-object-first rather than software, deliberately unfinished, and the one concept here that shows range beyond pure interface design.</p>
   <div class="ex-uranus-key-fact">
     <span class="ex-uranus-fact-number">WIP</span>
     <span class="ex-uranus-fact-label">In development</span>
@@ -132,7 +132,7 @@ const items = [
 <div class="ex-uranus-section" data-layout="right">
   <span class="ex-uranus-section-label">07 — IDEATION</span>
   <h2 class="ex-heading ex-uranus-section-title">How Concepts Form</h2>
-  <p class="ex-para ex-uranus-body">Concepts usually start in a notes app, not a design tool. I collect images, write fragments, and let things sit until the pattern becomes clear. Most die. A few turn into something real. Placeholder — describe your ideation process.</p>
+  <p class="ex-para ex-uranus-body">Concepts usually start in a notes app, not a design tool. I collect images, write fragments, and let things sit until the pattern becomes clear. Most die. A few turn into something real.</p>
   <div class="ex-uranus-stats-row">
     <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Collect</span><span class="ex-uranus-stat-pill-label">Phase 1</span></div>
     <div class="ex-uranus-stat-pill"><span class="ex-uranus-stat-pill-value">Sit</span><span class="ex-uranus-stat-pill-label">Phase 2</span></div>

@@ -5,50 +5,50 @@
 
 const items = [
   {
-    id:       'experiment-1',
+    id:       'terrarium',
     category: 'EXPERIMENT',
-    title:    '[Experiment Name]',
-    meta:     '[Tech] · [Year]',
+    title:    'Terrarium',
+    meta:     'WebGL + GLSL · 2024',
     body: [
-      'Placeholder — describe an experiment here. What were you testing? What was the constraint you gave yourself? The most interesting lab work comes from a single unusual restriction: one unusual input, one novel output, or one forbidden approach.',
-      'What worked? What did not? Lab work is allowed to fail — in fact, experiments that fail teach more than ones that succeed on the first attempt. Describe the failure honestly and what it revealed about the problem space.',
-      'Is this live? Is there a demo? A repo? If so, link it here. If not, describe what would be needed to take it from experiment to something shippable. Replace this placeholder with your actual experiment.',
+      'A generative plant-growth shader — one rule (branches bend toward the brightest point on screen) run thousands of times to see what shapes emerge without any single stroke being hand-drawn. The constraint was strict: no pre-baked geometry, everything grown in the fragment shader from a single seed value.',
+      'The first version grew nothing but straight lines — the "bend toward light" rule needed noise injected into the branching angle before anything resembling a plant showed up. The failure taught more about how organic-looking randomness actually works than the eventual success did.',
+      'Currently a standalone WebGL demo, not wired into anything production. Turning it into a generative loading-screen background is the obvious next step, not yet done.',
     ],
-    topics: ['The Constraint', 'What Failed', 'Where It Stands'],
+    topics: ['The Rule', 'What Failed First', 'Where It Stands'],
   },
   {
-    id:       'experiment-2',
+    id:       'echograph',
     category: 'EXPERIMENT',
-    title:    '[Experiment Name]',
-    meta:     '[Tech] · [Year]',
+    title:    'Echograph',
+    meta:     'Web Audio API · 2023',
     body: [
-      'Placeholder — a second experiment. This one could be a shader, a generative system, a physics simulation, or a weird CSS trick. The best lab experiments are the ones where you are genuinely unsure what the output will look like before you start.',
-      'What was the unexpected result? Experiments often produce outputs you did not anticipate — sometimes better, sometimes stranger, sometimes both. That moment of surprise is often worth documenting more than the intended outcome.',
-      'What does this experiment demonstrate about how you approach creative coding? Update this placeholder with your actual experiment and make it specific — the technology, the constraint, and the result.',
+      'A real-time audio visualiser that reacts to frequency data from the Web Audio API instead of a canned animation — feed it any playing audio and it draws a live waveform field that actually reflects what is playing, bass and treble rendered as different depths in a 3D scene.',
+      'The unexpected result: silence turned out to be the hardest case to handle gracefully, not loud audio. A flat frequency spectrum produced a visually dead scene, which meant designing an idle-state animation that only kicks in below a volume threshold.',
+      'This is the project that proved audio-reactive visuals were worth the effort — a version of this exact technique now drives the hover sound feedback across this site\'s UI.',
     ],
     topics: ['The Setup', 'The Surprise', 'What It Shows'],
   },
   {
-    id:       'experiment-3',
+    id:       'fracture',
     category: 'EXPERIMENT',
-    title:    '[Experiment Name]',
-    meta:     '[Tech] · [Year]',
+    title:    'Fracture',
+    meta:     'Canvas + Physics · 2023',
     body: [
-      'Placeholder — a third experiment. Interactive audio, data visualisation, machine learning in the browser, generative art. The medium does not matter as long as the constraint is clear and the question is specific.',
-      'What did building this teach you about the medium? Sometimes an experiment reveals a limitation of a tool or a browser API. Sometimes it reveals a new technique that ends up in production work. What did this one reveal?',
-      'Status: ongoing, archived, or turned into a product? Some experiments stay experiments. Some grow into something you ship. Describe where this one stands. Replace this placeholder with your actual work.',
+      'A shatter effect for UI elements — click a card and it breaks into physically-simulated shards that fall and settle under gravity, instead of the usual fade-and-slide dismissal. Built with a lightweight 2D physics step written from scratch rather than a full physics engine, since the use case never needed collision resolution beyond "fall and stop."',
+      'Building this revealed a real limitation of Canvas 2D: redrawing hundreds of independently-rotating shard polygons every frame is fine at low counts and falls off a cliff past roughly 150 shards on mid-range hardware — the kind of ceiling that only shows up once you actually stress-test past the demo case.',
+      'Status: archived as a component, but the shard-fracture math got reused (rewritten for WebGL instancing) in an early prototype of this site\'s warp transition before the current starfield approach replaced it.',
     ],
     topics: ['The Medium', 'What It Revealed', 'Current Status'],
   },
   {
-    id:       'experiment-4',
+    id:       'driftwood',
     category: 'EXPERIMENT',
-    title:    '[Experiment Name]',
-    meta:     '[Tech] · [Year]',
+    title:    'Driftwood',
+    meta:     'Three.js + Verlet Physics · 2022',
     body: [
-      'Placeholder — a fourth experiment. This space is for the work that does not fit anywhere else. The strange, the speculative, the one that took three weekends and you are still not sure it works but you cannot stop thinking about it.',
-      'What makes this one different from the others? If your other experiments were about technique, this one might be about concept. If your others were about code, this one might be about material or form.',
-      'Three weekends in, what did you learn? Not just about the technology — about yourself as a maker. The best lab notes capture the honest intellectual experience of the experiment, not just the technical outcome. Update this placeholder.',
+      'A cloth/rope simulation built on Verlet integration, applied to something deliberately unglamorous: a driftwood-and-rope bridge that sways believably under a simulated wind force. No practical use case going in — just curiosity about whether a from-scratch physics step could look convincing without a physics engine dependency.',
+      'What makes this one different from the others: it is the only experiment here that is pure simulation, no visual shader trickery. If Terrarium and Fracture are about rendering, Driftwood is about the underlying math holding up on its own.',
+      'Eleven iterations before the rope stopped visibly vibrating at rest — the real lesson was about numerical damping, not about Three.js. The kind of problem that looks like a rendering bug but is actually a math bug.',
     ],
     topics: ['The Outlier', 'Technique vs. Concept', 'The Real Lesson'],
   },
@@ -61,7 +61,7 @@ const items = [
   <h2 class="ex-heading ex-mars-section-title">Push<span class="ex-line-break"></span>the Limits.</h2>
   <p class="ex-para ex-mars-body">Experiments that don't need a client brief. Work done to learn, to break, to find the edge of what's possible in a browser. Some ships. Some stays here. All of it teaches something.</p>
   <div class="ex-mars-stats-row">
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[N] active</span><span class="ex-mars-stat-pill-label">Experiments</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">4 active</span><span class="ex-mars-stat-pill-label">Experiments</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">WebGL</span><span class="ex-mars-stat-pill-label">Primary medium</span></div>
   </div>
   <button class="ex-mars-intro-cta" type="button" data-scroll-next>
@@ -73,10 +73,10 @@ const items = [
 <!-- ── Section 2 — Experiment 1 ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">02 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
-  <p class="ex-para ex-mars-body">Placeholder — describe an experiment here. What were you testing? What was the constraint you gave yourself? What worked and what didn't? One or two sentences is enough.</p>
+  <h2 class="ex-heading ex-mars-section-title">Terrarium</h2>
+  <p class="ex-para ex-mars-body">A generative plant-growth shader — one branching rule run thousands of times from a single seed value, no geometry hand-drawn. Noise turned out to be the missing ingredient between "straight lines" and "plant."</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">[Tech]</span>
+    <span class="ex-mars-fact-number">GLSL</span>
     <span class="ex-mars-fact-label">Built with</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="0" data-planet="mars">Lab notes →</button>
@@ -85,10 +85,10 @@ const items = [
 <!-- ── Section 3 — Experiment 2 ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">03 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
-  <p class="ex-para ex-mars-body">Placeholder — another experiment. Maybe this one is a shader, a generative system, a physics simulation, or a weird CSS trick. Describe it in one or two sentences focused on what was interesting.</p>
+  <h2 class="ex-heading ex-mars-section-title">Echograph</h2>
+  <p class="ex-para ex-mars-body">A real-time audio visualiser reacting to live frequency data via the Web Audio API — bass and treble rendered as depth in a 3D field. Silence, not loud audio, turned out to be the hard case to design for.</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">[Outcome]</span>
+    <span class="ex-mars-fact-number">Shipped a spinoff</span>
     <span class="ex-mars-fact-label">What it does</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="1" data-planet="mars">Lab notes →</button>
@@ -97,11 +97,11 @@ const items = [
 <!-- ── Section 4 — Experiment 3 ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">04 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
-  <p class="ex-para ex-mars-body">Placeholder — a third experiment. Interactive audio, data visualisation, machine learning in the browser, generative art. Describe the concept and what you learned from building it.</p>
+  <h2 class="ex-heading ex-mars-section-title">Fracture</h2>
+  <p class="ex-para ex-mars-body">A shatter effect for UI dismissal — cards break into physically-simulated shards under gravity instead of fading out. Hit a real Canvas 2D performance ceiling around 150 simultaneous shards.</p>
   <div class="ex-mars-stats-row">
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Year]</span><span class="ex-mars-stat-pill-label">Built</span></div>
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Status]</span><span class="ex-mars-stat-pill-label">Ongoing / archived</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">2023</span><span class="ex-mars-stat-pill-label">Built</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Archived</span><span class="ex-mars-stat-pill-label">Ongoing / archived</span></div>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="2" data-planet="mars">Lab notes →</button>
 </div>
@@ -109,10 +109,10 @@ const items = [
 <!-- ── Section 5 — Experiment 4 ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">05 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
-  <p class="ex-para ex-mars-body">Placeholder — a fourth experiment. This space is for the work that doesn't fit anywhere else. The strange, the speculative, the one that took three weekends and you're still not sure it works.</p>
+  <h2 class="ex-heading ex-mars-section-title">Driftwood</h2>
+  <p class="ex-para ex-mars-body">A from-scratch Verlet-integration rope/cloth simulation — a driftwood bridge swaying under a simulated wind force, no physics engine dependency, built purely out of curiosity about the underlying math.</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">[N] iterations</span>
+    <span class="ex-mars-fact-number">11 iterations</span>
     <span class="ex-mars-fact-label">Before it clicked</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="3" data-planet="mars">Lab notes →</button>
@@ -133,7 +133,7 @@ const items = [
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">07 — TOOLS</span>
   <h2 class="ex-heading ex-mars-section-title">Lab Equipment</h2>
-  <p class="ex-para ex-mars-body">Three.js, GLSL shaders, WebGL, Web Audio API, Canvas, GSAP. Sometimes just raw CSS. The constraint isn't the tool — it's the question. Placeholder — update with your actual experimentation stack.</p>
+  <p class="ex-para ex-mars-body">Three.js, GLSL shaders, WebGL, Web Audio API, Canvas, GSAP. Sometimes just raw CSS. The constraint isn't the tool — it's the question.</p>
   <div class="ex-mars-stats-row">
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Three.js</span><span class="ex-mars-stat-pill-label">3D</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">GLSL</span><span class="ex-mars-stat-pill-label">Shaders</span></div>

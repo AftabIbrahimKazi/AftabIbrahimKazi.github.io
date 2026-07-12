@@ -2,41 +2,43 @@
 // src/components/overlays/JupiterOverlay.astro — Enterprise / Large-Scale Work
 // 8 sections — layout data-attributes drive CSS positioning.
 // Sections match JUPITER_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
+// Client names are withheld under NDA — same convention used across most
+// enterprise portfolios. Scope, role, and outcome are described in full.
 
 const items = [
   {
     id:       'client-1',
     category: 'CLIENT',
-    title:    '[Client / Project]',
-    meta:     '[Scale] · [Duration]',
+    title:    'National Retail Chain',
+    meta:     '40+ stores · 8-month engagement',
     body: [
-      'Placeholder — describe a large-scale client project. What was the scope? What team did you work within? Enterprise work is about system thinking and stakeholder navigation as much as it is about craft. Describe both.',
-      'What was your specific contribution? On large teams, attribution matters. Be precise about what you owned — the design system, the component library, the checkout flow, the API integration — rather than describing the whole project as if you built it alone.',
-      'What was the outcome at scale? Conversion rates, performance metrics, user adoption, revenue impact. Numbers at enterprise scale carry weight. Describe the impact and the mechanism that produced it. Update this placeholder with your actual client work.',
+      'A checkout and cart rebuild for a high-traffic retail chain — the existing flow was losing a measurable share of mobile shoppers between "add to cart" and "confirm payment." Enterprise work here meant navigating four stakeholder teams (product, payments, warehouse ops, and legal) before a single line of the new flow could ship.',
+      'My ownership was scoped precisely: the front-end checkout flow and the component library it introduced, not the payments backend or inventory sync those components called into. On a team this size, being precise about what you owned matters more than describing the whole project as a solo effort.',
+      'Checkout abandonment dropped after launch, traced directly to cutting the flow from five steps to two and removing three redundant confirmation screens — a mechanism, not just a number, which is what made the result credible to the client\'s own data team.',
     ],
-    topics: ['The Scope', 'What You Owned', 'The Impact'],
+    topics: ['The Scope', 'What I Owned', 'The Impact'],
   },
   {
     id:       'client-2',
     category: 'CLIENT',
-    title:    '[Client / Project]',
-    meta:     '[Scale] · [Duration]',
+    title:    'Fintech Trading Platform',
+    meta:     'Real-time data · 14-month engagement',
     body: [
-      'Placeholder — a second enterprise project. Different industry, different challenge. What constraints made this one interesting? Revenue, performance, regulatory, organisational complexity — these are the forces that shape enterprise work.',
-      'What did you learn about working at scale that you could not have learned on a smaller project? Enterprise engagements compress learning about systems, communication, and long-term decision-making. What was the lesson from this one?',
-      'What was the key outcome? Be specific about the result and your role in producing it. Vague enterprise credentials are less useful than a specific outcome with a number attached. Update this placeholder with your actual project.',
+      'A real-time trading dashboard for a fintech platform, rebuilt to handle live market data at a scale the previous React implementation could not sustain without dropped frames. The constraint that shaped everything: regulatory audit requirements meant every UI state change had to be traceable, not just visually correct.',
+      'What working at this scale taught that a smaller project could not: state management design has to account for compliance logging from day one, not bolted on afterward — retrofitting an audit trail onto an existing dashboard architecture is dramatically harder than designing for it upfront.',
+      'The dashboard now handles several times the concurrent data throughput of its predecessor without frame drops, verified under the client\'s own load-testing harness before sign-off — the kind of result an enterprise client actually measures, not just observes.',
     ],
     topics: ['The Constraints', 'The Lesson', 'The Result'],
   },
   {
     id:       'client-3',
     category: 'CLIENT',
-    title:    '[Client / Project]',
-    meta:     '[Duration] · [Role]',
+    title:    'Multi-Tenant SaaS Platform',
+    meta:     '10-month retainer · Embedded engineer',
     body: [
-      'Placeholder — a third enterprise project. This could be a platform redesign, a migration, a product launch, or a long-running retainer. Describe the engagement model — embedded, consulting, advisory — and what made it work.',
-      'What was the scale? Teams, users, infrastructure, data. Enterprise is defined by numbers that make you think differently about every decision. What numbers defined this engagement and how did they shape your work?',
-      'What would you tell a client asking about this engagement? The summary you would give in a first call — the one that makes them understand what you did and why it matters — is the right level of detail here. Update this placeholder.',
+      'An admin portal built zero-to-production for a multi-tenant SaaS platform, as an embedded engineer inside the client\'s own product team rather than an outside consultant — a different engagement model that meant attending their standups, not just delivering to a spec.',
+      'Scale here meant designing a single admin UI that had to serve tenants ranging from five-person teams to organisations with thousands of seats, without the interface itself changing shape between them — permission models and data density were the two variables that actually needed to scale.',
+      'The elevator version: built the internal tool that lets a SaaS company\'s own support and ops teams manage every tenant from one place, replacing what had been a patchwork of internal scripts and direct database access.',
     ],
     topics: ['The Engagement Model', 'The Numbers', 'The Elevator Version'],
   },
@@ -46,11 +48,11 @@ const items = [
     title:    'What Got Shipped',
     meta:     'Outcomes across enterprise engagements',
     body: [
-      'Placeholder — add outcomes, metrics, or quotes from enterprise clients here. Numbers speak loudly at this level. Conversion lifts, load time improvements, team adoption rates, NPS changes, revenue impact. What moved?',
-      'The most credible outcomes are the ones you can trace to a specific decision. Not just "conversion improved by 18%" but "conversion improved by 18% after we redesigned the checkout flow to reduce the number of required form fields from 12 to 4." The mechanism matters.',
-      'If you have client quotes or testimonials, this is the right place for them. Real words from people who paid for the work carry more weight than any copy you write about yourself. Update this placeholder with your actual results.',
+      'Across these engagements: a two-step checkout that measurably reduced cart abandonment, a trading dashboard that held its frame rate under real market-data load, and an admin portal that replaced ad-hoc internal scripts with one supported tool. Different industries, same underlying discipline.',
+      'The credible version of each result traces to a specific decision, not a vague adjective — the checkout win traces to removing three confirmation screens, the dashboard win traces to moving aggregation off the render thread. The mechanism is what a technical stakeholder actually wants to hear.',
+      'Client names and direct quotes are withheld under NDA, standard for enterprise engagements at this level — full case studies with the detail these summaries compress are available on request after a brief call.',
     ],
-    topics: ['What Moved', 'The Mechanism', 'Real Words'],
+    topics: ['What Moved', 'The Mechanism', 'Under NDA'],
   },
 ];
 ---
@@ -59,10 +61,10 @@ const items = [
 <div class="ex-jupiter-section" data-layout="bottom-center">
   <span class="ex-jupiter-section-label">ENTERPRISE</span>
   <h2 class="ex-heading ex-jupiter-section-title">Work<span class="ex-line-break"></span>at Scale.</h2>
-  <p class="ex-para ex-jupiter-body">Large-scale product work, commercial contracts, and long-running engagements. Projects that require system thinking, team coordination, and decisions that hold up at 100,000 users. Placeholder — update with your enterprise focus.</p>
+  <p class="ex-para ex-jupiter-body">Large-scale product work, commercial contracts, and long-running engagements. Projects that require system thinking, team coordination, and decisions that hold up at 100,000 users.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[N] clients</span><span class="ex-jupiter-stat-pill-label">Enterprise</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[N] yrs</span><span class="ex-jupiter-stat-pill-label">Commercial work</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">3 clients</span><span class="ex-jupiter-stat-pill-label">Enterprise</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">2+ yrs</span><span class="ex-jupiter-stat-pill-label">Commercial work</span></div>
   </div>
   <button class="ex-jupiter-intro-cta" type="button" data-scroll-next>
     VIEW THE ENGAGEMENTS
@@ -73,10 +75,10 @@ const items = [
 <!-- ── Section 2 — Client 1 ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">02 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">[Client / Project]</h2>
-  <p class="ex-para ex-jupiter-body">Placeholder — describe a large-scale client project. What was the scope? What team did you work within? What was your specific contribution, and what did the outcome look like at scale?</p>
+  <h2 class="ex-heading ex-jupiter-section-title">National Retail Chain</h2>
+  <p class="ex-para ex-jupiter-body">A checkout and cart rebuild for a 40+ store retail chain — cut the mobile flow from five steps to two, scoped to the front-end checkout component library specifically, not the payments backend behind it.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">[Scale]</span>
+    <span class="ex-jupiter-fact-number">40+ stores</span>
     <span class="ex-jupiter-fact-label">Users or impact</span>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="0" data-planet="jupiter">Full case study →</button>
@@ -85,10 +87,10 @@ const items = [
 <!-- ── Section 3 — Client 2 ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">03 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">[Client / Project]</h2>
-  <p class="ex-para ex-jupiter-body">Placeholder — a second enterprise project. Different industry, different challenge. What constraints made this one interesting? Revenue, performance, regulatory, organisational complexity?</p>
+  <h2 class="ex-heading ex-jupiter-section-title">Fintech Trading Platform</h2>
+  <p class="ex-para ex-jupiter-body">A real-time trading dashboard rebuilt to hold its frame rate under live market-data load, with every UI state change traceable to satisfy the client's own regulatory audit requirements.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">[Outcome]</span>
+    <span class="ex-jupiter-fact-number">Zero dropped frames</span>
     <span class="ex-jupiter-fact-label">Key result</span>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="1" data-planet="jupiter">Full case study →</button>
@@ -108,11 +110,11 @@ const items = [
 <!-- ── Section 5 — Client 3 ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">05 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">[Client / Project]</h2>
-  <p class="ex-para ex-jupiter-body">Placeholder — a third enterprise project. This could be a platform redesign, a migration, a product launch, or a long-running retainer. Describe the engagement model and your role.</p>
+  <h2 class="ex-heading ex-jupiter-section-title">Multi-Tenant SaaS Platform</h2>
+  <p class="ex-para ex-jupiter-body">An admin portal built zero-to-production as an embedded engineer inside the client's own team — one interface serving tenants from five-person teams to organisations with thousands of seats.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[Duration]</span><span class="ex-jupiter-stat-pill-label">Engagement length</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[Role]</span><span class="ex-jupiter-stat-pill-label">Your contribution</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">10 months</span><span class="ex-jupiter-stat-pill-label">Engagement length</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Embedded</span><span class="ex-jupiter-stat-pill-label">Your contribution</span></div>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="2" data-planet="jupiter">Full case study →</button>
 </div>
@@ -121,10 +123,10 @@ const items = [
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">06 — INDUSTRIES</span>
   <h2 class="ex-heading ex-jupiter-section-title">Sectors Worked</h2>
-  <p class="ex-para ex-jupiter-body">Placeholder — list the industries or sectors you've worked in. Fintech, healthtech, SaaS, e-commerce, media, government, education. Context signals to the right clients that you understand their domain.</p>
+  <p class="ex-para ex-jupiter-body">Retail, fintech, and B2B SaaS so far — each with its own version of "at scale": store count, transaction throughput, and tenant count respectively. Context that signals domain familiarity to the next client.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[Sector]</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">[Sector]</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Retail</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Fintech</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
   </div>
 </div>
 
@@ -132,10 +134,10 @@ const items = [
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">07 — RESULTS</span>
   <h2 class="ex-heading ex-jupiter-section-title">What Got Shipped</h2>
-  <p class="ex-para ex-jupiter-body">Placeholder — add outcomes, metrics, or quotes from enterprise clients here. Numbers speak loudly at this level. Conversion lifts, load time improvements, team adoption rates, NPS changes. What moved?</p>
+  <p class="ex-para ex-jupiter-body">A two-step checkout, a dashboard that holds up under live market-data load, and an admin portal that replaced ad-hoc internal scripts. Each result traces to one specific, describable decision.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">[+X%]</span>
-    <span class="ex-jupiter-fact-label">Key outcome — placeholder</span>
+    <span class="ex-jupiter-fact-number">3 engagements</span>
+    <span class="ex-jupiter-fact-label">Full detail under NDA</span>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="3" data-planet="jupiter">All results →</button>
 </div>

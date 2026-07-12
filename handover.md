@@ -1,7 +1,7 @@
 # Handover — Exo Space Planetarium
 
 **Date:** 2026-06-21
-**Last updated:** 2026-07-10 — Phase 21: Venus "Explore" scroll rebuilt onto the Mercury pattern (circular-orbit camera, dual-role progress strip, bottom slide-up article panel), plus a new 3D coverflow section and full centered project-detail cards for sections 3–7. First reusable Swiper preset added to the codebase. Next session: re-tune `VENUS_SCROLL_PATH` waypoints in `PlanetScrollCameras.ts` — camera framing was left as a placeholder throughout this session ("ignore the waypoint, we'll edit later"). Uncommitted on `dev`.
+**Last updated:** 2026-07-12 — Phase 23: pre-release production-readiness audit of the live site, root-caused and fixed a real horizontal-scroll bug plus several dead links/forms on the `/neptune` contact page, wired both dead newsletter/contact forms (Mercury, Venus) and the Neptune contact form to a `mailto:` fallback (static GitHub Pages has no backend), and replaced every remaining bracket-placeholder / meta-instructional copy across Sun, Earth, Mars, Jupiter, Saturn, and Uranus with concrete example content. Uncommitted on `dev` — see Phase 23 below for the full list before committing/pushing. Phase 22 (replicating the Mercury/Venus Explore pattern to the other 7 planets) is already committed and live on `main`.
 **Purpose:** State-of-the-project summary for continuity between sessions.
 
 ---
@@ -545,12 +545,14 @@ Full redesign of the `/sol?target=mercury` scroll experience — camera, layout,
 4. **`SolEngine` constructor does DOM work** (CL-03) — queries canvas and builds renderer inline instead of an explicit `init()`. Orchestration itself is now fixed (SolOrchestrator, Phase 17); this is the last piece — small refactor inside the engine, mirror the `EnvironmentManager` init() fix.
 5. **No `destroy()` method** — engines and controllers have no teardown. MPA navigation means Astro may not garbage-collect Three.js renderers and event listeners. Each needs a `destroy()` hooked to `astro:before-swap`. `CarouselPlanets.ts` also has no teardown — 8 WebGL contexts. Natural home now: the domain orchestrators.
 6. ~~Entry file logic (main.ts)~~ — ✅ fixed 2026-07-06: `core/solar-system/SolOrchestrator.ts` created (wiring moved verbatim from main.ts, incl. `?target=` camera snap + compileAsync→loop.start warp sequencing); `main.ts` is bootstrap-only. All three entry files (landing/main/warp-router-init) now E-01 compliant. Note: `SolEngine` constructor still does DOM work (issue #4 remains). Orphaned original `sol-entry.ts` (pre-WarpRouter reverse-warp script; its `ex-warp-entry` flag had no writer) deleted same session. Entry files then renamed to the `{domain}-entry.ts` convention: `landing.ts`→`landing-entry.ts`, `main.ts`→`sol-entry.ts` (name reused for the new bootstrap-only entry — unrelated to the deleted file), `warp-router-init.ts`→`warp-entry.ts`. Astro imports updated in Main.astro, Landing.astro, neptune.astro.
-7. **Planet journal pages are stubs** — Venus through Neptune need journal/portfolio content pages equivalent to `/mercury`. **Mercury itself was fully redesigned in Phase 20** (camera, layout, pagination, article panel) but still runs on the original 4-article *placeholder* dataset in `MercuryOverlay.astro` — real article content is the very next task.
-8. **Article placeholder images** — `index.astro` Beat 06 references 5 SVG placeholders at `public/images/articles/article-0{1-5}.svg` (added Phase 14). Real article imagery still needed for final content pass.
+7. ~~Mercury journal running on 4-article placeholder dataset~~ — ✅ replaced with 7 real blog posts (session prior to Phase 22). **Venus** (Phase 21) has real-shaped project cards but `image`/`demoUrl` are still `null` on every project — see Next Up. Earth/Mars/Jupiter/Saturn/Sun/Uranus got concrete example content in Phase 23 (still dummy, not final — see Next Up).
+8. **Article placeholder images** — `index.astro` Beat 06 references 5 SVG placeholders at `public/images/articles/article-0{1-5}.svg` (added Phase 14), reused across all 7 real Mercury blog posts (some SVGs used twice). Real article imagery still needed.
 9. ~~`Timer.elapsedTime` type error~~ — ✅ fixed 2026-07-06: the offending loop code was replaced by `animations/landing/LandingRenderLoop.ts`, which uses `getElapsed()`/`getDelta()`. `LandingEngine.clock` removed (unused).
 10. **Texture load time on the live site** (noted 2026-07-06, post GitHub Pages launch) — page loads under 2s but the 8k planet textures visibly lag in after it. Candidates for the fix: downscale (2k/4k is enough at these render sizes — the carousel minis are 90px), convert JPG → WebP/AVIF or KTX2 with mip chains, lazy-load per planet instead of all upfront, and/or a loading progress veil so the lag reads as intentional. Address in the performance pass (roadmap P3). Worst case observed: the landing carousel planets pop in one by one on the live site — each of the 8 mini WebGL scenes loads the full-size solar-system texture (Earth alone pulls ~16 MB incl. the 8k cloud layer) to fill a 90px canvas, and appearance order = download-completion order. Carousel-specific fix: dedicated 256–512px thumbnail textures (entire strip would then load faster than one current planet) + per-planet fade-in so residual stagger reads as intentional. **Chosen approach (2026-07-06): progressive texture loading** — generate tiny (128–256px, ~10–20KB) versions of each texture; a `ProgressiveTextureLoader` utility loads the tiny one first (planet renders instantly, soft), full-res downloads in background and swaps into the same uniform (`needsUpdate = true`). Caveats: rocky planets have a second sampler uniform (`Bump`'s `uniformName`) pointing at the same texture — the swap must update both; carousel may not need the full-res swap at all (90px canvases). **Must include retry-on-error with backoff**: live site observed a GitHub Pages CDN 503 on `8k_earth_daymap.jpg`, and every `TextureLoader.load()` in the project is currently fire-and-forget — one transient failure permanently blanks a planet until refresh. With the placeholder-first design, a failed full-res fetch degrades to "slightly soft planet" instead of "black planet".
 11. **Camera near plane 0.1 / far 1000** (`SolEngine`) — poor depth precision at distance; root cause of the cloud-shell z-fighting (worked around per-material with polygonOffset). Raising near to ~1 would fix globally — developer call.
 12. **Landing page orb atmosphere Fresnel renders as a full ring, not a one-sided glow** (`.lp-journal-orb` Mercury, `.lp-comm-orb` Saturn — see Phase 19). `buildCarouselAtmosphereMaterial()` is a pure view-angle Fresnel with no light-direction awareness; imperceptible at the 120px carousel scale, clearly a full ring at 300–520px. Needs *some* directional input to favor one limb (the scene's own `DirectionalLight`, or a fixed camera-space mask) — developer has not yet confirmed which, explicitly deferred this session. Do not implement without that confirmation.
+13. **No sitemap** — `robots.txt` added Phase 23, but sitemap generation needs a new `@astrojs/sitemap` dependency (or equivalent), not added since a bug-fix pass shouldn't introduce new dependencies. Low priority for a portfolio site (recruiters don't discover via search crawl), but worth adding eventually.
+14. ~~Phase 22 merged `dev` directly into `main`, skipping `test`/`beta`~~ — violated `git-standards.md` RULE G-02, caught after the fact during the Phase 23 audit; `test`/`beta` fast-forwarded to resync. Not a code issue, but a process one — confirm the PR target branch before merging next time, not after.
 
 ---
 
@@ -831,6 +833,75 @@ Verified via headless Chromium: sampled `getComputedStyle(veil).opacity` immedia
 
 ---
 
+## Phase 22 — Explore pattern replicated to Sun, Earth, Mars, Jupiter, Saturn, Uranus, Neptune ✅ (2026-07-12)
+
+**All 7 remaining planets migrated onto the Mercury/Venus "Explore" pattern** established in Phases 20–21: continuous circular-orbit `PlanetScrollCamera` path (radius scaled per-planet to that planet's actual sphere size — e.g. Sun R14→R6, Mercury/Venus-scale rocky planets R~2.5→R~1, Jupiter/Saturn R6.5→R2.7–3.5), a dual-role left progress strip (sections ↔ article paragraphs), and a single bottom slide-up article panel replacing the old Phase-13 two-sided offcanvas sidebar pairs. Each planet keeps its own palette, its own visual flavour (Mars's thicker dramatic borders, Saturn's thin elegant rules, Uranus's narrow cold panels, Jupiter's wider imperial padding), and its own contextual (dummy) content — no shared/generic copy.
+
+**New files, one set per planet** (all direct structural clones of `VenusProgressStrip.ts`, retargeted selectors/events):
+`SunProgressStrip.ts`, `EarthProgressStrip.ts`, `MarsProgressStrip.ts`, `JupiterProgressStrip.ts`, `SaturnProgressStrip.ts`, `UranusProgressStrip.ts` — all in `src/scripts/ui/solar-system/`.
+
+**Neptune is the one exception to the pattern** — it's a short 5-section contact page with no detail/article content, so `NeptuneProgressStrip.ts` is sections-only (no article-mode toggle, no bottom panel). Its `NEPTUNE_SCROLL_PATH` also only has 5 waypoints (t-step 1/5) instead of the 8-waypoint (t-step 1/8) pattern every other planet uses.
+
+**`variables.css`** — added the missing `--ex-color-{planet}-border-inner` / `-pill-bg` tokens for every planet that lacked them (previously only Mercury/Venus had them; the CSS pattern from Phase 20/21 needs both).
+
+**`ContentOverlay.astro`** — all 7 old two-sided sidebar blocks (`#ex-{planet}-sidebar-left/right`) replaced with single `#ex-{planet}-article-panel` bottom offcanvas blocks; 7 new progress-strip `<nav>` blocks added as top-level siblings of `#ex-content-overlay` (same containing-block reasoning as Mercury/Venus's).
+
+**Git note:** this phase was committed and pushed to `dev`, then merged directly into `main` via PR #3 — **skipping `test`/`beta`**, which violates `git-standards.md` RULE G-02 (no branch may be skipped). Not caught before the merge happened; `test` and `beta` were fast-forwarded to match `main` after the fact to resync the ladder. Watch for this on future merges — confirm the PR target branch before merging, not after.
+
+---
+
+## Phase 23 — Pre-release production-readiness audit + fixes (2026-07-12)
+
+Full audit of the live site (navigation, responsive at 8 breakpoints, console/network via a real Playwright/Chromium pass, accessibility, SEO, forms, asset paths, content) framed as a hiring-manager review — see the audit conversation for the full report format. Real bugs found were fixed; cosmetic/deferred items were reported only. All fixes verified in a real browser (Playwright) with a clean console and zero horizontal-overflow at 320/375/425/768/1024/1280/1440/1920px afterward.
+
+**Critical bug found and fixed — `/neptune` horizontal scroll bug, present at every breakpoint:**
+Root cause was **`src/pages/neptune.astro` never importing `strata.css`** — every other page/layout does (`import '../styles/strata.css';` in frontmatter), which is what triggers Vite's Strata-CSS plugin to scan that page's component tree and generate its utility classes into the bundled CSS. Without it, none of `LandingHeader`'s/`LandingFooter`'s Strata utility classes (`w-100`, `d-flex`, etc.) were ever generated for this page — the footer background image (`footer.png`, 1536×1024 intrinsic) rendered at full natural size instead of being clipped/covered, blowing out the layout to 1536px wide regardless of viewport. Fixed by adding the missing import, plus two stylesheet `<link>` tags (`landing-header.css`, `landing-footer.css`) that were also silently missing from this page only.
+
+**Second, independent horizontal-scroll cause on the same page:** `.ex-ct-footer-text` (`public/css/contact.css`) had `white-space: nowrap` applied to what is a full sentence, not the short label the rule was written for — forced the whole "Signal destination: Neptune, 8th planet…" line onto one row, overflowing at 320–375px. Removed the `nowrap`, added `text-align: center`.
+
+**Third cause:** `contact.css` had **zero media queries** — `.ex-ct-layout` (two-column grid, first column pinned to `--ex-size-380`) and `.ex-ct-form-row` (name/email side-by-side) never collapsed below tablet width. Added one `@media (max-width: 767.98px)` block collapsing both to a single column — matches the `767.98px` breakpoint convention already used everywhere else in the project.
+
+**Other `/neptune`-specific bugs fixed:**
+- `<link rel="stylesheet" href="/webfonts/font-awesome.css" />` pointed at a file that has never existed (confirmed 404) — every icon on the page was invisible. Replaced with the same `import '@fortawesome/fontawesome-free/css/all.min.css';` every other layout uses.
+- Social links (GitHub/LinkedIn/X) used literal `https://github.com/placeholder`-style dead URLs on both the standalone `/neptune` page **and** the `/sol?target=neptune` 3D-overlay version (`NeptuneOverlay.astro`), even though the real URLs (`AftabIbrahimKazi`, `aftab-kazi-715b88193`) already existed correctly in `LandingFooter.astro`. Both fixed to match; the Dribbble entry was removed (no real profile exists anywhere in the codebase to substitute a dead placeholder for).
+- `og:image` defaulted to `/images/og-default.jpg` (404, never existed) in both `Landing.astro` and `Main.astro` — social-share previews would render broken. Repointed to the existing `/images/footer.png`. Added missing `twitter:card`/`twitter:title`/`twitter:description`/`twitter:image` tags (none existed anywhere) and explicit `<link rel="icon">` tags to both main layouts plus `neptune.astro` (favicon files existed in `public/` but were never linked from the two layouts actually in use — only from the unused `src/layouts/Layout.astro`, an Astro-starter leftover, dead code, not imported anywhere).
+- Added `public/robots.txt` (`Allow: /`) — previously missing entirely. Sitemap generation was **not** added — requires a new `@astrojs/sitemap` dependency, out of scope for a bug-fix pass.
+
+**Dead forms wired to a `mailto:` fallback (static GitHub Pages has no backend to submit to):**
+Three forms were fully non-functional (`onsubmit="return false;"`, `action` pointing at routes that don't exist): the Neptune contact form (both the standalone page and the 3D-overlay version), Venus's "GET IN TOUCH" email-capture form, and Mercury's newsletter "SUBSCRIBE" form. All three now: use native HTML5 `required`/`reportValidity()` validation (blocks empty submission, verified in-browser), then build a `mailto:hello@aftabkazi.com` link pre-filled with subject + body from the form fields and hand off via `window.location.href`, plus a `role="status" aria-live="polite"` note telling the visitor what happened and giving the direct email as a fallback. This is the only submission path a static site without a form-service integration can offer — intentionally not wiring a third-party service (Formspree etc.), since that would be a new integration, not a bug fix.
+
+**Other reported-but-deliberately-not-fixed findings** (need a product decision, not a code fix):
+- Two separate "Contact" experiences exist — the header/footer nav "CONTACT" link goes to the standalone `/neptune` page; the landing carousel routes to `/sol?target=neptune` (the 3D overlay). Both work and both are now bug-free, but they're duplicate content with separately-maintained copy. Not consolidated — that's a call for the developer, not something to do unilaterally.
+- Venus's 5 "VISIT PROJECT" buttons: `demoUrl` is `null` for every project (real project data still pending, see Next Up), so instead of leaving them as dead `href="#" target="_blank"` links, they now conditionally render as a visibly disabled `aria-disabled` state (non-focusable, dimmed) until real URLs are added.
+
+**Content pass — every remaining bracket placeholder and meta-instructional sentence replaced** across `SunOverlay.astro`, `EarthOverlay.astro`, `MarsOverlay.astro`, `JupiterOverlay.astro`, `SaturnOverlay.astro`, `UranusOverlay.astro` (Venus/Mercury/Neptune were already real-shaped from earlier phases). All content is still explicitly dummy/example, consistent with the project's established pattern (Venus's Vesper/Lumen/Solstice, Mercury's real blog posts) — not final copy, but nothing reads as literally unfinished (`[Client / Project]`, "Placeholder — update with...") anymore:
+- **Earth:** 3 named projects (Meridian — SaaS analytics dashboard, Northwind — Astro/Node e-commerce rebuild, Pulsegrid — Three.js IoT data visualisation) + an Open Source section correctly pointing to the two **real** public repos (Strata, Triforge) instead of a fake placeholder handle.
+- **Jupiter:** 3 enterprise engagements framed as NDA-anonymized clients ("National Retail Chain", "Fintech Trading Platform", "Multi-Tenant SaaS Platform") — deliberately not given fake company names, matching how real enterprise portfolios represent NDA'd work, and consistent with the client-work descriptions already on the landing page's "Built under NDA" carousel (checkout rebuild / trading dashboard / admin portal — same three, cross-referenced).
+- **Saturn:** 3 named digital products (Orbit UI — Figma kit, Nightfall — Astro theme, Glyphset — icon pack).
+- **Mars:** 4 named lab experiments (Terrarium, Echograph, Fracture, Driftwood).
+- **Uranus:** 4 named speculative concepts (Aftertouch, Palimpsest, Weathervane, Nocturne).
+- **Sun:** bio/background/highlights paragraphs filled in with concrete (still example) numbers and a short origin story, replacing bracket fields and self-referential "update this with your actual X" sentences in the About-panel item bodies.
+
+**Not yet committed** — all Phase 23 changes are uncommitted on `dev` as of this update. Follow `git-standards.md` RULE G-02 exactly this time: `dev → test → beta → main` in sequence, do not repeat the Phase 22 PR-target mistake.
+
+---
+
+## Phase 24 — Landing section viewport-fit pass (2026-07-12)
+
+Every landing beat now fits the viewport with zero vertical overflow, verified via Playwright `scrollHeight` vs `innerHeight` measurement at 1920×1080, 1440×900, 1280×720, 1024×768, 768×1024, 375×667. Root problem: Beat 05 (Commercial Work) stacked to ~1151px minimum — taller than even 1080p — and beats 01/02/04/06 overflowed on short/narrow screens.
+
+**Base compaction (index.astro strata classes):** `.lp-comm` gap xl→lg, all 4 `.lp-comm-slide` cards gap lg→md + padding xl→lg, metrics bar `pt` xl→md.
+
+**`landing-comm.css`:** `.lp-section.lp-section--comm` vertical padding xxxl→lg (top-half rule). **First height-based media queries in the project** (flagged: breakpoint convention was width-only): `(max-height: 949.98px) and (min-width: 992px)` shrinks heading xxl→xl and stage/orb 520→420; `(max-height: 799.98px)` hides the Key-metrics bar, drops section padding to md, compacts slide gap/padding + title clamp. Developer chose this "height-adaptive" approach (hide/shrink on short screens) over compact-only or scale-down.
+
+**Width tiers reworked (same file):** MD tablets — stage/orb → 180px, metrics bar hidden, and the thumbnail rail switched `position: static` + horizontal row (`.lp-comm-rail`/`.lp-comm-thumbs` flex-direction row). Key finding: the rail is ~400px of absolutely-positioned content inside the stage, so shrinking the stage alone *increases* section overflow — the rail must go static/horizontal when the stage shrinks. SM — stage 180, metrics hidden. XS — stage + per-slide stats + metrics all hidden, gaps tightened to sm.
+
+**`landing.css` XS block (was empty):** `.lp-section` padding xxxl→xl vertical, `.lp-heading` xxl→xl, `.lp-heading--hero` xxxl→xxl on phones. **`landing-story.css` XS:** `.lp-about` gap→sm, `.lp-skills` gap→md. **`landing-work.css`:** `(max-height: 799.98px)` drops `.lp-section--work` padding to md (Beat 04 was +43px at 1280×720).
+
+Visually verified via screenshots at 4 viewports — tablet renders the Saturn orb with the rail as a horizontal row beside it; phone hides the orb entirely. Uncommitted on `dev`, same boat as Phase 23.
+
+---
+
 ## Portfolio direction (brainstorm 2026-07-05, decisions pending)
 
 Site is being repurposed as a live portfolio carrying real work + GitHub data. Key facts:
@@ -844,27 +915,26 @@ Site is being repurposed as a live portfolio carrying real work + GitHub data. K
 
 ## Next Up
 
-### Venus camera waypoints (next session — explicitly deferred from Phase 21)
+### Commit + push Phase 23 (immediate next step)
 
-`VENUS_SCROLL_PATH` in `src/scripts/ui/solar-system/PlanetScrollCameras.ts` still uses Mercury's generic derived-circular-orbit formula as a placeholder for all 9 waypoints. Needs real per-section framing tuned to what each of the 9 sections actually shows (intro, coverflow overview, 5 project detail cards, navigate, contact) — same kind of hand-tuning Mercury's path got. Do this before touching content population below, since re-tuning waypoints may shift how many sections/what pacing makes sense.
+Everything in Phase 23 above is uncommitted on `dev`. Follow `git-standards.md` RULE G-02 exactly: `dev → test → beta → main` in sequence — **do not repeat the Phase 22 mistake** of merging a PR directly from `dev` into `main` and skipping `test`/`beta`.
 
-### Real content population (next session)
+### Camera waypoints — every planet still uses a generic derived formula, none hand-tuned
 
-All planet overlays currently contain placeholder copy. The next session will replace all placeholder text with actual portfolio content across every planet.
+`PlanetScrollCameras.ts` gives all 9 planets a continuous circular-orbit path with radius breathing scaled to each planet's actual sphere size, but **no planet's `lookAt` framing has been hand-tuned to what its individual sections actually show** — Mercury is the only one with real per-waypoint framing work done (Phase 20). Venus, Sun, Earth, Mars, Jupiter, Saturn, and Uranus all need the same kind of session Mercury got: real per-section framing tuned to what each waypoint's section actually displays, not a mechanically-derived circle. Do this per-planet before further content changes on that planet, since re-tuning waypoints may shift section pacing/count.
 
-**Sun (About):** bio, methodology, stack, highlights, values
-**Venus (Design):** UI rebuilt in Phase 21 with fitting filler content (5 real-shaped projects + 2 filler cards, Vesper/Halo) — still needs real project data, real screenshots (`image` field is `null` everywhere, renders a placeholder icon), and real `demoUrl` links (all `null`, buttons fall back to `#`)
-**Earth (Dev):** development projects, stack, open-source contributions
-**Mars (Labs):** experiments, tools, creative coding work
-**Jupiter (Enterprise):** enterprise clients, methodology, results, industries
-**Saturn (Products):** digital products, pricing, licensing, reviews
-**Uranus (Concepts):** speculative concepts, design fiction, ideation process
-**Mercury (Journal):** article cards — real titles, excerpts, dates, categories, images
+### Real content still needed
+
+Sun, Earth, Mars, Jupiter, Saturn, and Uranus now have concrete example content (Phase 23) instead of bracket placeholders — but it is still example/dummy content, not final real copy. Still outstanding:
+
+**Venus (Design):** still needs real project data — `image` is `null` on every project (renders a placeholder icon) and `demoUrl` is `null` on every project (the 5 "VISIT PROJECT" buttons now render as a visibly disabled state rather than dead links, per Phase 23, but still need real URLs to become live)
+**Mercury (Journal):** real article images (currently 5 shared SVG placeholders in `public/images/articles/`, reused across all 7 posts)
+**All planets:** the example content added in Phase 23 (Meridian/Northwind/Pulsegrid, the NDA-anonymized Jupiter clients, Orbit UI/Nightfall/Glyphset, Terrarium/Echograph/Fracture/Driftwood, Aftertouch/Palimpsest/Weathervane/Nocturne) is realistic-sounding placeholder, not real project history — swap for actual work when ready
+**Landing page:** Beat 01–04 placeholder text (hero heading, stats, work pills) not yet audited for remaining placeholders
 
 **Also needed:**
-- Real article images to `public/images/articles/` (currently 404)
-- Sidebar `items[]` arrays in each `{Planet}Overlay.astro` to match real content
-- Landing page Beat 01–04 placeholder text (hero heading, stats, work pills)
+- Sidebar `items[]` arrays in each `{Planet}Overlay.astro` to match real content once written
+- Two duplicate "Contact" experiences (`/neptune` static page vs. `/sol?target=neptune` 3D overlay) — both now bug-free (Phase 23) but still separately-maintained duplicate copy; consolidating is a product decision, not done
 
 **Deferred but not forgotten:**
 - `@strata-packages/modal` — installed, not yet wired
@@ -873,5 +943,6 @@ All planet overlays currently contain placeholder copy. The next session will re
 - `destroy()` methods on all engines + `astro:before-swap` cleanup
 - Section-by-section strata utility audit (landing page beats)
 - Asteroid belt page / section
-- **Commit + push Phase 18** — currently uncommitted on `dev`. Follow `git-standards.md`: version bump at push time, commit message per Conventional Commits (likely `fix:` — the ghost-planet regression is the headline change), then `dev → test → beta → main` in sequence.
+- Sitemap generation (`@astrojs/sitemap` or equivalent) — flagged in the Phase 23 audit, not added since it requires a new dependency
+- **`Bump({method:'uv-offset'})` upstream bug still open** — report the 0.4.1 re-test findings (extension directive still misordered, now preceded by a `luminance()` helper) back to the triforge repo. Once genuinely fixed, migrate Mercury/Venus/Mars off `TextureBump` and delete it from `CoreShaderNodes.ts` — third and last custom node to retire.
 - **`Bump({method:'uv-offset'})` upstream bug still open** — report the 0.4.1 re-test findings (extension directive still misordered, now preceded by a `luminance()` helper) back to the triforge repo. Once genuinely fixed, migrate Mercury/Venus/Mars off `TextureBump` and delete it from `CoreShaderNodes.ts` — third and last custom node to retire.

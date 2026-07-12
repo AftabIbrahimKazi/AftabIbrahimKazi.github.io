@@ -30,7 +30,7 @@
     <span class="ex-neptune-status-dot" aria-hidden="true"></span>
     <span class="ex-neptune-status-text">Open to new projects</span>
   </div>
-  <p class="ex-para ex-neptune-body">Based in [City, Country]. Working remotely worldwide.</p>
+  <p class="ex-para ex-neptune-body">Working remotely, open to teams in any timezone.</p>
 </div>
 
 <!-- ── Section 3 — Contact form ─────────────────────────────── -->
@@ -39,11 +39,8 @@
   <h2 class="ex-heading ex-neptune-section-title">Compose Your Transmission</h2>
   <form
     class="ex-neptune-form"
+    id="ex-neptune-form"
     name="contact"
-    method="POST"
-    action="/neptune/success"
-    onsubmit="return false;"
-    novalidate
   >
     <div class="ex-neptune-form-row">
       <div class="ex-neptune-field">
@@ -63,10 +60,11 @@
       <label class="ex-neptune-label" for="np-message">Message</label>
       <textarea class="ex-neptune-input ex-neptune-textarea" id="np-message" name="message" rows="5" placeholder="Tell me about your project, idea, or just say hello." required></textarea>
     </div>
-    <button class="ex-neptune-submit" type="submit">
-      <span>TRANSMIT</span>
+    <button class="ex-neptune-submit" id="ex-neptune-submit" type="submit">
+      <span id="ex-neptune-submit-label">TRANSMIT</span>
       <span aria-hidden="true">&rarr;</span>
     </button>
+    <p class="ex-neptune-submit-note" id="ex-neptune-submit-note" role="status" aria-live="polite"></p>
   </form>
 </div>
 
@@ -76,27 +74,21 @@
   <h2 class="ex-heading ex-neptune-section-title">Other Frequencies</h2>
   <ul class="ex-neptune-socials" role="list">
     <li>
-      <a href="https://github.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/AftabIbrahimKazi" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-github ex-neptune-social-icon" aria-hidden="true"></i>
         <span>GitHub</span>
       </a>
     </li>
     <li>
-      <a href="https://linkedin.com/in/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/aftab-kazi-715b88193/" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-linkedin ex-neptune-social-icon" aria-hidden="true"></i>
         <span>LinkedIn</span>
       </a>
     </li>
     <li>
-      <a href="https://twitter.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
+      <a href="https://x.com" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-x-twitter ex-neptune-social-icon" aria-hidden="true"></i>
         <span>Twitter / X</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://dribbble.com/placeholder" class="ex-neptune-social-link" target="_blank" rel="noopener noreferrer">
-        <i class="fa-brands fa-dribbble ex-neptune-social-icon" aria-hidden="true"></i>
-        <span>Dribbble</span>
       </a>
     </li>
   </ul>
@@ -122,6 +114,33 @@
     document.querySelector<HTMLElement>('[data-scroll-next]')?.addEventListener('click', () => {
       const sections = document.querySelectorAll<HTMLElement>('.ex-neptune-section');
       sections[1]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // Static GitHub Pages hosting has no backend to submit this form to —
+    // the mailto: fallback opens the visitor's own email client pre-filled
+    // with their message, matching the standalone /neptune contact page.
+    const form  = document.getElementById('ex-neptune-form') as HTMLFormElement | null;
+    const label = document.getElementById('ex-neptune-submit-label');
+    const note  = document.getElementById('ex-neptune-submit-note');
+
+    form?.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      if (!form.reportValidity() || !label || !note) return;
+
+      const data    = new FormData(form);
+      const name    = (data.get('name') ?? '').toString();
+      const email   = (data.get('email') ?? '').toString();
+      const subject = (data.get('subject') ?? '').toString();
+      const message = (data.get('message') ?? '').toString();
+
+      const body = `${message}\n\n— ${name} (${email})`;
+      const mailto = `mailto:hello@aftabkazi.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      label.textContent = 'OPENING…';
+      note.textContent  = "Your email app should open with this message ready to send. If nothing opens, email hello@aftabkazi.com directly.";
+      window.location.href = mailto;
+
+      window.setTimeout(() => { label.textContent = 'TRANSMIT'; }, 4000);
     });
   }
 
