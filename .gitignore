@@ -27,3 +27,10 @@ pnpm-debug.log*
 coding-standards/
 skills/
 .claude/
+
+# AI session docs (local only)
+CLAUDE.md
+handover.md
+strata-findings.md
+FINDINGS.md
+PACKAGE-ISSUES.md
