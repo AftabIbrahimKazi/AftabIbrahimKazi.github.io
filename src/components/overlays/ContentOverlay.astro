@@ -33,219 +33,128 @@ import SunOverlay     from './SunOverlay.astro';
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     SUN sidebars
+     SUN article panel — single bottom slide-up sheet, same pattern as
+     the Mercury/Venus panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-sun-sidebar-left" class="ex-sun-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Detail">
-  <div class="ex-sun-sidebar-inner">
-    <div class="ex-sun-sidebar-header">
-      <button class="ex-sun-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-sun-article-panel" class="ex-sun-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Detail">
+  <div class="ex-sun-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-sun-article-panel-header">
+      <button class="ex-sun-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close detail">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-sun-sidebar-cat"  id="ex-sun-sidebar-cat-left"></span>
-      <h2 class="ex-sun-sidebar-title"  id="ex-sun-sidebar-title-left"></h2>
-      <p class="ex-sun-sidebar-meta"    id="ex-sun-sidebar-meta-left"></p>
+      <span class="ex-sun-article-panel-cat"   id="ex-sun-article-panel-cat"></span>
+      <h2 class="ex-sun-article-panel-title"   id="ex-sun-article-panel-title"></h2>
+      <p class="ex-sun-article-panel-meta"     id="ex-sun-article-panel-meta"></p>
     </div>
-    <div class="ex-sun-sidebar-body" id="ex-sun-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-sun-sidebar-right" class="ex-sun-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Detail">
-  <div class="ex-sun-sidebar-inner">
-    <div class="ex-sun-sidebar-header">
-      <button class="ex-sun-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-sun-sidebar-cat"  id="ex-sun-sidebar-cat-right"></span>
-      <h2 class="ex-sun-sidebar-title"  id="ex-sun-sidebar-title-right"></h2>
-      <p class="ex-sun-sidebar-meta"    id="ex-sun-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-sun-sidebar-body" id="ex-sun-sidebar-body-right"></div>
+    <div class="ex-sun-article-panel-body" id="ex-sun-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     VENUS sidebars
+     VENUS article panel — single bottom slide-up sheet, same pattern
+     as the Mercury panel above (see that block's comment).
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-venus-sidebar-left" class="ex-venus-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
-  <div class="ex-venus-sidebar-inner">
-    <div class="ex-venus-sidebar-header">
-      <button class="ex-venus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-venus-article-panel" class="ex-venus-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project">
+  <div class="ex-venus-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-venus-article-panel-header">
+      <button class="ex-venus-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close project">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-venus-sidebar-cat"  id="ex-venus-sidebar-cat-left"></span>
-      <h2 class="ex-venus-sidebar-title"  id="ex-venus-sidebar-title-left"></h2>
-      <p class="ex-venus-sidebar-meta"    id="ex-venus-sidebar-meta-left"></p>
+      <span class="ex-venus-article-panel-cat"   id="ex-venus-article-panel-cat"></span>
+      <h2 class="ex-venus-article-panel-title"   id="ex-venus-article-panel-title"></h2>
+      <p class="ex-venus-article-panel-meta"     id="ex-venus-article-panel-meta"></p>
     </div>
-    <div class="ex-venus-sidebar-body" id="ex-venus-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-venus-sidebar-right" class="ex-venus-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
-  <div class="ex-venus-sidebar-inner">
-    <div class="ex-venus-sidebar-header">
-      <button class="ex-venus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-venus-sidebar-cat"  id="ex-venus-sidebar-cat-right"></span>
-      <h2 class="ex-venus-sidebar-title"  id="ex-venus-sidebar-title-right"></h2>
-      <p class="ex-venus-sidebar-meta"    id="ex-venus-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-venus-sidebar-body" id="ex-venus-sidebar-body-right"></div>
+    <div class="ex-venus-article-panel-body" id="ex-venus-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     EARTH sidebars
+     EARTH article panel — single bottom slide-up sheet, same pattern
+     as the Mercury/Venus/Sun panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-earth-sidebar-left" class="ex-earth-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
-  <div class="ex-earth-sidebar-inner">
-    <div class="ex-earth-sidebar-header">
-      <button class="ex-earth-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-earth-article-panel" class="ex-earth-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
+  <div class="ex-earth-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-earth-article-panel-header">
+      <button class="ex-earth-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close project">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-earth-sidebar-cat"  id="ex-earth-sidebar-cat-left"></span>
-      <h2 class="ex-earth-sidebar-title"  id="ex-earth-sidebar-title-left"></h2>
-      <p class="ex-earth-sidebar-meta"    id="ex-earth-sidebar-meta-left"></p>
+      <span class="ex-earth-article-panel-cat"   id="ex-earth-article-panel-cat"></span>
+      <h2 class="ex-earth-article-panel-title"   id="ex-earth-article-panel-title"></h2>
+      <p class="ex-earth-article-panel-meta"     id="ex-earth-article-panel-meta"></p>
     </div>
-    <div class="ex-earth-sidebar-body" id="ex-earth-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-earth-sidebar-right" class="ex-earth-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Project detail">
-  <div class="ex-earth-sidebar-inner">
-    <div class="ex-earth-sidebar-header">
-      <button class="ex-earth-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-earth-sidebar-cat"  id="ex-earth-sidebar-cat-right"></span>
-      <h2 class="ex-earth-sidebar-title"  id="ex-earth-sidebar-title-right"></h2>
-      <p class="ex-earth-sidebar-meta"    id="ex-earth-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-earth-sidebar-body" id="ex-earth-sidebar-body-right"></div>
+    <div class="ex-earth-article-panel-body" id="ex-earth-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     MARS sidebars
+     MARS article panel — single bottom slide-up sheet, same pattern
+     as the Mercury/Venus/Sun/Earth panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-mars-sidebar-left" class="ex-mars-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Experiment detail">
-  <div class="ex-mars-sidebar-inner">
-    <div class="ex-mars-sidebar-header">
-      <button class="ex-mars-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-mars-article-panel" class="ex-mars-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Experiment detail">
+  <div class="ex-mars-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-mars-article-panel-header">
+      <button class="ex-mars-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close experiment">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-mars-sidebar-cat"  id="ex-mars-sidebar-cat-left"></span>
-      <h2 class="ex-mars-sidebar-title"  id="ex-mars-sidebar-title-left"></h2>
-      <p class="ex-mars-sidebar-meta"    id="ex-mars-sidebar-meta-left"></p>
+      <span class="ex-mars-article-panel-cat"   id="ex-mars-article-panel-cat"></span>
+      <h2 class="ex-mars-article-panel-title"   id="ex-mars-article-panel-title"></h2>
+      <p class="ex-mars-article-panel-meta"     id="ex-mars-article-panel-meta"></p>
     </div>
-    <div class="ex-mars-sidebar-body" id="ex-mars-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-mars-sidebar-right" class="ex-mars-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Experiment detail">
-  <div class="ex-mars-sidebar-inner">
-    <div class="ex-mars-sidebar-header">
-      <button class="ex-mars-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-mars-sidebar-cat"  id="ex-mars-sidebar-cat-right"></span>
-      <h2 class="ex-mars-sidebar-title"  id="ex-mars-sidebar-title-right"></h2>
-      <p class="ex-mars-sidebar-meta"    id="ex-mars-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-mars-sidebar-body" id="ex-mars-sidebar-body-right"></div>
+    <div class="ex-mars-article-panel-body" id="ex-mars-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     JUPITER sidebars
+     JUPITER article panel — single bottom slide-up sheet, same pattern
+     as the Mercury/Venus/Sun/Earth/Mars panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-jupiter-sidebar-left" class="ex-jupiter-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Client detail">
-  <div class="ex-jupiter-sidebar-inner">
-    <div class="ex-jupiter-sidebar-header">
-      <button class="ex-jupiter-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-jupiter-article-panel" class="ex-jupiter-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Client detail">
+  <div class="ex-jupiter-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-jupiter-article-panel-header">
+      <button class="ex-jupiter-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close case study">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-jupiter-sidebar-cat"  id="ex-jupiter-sidebar-cat-left"></span>
-      <h2 class="ex-jupiter-sidebar-title"  id="ex-jupiter-sidebar-title-left"></h2>
-      <p class="ex-jupiter-sidebar-meta"    id="ex-jupiter-sidebar-meta-left"></p>
+      <span class="ex-jupiter-article-panel-cat"   id="ex-jupiter-article-panel-cat"></span>
+      <h2 class="ex-jupiter-article-panel-title"   id="ex-jupiter-article-panel-title"></h2>
+      <p class="ex-jupiter-article-panel-meta"     id="ex-jupiter-article-panel-meta"></p>
     </div>
-    <div class="ex-jupiter-sidebar-body" id="ex-jupiter-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-jupiter-sidebar-right" class="ex-jupiter-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Client detail">
-  <div class="ex-jupiter-sidebar-inner">
-    <div class="ex-jupiter-sidebar-header">
-      <button class="ex-jupiter-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-jupiter-sidebar-cat"  id="ex-jupiter-sidebar-cat-right"></span>
-      <h2 class="ex-jupiter-sidebar-title"  id="ex-jupiter-sidebar-title-right"></h2>
-      <p class="ex-jupiter-sidebar-meta"    id="ex-jupiter-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-jupiter-sidebar-body" id="ex-jupiter-sidebar-body-right"></div>
+    <div class="ex-jupiter-article-panel-body" id="ex-jupiter-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     SATURN sidebars
+     SATURN article panel — single bottom slide-up sheet, same pattern
+     as the Mercury/Venus/Sun/Earth/Mars/Jupiter panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-saturn-sidebar-left" class="ex-saturn-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Product detail">
-  <div class="ex-saturn-sidebar-inner">
-    <div class="ex-saturn-sidebar-header">
-      <button class="ex-saturn-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-saturn-article-panel" class="ex-saturn-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Product detail">
+  <div class="ex-saturn-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-saturn-article-panel-header">
+      <button class="ex-saturn-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close product detail">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-saturn-sidebar-cat"  id="ex-saturn-sidebar-cat-left"></span>
-      <h2 class="ex-saturn-sidebar-title"  id="ex-saturn-sidebar-title-left"></h2>
-      <p class="ex-saturn-sidebar-meta"    id="ex-saturn-sidebar-meta-left"></p>
+      <span class="ex-saturn-article-panel-cat"   id="ex-saturn-article-panel-cat"></span>
+      <h2 class="ex-saturn-article-panel-title"   id="ex-saturn-article-panel-title"></h2>
+      <p class="ex-saturn-article-panel-meta"     id="ex-saturn-article-panel-meta"></p>
     </div>
-    <div class="ex-saturn-sidebar-body" id="ex-saturn-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-saturn-sidebar-right" class="ex-saturn-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Product detail">
-  <div class="ex-saturn-sidebar-inner">
-    <div class="ex-saturn-sidebar-header">
-      <button class="ex-saturn-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-saturn-sidebar-cat"  id="ex-saturn-sidebar-cat-right"></span>
-      <h2 class="ex-saturn-sidebar-title"  id="ex-saturn-sidebar-title-right"></h2>
-      <p class="ex-saturn-sidebar-meta"    id="ex-saturn-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-saturn-sidebar-body" id="ex-saturn-sidebar-body-right"></div>
+    <div class="ex-saturn-article-panel-body" id="ex-saturn-article-panel-body"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════
-     URANUS sidebars
+     URANUS article panel — single bottom slide-up sheet, same pattern
+     as the Mercury/Venus/Sun/Earth/Mars/Jupiter/Saturn panels above.
      ══════════════════════════════════════════════════════════════ -->
-<div id="ex-uranus-sidebar-left" class="ex-uranus-sidebar offcanvas" data-st-side="left" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Concept detail">
-  <div class="ex-uranus-sidebar-inner">
-    <div class="ex-uranus-sidebar-header">
-      <button class="ex-uranus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
+<div id="ex-uranus-article-panel" class="ex-uranus-article-panel offcanvas" data-st-side="bottom" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Concept detail">
+  <div class="ex-uranus-article-panel-inner d-flex flex-column h-100 overflow-y-auto">
+    <div class="ex-uranus-article-panel-header">
+      <button class="ex-uranus-article-panel-close" data-st-dismiss="offcanvas" aria-label="Close concept">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <span class="ex-uranus-sidebar-cat"  id="ex-uranus-sidebar-cat-left"></span>
-      <h2 class="ex-uranus-sidebar-title"  id="ex-uranus-sidebar-title-left"></h2>
-      <p class="ex-uranus-sidebar-meta"    id="ex-uranus-sidebar-meta-left"></p>
+      <span class="ex-uranus-article-panel-cat"   id="ex-uranus-article-panel-cat"></span>
+      <h2 class="ex-uranus-article-panel-title"   id="ex-uranus-article-panel-title"></h2>
+      <p class="ex-uranus-article-panel-meta"     id="ex-uranus-article-panel-meta"></p>
     </div>
-    <div class="ex-uranus-sidebar-body" id="ex-uranus-sidebar-body-left"></div>
-  </div>
-</div>
-
-<div id="ex-uranus-sidebar-right" class="ex-uranus-sidebar offcanvas" data-st-side="right" aria-hidden="true" aria-modal="false" role="dialog" aria-label="Concept detail">
-  <div class="ex-uranus-sidebar-inner">
-    <div class="ex-uranus-sidebar-header">
-      <button class="ex-uranus-sidebar-close" data-st-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <span class="ex-uranus-sidebar-cat"  id="ex-uranus-sidebar-cat-right"></span>
-      <h2 class="ex-uranus-sidebar-title"  id="ex-uranus-sidebar-title-right"></h2>
-      <p class="ex-uranus-sidebar-meta"    id="ex-uranus-sidebar-meta-right"></p>
-    </div>
-    <div class="ex-uranus-sidebar-body" id="ex-uranus-sidebar-body-right"></div>
+    <div class="ex-uranus-article-panel-body" id="ex-uranus-article-panel-body"></div>
   </div>
 </div>
 
@@ -352,5 +261,388 @@ import SunOverlay     from './SunOverlay.astro';
     <span class="ex-mercury-progress-bullet"></span>
     <span class="ex-mercury-progress-number">10</span>
     <span class="ex-mercury-progress-label">Subscribe</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     VENUS progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-venus-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-venus-progress-strip" class="ex-venus-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-venus-progress-line"></span>
+  <button class="ex-venus-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">01</span>
+    <span class="ex-venus-progress-label">Intro</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">02</span>
+    <span class="ex-venus-progress-label">Work</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">03</span>
+    <span class="ex-venus-progress-label">Lumen</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">04</span>
+    <span class="ex-venus-progress-label">Solstice</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">05</span>
+    <span class="ex-venus-progress-label">Nimbus</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">06</span>
+    <span class="ex-venus-progress-label">Aurora</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">07</span>
+    <span class="ex-venus-progress-label">Kinetic</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">08</span>
+    <span class="ex-venus-progress-label">Navigate</span>
+  </button>
+  <button class="ex-venus-progress-item" type="button" data-section-index="8" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-venus-progress-bullet"></span>
+    <span class="ex-venus-progress-number">09</span>
+    <span class="ex-venus-progress-label">Contact</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SUN progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-sun-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-sun-progress-strip" class="ex-sun-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-sun-progress-line"></span>
+  <button class="ex-sun-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">01</span>
+    <span class="ex-sun-progress-label">Identity</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">02</span>
+    <span class="ex-sun-progress-label">Discipline</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">03</span>
+    <span class="ex-sun-progress-label">Philosophy</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">04</span>
+    <span class="ex-sun-progress-label">Stack</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">05</span>
+    <span class="ex-sun-progress-label">Background</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">06</span>
+    <span class="ex-sun-progress-label">Values</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">07</span>
+    <span class="ex-sun-progress-label">Highlights</span>
+  </button>
+  <button class="ex-sun-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-sun-progress-bullet"></span>
+    <span class="ex-sun-progress-number">08</span>
+    <span class="ex-sun-progress-label">Navigate</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     EARTH progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-earth-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-earth-progress-strip" class="ex-earth-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-earth-progress-line"></span>
+  <button class="ex-earth-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">01</span>
+    <span class="ex-earth-progress-label">Overview</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">02</span>
+    <span class="ex-earth-progress-label">Project 1</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">03</span>
+    <span class="ex-earth-progress-label">Stack</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">04</span>
+    <span class="ex-earth-progress-label">Project 2</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">05</span>
+    <span class="ex-earth-progress-label">Approach</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">06</span>
+    <span class="ex-earth-progress-label">Project 3</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">07</span>
+    <span class="ex-earth-progress-label">Open Source</span>
+  </button>
+  <button class="ex-earth-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-earth-progress-bullet"></span>
+    <span class="ex-earth-progress-number">08</span>
+    <span class="ex-earth-progress-label">Code</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MARS progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-mars-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-mars-progress-strip" class="ex-mars-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-mars-progress-line"></span>
+  <button class="ex-mars-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">01</span>
+    <span class="ex-mars-progress-label">Overview</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">02</span>
+    <span class="ex-mars-progress-label">Experiment 1</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">03</span>
+    <span class="ex-mars-progress-label">Experiment 2</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">04</span>
+    <span class="ex-mars-progress-label">Experiment 3</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">05</span>
+    <span class="ex-mars-progress-label">Experiment 4</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">06</span>
+    <span class="ex-mars-progress-label">Process</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">07</span>
+    <span class="ex-mars-progress-label">Tools</span>
+  </button>
+  <button class="ex-mars-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-mars-progress-bullet"></span>
+    <span class="ex-mars-progress-number">08</span>
+    <span class="ex-mars-progress-label">Field Notes</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     JUPITER progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-jupiter-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-jupiter-progress-strip" class="ex-jupiter-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-jupiter-progress-line"></span>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">01</span>
+    <span class="ex-jupiter-progress-label">Overview</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">02</span>
+    <span class="ex-jupiter-progress-label">Client 1</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">03</span>
+    <span class="ex-jupiter-progress-label">Client 2</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">04</span>
+    <span class="ex-jupiter-progress-label">Methodology</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">05</span>
+    <span class="ex-jupiter-progress-label">Client 3</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">06</span>
+    <span class="ex-jupiter-progress-label">Industries</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">07</span>
+    <span class="ex-jupiter-progress-label">Results</span>
+  </button>
+  <button class="ex-jupiter-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-jupiter-progress-bullet"></span>
+    <span class="ex-jupiter-progress-number">08</span>
+    <span class="ex-jupiter-progress-label">Engage</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SATURN progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-saturn-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-saturn-progress-strip" class="ex-saturn-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-saturn-progress-line"></span>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">01</span>
+    <span class="ex-saturn-progress-label">Overview</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">02</span>
+    <span class="ex-saturn-progress-label">Product 1</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">03</span>
+    <span class="ex-saturn-progress-label">Product 2</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">04</span>
+    <span class="ex-saturn-progress-label">Product 3</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">05</span>
+    <span class="ex-saturn-progress-label">Offer</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">06</span>
+    <span class="ex-saturn-progress-label">Custom</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">07</span>
+    <span class="ex-saturn-progress-label">Reviews</span>
+  </button>
+  <button class="ex-saturn-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-saturn-progress-bullet"></span>
+    <span class="ex-saturn-progress-number">08</span>
+    <span class="ex-saturn-progress-label">Shop</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     URANUS progress strip — same top-level-sibling reasoning as Mercury's.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-uranus-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-uranus-progress-strip" class="ex-uranus-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-uranus-progress-line"></span>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">01</span>
+    <span class="ex-uranus-progress-label">Overview</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">02</span>
+    <span class="ex-uranus-progress-label">Concept 1</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">03</span>
+    <span class="ex-uranus-progress-label">Concept 2</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">04</span>
+    <span class="ex-uranus-progress-label">Concept 3</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">05</span>
+    <span class="ex-uranus-progress-label">Design Fiction</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="5" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">06</span>
+    <span class="ex-uranus-progress-label">Concept 4</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="6" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">07</span>
+    <span class="ex-uranus-progress-label">Ideation</span>
+  </button>
+  <button class="ex-uranus-progress-item" type="button" data-section-index="7" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-uranus-progress-bullet"></span>
+    <span class="ex-uranus-progress-number">08</span>
+    <span class="ex-uranus-progress-label">Collaborate</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     NEPTUNE progress strip — same top-level-sibling reasoning as
+     Mercury's. Sections-only (no article panel — see NeptuneOverlay.astro).
+     ══════════════════════════════════════════════════════════════ -->
+<div class="ex-neptune-progress-backdrop" aria-hidden="true"></div>
+
+<nav id="ex-neptune-progress-strip" class="ex-neptune-progress-strip" data-mode="sections" aria-label="Section progress">
+  <span class="ex-neptune-progress-line"></span>
+  <button class="ex-neptune-progress-item" type="button" data-section-index="0" data-active="true" data-in-range="true" data-swapping="false">
+    <span class="ex-neptune-progress-bullet"></span>
+    <span class="ex-neptune-progress-number">01</span>
+    <span class="ex-neptune-progress-label">Transmission</span>
+  </button>
+  <button class="ex-neptune-progress-item" type="button" data-section-index="1" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-neptune-progress-bullet"></span>
+    <span class="ex-neptune-progress-number">02</span>
+    <span class="ex-neptune-progress-label">Direct Line</span>
+  </button>
+  <button class="ex-neptune-progress-item" type="button" data-section-index="2" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-neptune-progress-bullet"></span>
+    <span class="ex-neptune-progress-number">03</span>
+    <span class="ex-neptune-progress-label">Message Form</span>
+  </button>
+  <button class="ex-neptune-progress-item" type="button" data-section-index="3" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-neptune-progress-bullet"></span>
+    <span class="ex-neptune-progress-number">04</span>
+    <span class="ex-neptune-progress-label">Elsewhere</span>
+  </button>
+  <button class="ex-neptune-progress-item" type="button" data-section-index="4" data-active="false" data-in-range="true" data-swapping="false">
+    <span class="ex-neptune-progress-bullet"></span>
+    <span class="ex-neptune-progress-number">05</span>
+    <span class="ex-neptune-progress-label">Signal Sent</span>
   </button>
 </nav>

@@ -1,8 +1,11 @@
 ---
 // src/components/overlays/MarsOverlay.astro — Labs / Experiments
+// 8 sections — layout data-attributes drive CSS positioning.
+// Sections match MARS_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
 
 const items = [
   {
+    id:       'experiment-1',
     category: 'EXPERIMENT',
     title:    '[Experiment Name]',
     meta:     '[Tech] · [Year]',
@@ -11,8 +14,10 @@ const items = [
       'What worked? What did not? Lab work is allowed to fail — in fact, experiments that fail teach more than ones that succeed on the first attempt. Describe the failure honestly and what it revealed about the problem space.',
       'Is this live? Is there a demo? A repo? If so, link it here. If not, describe what would be needed to take it from experiment to something shippable. Replace this placeholder with your actual experiment.',
     ],
+    topics: ['The Constraint', 'What Failed', 'Where It Stands'],
   },
   {
+    id:       'experiment-2',
     category: 'EXPERIMENT',
     title:    '[Experiment Name]',
     meta:     '[Tech] · [Year]',
@@ -21,8 +26,10 @@ const items = [
       'What was the unexpected result? Experiments often produce outputs you did not anticipate — sometimes better, sometimes stranger, sometimes both. That moment of surprise is often worth documenting more than the intended outcome.',
       'What does this experiment demonstrate about how you approach creative coding? Update this placeholder with your actual experiment and make it specific — the technology, the constraint, and the result.',
     ],
+    topics: ['The Setup', 'The Surprise', 'What It Shows'],
   },
   {
+    id:       'experiment-3',
     category: 'EXPERIMENT',
     title:    '[Experiment Name]',
     meta:     '[Tech] · [Year]',
@@ -31,8 +38,10 @@ const items = [
       'What did building this teach you about the medium? Sometimes an experiment reveals a limitation of a tool or a browser API. Sometimes it reveals a new technique that ends up in production work. What did this one reveal?',
       'Status: ongoing, archived, or turned into a product? Some experiments stay experiments. Some grow into something you ship. Describe where this one stands. Replace this placeholder with your actual work.',
     ],
+    topics: ['The Medium', 'What It Revealed', 'Current Status'],
   },
   {
+    id:       'experiment-4',
     category: 'EXPERIMENT',
     title:    '[Experiment Name]',
     meta:     '[Tech] · [Year]',
@@ -41,72 +50,77 @@ const items = [
       'What makes this one different from the others? If your other experiments were about technique, this one might be about concept. If your others were about code, this one might be about material or form.',
       'Three weekends in, what did you learn? Not just about the technology — about yourself as a maker. The best lab notes capture the honest intellectual experience of the experiment, not just the technical outcome. Update this placeholder.',
     ],
+    topics: ['The Outlier', 'Technique vs. Concept', 'The Real Lesson'],
   },
 ];
 ---
 
-<!-- 01 — Overview -->
+<!-- ── Section 1 — Overview ─────────────────────────────────── -->
 <div class="ex-mars-section" data-layout="bottom-center">
-  <span class="ex-mars-section-label">01 — Labs</span>
-  <h2 class="ex-heading ex-mars-section-title">Push the Limits</h2>
+  <span class="ex-mars-section-label">LABS</span>
+  <h2 class="ex-heading ex-mars-section-title">Push<span class="ex-line-break"></span>the Limits.</h2>
   <p class="ex-para ex-mars-body">Experiments that don't need a client brief. Work done to learn, to break, to find the edge of what's possible in a browser. Some ships. Some stays here. All of it teaches something.</p>
   <div class="ex-mars-stats-row">
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[N] active</span><span class="ex-mars-stat-pill-label">Experiments</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">WebGL</span><span class="ex-mars-stat-pill-label">Primary medium</span></div>
   </div>
+  <button class="ex-mars-intro-cta" type="button" data-scroll-next>
+    ENTER THE LAB
+    <span class="ex-mars-intro-cta-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+  </button>
 </div>
 
-<!-- 02 — Experiment 1 -->
-<div class="ex-mars-section" data-layout="bottom-right">
-  <span class="ex-mars-section-label">02 — Experiment</span>
+<!-- ── Section 2 — Experiment 1 ─────────────────────────────── -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">02 — EXPERIMENT</span>
   <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
   <p class="ex-para ex-mars-body">Placeholder — describe an experiment here. What were you testing? What was the constraint you gave yourself? What worked and what didn't? One or two sentences is enough.</p>
   <div class="ex-mars-key-fact">
     <span class="ex-mars-fact-number">[Tech]</span>
     <span class="ex-mars-fact-label">Built with</span>
   </div>
-  <button class="ex-mars-detail-link" data-item-id="0" data-item-side="left" data-planet="mars">Lab notes →</button>
+  <button class="ex-mars-detail-link" type="button" data-item-id="0" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- 03 — Experiment 2 -->
-<div class="ex-mars-section" data-layout="top-left">
-  <span class="ex-mars-section-label">03 — Experiment</span>
+<!-- ── Section 3 — Experiment 2 ─────────────────────────────── -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">03 — EXPERIMENT</span>
   <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
   <p class="ex-para ex-mars-body">Placeholder — another experiment. Maybe this one is a shader, a generative system, a physics simulation, or a weird CSS trick. Describe it in one or two sentences focused on what was interesting.</p>
   <div class="ex-mars-key-fact">
     <span class="ex-mars-fact-number">[Outcome]</span>
     <span class="ex-mars-fact-label">What it does</span>
   </div>
-  <button class="ex-mars-detail-link" data-item-id="1" data-item-side="right" data-planet="mars">Lab notes →</button>
+  <button class="ex-mars-detail-link" type="button" data-item-id="1" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- 04 — Experiment 3 -->
+<!-- ── Section 4 — Experiment 3 ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
-  <span class="ex-mars-section-label">04 — Experiment</span>
+  <span class="ex-mars-section-label">04 — EXPERIMENT</span>
   <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
   <p class="ex-para ex-mars-body">Placeholder — a third experiment. Interactive audio, data visualisation, machine learning in the browser, generative art. Describe the concept and what you learned from building it.</p>
   <div class="ex-mars-stats-row">
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Year]</span><span class="ex-mars-stat-pill-label">Built</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">[Status]</span><span class="ex-mars-stat-pill-label">Ongoing / archived</span></div>
   </div>
-  <button class="ex-mars-detail-link" data-item-id="2" data-item-side="left" data-planet="mars">Lab notes →</button>
+  <button class="ex-mars-detail-link" type="button" data-item-id="2" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- 05 — Experiment 4 -->
-<div class="ex-mars-section" data-layout="bottom-left">
-  <span class="ex-mars-section-label">05 — Experiment</span>
+<!-- ── Section 5 — Experiment 4 ─────────────────────────────── -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">05 — EXPERIMENT</span>
   <h2 class="ex-heading ex-mars-section-title">[Experiment Name]</h2>
   <p class="ex-para ex-mars-body">Placeholder — a fourth experiment. This space is for the work that doesn't fit anywhere else. The strange, the speculative, the one that took three weekends and you're still not sure it works.</p>
   <div class="ex-mars-key-fact">
     <span class="ex-mars-fact-number">[N] iterations</span>
     <span class="ex-mars-fact-label">Before it clicked</span>
   </div>
-  <button class="ex-mars-detail-link" data-item-id="3" data-item-side="right" data-planet="mars">Lab notes →</button>
+  <button class="ex-mars-detail-link" type="button" data-item-id="3" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- 06 — Process -->
-<div class="ex-mars-section" data-layout="top-left">
-  <span class="ex-mars-section-label">06 — Process</span>
+<!-- ── Section 6 — Process ──────────────────────────────────── -->
+<div class="ex-mars-section" data-layout="right">
+  <span class="ex-mars-section-label">06 — PROCESS</span>
   <h2 class="ex-heading ex-mars-section-title">The Lab Method</h2>
   <p class="ex-para ex-mars-body">Every experiment starts with a single constraint: one unusual input, one novel output, or one forbidden approach. Time-boxed. Documented. The ones that survive go into the field. The rest stay as notes.</p>
   <div class="ex-mars-key-fact">
@@ -115,9 +129,9 @@ const items = [
   </div>
 </div>
 
-<!-- 07 — Tools -->
+<!-- ── Section 7 — Tools ────────────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
-  <span class="ex-mars-section-label">07 — Tools</span>
+  <span class="ex-mars-section-label">07 — TOOLS</span>
   <h2 class="ex-heading ex-mars-section-title">Lab Equipment</h2>
   <p class="ex-para ex-mars-body">Three.js, GLSL shaders, WebGL, Web Audio API, Canvas, GSAP. Sometimes just raw CSS. The constraint isn't the tool — it's the question. Placeholder — update with your actual experimentation stack.</p>
   <div class="ex-mars-stats-row">
@@ -126,9 +140,9 @@ const items = [
   </div>
 </div>
 
-<!-- 08 — CTA -->
+<!-- ── Section 8 — CTA ──────────────────────────────────────── -->
 <div class="ex-mars-section" data-layout="center">
-  <span class="ex-mars-section-label">08 — Field Notes</span>
+  <span class="ex-mars-section-label">08 — FIELD NOTES</span>
   <h2 class="ex-heading ex-mars-section-title">Read the Notes</h2>
   <p class="ex-para ex-mars-body">Write-ups for some experiments live on Mercury. The rest are on GitHub with comments. If something here interests you — working or not — reach out. Broken things are often more interesting than finished ones.</p>
   <div class="ex-mars-stats-row">
@@ -137,47 +151,62 @@ const items = [
   </div>
 </div>
 
-<!-- ── Item data for sidebar ───────────────────────────────────── -->
+<!-- ── Item data for article panel ──────────────────────────── -->
 <script type="application/json" id="ex-mars-items-data" is:inline set:html={JSON.stringify(items)}></script>
 
 <script>
   import StrataOffcanvas from '@strata-packages/offcanvas';
+  import { MarsProgressStrip } from '../../scripts/ui/solar-system/MarsProgressStrip';
 
   function init(): void {
-    const dataEl       = document.getElementById('ex-mars-items-data');
-    const sidebarLeft  = document.getElementById('ex-mars-sidebar-left');
-    const sidebarRight = document.getElementById('ex-mars-sidebar-right');
+    new MarsProgressStrip().init();
 
-    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+    document.querySelector<HTMLElement>('[data-scroll-next]')?.addEventListener('click', () => {
+      const sections = document.querySelectorAll<HTMLElement>('.ex-mars-section');
+      sections[1]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
 
-    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
-    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    const dataEl   = document.getElementById('ex-mars-items-data');
+    const panel    = document.getElementById('ex-mars-article-panel');
+    const closeBtn = panel?.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]') ?? null;
 
-    const items: { category: string; title: string; meta: string; body: string[] }[] =
+    if (!dataEl || !panel) return;
+
+    const catEl   = document.getElementById('ex-mars-article-panel-cat');
+    const titleEl = document.getElementById('ex-mars-article-panel-title');
+    const metaEl  = document.getElementById('ex-mars-article-panel-meta');
+    const bodyEl  = document.getElementById('ex-mars-article-panel-body');
+
+    const items: { id: string; category: string; title: string; meta: string; body: string[]; topics: string[] }[] =
       JSON.parse(dataEl.textContent ?? '[]');
+
+    const openItem = (item: typeof items[number]): void => {
+      if (catEl)   catEl.textContent   = item.category;
+      if (titleEl) titleEl.textContent = item.title;
+      if (metaEl)  metaEl.textContent  = item.meta;
+      if (bodyEl)  bodyEl.innerHTML    = item.body
+        .map((para, i) => `<p data-topic="${(item.topics[i] ?? '').replace(/"/g, '&quot;')}">${para}</p>`)
+        .join('');
+
+      StrataOffcanvas.open(panel);
+      setTimeout(() => closeBtn?.focus(), 60);
+    };
+
+    document.addEventListener('st:offcanvas:open', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:mars-article-open'));
+    });
+    document.addEventListener('st:offcanvas:close', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:mars-article-close'));
+    });
 
     document.addEventListener('click', (e: MouseEvent) => {
       const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
       if (!btn || btn.dataset.planet !== 'mars') return;
       const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
       if (!item) return;
-
-      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
-      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
-      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
-
-      const catEl   = document.getElementById(`ex-mars-sidebar-cat-${side}`);
-      const titleEl = document.getElementById(`ex-mars-sidebar-title-${side}`);
-      const metaEl  = document.getElementById(`ex-mars-sidebar-meta-${side}`);
-      const bodyEl  = document.getElementById(`ex-mars-sidebar-body-${side}`);
-
-      if (catEl)   catEl.textContent   = item.category;
-      if (titleEl) titleEl.textContent = item.title;
-      if (metaEl)  metaEl.textContent  = item.meta;
-      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
-
-      StrataOffcanvas.open(sidebar);
-      setTimeout(() => closeBtn?.focus(), 60);
+      openItem(item);
     });
   }
 

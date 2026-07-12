@@ -1,6 +1,11 @@
-/* mars-overlay.css — Red planet · Bold dramatic theme */
+/* mars-overlay.css — Red planet · Bold dramatic theme
+   Color palette: burnt orange → rust — rgba(230,100,50) → rgba(140,40,10)
+   Evokes: dust storms, oxidised iron, dramatic contrast */
 
-#ex-content-overlay[data-planet="ex-mars-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-mars-js"] {
+  background: transparent;
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-mars-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-mars-js"] .ex-overlay-section--entry {
@@ -15,6 +20,7 @@
   border-radius: var(--ex-border-radius-outer);
   display: inline-block;
   margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
   padding: var(--ex-space-md) var(--ex-space-lg);
 }
 
@@ -25,7 +31,9 @@
   color: transparent;
 }
 
-/* ── Section base — sharp, stark, dramatic ───────────────────── */
+/* ================================================================
+   MARS — SECTION LAYOUT SYSTEM (sharp, stark, dramatic — 3px borders)
+   ================================================================ */
 
 .ex-mars-section {
   backdrop-filter: blur(16px);
@@ -35,15 +43,13 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
-
-/* ── Layout variants ─────────────────────────────────────────── */
 
 .ex-mars-section[data-layout="bottom-center"] {
   align-items: center;
@@ -55,36 +61,11 @@
   text-align: center;
 }
 
-.ex-mars-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 3px solid var(--ex-color-mars-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-mars-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-mars-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 3px solid var(--ex-color-mars-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-mars-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-mars-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -98,7 +79,9 @@
   text-align: center;
 }
 
-/* ── Typography — bold section labels as visual anchors ──────── */
+/* ================================================================
+   MARS — TYPOGRAPHY
+   ================================================================ */
 
 .ex-mars-section-label {
   background: none;
@@ -129,14 +112,13 @@
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact — massive numbers for planetary scale ──────────── */
-
+/* ── Key fact ── */
 .ex-mars-key-fact {
-  border-top: 1px solid var(--ex-color-mars-border);
+  border-top: 1px solid var(--ex-color-mars-border-inner);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-mars-fact-number {
@@ -159,24 +141,23 @@
   text-transform: uppercase;
 }
 
-/* ── Stats row / pill ────────────────────────────────────────── */
-
+/* ── Stats row / pill ── */
 .ex-mars-stats-row {
-  border-top: 1px solid var(--ex-color-mars-border);
+  border-top: 1px solid var(--ex-color-mars-border-inner);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-mars-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-mars-border);
+  background-color: var(--ex-color-mars-pill-bg);
+  border: 1px solid var(--ex-color-mars-border-inner);
   border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
 }
 
 .ex-mars-stat-pill-value {
@@ -195,118 +176,13 @@
   text-transform: uppercase;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────────── */
-
-.ex-mars-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(20, 3, 0, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(65, 12, 0, 0.94);
-  border-top: 2px solid var(--ex-color-mars-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-
-.ex-mars-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-mars-border); }
-.ex-mars-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-mars-border); }
-
-.ex-mars-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--ex-color-mars-border) transparent;
-  scrollbar-width: thin;
-}
-
-.ex-mars-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-mars-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
-  position: relative;
-}
-
-.ex-mars-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-mars-border);
-  border-radius: var(--ex-border-radius-round);
-  color: var(--ex-text-body);
-  cursor: pointer;
-  font-size: var(--ex-font-size-default);
-  height: var(--ex-size-36);
-  position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
-  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
-  width: var(--ex-size-36);
-}
-
-.ex-mars-sidebar-close:hover {
-  background: var(--ex-color-mars-border);
-  border-color: var(--ex-color-mars-hi);
-}
-
-.ex-mars-sidebar-cat {
-  -webkit-background-clip: text;
-  background: linear-gradient(to right, var(--ex-color-mars-hi), var(--ex-color-mars-lo));
-  background-clip: text;
-  color: transparent;
-  display: block;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-heading-font-weight);
-  letter-spacing: var(--ex-tracking-xl);
-  margin-bottom: var(--ex-space-sm);
-  padding-right: var(--ex-size-40);
-  text-transform: uppercase;
-}
-
-.ex-mars-sidebar-title {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
-  font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
-  margin-bottom: var(--ex-space-xs);
-}
-
-.ex-mars-sidebar-meta {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-para-font-weight);
-  letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
-  text-transform: uppercase;
-}
-
-.ex-mars-sidebar-body {
-  flex: 1;
-  padding: var(--ex-space-lg);
-}
-
-.ex-mars-sidebar-body p {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-default);
-  font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
-  margin-bottom: var(--ex-space-md);
-  opacity: var(--ex-opacity-body);
-}
-
-.ex-mars-sidebar-body p:last-child { margin-bottom: 0; }
-
-/* ── Detail link ─────────────────────────────────────────────── */
-
+/* ── Detail link ── */
 .ex-mars-detail-link {
-  -webkit-background-clip: text;
   align-items: center;
   background: linear-gradient(to right, var(--ex-color-mars-hi), var(--ex-color-mars-lo));
+  -webkit-background-clip: text;
   background-clip: text;
+  border: none;
   color: transparent;
   cursor: pointer;
   display: inline-flex;
@@ -320,5 +196,315 @@
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
-
 .ex-mars-detail-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Intro CTA ── */
+.ex-mars-intro-cta {
+  align-items: center;
+  background: var(--ex-color-mars-pill-bg);
+  border: 1px solid var(--ex-color-mars-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-mars-hi);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-lg);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-mars-intro-cta:hover { border-color: var(--ex-color-mars-hi); opacity: var(--ex-opacity-high); }
+
+.ex-mars-intro-cta-arrow { display: inline-flex; }
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, same pattern as the
+   Mercury/Venus/Sun/Earth panels.
+   ================================================================ */
+
+.ex-mars-article-panel {
+  --st-bg:               var(--ex-color-mars-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 1200px) {
+  .ex-mars-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.ex-mars-article-panel-inner,
+.ex-mars-article-panel-header,
+.ex-mars-article-panel-body,
+.ex-mars-article-panel-close {
+  pointer-events: auto;
+}
+
+.ex-mars-article-panel-inner {
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-mars-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-mars-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-mars-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
+  position: relative;
+}
+
+.ex-mars-article-panel-close {
+  background: var(--ex-color-mars-pill-bg);
+  border: 1px solid var(--ex-color-mars-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+.ex-mars-article-panel-close:hover {
+  background: var(--ex-color-mars-border);
+  border-color: var(--ex-color-mars-hi);
+}
+
+.ex-mars-article-panel-cat {
+  background: linear-gradient(to right, var(--ex-color-mars-hi), var(--ex-color-mars-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-mars-article-panel-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+  margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
+}
+
+.ex-mars-article-panel-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-mars-article-panel-body {
+  flex: 1;
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
+}
+
+.ex-mars-article-panel-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-mars-article-panel-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================
+   MARS — PROGRESS STRIP
+   ================================================================ */
+
+.ex-mars-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-mars-js"] ~ .ex-mars-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-mars-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-mars-js"] ~ .ex-mars-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-mars-progress-line {
+  background-color: var(--ex-color-mars-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-mars-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mars-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-mars-progress-bullet {
+  background-color: var(--ex-color-mars-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-mars-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mars-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-mars-progress-item[data-swapping="true"] .ex-mars-progress-number,
+.ex-mars-progress-item[data-swapping="true"] .ex-mars-progress-label {
+  opacity: 0;
+}
+
+.ex-mars-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-mars-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-mars-progress-item[data-active="true"] .ex-mars-progress-bullet {
+  background-color: var(--ex-color-mars-hi);
+  transform: scale(1.6);
+}
+
+.ex-mars-progress-item[data-active="true"] .ex-mars-progress-number {
+  background: linear-gradient(to right, var(--ex-color-mars-hi), var(--ex-color-mars-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   MARS — RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-mars-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-mars-progress-strip,
+  .ex-mars-progress-backdrop {
+    display: none;
+  }
+
+  .ex-mars-article-panel-header,
+  .ex-mars-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-mars-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-mars-progress-number,
+  .ex-mars-progress-label {
+    display: none;
+  }
+
+  .ex-mars-article-panel-header,
+  .ex-mars-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-mars-progress-label {
+    display: none;
+  }
+
+  .ex-mars-article-panel-header,
+  .ex-mars-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

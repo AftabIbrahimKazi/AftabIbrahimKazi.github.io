@@ -1,334 +1,574 @@
 ---
-// src/components/overlays/VenusOverlay.astro — Design / Visual Work
-// 12 sections matching VENUS_SCROLL_PATH waypoints
+// src/components/overlays/VenusOverlay.astro
+// 9 sections — layout data-attributes drive CSS positioning.
+// Sections match VENUS_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
 
-const items = [
+const projects = [
   {
+    id:       'vesper-weather-app',
+    meta:     'Mobile App · 2025',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Deliverable] · [Year]',
+    title:    'Vesper: A Weather App Redesign',
+    excerpt:  'A ground-up redesign of a weather app\'s hourly and radar views, built around glanceability over completeness.',
+    date:     '2025',
+    image:    null,
     body: [
-      'Placeholder — describe your first featured design project. What was the brief, who was it for, and what was the core design challenge? The most compelling case studies start with a specific problem, not a list of deliverables.',
-      'What decisions did you make and why? Design is a series of choices under constraints. Describe the constraints — timeline, brand, technical, audience — and how they shaped the outcome. This is what separates a portfolio piece from a screenshot.',
-      'What was the result? If you have metrics, use them. If not, describe the qualitative outcome. Update this placeholder with your actual project details and remove everything that is not true.',
+      'Most weather apps try to show everything at once — a decision that makes sense for a settings screen, not a glance screen. Vesper\'s redesign started from the opposite question: what is the one number a user actually needs in the first half-second?',
+      'The radar view got the most attention: a full-screen, gesture-driven timeline instead of a cramped inset map, since precipitation timing is the single highest-value piece of information a weather app can surface.',
+      'Shipped as a personal project, not client work — a testing ground for glanceable-UI patterns that later informed how the Nimbus banking redesign approached its own home screen.',
     ],
+    topics: ['The Glance Question', 'The Radar View', 'Feeding Forward'],
   },
   {
+    id:       'lumen-health-design-system',
+    meta:     'Design System · 2025',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Deliverable] · [Year]',
-    body: [
-      'Placeholder — a second featured design project. This could be a brand identity, a dashboard, a mobile app, or a design system. The goal is to show range — a different type of problem, a different deliverable, a different scale.',
-      'What was your specific role? If this was a team project, be clear about what you were responsible for. Design credits matter — vague attribution signals imprecision. Be specific about your contribution.',
-      'What makes this project a good example of your design thinking? Not the visual output, but the reasoning. Update this placeholder with your actual project. Replace all placeholder brackets with real content.',
+    title:    'Lumen: A Design System for a Health Platform',
+    subtitle: 'A Design System for a Health Platform',
+    excerpt:  'A token-based component library built to carry a patient-facing health platform across web and native, without the two surfaces drifting apart.',
+    date:     '2025',
+    image:    null,
+    demoUrl:  null,
+    stats: [
+      { value: 62, suffix: '+', label: 'Components' },
+      { value: 18, suffix: '',  label: 'Months' },
+      { value: 3,  suffix: '',  label: 'Platforms' },
     ],
+    body: [
+      'Lumen started as a token layer — colour, spacing, and type scales shared between the web app and the native clients — before a single component existed. Getting the tokens right first meant every component built afterward inherited consistency instead of having to enforce it case by case.',
+      'The hardest constraint was accessibility in a clinical context: contrast ratios, focus states, and error messaging all had to hold up for users under stress, not just pass an automated audit. Every component shipped with its accessibility behaviour documented alongside its visual spec, not as an afterthought.',
+      'Eighteen months in, the system covers over sixty components and is the default starting point for every new feature on the platform — the real measure of a design system is not how it looks on day one, it is whether teams reach for it on day two hundred.',
+    ],
+    topics: ['The Token Layer', 'Accessibility First', 'Adoption'],
   },
   {
+    id:       'solstice-rebrand',
+    meta:     'Brand Identity · 2024',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Deliverable] · [Year]',
-    body: [
-      'Placeholder — a third design project. Branding, product design, editorial, motion, or interactive. By this point you have shown range — this project can go deeper into one specialisation or demonstrate a type of design work the others do not cover.',
-      'What are you most proud of in this one? Not the visual — the decision. The moment where you chose a direction, defended it, and it turned out to be right. Those moments of conviction are what make a portfolio memorable.',
-      'What would you do differently now? Every project contains lessons. Naming them demonstrates self-awareness and growth. Update this placeholder with your actual project and be honest about what worked and what you would change.',
+    title:    'Solstice: A Full Brand Rebrand',
+    subtitle: 'A Full Brand Rebrand',
+    excerpt:  'A ground-up identity rebuild for a subscription hardware company — logo, type system, colour, and a guidelines deck the internal team could actually use.',
+    date:     '2024',
+    image:    null,
+    demoUrl:  null,
+    stats: [
+      { value: 3,  suffix: '',  label: 'Logo Variants' },
+      { value: 40, suffix: '+', label: 'Guideline Pages' },
+      { value: 6,  suffix: '',  label: 'Months' },
     ],
+    body: [
+      'The brief was blunt: the existing brand looked like a 2016 startup, and the product had moved well past that. The rebuild started with a type pairing that held its own at both 12px UI labels and 3-metre trade-show signage — most identity work fails at one end of that range.',
+      'Colour came last, not first. Locking type and logomark before colour meant the palette could be chosen to serve the system, not the other way around — a common ordering mistake that produces identities that look good in isolation and fall apart across real touchpoints.',
+      'The guidelines deck was written for the internal marketing team, not for an awards submission — usage rules, common mistakes, and ready-to-use asset exports, because a brand guide nobody opens twice was not worth building.',
+    ],
+    topics: ['The Type System', 'Colour Last', 'A Usable Guide'],
   },
   {
+    id:       'nimbus-mobile-banking',
+    meta:     'Mobile App · 2024',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Deliverable] · [Year]',
-    body: [
-      'Placeholder — a fourth design project. Could be a case study, a design system, a redesign, or a speculative concept. This is a good place for a project that was challenging for non-obvious reasons — organisational, conceptual, or technical.',
-      'What was the most difficult constraint? The best design work often happens under the most difficult constraints. Describe what yours were and how you navigated them without the work showing the strain.',
-      'What is the measurable impact? Even if the metric is qualitative — user satisfaction, team adoption, client feedback — put a number on it if you can. Outcomes distinguish portfolio pieces from exercises. Update this placeholder.',
+    title:    'Nimbus: A Mobile Banking App Redesign',
+    subtitle: 'A Mobile Banking App Redesign',
+    excerpt:  'A full UX audit and redesign of a mobile banking app\'s core flows — balances, transfers, and card controls — cutting task completion time by a third.',
+    date:     '2024',
+    image:    null,
+    demoUrl:  null,
+    stats: [
+      { value: 33, suffix: '%', label: 'Faster Tasks' },
+      { value: 4,  suffix: '',  label: 'Core Flows' },
+      { value: 2,  suffix: '',  label: 'Platforms' },
     ],
+    body: [
+      'The audit started with session recordings, not assumptions. Watching real users hunt for the transfer flow across three nested menus was more useful than any heuristic checklist — it showed exactly where the information architecture had drifted from how people actually think about their money.',
+      'The redesign flattened the navigation from four levels to two and moved the most-used actions — balance check, quick transfer, card freeze — onto the home screen itself. Every change was validated against the same recorded sessions before it shipped, not just internal review.',
+      'Post-launch analytics showed task completion time down roughly a third on the core flows, with support tickets tagged "can\'t find X" dropping to a fraction of their previous volume — the kind of outcome a redesign should be judged on.',
+    ],
+    topics: ['Watching Real Sessions', 'Flattening the Nav', 'The Numbers'],
   },
   {
+    id:       'aurora-marketing-site',
+    meta:     'Web Design · 2023',
     category: 'PROJECT',
-    title:    '[Project Name]',
-    meta:     '[Deliverable] · [Year]',
-    body: [
-      'Placeholder — a fifth project. Maybe something speculative or a personal passion project. Work done for yourself, for a cause, or as an exploration is often the most revealing work in a portfolio — it shows what you choose to do when nobody is telling you what to do.',
-      'What question were you trying to answer with this project? Personal work at its best is a design research project: a hypothesis, an experiment, and a finding. Even if the outcome is "I learned that this approach does not work," that is a valid result.',
-      'What would you do with it if you had the time and budget to take it further? The answer reveals your ambition and your values. Update this placeholder with your actual project and be specific about what drove it.',
+    title:    'Aurora: A Marketing Site Built for Conversion',
+    subtitle: 'A Marketing Site Built for Conversion',
+    excerpt:  'A marketing site rebuild for a B2B SaaS product, designed around a single conversion goal instead of a laundry list of feature callouts.',
+    date:     '2023',
+    image:    null,
+    demoUrl:  null,
+    stats: [
+      { value: 3, suffix: '',  label: 'Page Sections' },
+      { value: 2, suffix: 'x', label: 'Conversion Lift' },
+      { value: 8, suffix: '',  label: 'Weeks' },
     ],
+    body: [
+      'The old site tried to say everything at once — a dozen feature callouts competing for the same fold. Aurora\'s brief was the opposite: pick the one thing a first-time visitor needs to believe, and build the entire page structure around getting them there.',
+      'Every section was designed with a single job: the hero establishes the problem, the second section shows the product solving it in motion, and the third handles objections before the visitor has to ask. Nothing on the page exists without a reason tied to that funnel.',
+      'The rebuild shipped with its own lightweight animation system — scroll-triggered reveals, not decoration — timed to reinforce the reading order rather than compete with it. Motion that does not serve the funnel does not ship.',
+    ],
+    topics: ['One Conversion Goal', 'Every Section Has a Job', 'Motion With a Purpose'],
+  },
+  {
+    id:       'kinetic-motion-reel',
+    meta:     'Motion Design · 2023',
+    category: 'PROJECT',
+    title:    'Kinetic: A Motion Design Reel',
+    subtitle: 'A Motion Design Reel',
+    excerpt:  'A self-directed motion design reel exploring micro-interactions, page transitions, and loading states — the small moments most products skip.',
+    date:     '2023',
+    image:    null,
+    demoUrl:  null,
+    stats: [
+      { value: 24, suffix: '', label: 'Micro-interactions' },
+      { value: 6,  suffix: '', label: 'Patterns Shipped' },
+      { value: 3,  suffix: '', label: 'Months' },
+    ],
+    body: [
+      'Kinetic was not client work — it was a deliberate exercise in the moments most products treat as an afterthought: the loading spinner, the error shake, the success checkmark. Small interactions get the least design attention and the most exposure per session.',
+      'Every clip in the reel started from a real interaction problem, not a visual idea: how should a form field communicate a validation error without feeling punitive? How long should a success state hold before it clears? Motion design is a timing problem before it is a visual one.',
+      'The reel became a personal reference library — several of its transition patterns later shipped, near-verbatim, in the Nimbus and Aurora projects above. Personal work at its best feeds back into client work rather than sitting separate from it.',
+    ],
+    topics: ['The Small Moments', 'Timing Before Visuals', 'Feeding Back Into Client Work'],
+  },
+  {
+    id:       'halo-ecommerce-storefront',
+    meta:     'E-commerce · 2024',
+    category: 'PROJECT',
+    title:    'Halo: An E-commerce Storefront Concept',
+    excerpt:  'A speculative storefront concept exploring product-first layout and a checkout flow cut down to two screens.',
+    date:     '2024',
+    image:    null,
+    body: [
+      'Halo was never a client brief — it was a chance to test a hypothesis: most e-commerce checkout abandonment isn\'t a trust problem, it\'s a screen-count problem. The concept collapsed a typical five-step checkout into two: cart review, then a single combined shipping-and-payment screen.',
+      'Product pages ran product-first, not chrome-first — the image carousel and price occupy the entire first viewport on mobile, with everything else (reviews, specs, related items) below the fold rather than competing for space above it.',
+      'As a concept piece it stayed unshipped, but it is the reference deck pulled out whenever a real client project needs a starting argument for cutting checkout friction.',
+    ],
+    topics: ['The Screen-Count Hypothesis', 'Product First', 'The Reference Deck'],
   },
 ];
 ---
 
-<!-- 01 — Overview -->
+<!-- ── Section 1 — Intro ──────────────────────────────────── -->
 <div class="ex-venus-section" data-layout="bottom-center">
-  <span class="ex-venus-section-label">01 — Design</span>
-  <h2 class="ex-heading ex-venus-section-title">Visual Work</h2>
+  <span class="ex-venus-section-label">VENUS OBSERVATORY</span>
+  <h2 class="ex-heading ex-venus-section-title">Designs<span class="ex-line-break"></span>That Live.</h2>
   <p class="ex-para ex-venus-body">
-    UI/UX design, brand identity, design systems, and motion. Work that earns attention, earns trust, and earns repeat use. Placeholder — update this with your actual design focus and who you design for.
+    A curated collection of themes, websites and digital experiences
+    crafted with precision, performance and purpose.
   </p>
-  <div class="ex-venus-stats-row">
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">[N] projects</span>
-      <span class="ex-venus-stat-pill-label">Designed</span>
+  <button class="ex-venus-intro-cta" type="button" data-scroll-next>
+    EXPLORE COLLECTION
+    <span class="ex-venus-intro-cta-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+  </button>
+</div>
+
+<!-- ── Section 2 — Featured work coverflow ─────────────────── -->
+<div class="ex-venus-section ex-venus-coverflow-section" data-layout="coverflow">
+  <span class="ex-venus-coverflow-hint">
+    <i class="fa-solid fa-location-dot"></i> TO EXPLORE
+  </span>
+
+  <div class="swiper ex-venus-coverflow" id="ex-venus-coverflow">
+    <div class="swiper-wrapper">
+      {projects.map((p, i) => (
+        <div class="swiper-slide ex-venus-coverflow-card" data-article-id={i}>
+          <span class="ex-venus-coverflow-card-index">{String(i + 1).padStart(2, '0')}</span>
+          <div class="ex-venus-coverflow-card-media">
+            {p.image ? (
+              <img src={p.image} alt={p.title} loading="lazy" />
+            ) : (
+              <div class="ex-venus-coverflow-card-image-placeholder">
+                <i class="fa-solid fa-swatchbook"></i>
+              </div>
+            )}
+            <span class="ex-venus-coverflow-card-overlay"></span>
+          </div>
+          <div class="ex-venus-coverflow-card-text">
+            <h3 class="ex-venus-coverflow-card-title">{p.title.split(':')[0]}</h3>
+            <span class="ex-venus-coverflow-card-theme">{p.category}</span>
+          </div>
+        </div>
+      ))}
     </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Figma</span>
-      <span class="ex-venus-stat-pill-label">Primary tool</span>
+  </div>
+
+  <div class="ex-venus-coverflow-nav">
+    <button class="ex-venus-carousel-arrow ex-venus-carousel-arrow--prev" type="button" id="ex-venus-coverflow-prev" aria-label="Previous project">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="ex-venus-carousel-arrow ex-venus-carousel-arrow--next" type="button" id="ex-venus-coverflow-next" aria-label="Next project">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── Section 3 — Project 1 (Lumen) — full detail card ────── -->
+<div class="ex-venus-section ex-venus-project-section" data-layout="project">
+  <div class="ex-venus-project-card" data-project="lumen">
+    <span class="ex-venus-project-eyebrow">{projects[1].category} · {projects[1].meta}</span>
+    <h2 class="ex-heading ex-venus-project-title">{projects[1].title.split(':')[0]}</h2>
+    <p class="ex-venus-project-subtitle">{projects[1].subtitle}</p>
+    <p class="ex-para ex-venus-project-desc">{projects[1].excerpt}</p>
+
+    <div class="ex-venus-project-stats">
+      {projects[1].stats?.map((stat) => (
+        <div class="ex-venus-project-stat">
+          <span
+            class="ex-venus-project-stat-value ex-venus-counter"
+            data-count-to={stat.value}
+            data-count-suffix={stat.suffix}
+          >0{stat.suffix}</span>
+          <span class="ex-venus-project-stat-label">{stat.label}</span>
+        </div>
+      ))}
     </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Systems</span>
-      <span class="ex-venus-stat-pill-label">Approach</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">[N] yrs</span>
-      <span class="ex-venus-stat-pill-label">Experience</span>
+
+    <div class="ex-venus-project-actions">
+      <a
+        class="ex-venus-project-visit-btn"
+        href={projects[1].demoUrl ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <button class="ex-venus-project-details-btn" type="button" data-article-id="1">
+        VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- 02 — Featured Project 1 -->
-<div class="ex-venus-section" data-layout="bottom-right">
-  <span class="ex-venus-section-label">02 — Project</span>
-  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
-  <p class="ex-para ex-venus-body">
-    Placeholder — describe your first featured design project. What was the brief, who was it for, what was the core design challenge? What made it stand out?
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[Outcome]</span>
-    <span class="ex-venus-fact-label">Key result</span>
-  </div>
-  <button class="ex-venus-detail-link" data-item-id="0" data-item-side="left" data-planet="venus">Case study →</button>
-</div>
+<!-- ── Section 4 — Project 2 (Solstice) — full detail card ─── -->
+<div class="ex-venus-section ex-venus-project-section" data-layout="project" data-align="left">
+  <div class="ex-venus-project-card" data-project="solstice">
+    <span class="ex-venus-project-eyebrow">{projects[2].category} · {projects[2].meta}</span>
+    <h2 class="ex-heading ex-venus-project-title">{projects[2].title.split(':')[0]}</h2>
+    <p class="ex-venus-project-subtitle">{projects[2].subtitle}</p>
+    <p class="ex-para ex-venus-project-desc">{projects[2].excerpt}</p>
 
-<!-- 03 — Process -->
-<div class="ex-venus-section" data-layout="bottom-left">
-  <span class="ex-venus-section-label">03 — Process</span>
-  <h2 class="ex-heading ex-venus-section-title">How I Design</h2>
-  <p class="ex-para ex-venus-body">
-    Research before pixels. Systems before screens. I design components that scale and flows that hold up under edge cases. Visual polish arrives after the structure is sound. Placeholder — describe your actual process.
-  </p>
-  <div class="ex-venus-stats-row">
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Research</span>
-      <span class="ex-venus-stat-pill-label">Phase 1</span>
+    <div class="ex-venus-project-stats">
+      {projects[2].stats?.map((stat) => (
+        <div class="ex-venus-project-stat">
+          <span
+            class="ex-venus-project-stat-value ex-venus-counter"
+            data-count-to={stat.value}
+            data-count-suffix={stat.suffix}
+          >0{stat.suffix}</span>
+          <span class="ex-venus-project-stat-label">{stat.label}</span>
+        </div>
+      ))}
     </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Systems</span>
-      <span class="ex-venus-stat-pill-label">Phase 2</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Polish</span>
-      <span class="ex-venus-stat-pill-label">Phase 3</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Ship</span>
-      <span class="ex-venus-stat-pill-label">Phase 4</span>
+
+    <div class="ex-venus-project-actions">
+      <a
+        class="ex-venus-project-visit-btn"
+        href={projects[2].demoUrl ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <button class="ex-venus-project-details-btn" type="button" data-article-id="2">
+        VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- 04 — Featured Project 2 -->
-<div class="ex-venus-section" data-layout="right">
-  <span class="ex-venus-section-label">04 — Project</span>
-  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
-  <p class="ex-para ex-venus-body">
-    Placeholder — a second featured design project. This could be a brand identity, a dashboard, a mobile app, or a design system. Describe the scope and what you were responsible for.
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[Scope]</span>
-    <span class="ex-venus-fact-label">Scale of work</span>
-  </div>
-  <button class="ex-venus-detail-link" data-item-id="1" data-item-side="left" data-planet="venus">Case study →</button>
-</div>
+<!-- ── Section 5 — Project 3 (Nimbus) — full detail card ───── -->
+<div class="ex-venus-section ex-venus-project-section" data-layout="project" data-align="left">
+  <div class="ex-venus-project-card" data-project="nimbus">
+    <span class="ex-venus-project-eyebrow">{projects[3].category} · {projects[3].meta}</span>
+    <h2 class="ex-heading ex-venus-project-title">{projects[3].title.split(':')[0]}</h2>
+    <p class="ex-venus-project-subtitle">{projects[3].subtitle}</p>
+    <p class="ex-para ex-venus-project-desc">{projects[3].excerpt}</p>
 
-<!-- 05 — Branding -->
-<div class="ex-venus-section" data-layout="left">
-  <span class="ex-venus-section-label">05 — Branding</span>
-  <h2 class="ex-heading ex-venus-section-title">Identity Work</h2>
-  <p class="ex-para ex-venus-body">
-    Logo systems, type pairing, colour palettes, brand guidelines. I design identities that read clearly at 16px and hold their weight at 10 metres. Placeholder — describe your branding approach.
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[N] brands</span>
-    <span class="ex-venus-fact-label">Identity projects</span>
-  </div>
-</div>
+    <div class="ex-venus-project-stats">
+      {projects[3].stats?.map((stat) => (
+        <div class="ex-venus-project-stat">
+          <span
+            class="ex-venus-project-stat-value ex-venus-counter"
+            data-count-to={stat.value}
+            data-count-suffix={stat.suffix}
+          >0{stat.suffix}</span>
+          <span class="ex-venus-project-stat-label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
 
-<!-- 06 — Featured Project 3 -->
-<div class="ex-venus-section" data-layout="top-left">
-  <span class="ex-venus-section-label">06 — Project</span>
-  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
-  <p class="ex-para ex-venus-body">
-    Placeholder — a third design project. Branding, product design, editorial, motion, or interactive. Describe the brief and your specific contribution. What are you most proud of in this one?
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[Deliverable]</span>
-    <span class="ex-venus-fact-label">Key output</span>
-  </div>
-  <button class="ex-venus-detail-link" data-item-id="2" data-item-side="right" data-planet="venus">Case study →</button>
-</div>
-
-<!-- 07 — Design Systems -->
-<div class="ex-venus-section" data-layout="right">
-  <span class="ex-venus-section-label">07 — Systems</span>
-  <h2 class="ex-heading ex-venus-section-title">Design at Scale</h2>
-  <p class="ex-para ex-venus-body">
-    Design systems are the highest-leverage design work. A token system, a component library, and clear documentation multiplies every designer and developer that works with it. Placeholder — describe your systems experience.
-  </p>
-  <div class="ex-venus-stats-row">
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Tokens</span>
-      <span class="ex-venus-stat-pill-label">Foundation</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Components</span>
-      <span class="ex-venus-stat-pill-label">Library</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Docs</span>
-      <span class="ex-venus-stat-pill-label">Adoption</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Figma</span>
-      <span class="ex-venus-stat-pill-label">Source of truth</span>
+    <div class="ex-venus-project-actions">
+      <a
+        class="ex-venus-project-visit-btn"
+        href={projects[3].demoUrl ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <button class="ex-venus-project-details-btn" type="button" data-article-id="3">
+        VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- 08 — Featured Project 4 -->
-<div class="ex-venus-section" data-layout="bottom-left">
-  <span class="ex-venus-section-label">08 — Project</span>
-  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
-  <p class="ex-para ex-venus-body">
-    Placeholder — a fourth design project. Could be a case study, a design system, a redesign, or a speculative concept. Describe what made it challenging or interesting to work on.
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[Impact]</span>
-    <span class="ex-venus-fact-label">Measurable outcome</span>
-  </div>
-  <button class="ex-venus-detail-link" data-item-id="3" data-item-side="right" data-planet="venus">Case study →</button>
-</div>
+<!-- ── Section 6 — Project 4 (Aurora) — full detail card ───── -->
+<div class="ex-venus-section ex-venus-project-section" data-layout="project" data-align="left">
+  <div class="ex-venus-project-card" data-project="aurora">
+    <span class="ex-venus-project-eyebrow">{projects[4].category} · {projects[4].meta}</span>
+    <h2 class="ex-heading ex-venus-project-title">{projects[4].title.split(':')[0]}</h2>
+    <p class="ex-venus-project-subtitle">{projects[4].subtitle}</p>
+    <p class="ex-para ex-venus-project-desc">{projects[4].excerpt}</p>
 
-<!-- 09 — Motion -->
-<div class="ex-venus-section" data-layout="left">
-  <span class="ex-venus-section-label">09 — Motion</span>
-  <h2 class="ex-heading ex-venus-section-title">Things That Move</h2>
-  <p class="ex-para ex-venus-body">
-    Animation is communication. Transitions that orient. Micro-interactions that confirm. GSAP, CSS transitions, Lottie. Motion that earns its compute cycles. Placeholder — describe your motion design work.
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">GSAP</span>
-    <span class="ex-venus-fact-label">Primary animation tool</span>
-  </div>
-</div>
+    <div class="ex-venus-project-stats">
+      {projects[4].stats?.map((stat) => (
+        <div class="ex-venus-project-stat">
+          <span
+            class="ex-venus-project-stat-value ex-venus-counter"
+            data-count-to={stat.value}
+            data-count-suffix={stat.suffix}
+          >0{stat.suffix}</span>
+          <span class="ex-venus-project-stat-label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
 
-<!-- 10 — Tools -->
-<div class="ex-venus-section" data-layout="right">
-  <span class="ex-venus-section-label">10 — Tools</span>
-  <h2 class="ex-heading ex-venus-section-title">Design Stack</h2>
-  <p class="ex-para ex-venus-body">
-    Figma for UI and systems. Illustrator for vector work. After Effects and GSAP for motion. Framer for interactive prototypes. I use whatever produces the most honest prototype. Placeholder — update with your tools.
-  </p>
-  <div class="ex-venus-stats-row">
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Figma</span>
-      <span class="ex-venus-stat-pill-label">UI & systems</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Framer</span>
-      <span class="ex-venus-stat-pill-label">Prototyping</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">After Effects</span>
-      <span class="ex-venus-stat-pill-label">Motion</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Illustrator</span>
-      <span class="ex-venus-stat-pill-label">Vector</span>
+    <div class="ex-venus-project-actions">
+      <a
+        class="ex-venus-project-visit-btn"
+        href={projects[4].demoUrl ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <button class="ex-venus-project-details-btn" type="button" data-article-id="4">
+        VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- 11 — Featured Project 5 -->
-<div class="ex-venus-section" data-layout="bottom-right">
-  <span class="ex-venus-section-label">11 — Project</span>
-  <h2 class="ex-heading ex-venus-section-title">[Project Name]</h2>
-  <p class="ex-para ex-venus-body">
-    Placeholder — a fifth project. Maybe something speculative or a personal passion project. Describe what you designed, why, and what you'd do differently now.
-  </p>
-  <div class="ex-venus-key-fact">
-    <span class="ex-venus-fact-number">[Year]</span>
-    <span class="ex-venus-fact-label">Completed</span>
+<!-- ── Section 7 — Project 5 (Kinetic) — full detail card ──── -->
+<div class="ex-venus-section ex-venus-project-section" data-layout="project" data-align="left">
+  <div class="ex-venus-project-card" data-project="kinetic">
+    <span class="ex-venus-project-eyebrow">{projects[5].category} · {projects[5].meta}</span>
+    <h2 class="ex-heading ex-venus-project-title">{projects[5].title.split(':')[0]}</h2>
+    <p class="ex-venus-project-subtitle">{projects[5].subtitle}</p>
+    <p class="ex-para ex-venus-project-desc">{projects[5].excerpt}</p>
+
+    <div class="ex-venus-project-stats">
+      {projects[5].stats?.map((stat) => (
+        <div class="ex-venus-project-stat">
+          <span
+            class="ex-venus-project-stat-value ex-venus-counter"
+            data-count-to={stat.value}
+            data-count-suffix={stat.suffix}
+          >0{stat.suffix}</span>
+          <span class="ex-venus-project-stat-label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="ex-venus-project-actions">
+      <a
+        class="ex-venus-project-visit-btn"
+        href={projects[5].demoUrl ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VISIT PROJECT <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      <button class="ex-venus-project-details-btn" type="button" data-article-id="5">
+        VIEW DETAILS <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
   </div>
-  <button class="ex-venus-detail-link" data-item-id="4" data-item-side="left" data-planet="venus">Case study →</button>
 </div>
 
-<!-- 12 — CTA -->
+<!-- ── Section 8 — Close / navigate ───────────────────────── -->
 <div class="ex-venus-section" data-layout="center">
-  <span class="ex-venus-section-label">12 — Portfolio</span>
-  <h2 class="ex-heading ex-venus-section-title">See All the Work</h2>
+  <span class="ex-venus-section-label">08 — NAVIGATE</span>
+  <h2 class="ex-heading ex-venus-section-title">Explore More of the System</h2>
   <p class="ex-para ex-venus-body">
-    The full portfolio — case studies, process notes, and finished work — is available on request or via Dribbble and Behance. Get in touch at Neptune if you'd like a deck.
+    Venus is one stop in the system. Each planet holds a different corner
+    of the work — from engineering to enterprise builds to open-source tools.
   </p>
   <div class="ex-venus-stats-row">
     <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Dribbble</span>
-      <span class="ex-venus-stat-pill-label">Visual shots</span>
+      <span class="ex-venus-stat-pill-value">9</span>
+      <span class="ex-venus-stat-pill-label">Planets to explore</span>
     </div>
     <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Neptune</span>
-      <span class="ex-venus-stat-pill-label">Get in touch</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">Behance</span>
-      <span class="ex-venus-stat-pill-label">Case studies</span>
-    </div>
-    <div class="ex-venus-stat-pill">
-      <span class="ex-venus-stat-pill-value">PDF deck</span>
-      <span class="ex-venus-stat-pill-label">On request</span>
+      <span class="ex-venus-stat-pill-value">∞</span>
+      <span class="ex-venus-stat-pill-label">Things to discover</span>
     </div>
   </div>
 </div>
 
-<!-- ── Item data for sidebar ───────────────────────────────────── -->
-<script type="application/json" id="ex-venus-items-data" is:inline set:html={JSON.stringify(items)}></script>
+<!-- ── Section 9 — Contact (true last stop) ───────────────── -->
+<div class="ex-venus-section" data-layout="center">
+  <span class="ex-venus-subscribe-icon"><i class="fa-solid fa-palette"></i></span>
+  <span class="ex-venus-section-label">SEE THE FULL PORTFOLIO</span>
+  <h2 class="ex-heading ex-venus-section-title">Let's talk about the work.</h2>
+  <p class="ex-para ex-venus-body">
+    Full case studies, process notes, and finished work are available on
+    request. Leave an email and a note on what you're looking for.
+  </p>
+  <form class="ex-venus-form" onsubmit="return false;">
+    <i class="fa-solid fa-envelope ex-venus-form-icon"></i>
+    <input
+      class="ex-venus-input"
+      type="email"
+      placeholder="your@email.com"
+      aria-label="Email address"
+      autocomplete="email"
+    />
+    <button class="ex-venus-btn" type="submit">GET IN TOUCH →</button>
+  </form>
+</div>
+
+<!-- ── Project data for article panel ─────────────────────── -->
+<script type="application/json" id="ex-venus-projects-data" is:inline set:html={JSON.stringify(projects)}></script>
 
 <script>
   import StrataOffcanvas from '@strata-packages/offcanvas';
+  import { VenusProgressStrip } from '../../scripts/ui/solar-system/VenusProgressStrip';
+  import { VenusIntroCounters } from '../../scripts/ui/solar-system/VenusIntroCounters';
+  import { createCoverflowSwiper } from '../../scripts/ui/shared/CoverflowSwiper';
 
   function init(): void {
-    const dataEl       = document.getElementById('ex-venus-items-data');
-    const sidebarLeft  = document.getElementById('ex-venus-sidebar-left');
-    const sidebarRight = document.getElementById('ex-venus-sidebar-right');
+    new VenusProgressStrip().init();
+    new VenusIntroCounters().init();
 
-    if (!dataEl || !sidebarLeft || !sidebarRight) return;
+    document.querySelector<HTMLElement>('[data-scroll-next]')?.addEventListener('click', () => {
+      const sections = document.querySelectorAll<HTMLElement>('.ex-venus-section');
+      sections[1]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
 
-    const closeBtnLeft  = sidebarLeft.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
-    const closeBtnRight = sidebarRight.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]');
+    // Hand-tuned per-offset transform curve (dev-tools-authored, not
+    // Swiper's built-in continuous coverflow formula — that formula is
+    // linear in offset and can't reproduce this exact non-linear fan).
+    // offset 0/1/2 are the exact values tuned live; offset 3 (needed once
+    // a 6th/7th card was added on each end) continues the same growth
+    // curve fit through those three points, with rotation capped at the
+    // offset-2 value rather than extrapolated further past 45deg. Only
+    // used at `lg`+ (see arcBreakpoints below) — the fixed pixel values
+    // don't scale down with viewport width, so below that the fan just
+    // doesn't work: neighbour cards overflow and get hard-clipped by the
+    // viewport edge instead of tapering off.
+    const venusFanArc = [
+      { offset: 0, x: 0,       z: 0,     rotate: 0      },
+      { offset: 1, x: 34.6372, z: 230.915, rotate: 32.328 },
+      { offset: 2, x: 100,     z: 500,   rotate: 45     },
+      { offset: 3, x: 196,     z: 807,   rotate: 45     },
+    ];
+    // Gap between adjacent cards near the fan's edges, dev-tools-tuned
+    // alongside the transform curve above — NOT symmetric left vs. right
+    // (e.g. offset -2 is 30px but offset +2 is 60px), so this is keyed by
+    // signed slideIndex-activeIndex rather than mirrored like arcCurve.
+    const venusFanGap = [
+      { offset: -3, gap: 60 },
+      { offset: -2, gap: 30 },
+      { offset: -1, gap: 40 },
+      { offset: 0,  gap: 40 },
+      { offset: 1,  gap: 35 },
+      { offset: 2,  gap: 60 },
+      { offset: 3,  gap: 60 },
+    ];
+    // Caps how many cards render on each side of the active one — the
+    // section is shifted right of the progress strip (see venus-overlay.css)
+    // and this keeps the fan from ever fanning wide enough to reach back
+    // toward it, rather than relying on the container clipping/masking a
+    // card that's still there (both proved unreliable against 3D-
+    // transformed slides in testing).
+    const venusFanVisibleRange = { left: 3, right: 2 };
+    // Flat single-point curve — no neighbour offset, no rotation, no fade
+    // — used below `lg`, where `breakpoints` also drops to one plain slide
+    // per view (a regular flat carousel, not a shrunk coverflow).
+    const venusFlatArc          = [{ offset: 0, x: 0, z: 0, rotate: 0, opacity: 1 }];
+    const venusFlatGap          = [{ offset: 0, gap: 24 }];
+    const venusFlatVisibleRange = { left: 0, right: 0 };
 
-    const items: { category: string; title: string; meta: string; body: string[] }[] =
+    createCoverflowSwiper({
+      el:            '#ex-venus-coverflow',
+      prevEl:        '#ex-venus-coverflow-prev',
+      nextEl:        '#ex-venus-coverflow-next',
+      slidesPerView: 'auto',
+      spaceBetween:  40,
+      visibleRange:  venusFanVisibleRange,
+      arcCurve:      venusFanArc,
+      gapCurve:      venusFanGap,
+      // Mobile-first: each key's override stays active for every width >=
+      // that key until a later key overrides it again, exactly like
+      // Swiper's own `breakpoints` — so `lg` must explicitly re-assert the
+      // full fan curve, otherwise the `0` override would keep suppressing
+      // it all the way up to desktop widths.
+      arcBreakpoints: {
+        0:   { arcCurve: venusFlatArc, gapCurve: venusFlatGap, visibleRange: venusFlatVisibleRange },
+        992: { arcCurve: venusFanArc,  gapCurve: venusFanGap,  visibleRange: venusFanVisibleRange },
+      },
+      loop:          true,
+      breakpoints: {
+        0:    { slidesPerView: 1,    spaceBetween: 24 },
+        992:  { slidesPerView: 3,    spaceBetween: 40 },
+        1200: { slidesPerView: 3.5,  spaceBetween: 44 },
+      },
+    });
+
+    const dataEl   = document.getElementById('ex-venus-projects-data');
+    const panel    = document.getElementById('ex-venus-article-panel');
+    const closeBtn = panel?.querySelector<HTMLElement>('[data-st-dismiss="offcanvas"]') ?? null;
+
+    if (!dataEl || !panel) return;
+
+    const catEl   = document.getElementById('ex-venus-article-panel-cat');
+    const titleEl = document.getElementById('ex-venus-article-panel-title');
+    const metaEl  = document.getElementById('ex-venus-article-panel-meta');
+    const bodyEl  = document.getElementById('ex-venus-article-panel-body');
+
+    const projects: { id: string; category: string; title: string; date: string; meta: string; body: string[]; topics: string[] }[] =
       JSON.parse(dataEl.textContent ?? '[]');
 
-    document.addEventListener('click', (e: MouseEvent) => {
-      const btn = (e.target as Element).closest<HTMLElement>('[data-item-id]');
-      if (!btn || btn.dataset.planet !== 'venus') return;
-      const item = items[parseInt(btn.dataset.itemId ?? '', 10)];
-      if (!item) return;
+    const openProject = (p: typeof projects[number]): void => {
+      if (catEl)   catEl.textContent   = p.category;
+      if (titleEl) titleEl.textContent = p.title;
+      if (metaEl)  metaEl.textContent  = `${p.date} · ${p.meta}`;
+      if (bodyEl)  bodyEl.innerHTML    = p.body
+        .map((para, i) => `<p data-topic="${(p.topics[i] ?? '').replace(/"/g, '&quot;')}">${para}</p>`)
+        .join('');
 
-      const side     = btn.dataset.itemSide === 'right' ? 'right' : 'left';
-      const sidebar  = side === 'right' ? sidebarRight : sidebarLeft;
-      const closeBtn = side === 'right' ? closeBtnRight : closeBtnLeft;
-
-      const catEl   = document.getElementById(`ex-venus-sidebar-cat-${side}`);
-      const titleEl = document.getElementById(`ex-venus-sidebar-title-${side}`);
-      const metaEl  = document.getElementById(`ex-venus-sidebar-meta-${side}`);
-      const bodyEl  = document.getElementById(`ex-venus-sidebar-body-${side}`);
-
-      if (catEl)   catEl.textContent   = item.category;
-      if (titleEl) titleEl.textContent = item.title;
-      if (metaEl)  metaEl.textContent  = item.meta;
-      if (bodyEl)  bodyEl.innerHTML    = item.body.map(p => `<p>${p}</p>`).join('');
-
-      StrataOffcanvas.open(sidebar);
+      StrataOffcanvas.open(panel);
       setTimeout(() => closeBtn?.focus(), 60);
+    };
+
+    // The package fires these regardless of how the panel was dismissed
+    // (close button, backdrop, Escape) — relaying them tells the progress
+    // strip when to switch between section and article-paragraph pagination.
+    document.addEventListener('st:offcanvas:open', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:venus-article-open'));
     });
+    document.addEventListener('st:offcanvas:close', (e: Event) => {
+      if ((e as CustomEvent).detail?.offcanvas !== panel) return;
+      window.dispatchEvent(new CustomEvent('ct:venus-article-close'));
+    });
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLElement>('[data-article-id]');
+      if (!btn) return;
+      const p = projects[parseInt(btn.dataset.articleId ?? '', 10)];
+      if (!p) return;
+      openProject(p);
+    });
+
+    // Deep-link support: /sol?target=venus&project=<id> auto-opens that
+    // project's panel once the page has settled.
+    const deepLinkId = new URLSearchParams(window.location.search).get('project');
+    if (deepLinkId) {
+      const match = projects.find((p) => p.id === deepLinkId);
+      if (match) setTimeout(() => openProject(match), 400);
+    }
   }
 
   init();

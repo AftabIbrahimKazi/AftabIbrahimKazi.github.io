@@ -1,6 +1,11 @@
-/* earth-overlay.css — Blue marble · Oceanic clarity theme */
+/* earth-overlay.css — Blue marble · Oceanic clarity theme
+   Color palette: sky blue → deep ocean — rgba(80,200,255) → rgba(20,100,200)
+   Evokes: atmosphere, water, clarity */
 
-#ex-content-overlay[data-planet="ex-earth-js"] { background: transparent; }
+#ex-content-overlay[data-planet="ex-earth-js"] {
+  background: transparent;
+  padding-bottom: var(--ex-scroll-headroom-lg);
+}
 
 #ex-content-overlay[data-planet="ex-earth-js"] .ex-overlay-section,
 #ex-content-overlay[data-planet="ex-earth-js"] .ex-overlay-section--entry {
@@ -15,6 +20,7 @@
   border-radius: var(--ex-border-radius-outer);
   display: inline-block;
   margin-bottom: 0;
+  margin-left: var(--ex-space-xxl);
   padding: var(--ex-space-md) var(--ex-space-lg);
 }
 
@@ -25,7 +31,9 @@
   color: transparent;
 }
 
-/* ── Section base ────────────────────────────────────────────── */
+/* ================================================================
+   EARTH — SECTION LAYOUT SYSTEM
+   ================================================================ */
 
 .ex-earth-section {
   backdrop-filter: blur(16px);
@@ -35,15 +43,13 @@
   border-radius: 0 var(--ex-border-radius-outer) var(--ex-border-radius-outer) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ex-space-md);
+  gap: var(--ex-space-sm);
   justify-content: center;
   max-width: var(--ex-size-420);
   min-height: auto;
-  padding: var(--ex-space-lg) var(--ex-space-xl);
+  padding: var(--ex-space-sm) var(--ex-space-md);
   position: relative;
 }
-
-/* ── Layout variants ─────────────────────────────────────────── */
 
 .ex-earth-section[data-layout="bottom-center"] {
   align-items: center;
@@ -55,36 +61,11 @@
   text-align: center;
 }
 
-.ex-earth-section[data-layout="bottom-right"] {
-  border-left: none;
-  border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
-  border-right: 2px solid var(--ex-color-earth-border);
-  margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-earth-section[data-layout="top-left"] {
-  margin-right: auto;
-  margin-top: var(--ex-space-xl);
-}
-
 .ex-earth-section[data-layout="right"] {
   border-left: none;
   border-radius: var(--ex-border-radius-outer) 0 0 var(--ex-border-radius-outer);
   border-right: 2px solid var(--ex-color-earth-border);
   margin-left: auto;
-  margin-right: var(--ex-space-md);
-  margin-top: calc(100dvh * 0.2);
-}
-
-.ex-earth-section[data-layout="bottom-left"] {
-  margin-right: auto;
-  margin-top: calc(100dvh * 0.3);
-}
-
-.ex-earth-section[data-layout="left"] {
-  margin-right: auto;
   margin-top: calc(100dvh * 0.2);
 }
 
@@ -98,7 +79,9 @@
   text-align: center;
 }
 
-/* ── Typography ──────────────────────────────────────────────── */
+/* ================================================================
+   EARTH — TYPOGRAPHY
+   ================================================================ */
 
 .ex-earth-section-label {
   background: none;
@@ -108,7 +91,7 @@
   display: block;
   font-family: var(--ex-font-main);
   font-size: var(--ex-font-size-xxxs);
-  letter-spacing: var(--ex-tracking-xxl);
+  letter-spacing: var(--ex-tracking-xl);
   padding: 0;
   text-transform: uppercase;
 }
@@ -125,18 +108,16 @@
 .ex-earth-body {
   color: var(--ex-text-body);
   font-size: var(--ex-font-size-default);
-  line-height: 1.75;
   opacity: var(--ex-opacity-body);
 }
 
-/* ── Key fact ────────────────────────────────────────────────── */
-
+/* ── Key fact ── */
 .ex-earth-key-fact {
-  border-top: 1px solid var(--ex-color-earth-border);
+  border-top: 1px solid var(--ex-color-earth-border-inner);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-earth-fact-number {
@@ -158,24 +139,23 @@
   text-transform: uppercase;
 }
 
-/* ── Stats row / pill ────────────────────────────────────────── */
-
+/* ── Stats row / pill ── */
 .ex-earth-stats-row {
-  border-top: 1px solid var(--ex-color-earth-border);
+  border-top: 1px solid var(--ex-color-earth-border-inner);
   display: flex;
   flex-wrap: wrap;
   gap: var(--ex-space-xs);
-  padding-top: var(--ex-space-sm);
+  padding-top: var(--ex-space-default);
 }
 
 .ex-earth-stat-pill {
-  background-color: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-earth-border);
+  background-color: var(--ex-color-earth-pill-bg);
+  border: 1px solid var(--ex-color-earth-border-inner);
   border-radius: var(--ex-border-radius-full);
   display: flex;
   flex-direction: column;
   gap: var(--ex-space-xxs);
-  padding: var(--ex-space-xs) var(--ex-space-default);
+  padding: var(--ex-space-xxs) var(--ex-space-md);
 }
 
 .ex-earth-stat-pill-value {
@@ -194,152 +174,13 @@
   text-transform: uppercase;
 }
 
-/* ── Stat bar — horizontal fill indicator ────────────────────── */
-
-.ex-earth-stat-bar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--ex-space-xxs);
-  padding-top: var(--ex-space-sm);
-}
-
-.ex-earth-stat-bar-label {
-  color: var(--ex-text-body);
-  display: flex;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  justify-content: space-between;
-  letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
-  text-transform: uppercase;
-}
-
-.ex-earth-stat-bar-track {
-  background-color: var(--ex-color-white-faint);
-  border-radius: var(--ex-border-radius-full);
-  height: 3px;
-  overflow: hidden;
-  width: 100%;
-}
-
-.ex-earth-stat-bar-fill {
-  background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
-  border-radius: var(--ex-border-radius-full);
-  height: 100%;
-}
-
-/* ── Sidebar ─────────────────────────────────────────────────── */
-
-.ex-earth-sidebar {
-  --st-offcanvas-width: min(520px, 100vw);
-  --st-bg:              rgba(0, 8, 22, 0.94);
-  --st-border:          transparent;
-  --st-duration:        var(--ex-duration-slow);
-  --st-easing:          cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(0, 18, 55, 0.94);
-  border-top: 2px solid var(--ex-color-earth-hi);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-
-.ex-earth-sidebar[data-st-side="left"]  { border-right: 1px solid var(--ex-color-earth-border); }
-.ex-earth-sidebar[data-st-side="right"] { border-left:  1px solid var(--ex-color-earth-border); }
-
-.ex-earth-sidebar-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--ex-color-earth-border) transparent;
-  scrollbar-width: thin;
-}
-
-.ex-earth-sidebar-header {
-  border-bottom: 1px solid var(--ex-color-earth-border);
-  padding: var(--ex-space-lg) var(--ex-space-lg) var(--ex-space-md);
-  position: relative;
-}
-
-.ex-earth-sidebar-close {
-  background: var(--ex-color-white-faint);
-  border: 1px solid var(--ex-color-earth-border);
-  border-radius: var(--ex-border-radius-round);
-  color: var(--ex-text-body);
-  cursor: pointer;
-  font-size: var(--ex-font-size-default);
-  height: var(--ex-size-36);
-  position: absolute;
-  right: var(--ex-space-lg);
-  top: var(--ex-space-lg);
-  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
-  width: var(--ex-size-36);
-}
-
-.ex-earth-sidebar-close:hover {
-  background: var(--ex-color-earth-border);
-  border-color: var(--ex-color-earth-hi);
-}
-
-.ex-earth-sidebar-cat {
-  -webkit-background-clip: text;
-  background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
-  background-clip: text;
-  color: transparent;
-  display: block;
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-heading-font-weight);
-  letter-spacing: var(--ex-tracking-xl);
-  margin-bottom: var(--ex-space-sm);
-  padding-right: var(--ex-size-40);
-  text-transform: uppercase;
-}
-
-.ex-earth-sidebar-title {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-lg);
-  font-weight: var(--ex-heading-font-weight);
-  line-height: 1.3;
-  margin-bottom: var(--ex-space-xs);
-}
-
-.ex-earth-sidebar-meta {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-xxxs);
-  font-weight: var(--ex-para-font-weight);
-  letter-spacing: var(--ex-tracking-sm);
-  opacity: var(--ex-opacity-faint);
-  text-transform: uppercase;
-}
-
-.ex-earth-sidebar-body {
-  flex: 1;
-  padding: var(--ex-space-lg);
-}
-
-.ex-earth-sidebar-body p {
-  color: var(--ex-text-body);
-  font-family: var(--ex-font-main);
-  font-size: var(--ex-font-size-default);
-  font-weight: var(--ex-para-font-weight);
-  line-height: 1.75;
-  margin-bottom: var(--ex-space-md);
-  opacity: var(--ex-opacity-body);
-}
-
-.ex-earth-sidebar-body p:last-child { margin-bottom: 0; }
-
-/* ── Detail link ─────────────────────────────────────────────── */
-
+/* ── Detail link ── */
 .ex-earth-detail-link {
-  -webkit-background-clip: text;
   align-items: center;
   background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
+  -webkit-background-clip: text;
   background-clip: text;
+  border: none;
   color: transparent;
   cursor: pointer;
   display: inline-flex;
@@ -353,5 +194,315 @@
   text-transform: uppercase;
   transition: opacity var(--ex-duration-fast) ease;
 }
-
 .ex-earth-detail-link:hover { opacity: var(--ex-opacity-mid); }
+
+/* ── Intro CTA ── */
+.ex-earth-intro-cta {
+  align-items: center;
+  background: var(--ex-color-earth-pill-bg);
+  border: 1px solid var(--ex-color-earth-border-inner);
+  border-radius: var(--ex-border-radius-full);
+  color: var(--ex-color-earth-hi);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxs);
+  font-weight: var(--ex-heading-font-weight);
+  gap: var(--ex-space-xs);
+  letter-spacing: var(--ex-tracking-lg);
+  margin-top: var(--ex-space-sm);
+  padding: var(--ex-space-xs) var(--ex-space-lg);
+  transition: border-color var(--ex-duration-fast) ease, opacity var(--ex-duration-fast) ease;
+}
+.ex-earth-intro-cta:hover { border-color: var(--ex-color-earth-hi); opacity: var(--ex-opacity-high); }
+
+.ex-earth-intro-cta-arrow { display: inline-flex; }
+
+/* ================================================================
+   ARTICLE PANEL — slides up from the bottom, same pattern as the
+   Mercury/Venus/Sun panels.
+   ================================================================ */
+
+.ex-earth-article-panel {
+  --st-bg:               var(--ex-color-earth-bg);
+  --st-border:           transparent;
+  --st-duration:         var(--ex-duration-slow);
+  --st-easing:           cubic-bezier(0.4, 0, 0.2, 1);
+  --st-offcanvas-height: min(85vh, 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 1200px) {
+  .ex-earth-article-panel {
+    --st-bg: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.ex-earth-article-panel-inner,
+.ex-earth-article-panel-header,
+.ex-earth-article-panel-body,
+.ex-earth-article-panel-close {
+  pointer-events: auto;
+}
+
+.ex-earth-article-panel-inner {
+  overscroll-behavior: contain;
+  scrollbar-color: var(--ex-color-earth-border) transparent;
+  scrollbar-width: thin;
+}
+
+.ex-earth-article-panel-header {
+  border-bottom: 1px solid var(--ex-color-earth-border-inner);
+  padding: var(--ex-space-xl) 0 var(--ex-space-md) var(--ex-size-md);
+  position: relative;
+}
+
+.ex-earth-article-panel-close {
+  background: var(--ex-color-earth-pill-bg);
+  border: 1px solid var(--ex-color-earth-border-inner);
+  border-radius: var(--ex-border-radius-round);
+  color: var(--ex-text-body);
+  cursor: pointer;
+  font-size: var(--ex-font-size-default);
+  height: var(--ex-size-36);
+  position: absolute;
+  right: var(--ex-space-xl);
+  top: var(--ex-space-xl);
+  transition: background var(--ex-duration-fast) ease, border-color var(--ex-duration-fast) ease;
+  width: var(--ex-size-36);
+}
+.ex-earth-article-panel-close:hover {
+  background: var(--ex-color-earth-border);
+  border-color: var(--ex-color-earth-hi);
+}
+
+.ex-earth-article-panel-cat {
+  background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-heading-font-weight);
+  letter-spacing: var(--ex-tracking-xl);
+  margin-bottom: var(--ex-space-sm);
+  padding-right: var(--ex-size-40);
+  text-transform: uppercase;
+}
+
+.ex-earth-article-panel-title {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xl);
+  font-weight: var(--ex-heading-font-weight);
+  margin-bottom: var(--ex-space-xs);
+  max-width: var(--ex-size-xxl);
+}
+
+.ex-earth-article-panel-meta {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  letter-spacing: var(--ex-tracking-sm);
+  opacity: var(--ex-opacity-faint);
+  text-transform: uppercase;
+}
+
+.ex-earth-article-panel-body {
+  flex: 1;
+  max-width: var(--ex-size-xxxl);
+  padding: var(--ex-space-xl) 0 var(--ex-scroll-headroom-sm) var(--ex-size-md);
+}
+
+.ex-earth-article-panel-body p {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-default);
+  font-weight: var(--ex-para-font-weight);
+  margin-bottom: var(--ex-space-md);
+  opacity: var(--ex-opacity-body);
+}
+
+.ex-earth-article-panel-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================
+   EARTH — PROGRESS STRIP
+   ================================================================ */
+
+.ex-earth-progress-backdrop {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ex-color-black) 90%, transparent) 0%,
+    color-mix(in srgb, var(--ex-color-black) 82%, transparent) 12%,
+    color-mix(in srgb, var(--ex-color-black) 65%, transparent) 26%,
+    color-mix(in srgb, var(--ex-color-black) 45%, transparent) 42%,
+    color-mix(in srgb, var(--ex-color-black) 26%, transparent) 58%,
+    color-mix(in srgb, var(--ex-color-black) 12%, transparent) 75%,
+    color-mix(in srgb, var(--ex-color-black) 4%, transparent) 90%,
+    transparent 100%
+  );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity var(--ex-duration-slow) ease;
+  width: var(--ex-size-lg);
+  z-index: 9;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-earth-js"] ~ .ex-earth-progress-backdrop {
+  opacity: 1;
+}
+
+.ex-earth-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-space-lg);
+  left: var(--ex-space-xl);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(calc(-50% + var(--ex-space-xxl)));
+  transition: opacity var(--ex-duration-slow) ease, transform var(--ex-duration-slow) ease;
+  z-index: 1046;
+}
+
+#ex-content-overlay[data-overlay-state="open"][data-planet="ex-earth-js"] ~ .ex-earth-progress-strip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.ex-earth-progress-line {
+  background-color: var(--ex-color-earth-border-inner);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ex-earth-progress-item {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0 var(--ex-space-sm);
+  grid-template-columns: var(--ex-space-xxs) auto;
+  opacity: var(--ex-opacity-faint);
+  padding: 0;
+  text-align: left;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-earth-progress-item[data-in-range="false"] {
+  display: none;
+}
+
+.ex-earth-progress-bullet {
+  background-color: var(--ex-color-earth-border);
+  border-radius: var(--ex-border-radius-round);
+  grid-row: 1 / 3;
+  height: var(--ex-space-xxs);
+  transition: background-color var(--ex-duration-fast) ease, transform var(--ex-duration-fast) ease;
+  width: var(--ex-space-xxs);
+}
+
+.ex-earth-progress-number {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xs);
+  font-weight: var(--ex-heading-font-weight);
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-earth-progress-label {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  letter-spacing: var(--ex-tracking-sm);
+  text-transform: uppercase;
+  transition: opacity var(--ex-duration-fast) ease;
+}
+
+.ex-earth-progress-item[data-swapping="true"] .ex-earth-progress-number,
+.ex-earth-progress-item[data-swapping="true"] .ex-earth-progress-label {
+  opacity: 0;
+}
+
+.ex-earth-progress-item:hover { opacity: var(--ex-opacity-mid); }
+
+.ex-earth-progress-item[data-active="true"] {
+  opacity: var(--ex-opacity-high);
+}
+
+.ex-earth-progress-item[data-active="true"] .ex-earth-progress-bullet {
+  background-color: var(--ex-color-earth-hi);
+  transform: scale(1.6);
+}
+
+.ex-earth-progress-item[data-active="true"] .ex-earth-progress-number {
+  background: linear-gradient(to right, var(--ex-color-earth-hi), var(--ex-color-earth-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ================================================================
+   EARTH — RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 575.98px) {
+  .ex-earth-article-panel-close {
+    right: var(--ex-space-sm);
+  }
+
+  .ex-earth-progress-strip,
+  .ex-earth-progress-backdrop {
+    display: none;
+  }
+
+  .ex-earth-article-panel-header,
+  .ex-earth-article-panel-body {
+    padding-left: var(--ex-space-xs);
+    padding-right: var(--ex-space-xs);
+  }
+
+  #ex-content-overlay[data-planet="ex-earth-js"] .ex-overlay-entry-header {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ex-earth-progress-number,
+  .ex-earth-progress-label {
+    display: none;
+  }
+
+  .ex-earth-article-panel-header,
+  .ex-earth-article-panel-body {
+    padding-left: var(--ex-space-xxl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ex-earth-progress-label {
+    display: none;
+  }
+
+  .ex-earth-article-panel-header,
+  .ex-earth-article-panel-body {
+    padding-left: var(--ex-size-md);
+  }
+}

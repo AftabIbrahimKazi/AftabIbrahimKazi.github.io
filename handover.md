@@ -1,7 +1,7 @@
 # Handover — Exo Space Planetarium
 
 **Date:** 2026-06-21
-**Last updated:** 2026-07-09 — Phase 20: full Mercury "Explore" scroll redesign — circular-orbit scroll camera with a close immersive pass, right-aligned section layout, new dual-role numbered progress strip (sections ↔ article paragraphs), article sidebar replaced with a bottom slide-up panel, responsive breakpoints, legacy `Header`/`Footer` bleed-through on mobile fixed. Real Mercury article content is next session's task (still placeholder text). Pushed to `origin/dev`.
+**Last updated:** 2026-07-10 — Phase 21: Venus "Explore" scroll rebuilt onto the Mercury pattern (circular-orbit camera, dual-role progress strip, bottom slide-up article panel), plus a new 3D coverflow section and full centered project-detail cards for sections 3–7. First reusable Swiper preset added to the codebase. Next session: re-tune `VENUS_SCROLL_PATH` waypoints in `PlanetScrollCameras.ts` — camera framing was left as a placeholder throughout this session ("ignore the waypoint, we'll edit later"). Uncommitted on `dev`.
 **Purpose:** State-of-the-project summary for continuity between sessions.
 
 ---
@@ -803,6 +803,34 @@ Verified via headless Chromium: sampled `getComputedStyle(veil).opacity` immedia
 
 ---
 
+## Phase 21 — Venus "Explore" scroll rebuilt onto the Mercury pattern + reusable coverflow (2026-07-10)
+
+**Venus migrated from the pre-Phase-20 pattern to Mercury's**: circular-orbit `PlanetScrollCamera` path, dual-role progress strip, single bottom slide-up article panel — same architecture as Mercury, own gold/orange palette, own content. New files: `VenusProgressStrip.ts`, `VenusIntroCounters.ts` (direct clones of Mercury's, retargeted selectors/events). Old two-sided `#ex-venus-sidebar-left/right` offcanvas pair removed from `ContentOverlay.astro`.
+
+**`VENUS_SCROLL_PATH` in `PlanetScrollCameras.ts` is a placeholder** — every waypoint this session used the same derived circular-orbit formula as Mercury's (`R = 5 − 3.2·sin(πt)`, angle `= 360·t`, lookAt shift `0.6·sin(πt)` along camera-right), recomputed twice as the section count grew (8 → 9 sections). The developer explicitly said to ignore camera framing quality throughout ("we will edit later") — **this is the named next-session task.**
+
+**New reusable widget: `src/scripts/ui/shared/CoverflowSwiper.ts`** — first parameterized Swiper factory in the codebase (every prior carousel — `LandingJournal`, `RepoCarousel`, `CommCarousel` — hardcodes its own `new Swiper(...)`). `createCoverflowSwiper(options)` returns a live `Swiper` instance. Two effect modes:
+- Stock Swiper `effect: 'coverflow'` (rotate/depth/stretch/modifier params) for simple cases.
+- **`arcCurve`** — a hand-authored, piecewise-linear per-offset transform table (x/z/rotate, optionally `opacity`) that fully replaces Swiper's built-in formula, for tuned non-linear fans the stock continuous formula can't reproduce. Interpolated against Swiper's own `slide.progress` (note: positive progress = left of active, negative = right — inverted from the intuitive reading, documented inline).
+- **`gapCurve`** — signed (not mirrored) per-offset `margin-right` override, for asymmetric spacing tapers.
+- **`visibleRange: {left, right}`** — hides slides beyond N positions on each side via `visibility:hidden` rather than relying on container clipping/CSS masks (both proved unreliable against 3D-transformed slides — see bugs below).
+
+**Two real bugs found and fixed in the factory** (both apply to any future `arcCurve` consumer, not just Venus):
+1. Swiper's own `breakpoint` event can fire while the container is still `display:none` (every planet's overlay content sits in the DOM simultaneously; only the active one is visible), computing `NaN` for `swiper.translate` — invalid CSS, silently dropped, and Swiper's internal state stays corrupted afterward (doesn't self-heal on a later valid call). Fixed with a `container.clientWidth === 0` guard before any resync, backstopped by a `ResizeObserver` for the eventual hidden→visible transition.
+2. `update()`'s internal `slideTo()` short-circuits (never emits `setTranslate`) once the active index stops changing, so the effect module's per-slide transform never runs from `update()` alone — fixed by explicitly re-emitting `setTranslate` after `update()`.
+
+**Venus content structure — 9 sections now:**
+1. Intro (typography-only, no card chrome, left-aligned, matches a dev-tools-referenced mockup)
+2. **Coverflow** — all 7 projects (5 real + 2 filler: Vesper, Halo) in a 3D fan, hand-tuned `arcCurve`/`gapCurve` (values reverse-engineered from live devtools edits the developer made directly), `loop: true` (continuous wrap, verified both directions), `visibleRange: {left:3, right:2}` to clear the fixed progress strip
+3–7. **Full centered/left-aligned project-detail cards** (`data-layout="project"`) — no section background (transparent, scene shows through directly — card background was tried and explicitly rejected), title/subtitle/description, 3 count-up numeric stats (reuses `VenusIntroCounters`'/Mercury's exact counter pattern — just add `.ex-venus-counter` + `data-count-to`/`data-count-suffix`), two CTAs (external "VISIT PROJECT" redirect + "VIEW DETAILS" opening the bottom article panel). **Section 3 (Lumen) stays centered** as the one intentional exception; sections 4–7 are left-aligned via a `data-align="left"` modifier.
+8. Navigate, 9. Contact — unchanged from earlier this session.
+
+**Article/off-canvas panel made always-opaque** (`.ex-venus-article-panel` — removed the `@media (min-width:1200px) { --st-bg: transparent }` immersive override inherited from Mercury's panel). Mercury's sections never overlapped the panel's own screen space, but Venus's new full-centered project cards do, and a transparent panel let the section behind it bleed through and visually collide with the panel's own header. Developer confirmed: off-canvas should always carry a background; sections should not.
+
+**Offcanvas audit (developer asked, not yet acted on):** `@strata-packages/offcanvas` is used everywhere it should be. The only non-package show/hide logic left in the codebase is `RepoCarousel.ts`'s in-card accordion expand (toggles `aria-hidden` on sub-elements within a Swiper slide) — a different UI pattern (in-place expand, not a slide-in panel), not a clear migration candidate. `@strata-packages/modal` remains installed and unused. Developer's call on both, no action taken.
+
+---
+
 ## Portfolio direction (brainstorm 2026-07-05, decisions pending)
 
 Site is being repurposed as a live portfolio carrying real work + GitHub data. Key facts:
@@ -816,12 +844,16 @@ Site is being repurposed as a live portfolio carrying real work + GitHub data. K
 
 ## Next Up
 
+### Venus camera waypoints (next session — explicitly deferred from Phase 21)
+
+`VENUS_SCROLL_PATH` in `src/scripts/ui/solar-system/PlanetScrollCameras.ts` still uses Mercury's generic derived-circular-orbit formula as a placeholder for all 9 waypoints. Needs real per-section framing tuned to what each of the 9 sections actually shows (intro, coverflow overview, 5 project detail cards, navigate, contact) — same kind of hand-tuning Mercury's path got. Do this before touching content population below, since re-tuning waypoints may shift how many sections/what pacing makes sense.
+
 ### Real content population (next session)
 
 All planet overlays currently contain placeholder copy. The next session will replace all placeholder text with actual portfolio content across every planet.
 
 **Sun (About):** bio, methodology, stack, highlights, values
-**Venus (Design):** design projects, process, branding work, systems, motion
+**Venus (Design):** UI rebuilt in Phase 21 with fitting filler content (5 real-shaped projects + 2 filler cards, Vesper/Halo) — still needs real project data, real screenshots (`image` field is `null` everywhere, renders a placeholder icon), and real `demoUrl` links (all `null`, buttons fall back to `#`)
 **Earth (Dev):** development projects, stack, open-source contributions
 **Mars (Labs):** experiments, tools, creative coding work
 **Jupiter (Enterprise):** enterprise clients, methodology, results, industries
