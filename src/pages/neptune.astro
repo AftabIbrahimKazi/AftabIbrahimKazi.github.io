@@ -1,14 +1,15 @@
 ---
 // src/pages/neptune.astro — Contact page
+import '../styles/strata.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import WarpOverlay   from '../components/WarpOverlay.astro';
 import LandingHeader from '../components/LandingHeader.astro';
 import LandingFooter from '../components/LandingFooter.astro';
 
 const socials = [
-  { label: 'GitHub',   href: 'https://github.com/placeholder',         icon: 'fa-brands fa-github' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/placeholder',     icon: 'fa-brands fa-linkedin' },
-  { label: 'Twitter',  href: 'https://twitter.com/placeholder',         icon: 'fa-brands fa-x-twitter' },
-  { label: 'Dribbble', href: 'https://dribbble.com/placeholder',        icon: 'fa-brands fa-dribbble' },
+  { label: 'GitHub',   href: 'https://github.com/AftabIbrahimKazi',              icon: 'fa-brands fa-github' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aftab-kazi-715b88193/', icon: 'fa-brands fa-linkedin' },
+  { label: 'Twitter',  href: 'https://x.com',                                     icon: 'fa-brands fa-x-twitter' },
 ];
 ---
 
@@ -20,9 +21,17 @@ const socials = [
     <title>Contact | Aftab Kazi</title>
     <meta name="description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
     <link rel="canonical" href="https://aftabkazi.com/neptune" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
     <meta property="og:title" content="Contact | Aftab Kazi" />
     <meta property="og:description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
+    <meta property="og:image" content="/images/footer.png" />
+    <meta property="og:url" content="https://aftabkazi.com/neptune" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact | Aftab Kazi" />
+    <meta name="twitter:description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
+    <meta name="twitter:image" content="/images/footer.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,8 +39,9 @@ const socials = [
 
     <link rel="stylesheet" href="/css/variables.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/landing/landing-header.css" />
+    <link rel="stylesheet" href="/css/landing/landing-footer.css" />
     <link rel="stylesheet" href="/css/contact.css" />
-    <link rel="stylesheet" href="/webfonts/font-awesome.css" />
 
     <script>
       import '../scripts/warp-entry';
@@ -74,7 +84,7 @@ const socials = [
                 Open to new projects
               </p>
               <p class="ex-ct-availability-detail">
-                Based in [City, Country]. Working remotely worldwide.
+                Working remotely, open to teams in any timezone.
               </p>
             </div>
 
@@ -103,11 +113,8 @@ const socials = [
           <section class="ex-ct-form-panel" aria-label="Contact form">
             <form
               class="ex-ct-form"
+              id="ex-ct-form"
               name="contact"
-              method="POST"
-              action="/neptune/success"
-              onsubmit="return false;"
-              novalidate
             >
               <div class="ex-ct-form-row">
                 <div class="ex-ct-field">
@@ -160,10 +167,11 @@ const socials = [
                 ></textarea>
               </div>
 
-              <button class="ex-ct-submit" type="submit">
-                <span>TRANSMIT MESSAGE</span>
+              <button class="ex-ct-submit" id="ex-ct-submit" type="submit">
+                <span id="ex-ct-submit-label">TRANSMIT MESSAGE</span>
                 <span class="ex-ct-submit-arrow" aria-hidden="true">&rarr;</span>
               </button>
+              <p class="ex-ct-submit-note" id="ex-ct-submit-note" role="status" aria-live="polite"></p>
 
             </form>
           </section>
@@ -183,5 +191,41 @@ const socials = [
     </main>
 
     <LandingFooter />
+
+    <script>
+      // Static GitHub Pages hosting has no backend to submit this form to —
+      // the mailto: fallback opens the visitor's own email client pre-filled
+      // with their message, which is the only submission path a static site
+      // can offer without adding a third-party form service.
+      function init(): void {
+        const form  = document.getElementById('ex-ct-form') as HTMLFormElement | null;
+        const btn   = document.getElementById('ex-ct-submit');
+        const label = document.getElementById('ex-ct-submit-label');
+        const note  = document.getElementById('ex-ct-submit-note');
+        if (!form || !btn || !label || !note) return;
+
+        form.addEventListener('submit', (e: Event) => {
+          e.preventDefault();
+          if (!form.reportValidity()) return;
+
+          const data    = new FormData(form);
+          const name    = (data.get('name') ?? '').toString();
+          const email   = (data.get('email') ?? '').toString();
+          const subject = (data.get('subject') ?? '').toString();
+          const message = (data.get('message') ?? '').toString();
+
+          const body = `${message}\n\n— ${name} (${email})`;
+          const mailto = `mailto:hello@aftabkazi.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          label.textContent = 'OPENING EMAIL CLIENT…';
+          note.textContent  = "Your email app should open with this message ready to send. If nothing opens, email hello@aftabkazi.com directly.";
+          window.location.href = mailto;
+
+          window.setTimeout(() => { label.textContent = 'TRANSMIT MESSAGE'; }, 4000);
+        });
+      }
+
+      init();
+    </script>
   </body>
 </html>

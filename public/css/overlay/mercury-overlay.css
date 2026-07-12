@@ -289,6 +289,17 @@
 }
 .ex-mercury-btn:hover { opacity: var(--ex-opacity-high); }
 
+.ex-mercury-form-note {
+  color: var(--ex-text-body);
+  font-family: var(--ex-font-main);
+  font-size: var(--ex-font-size-xxxs);
+  font-weight: var(--ex-para-font-weight);
+  margin-top: var(--ex-space-xs);
+  min-height: 1em;
+  opacity: var(--ex-opacity-faint);
+  text-align: center;
+}
+
 /* ================================================================
    ARTICLE PANEL — slides up from the bottom, full-bleed and immersive
    (no boxed sidebar chrome). Position, the translateY slide, and the
