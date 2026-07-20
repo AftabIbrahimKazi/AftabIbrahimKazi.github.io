@@ -4,6 +4,23 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.2.0] — 2026-07-13
+
+### Added
+- `@triforge/context-pool-core` 0.1.0 and `@triforge/render-budget-core` 0.1.0 — built by the triforge maintainer in direct response to real mobile bugs on this live site (WebGL context exhaustion, AVIF decode failures, nebula shader compile failure under mobile shader limits).
+- Landing page's 10 planet orbs (8 carousel + comm-stage Saturn + journal Mercury) now share a single real WebGLRenderer via `ThreeContextAdapter`, instead of one renderer per canvas — the fix for mobile context exhaustion.
+- Real device/network profiling now drives the shared renderer's context budget, gates the fresnel-atmosphere/cloud-shell extras behind a shader-complexity tier, and — after generating real, verified-smaller AVIF variants (mid/low/potato) for 12 master textures — picks which resolution each orb actually downloads.
+
+### Changed
+- `CarouselPlanets.ts` rewritten around the shared-context model; orb canvases are now inert position anchors rather than individual render targets.
+- Device/network profiling split into two phases (`src/scripts/core/landing/RenderBudget.ts`): a fast, network-independent hardware probe that must resolve before any renderer exists, and a slower full-plan resolution (adds network profiling) that only gates the carousel.
+
+### Fixed
+- A visitor downgraded to a lower texture tier no longer downloads the full-resolution file first and the small one second — the carousel now awaits the resolved tier before loading anything.
+- The hardware probe (which deliberately exhausts the browser's real WebGL context ceiling to measure it) no longer evicts the nebula scene's own renderer — it now runs before any renderer is constructed, and no longer redundantly re-probes a second time later.
+
+---
+
 ## [0.1.2] — 2026-07-12
 
 ### Removed

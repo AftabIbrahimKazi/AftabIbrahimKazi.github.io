@@ -5,6 +5,7 @@
 // and calls init().
 
 import { LandingEngine }             from './LandingEngine';
+import { resolveHardwareCeiling, resolveFullPlan } from './RenderBudget';
 import { LandingEnvironment }        from '../../environment/landing/LandingEnvironment';
 import { LandingAsteroids }          from '../../objects/landing/LandingAsteroids';
 import { LandingScrollCamera }       from '../../controllers/landing/LandingScrollCamera';
@@ -22,7 +23,16 @@ export class LandingOrchestrator {
   private _asteroidsAnimation!: LandingAsteroidsAnimation;
   private _loop!:               LandingRenderLoop;
 
-  init(): void {
+  async init(): Promise<void> {
+    // Must resolve BEFORE any real WebGL renderer exists on the page — the
+    // hardware probe measures the browser's context ceiling by deliberately
+    // creating scratch contexts until it's hit, and will evict whichever
+    // real context is oldest if one already exists when it runs (verified:
+    // this evicted the nebula renderer when the probe lived inside
+    // CarouselPlanets instead, which only runs after LandingEngine exists).
+    // Network-independent — no first-paint delay risk from a slow connection.
+    const hardware = await resolveHardwareCeiling();
+
     this._engine = new LandingEngine('ex-nebula-canvas');
 
     this._environment = new LandingEnvironment(this._engine.scene);
@@ -34,7 +44,11 @@ export class LandingOrchestrator {
     this._scrollCam.init();
 
     this._carouselPlanets = new CarouselPlanets();
-    this._carouselPlanets.init();
+    // The full plan (adds network profiling on top of the already-resolved
+    // `hardware`, no second probe) resolves separately — CarouselPlanets
+    // awaits it internally and no-ops in update() until then; it must not
+    // block the nebula/asteroids/camera above.
+    void this._carouselPlanets.init(resolveFullPlan(Promise.resolve(hardware)));
 
     this._asteroidsAnimation = new LandingAsteroidsAnimation(this._asteroids);
 
