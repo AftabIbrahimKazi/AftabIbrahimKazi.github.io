@@ -70,6 +70,11 @@ const {
     <!-- Nebula canvas — full screen, behind everything -->
     <canvas id="ex-nebula-canvas"></canvas>
 
+    <!-- Shared carousel-orb render surface — one real WebGL context reused across
+         every planet orb (carousel, journal, comm stage) via @triforge/context-pool-core,
+         instead of one WebGLRenderer per canvas. Sits above the nebula, below content. -->
+    <canvas id="ex-carousel-canvas"></canvas>
+
     <WarpOverlay />
     <LandingHeader />
 

@@ -1,7 +1,7 @@
 {
   "name": "planetarium",
   "type": "module",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -15,6 +15,7 @@
     "@strata-packages/offcanvas": "^1.0.0",
     "@triforge/animation-core": "^0.1.0",
     "@triforge/compositor-core": "^0.1.0",
+    "@triforge/context-pool-core": "^0.1.0",
     "@triforge/core-types": "^0.1.0",
     "@triforge/curve-core": "^0.1.0",
     "@triforge/geometry-nodes": "^0.1.0",
@@ -22,6 +23,7 @@
     "@triforge/modifier-core": "^0.1.0",
     "@triforge/particle-core": "^0.1.0",
     "@triforge/radius-parametric-geometry": "^0.1.0",
+    "@triforge/render-budget-core": "^0.1.0",
     "@triforge/shader-core": "^0.4.2",
     "@triforge/uv-core": "^0.1.0",
     "@triforge/volume-core": "^0.1.0",

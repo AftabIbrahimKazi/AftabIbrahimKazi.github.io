@@ -25,6 +25,8 @@ export default defineConfig({
                 '@triforge/geometry-nodes',
                 '@triforge/radius-parametric-geometry',
                 '@triforge/shader-core',
+                '@triforge/context-pool-core/three',
+                '@triforge/render-budget-core',
                 '@strata-packages/offcanvas',
                 '@strata-packages/modal',
                 'swiper',
