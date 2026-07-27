@@ -1,18 +1,116 @@
 // src/scripts/ui/landing/CarouselPlanets.ts
 // Renders every carousel/journal/comm-stage planet orb through ONE shared
-// WebGLRenderer (@triforge/context-pool-core's ThreeContextAdapter) instead of
-// one WebGLRenderer per canvas. Mobile browsers cap real WebGL contexts far
-// lower than this page used to need (up to 10 simultaneously); the adapter
-// scissor-renders each orb's scene into its own on-screen rect on a single
-// shared canvas, and only actually renders the orbs currently visible/in
-// budget. @triforge/render-budget-core profiles the device once and feeds
-// the context budget + a shader-complexity tier back in.
+// WebGLRenderer instead of one WebGLRenderer per canvas. Mobile browsers cap
+// real WebGL contexts far lower than this page used to need (up to 10
+// simultaneously); a shared-context manager scissor-renders each orb's
+// scene into its own on-screen rect on a single shared canvas, and only
+// actually renders the orbs currently visible/in budget.
+// @triforge/render-budget-core profiles the device once and feeds the
+// context budget + a shader-complexity tier back in.
 
 import * as THREE from 'three';
-import { ThreeContextAdapter } from '@triforge/context-pool-core/three';
+import { ContextPool } from '@triforge/context-pool-core';
+import type { Rect } from '@triforge/context-pool-core';
 import type { RenderBudgetPlan, ShaderComplexityTier, TextureVariantTier } from '@triforge/render-budget-core';
 import { buildCarouselAtmosphereMaterial, buildCarouselSunMaterial } from '../../objects/landing/CarouselPlanetMaterials';
 import { resolveTierUrl } from '../../objects/landing/TextureVariants';
+
+// Reimplements @triforge/context-pool-core/three's ThreeContextAdapter, with
+// one addition: each client's on-screen rect can be intersected against a
+// `clipAncestor` element instead of just the raw anchor's own
+// getBoundingClientRect(). The package's own adapter always uses the
+// anchor's unclipped rect — fine for orbs with no clipping ancestor, but the
+// planet carousel strip (`.lp-planet-carousel`) is a horizontally-scrolled
+// `overflow-x: auto` row; items scrolled past its edge are still fully
+// within the page viewport (so the package's own visibility check treats
+// them as visible) even though the browser would clip their painting. Every
+// orb previously had its own small DOM canvas, so that clipping happened
+// for free; a single page-covering shared canvas has no such awareness on
+// its own, so orbs scrolled off the strip stayed fully rendered and
+// overlapped the prev/next arrow buttons.
+class ClippableSharedRenderer {
+  private pool: ContextPool;
+  private renderer: THREE.WebGLRenderer;
+  private canvasRect: Rect = { x: 0, y: 0, width: 0, height: 0 };
+  private contextLost = false;
+  private handleContextLost = (event: Event): void => { event.preventDefault(); this.contextLost = true; };
+  private handleContextRestored = (): void => { this.contextLost = false; };
+
+  constructor(renderer: THREE.WebGLRenderer, maxConcurrent: number) {
+    this.renderer = renderer;
+    this.pool = new ContextPool({ maxConcurrent });
+    renderer.domElement.addEventListener('webglcontextlost', this.handleContextLost);
+    renderer.domElement.addEventListener('webglcontextrestored', this.handleContextRestored);
+  }
+
+  registerScene(
+    id: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera,
+    anchor: HTMLCanvasElement, clipAncestor: Element | null, priority: number,
+  ): void {
+    this.pool.register({
+      id,
+      priority,
+      getAnchorRect: (): Rect | null => {
+        const r = anchor.getBoundingClientRect();
+        if (r.width <= 0 || r.height <= 0) return null;
+        if (!clipAncestor) return { x: r.left, y: r.top, width: r.width, height: r.height };
+
+        const c = clipAncestor.getBoundingClientRect();
+        const x1 = Math.max(r.left, c.left), y1 = Math.max(r.top, c.top);
+        const x2 = Math.min(r.right, c.right), y2 = Math.min(r.bottom, c.bottom);
+        if (x2 <= x1 || y2 <= y1) return null;
+        return { x: x1, y: y1, width: x2 - x1, height: y2 - y1 };
+      },
+      render: (clippedRect: Rect): void => {
+        // clippedRect (from getAnchorRect, already intersected with
+        // clipAncestor if any) drives ONLY the scissor test — which pixels
+        // are allowed to be written. The viewport — which controls how the
+        // camera's projection maps onto the target rectangle — always uses
+        // the anchor's own FULL, unclipped size. Using the clipped rect for
+        // both (this class's first version) meant a partially-clipped orb's
+        // viewport shrank along with it: WebGL doesn't crop an image into a
+        // smaller viewport, it re-projects the whole scene to fit, so a
+        // sphere clipped down to a few-pixel-wide sliver rendered squished
+        // into that sliver and blurred into a solid colour smear — verified
+        // by hiding the shared canvas and confirming the smear vanished, and
+        // by reproducing the same shape whenever a clip intersection was
+        // only a few pixels wide. Real CSS overflow clipping never resizes
+        // the content, only crops which pixels show — this restores that.
+        const full = anchor.getBoundingClientRect();
+        const fullRect: Rect = {
+          x: full.left - this.canvasRect.x, y: full.top - this.canvasRect.y,
+          width: full.width, height: full.height,
+        };
+
+        const glYClip = this.canvasRect.height - clippedRect.y - clippedRect.height;
+        const glYFull = this.canvasRect.height - fullRect.y - fullRect.height;
+
+        this.renderer.setScissorTest(true);
+        this.renderer.setScissor(clippedRect.x, glYClip, clippedRect.width, clippedRect.height);
+        this.renderer.setViewport(fullRect.x, glYFull, fullRect.width, fullRect.height);
+        this.renderer.render(scene, camera);
+      },
+    });
+  }
+
+  unregisterScene(id: string): void { this.pool.unregister(id); }
+  setMaxConcurrent(n: number): void { this.pool.setMaxConcurrent(n); }
+
+  renderFrame(): void {
+    if (this.contextLost) return;
+    const r = this.renderer.domElement.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return;
+    this.renderer.setScissorTest(false);
+    this.renderer.clear();
+    this.canvasRect = { x: r.left, y: r.top, width: r.width, height: r.height };
+    this.pool.tick(this.canvasRect);
+  }
+
+  dispose(): void {
+    this.renderer.domElement.removeEventListener('webglcontextlost', this.handleContextLost);
+    this.renderer.domElement.removeEventListener('webglcontextrestored', this.handleContextRestored);
+  }
+}
 
 // Per-planet atmosphere glow colour (matches the glow colour in each planet's atmosphere builder).
 const ATMO_COLOR: Record<string, THREE.Color> = {
@@ -91,10 +189,19 @@ export class CarouselPlanets {
 
   private _entries: PlanetEntry[] = [];
   private _renderer!: THREE.WebGLRenderer;
-  private _adapter!:  ThreeContextAdapter;
+  private _adapter!:  ClippableSharedRenderer;
   private _priority = 0;
   private _textureTier: TextureVariantTier = 'high';
   private _resizeHandler = (): void => this._resize();
+  // #ex-carousel-canvas is a page-viewport-fixed layer whose per-orb draw
+  // rects are computed from each anchor's getBoundingClientRect() on the
+  // main-thread rAF tick (see LandingRenderLoop). Native scroll is
+  // compositor-driven and can advance a frame ahead of that tick, so the
+  // painted orb visibly trails its DOM anchor while scrolling and only
+  // catches up once scrolling stops. Re-reading rects on the scroll event
+  // itself (fired every compositor frame during scroll) keeps the two in
+  // sync instead of waiting for the next rAF.
+  private _scrollHandler = (): void => this._adapter?.renderFrame();
 
   private _resize(): void {
     const dpr = Math.min(devicePixelRatio, 2);
@@ -111,6 +218,7 @@ export class CarouselPlanets {
     opts: CanvasOptions,
     loader: THREE.TextureLoader,
     complexity: ShaderComplexityTier,
+    clipAncestor: Element | null,
   ): void {
     const { exposure = 2.2, atmoScale = 1.012, atmoIntensity = 1.5,
             ambientIntensity = 0.15, lightPos = [-5, 1.8, 2] as [number, number, number],
@@ -159,10 +267,24 @@ export class CarouselPlanets {
         mesh.material  = buildCarouselSunMaterial(texture);
 
         const glowTex  = loader.load(resolveTierUrl(SUN_GLOW_URL, this._textureTier));
-        const glowOpts = { map: glowTex, color: sunColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false };
-        const scales   = [radius * 5.5, radius * 7.0, radius * 4.0];
+        // Scales tuned to this carousel's own tight camera framing (the
+        // sphere already fills ~92% of the frame) — the sol-scene Sun.ts
+        // sprites this was copied from scale up to 13.5-26, correct there
+        // only because that camera views the whole system from far away.
+        const scales = [radius * 1.6, radius * 2.0, radius * 1.2];
         for (const s of scales) {
-          const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ ...glowOpts }));
+          const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+            map: glowTex, color: sunColor, transparent: true, opacity: 1.0,
+            blending: THREE.AdditiveBlending, depthWrite: false,
+            // Additive blending's default alpha factors match its RGB
+            // factors, so every sprite draw pushes the framebuffer's alpha
+            // toward opaque wherever it reaches — invisible on the
+            // sol-scene page (opaque background there) but a visible white
+            // wash here, where this canvas composites transparently over
+            // the page. Never write alpha from these purely-additive glow
+            // sprites; only their RGB contribution should matter.
+            blendSrcAlpha: THREE.ZeroFactor, blendDstAlpha: THREE.OneFactor,
+          }));
           sprite.scale.setScalar(s);
           mesh.add(sprite);
         }
@@ -173,7 +295,7 @@ export class CarouselPlanets {
 
         this._renderer.toneMappingExposure = 1.4;
         this._entries.push({ id, scene, camera, mesh });
-        this._register(id, scene, camera, canvas);
+        this._register(id, scene, camera, canvas, clipAncestor);
         return;
       }
 
@@ -249,15 +371,18 @@ export class CarouselPlanets {
       }
 
       this._entries.push({ id, scene, camera, mesh });
-      this._register(id, scene, camera, canvas);
+      this._register(id, scene, camera, canvas, clipAncestor);
     });
   }
 
-  private _register(id: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera, anchor: HTMLCanvasElement): void {
+  private _register(
+    id: string, scene: THREE.Scene, camera: THREE.PerspectiveCamera,
+    anchor: HTMLCanvasElement, clipAncestor: Element | null,
+  ): void {
     // Registration order = default priority (comm-stage/journal orbs register last,
     // after the 8 carousel minis, so if the device-profiled budget is ever tight the
     // small always-visible carousel items keep their slot over the larger showcase orbs).
-    this._adapter.registerScene(id, { scene, camera, anchor, priority: this._priority++ });
+    this._adapter.registerScene(id, scene, camera, anchor, clipAncestor, this._priority++);
   }
 
   // Takes the plan as an already-in-flight Promise (LandingOrchestrator
@@ -286,20 +411,34 @@ export class CarouselPlanets {
     addEventListener('resize', this._resizeHandler);
 
     this._textureTier = plan.textureTier;
-    this._adapter = new ThreeContextAdapter({
-      renderer: this._renderer,
-      maxConcurrent: plan.maxConcurrentContexts,
-    });
+    this._adapter = new ClippableSharedRenderer(this._renderer, plan.maxConcurrentContexts);
+
+    const scrollContainer = document.getElementById('lp-scroll-container');
+    scrollContainer?.addEventListener('scroll', this._scrollHandler, { passive: true });
+
+    // Only the carousel strip is a scrollable, clipping ancestor
+    // (overflow-x: auto) — journal/comm orbs sit in normal page flow, no
+    // clip ancestor needed for them.
+    const carouselStrip = document.getElementById('lp-planet-carousel');
 
     const loader = new THREE.TextureLoader();
     this._registerGroup(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-planet-orb'),
-      {}, loader, plan.shaderComplexity);
-    this._registerGroup(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-journal-orb'),
-      { exposure: 1.2, atmoScale: 1.008, atmoIntensity: 0.9,
-        ambientIntensity: 0.08, lightPos: [-4, 2.0, 1], lightIntensity: 2.0, bump: true }, loader, plan.shaderComplexity);
+      {}, loader, plan.shaderComplexity, carouselStrip);
+    // Comm (Saturn) registers before journal (Mercury) so Mercury draws
+    // last: the journal orb intentionally bleeds up into the commerce
+    // section's space above it (see its `top: -65px` bleed in index.astro),
+    // and this single shared canvas has no DOM-style z-index of its own —
+    // whichever orb's scissor rect is drawn later simply paints over any
+    // pixels it shares with an earlier one. Saturn's comm-stage orb sits
+    // close enough to that shared boundary to overlap it at some scroll
+    // offsets, and with comm drawn second Saturn was winning that overlap
+    // and covering Mercury instead of the other way around.
     this._registerGroup(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-comm-orb'),
       { exposure: 1.3, atmoScale: 1.01, atmoIntensity: 1.0,
-        ambientIntensity: 0.10, lightPos: [-4, 2.2, 1.5], lightIntensity: 2.4, ring: true }, loader, plan.shaderComplexity);
+        ambientIntensity: 0.10, lightPos: [-4, 2.2, 1.5], lightIntensity: 2.4, ring: true }, loader, plan.shaderComplexity, null);
+    this._registerGroup(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-journal-orb'),
+      { exposure: 1.2, atmoScale: 1.008, atmoIntensity: 0.9,
+        ambientIntensity: 0.08, lightPos: [-4, 2.0, 1], lightIntensity: 2.0, bump: true }, loader, plan.shaderComplexity, null);
   }
 
   // Driven by LandingRenderLoop — no private requestAnimationFrame chain here.
@@ -318,6 +457,7 @@ export class CarouselPlanets {
 
   destroy(): void {
     removeEventListener('resize', this._resizeHandler);
+    document.getElementById('lp-scroll-container')?.removeEventListener('scroll', this._scrollHandler);
     this._adapter?.dispose();
     this._renderer?.dispose();
     this._entries = [];

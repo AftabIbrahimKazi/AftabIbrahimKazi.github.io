@@ -15,7 +15,12 @@
    one real WebGL context, scissored per orb via @triforge/context-pool-core.
    Sits above page content (.lp-main is z-index 1) so orb imagery always
    shows through at each anchor's on-screen position; pointer-events is
-   disabled so clicks/hovers pass through to the real DOM underneath. */
+   disabled so clicks/hovers pass through to the real DOM underneath.
+   z-index sits above .lp-header (z-[20]) too — the journal-section Mercury
+   orb intentionally bleeds up past its section's own top edge, and at the
+   scroll offset where that section sits flush under the header, the
+   header's opaque/blurred scrolled state (.lp-header--scrolled) would
+   otherwise paint over and crop the bled portion. */
 #ex-carousel-canvas {
   display: block;
   height: 100%;
@@ -23,7 +28,7 @@
   pointer-events: none;
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 21;
 }
 
 /* ── Body overrides ─────────────────────────────────────────── */
