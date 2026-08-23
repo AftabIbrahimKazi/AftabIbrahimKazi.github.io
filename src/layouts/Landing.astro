@@ -25,6 +25,11 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Click analytics + live widget — widget theme bound to this page's own theme value -->
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" src="https://useclick.io/analytics.js"></script>
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" data-theme="dark" src="https://useclick.io/live.js"></script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -63,6 +68,9 @@ const {
     </script>
     <script>
       import '../scripts/warp-entry';
+    </script>
+    <script>
+      import '../scripts/ui/shared/UseClickWidgetPosition';
     </script>
   </head>
   <body class="ex-body ex-landing-body">

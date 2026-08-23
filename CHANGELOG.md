@@ -4,6 +4,14 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.4.0] — 2026-08-23
+
+### Added
+- useclick.io analytics + live-visitor widget on every page (landing, 3D scenes, `/neptune`), with the widget's `data-theme` bound to each page's own theme value.
+- `UseClickWidgetPosition.ts` — repositions the vendor widget's inline-styled floating pill (no documented config option exists for this) to sit flush in one line next to the Three.js Resources badge instead of overlapping it, matching z-index with whichever badge variant is on the page.
+
+---
+
 ## [0.3.0] — 2026-08-23
 
 ### Added
