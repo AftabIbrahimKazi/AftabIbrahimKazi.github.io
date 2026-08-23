@@ -18,6 +18,9 @@
 
   --ex-gradient-overlay-opaque: rgba(255, 255, 255, 0.95);
   --ex-gradient-overlay-fade:   rgba(255, 255, 255, 0.15);
+
+  --ex-badge-bg:       rgba(0, 0, 0, 0.04);
+  --ex-badge-bg-hover: rgba(0, 0, 0, 0.08);
 }
 
 /* Dark Theme */
@@ -38,6 +41,9 @@
 
   --ex-gradient-overlay-opaque: rgba(0, 0, 0, 0.95);
   --ex-gradient-overlay-fade:   rgba(0, 0, 0, 0.15);
+
+  --ex-badge-bg:       rgba(255, 255, 255, 0.05);
+  --ex-badge-bg-hover: rgba(255, 255, 255, 0.10);
 }
 
 /* ── Strata component tokens ─────────────────────────────────── */
@@ -357,6 +363,9 @@
   --ex-duration-veil-out: var(--ex-duration-md);
   --ex-duration-header:   var(--ex-duration-sm);
   --ex-duration-hide:     4000ms;   /* JS idle timer — no CSS analogue */
+
+  /* z-index scale — fixed UI chrome above canvases/overlays, below the warp veil */
+  --ex-z-badge: 2;
 
   /* easing curves */
   --ex-ease-ui:      cubic-bezier(0.4, 0, 0.2, 1);

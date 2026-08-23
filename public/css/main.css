@@ -51,10 +51,6 @@
     text-decoration: none;
 }
 
-.ex-social-links {
-    display: flex;
-}
-
 .ex-nav-links a:hover,
 .ex-social-links a:hover {
     color: var(--ex-nav-link-color-hover);
@@ -112,6 +108,26 @@
     box-shadow: var(--ex-drop-shadow-focus-hover);
 }
 
+
+/* css for Three.js Resources badge — Strata has no arbitrary filter utility (registry
+   checked, none exists), so the logo invert is genuine custom CSS per SC-02; the scene
+   badge's hover is the one Strata can't express (pseudo-class, SC-02). The landing/footer
+   badge is dark-mode-only (no toggle on that layout) so its logo always inverts; the
+   scene badge sits behind the light/dark toggle, so its logo only inverts in dark theme. */
+
+.ex-threejs-badge-logo {
+    filter: brightness(0) invert(1);
+}
+
+html[data-ex-theme="dark"] .ex-threejs-badge-scene-logo {
+    filter: brightness(0) invert(1);
+}
+
+.ex-threejs-badge-scene:hover {
+    background: var(--ex-badge-bg-hover);
+}
+
+/* end of css for Three.js Resources badge */
 
 .ex-toggle-container {
     bottom: 90px;
@@ -355,10 +371,6 @@
     pointer-events: auto;
 }
 
-.ex-planet-btn-inner {
-    position: relative;
-}
-
 .ex-planet-btn[data-object="ex-sun-js"] .ex-planet-btn-inner     { transform: translate(80px, -20px); }
 .ex-planet-btn[data-object="ex-mercury-js"] .ex-planet-btn-inner { transform: translate(30px, -10px); }
 .ex-planet-btn[data-object="ex-venus-js"] .ex-planet-btn-inner   { transform: translate(35px, -10px); }
@@ -548,7 +560,6 @@
     padding: var(--ex-space-xxxs) var(--ex-space-sm);
     white-space: nowrap;
 }
-.ex-tooltip-static-ts { opacity: 0.6; }
 .ex-tooltip-live-ts   { opacity: 0.95; font-weight: var(--ex-heading-font-weight); }
 
 /* end of css for tooltip and explore button */
