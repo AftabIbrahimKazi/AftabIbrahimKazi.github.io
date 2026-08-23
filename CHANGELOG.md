@@ -4,6 +4,28 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.4.0] — 2026-08-23
+
+### Added
+- useclick.io analytics + live-visitor widget on every page (landing, 3D scenes, `/neptune`), with the widget's `data-theme` bound to each page's own theme value.
+- `UseClickWidgetPosition.ts` — repositions the vendor widget's inline-styled floating pill (no documented config option exists for this) to sit flush in one line next to the Three.js Resources badge instead of overlapping it, matching z-index with whichever badge variant is on the page.
+
+---
+
+## [0.3.0] — 2026-08-23
+
+### Added
+- "Featured on Three.js Resources" badge — a pill on the landing footer (dark-mode brand spec, exact colors per the partner's asset) and a themed corner badge on every 3D planet scene (`Main.astro`), both linking to the site's showcase listing.
+- Theme (`ThemeToggle.ts`) and background-music (`MusicToggle.ts`) toggle controllers, wiring up the previously inert `#ex-toggle-theme-js`/`#ex-toggle-music-btn-js` buttons on 3D scene pages — persists the chosen theme via `localStorage`.
+
+### Changed
+- `strata-css` upgraded 1.4.10 → 1.8.17; `Footer.astro`/`Scene.astro` converted to Strata utility classes where the version bump exposed new coverage (`.ex-social-links`, `.ex-planet-btn-inner`, `.ex-tooltip-static-ts` opacity).
+
+### Fixed
+- Theme toggle button temporarily commented out in `Main.astro` (site stays light-mode-only for now) — markup preserved, not deleted, for later re-enable.
+
+---
+
 ## [0.2.0] — 2026-07-13
 
 ### Added

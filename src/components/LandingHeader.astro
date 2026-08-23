@@ -40,6 +40,31 @@
   <button class="lp-dot bg-[var(--ex-color-border-faint)] border-0 cursor-pointer h-[var(--ex-size-6)] p-0 w-[var(--ex-size-6)]" data-active="false" data-beat="6" aria-label="The Journey"></button>
 </nav>
 
+<!-- Three.js Resources badge — sticky like the scroll-to-top pattern, always above the
+     footer's brand row. Third-party asset, exact brand spec (bg/border/shadow colors +
+     gap/radius have no matching project token; hardcoded on purpose per css-standards
+     RULE 20). Dark-mode variant only — landing has no theme toggle. -->
+<a
+  href="https://threejsresources.com/showcase/aftabibrahimkazi-github-io?ref=badge"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="ex-threejs-badge d-inline-flex align-items-center position-fixed bottom-[var(--ex-space-xxxl)] left-[var(--ex-space-xl)] z-[20] gap-[10px] rounded-[8px] bg-[var(--ex-color-black)] border-[1px_solid_#333333] shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-decoration-none py-[6px] ps-[var(--ex-space-sm)] pe-[var(--ex-space-sm)]"
+  aria-label="Featured on Three.js Resources"
+>
+  <img
+    src="https://threejsresources.com/logo.svg"
+    alt="Three.js Resources Logo"
+    width="20"
+    height="20"
+    loading="lazy"
+    class="ex-threejs-badge-logo d-block object-fit-contain h-[var(--ex-size-20)] w-[var(--ex-size-20)]"
+  />
+  <span class="d-flex flex-column">
+    <span class="fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-para-font-weight)] text-[var(--ex-color-white)]">Featured on</span>
+    <span class="fs-[var(--ex-font-size-xs)] fw-[var(--ex-font-weight-semibold)] text-[var(--ex-color-white)]">Three.js Resources</span>
+  </span>
+</a>
+
 <script>
   import '../scripts/ui/landing/LandingDotNav';
   import '../scripts/ui/landing/LandingHeaderHide';

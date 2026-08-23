@@ -35,6 +35,11 @@ const themeValue = isDark ? "dark" : "light";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Click analytics + live widget — widget theme bound to this page's own theme value -->
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" src="https://useclick.io/analytics.js"></script>
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" data-theme={themeValue} src="https://useclick.io/live.js"></script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -82,12 +87,48 @@ const themeValue = isDark ? "dark" : "light";
     <script>
       import '../scripts/warp-entry';
     </script>
+    <script>
+      import '../scripts/ui/shared/ThemeToggle';
+    </script>
+    <script>
+      import '../scripts/ui/shared/MusicToggle';
+    </script>
+    <script>
+      import '../scripts/ui/shared/UseClickWidgetPosition';
+    </script>
   </head>
   <body class="ex-body" data-cursor-state="default" data-scroll-state="auto">
     <WarpOverlay />
     <div id="ex-top-sensor-js"></div>
     <Scene />
     <ContentOverlay />
+
+    <!-- Three.js Resources badge — same button as the landing footer/header, mirrored to
+         the right side of the scene. Theme-aware (this layout has the light/dark toggle,
+         unlike landing): bg/border/text follow --ex-badge-bg/--ex-border-color/--ex-text-body,
+         logo invert is applied only in dark theme (main.css, data-ex-theme selector).
+         Exact-brand gap/radius/shadow values still have no matching project token —
+         hardcoded on purpose per css-standards RULE 20. -->
+    <a
+      href="https://threejsresources.com/showcase/aftabibrahimkazi-github-io?ref=badge"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Featured on Three.js Resources"
+      class="ex-threejs-badge-scene d-inline-flex align-items-center position-fixed bottom-[var(--ex-space-md)] right-[var(--ex-space-md)] z-[var(--ex-z-badge)] gap-[10px] rounded-[8px] bg-[var(--ex-badge-bg)] border-[1px_solid_var(--ex-border-color)] shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-decoration-none py-[6px] ps-[var(--ex-space-sm)] pe-[var(--ex-space-sm)]"
+    >
+      <img
+        src="https://threejsresources.com/logo.svg"
+        alt="Three.js Resources Logo"
+        width="20"
+        height="20"
+        loading="lazy"
+        class="ex-threejs-badge-scene-logo d-block object-fit-contain h-[var(--ex-size-20)] w-[var(--ex-size-20)]"
+      />
+      <span class="d-flex flex-column">
+        <span class="fs-[var(--ex-font-size-xxxs)] fw-[var(--ex-para-font-weight)] text-[var(--ex-text-body)]">Featured on</span>
+        <span class="fs-[var(--ex-font-size-xs)] fw-[var(--ex-font-weight-semibold)] text-[var(--ex-text-body)]">Three.js Resources</span>
+      </span>
+    </a>
     <!-- Legacy header — see commented-out import above. Kept for future reuse. -->
     <!-- <Header /> -->
 
@@ -106,6 +147,7 @@ const themeValue = isDark ? "dark" : "light";
         </div>
       </button>
 
+      <!-- Theme toggle disabled for now — site stays light-mode only.
       <button id="ex-toggle-theme-js" data-ex-theme="dark">
           <div class="ex-icon-wrapper">
             <Icon name="lucide:sun" class="ex-icon" />
@@ -114,6 +156,7 @@ const themeValue = isDark ? "dark" : "light";
             <Icon name="lucide:moon" class="ex-icon" />
           </div>
       </button>
+      -->
 
       <button id="ex-toggle-music-btn-js" data-sound-state="paused">
         <div class="ex-icon-wrapper">

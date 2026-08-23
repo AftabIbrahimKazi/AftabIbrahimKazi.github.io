@@ -18,6 +18,11 @@ const socials = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Click analytics + live widget — widget theme bound to this page's own theme value -->
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" src="https://useclick.io/analytics.js"></script>
+    <script is:inline defer data-site="8f3e2530-7056-4f1c-81d9-ddd25f9eec23" data-theme="dark" src="https://useclick.io/live.js"></script>
+
     <title>Contact | Aftab Kazi</title>
     <meta name="description" content="Send a signal. Get in touch with Aftab Kazi — available for freelance projects, collaborations, and conversations." />
     <link rel="canonical" href="https://aftabkazi.com/neptune" />
@@ -45,6 +50,9 @@ const socials = [
 
     <script>
       import '../scripts/warp-entry';
+    </script>
+    <script>
+      import '../scripts/ui/shared/UseClickWidgetPosition';
     </script>
   </head>
 
