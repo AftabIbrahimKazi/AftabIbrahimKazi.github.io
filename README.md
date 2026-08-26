@@ -2,6 +2,10 @@
 
 A portfolio site built as an explorable solar system — and a live demonstration of my own open-source tools. The planets are rendered by [triforge](https://github.com/AftabIbrahimKazi/triforge), my Blender-inspired node system for Three.js. The styling layer is [strata](https://github.com/AftabIbrahimKazi/strata), my CSS utility framework. The site doesn't just present my work; it runs on it.
 
+This project is featured on Three.js Resources, a curated showcase of Three.js portfolio sites and creative builds.
+
+[![Featured on Three.js Resources](https://img.shields.io/badge/Featured%20on-Three.js%20Resources-4CAF50?style=for-the-badge&logo=three.js&logoColor=white)](https://threejsresources.com/showcase/aftabibrahimkazi-github-io?ref=badge)
+
 ## How it works
 
 The landing page opens on a procedural nebula with a planet carousel. Picking a planet fires a warp-speed transition — a custom star-field shader, colour-keyed to the destination — and lands on a full Three.js solar system where each planet carries a category of work, framed around the Hindu Navagraha.
