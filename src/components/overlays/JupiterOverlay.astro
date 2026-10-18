@@ -1,97 +1,97 @@
 ---
-// src/components/overlays/JupiterOverlay.astro — Enterprise / Large-Scale Work
+// src/components/overlays/JupiterOverlay.astro — Case Studies
 // 8 sections — layout data-attributes drive CSS positioning.
 // Sections match JUPITER_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
-// Client names are withheld under NDA — same convention used across most
-// enterprise portfolios. Scope, role, and outcome are described in full.
+// No enterprise clients exist yet — these are deep-dive case studies on
+// real, public projects instead (see directive from Venus/Jupiter planning).
 
 const items = [
   {
-    id:       'client-1',
-    category: 'CLIENT',
-    title:    'National Retail Chain',
-    meta:     '40+ stores · 8-month engagement',
+    id:       'aerin-bio-case-study',
+    category: 'CASE STUDY',
+    title:    'Aerin Bio: A Take-Home Brief, Treated Like a Real Launch',
+    meta:     'Next.js · Design-to-build in one pass',
     body: [
-      'A checkout and cart rebuild for a high-traffic retail chain — the existing flow was losing a measurable share of mobile shoppers between "add to cart" and "confirm payment." Enterprise work here meant navigating four stakeholder teams (product, payments, warehouse ops, and legal) before a single line of the new flow could ship.',
-      'My ownership was scoped precisely: the front-end checkout flow and the component library it introduced, not the payments backend or inventory sync those components called into. On a team this size, being precise about what you owned matters more than describing the whole project as a solo effort.',
-      'Checkout abandonment dropped after launch, traced directly to cutting the flow from five steps to two and removing three redundant confirmation screens — a mechanism, not just a number, which is what made the result credible to the client\'s own data team.',
+      'Aerin Bio started as a take-home assignment for a creative frontend developer role — build a landing page for a fictional biotech company. The scope was small on paper; the execution wasn\'t treated that way.',
+      'The brief needed a single idea to carry the whole page: "medicine that breathes with you," inhaled biologics delivered as a mist rather than through the bloodstream. That idea became the literal mechanic of the hero — the word "Aerin" rendered as an SVG mask that reveals a real photograph beneath it as you scroll, until the letters dissolve into the image.',
+      'Everything downstream of that decision followed the same discipline: a cursor-reactive Canvas 2D smoke layer that only spawns particles on movement and stays blank at rest, GSAP-driven scroll-scrubbed sequences, a monochrome-plus-one-accent design system, and full `prefers-reduced-motion` support so the motion-heavy page degrades gracefully rather than breaking for users who need it to.',
     ],
-    topics: ['The Scope', 'What I Owned', 'The Impact'],
+    topics: ['The Brief', 'The Core Idea', 'The Execution'],
   },
   {
-    id:       'client-2',
-    category: 'CLIENT',
-    title:    'Fintech Trading Platform',
-    meta:     'Real-time data · 14-month engagement',
+    id:       'fish-pond-case-study',
+    category: 'CASE STUDY',
+    title:    'Fish Pond: Comparing Three Ways to Make a Fish Decide',
+    meta:     'Next.js + Three.js + ONNX · In development',
     body: [
-      'A real-time trading dashboard for a fintech platform, rebuilt to handle live market data at a scale the previous React implementation could not sustain without dropped frames. The constraint that shaped everything: regulatory audit requirements meant every UI state change had to be traceable, not just visually correct.',
-      'What working at this scale taught that a smaller project could not: state management design has to account for compliance logging from day one, not bolted on afterward — retrofitting an audit trail onto an existing dashboard architecture is dramatically harder than designing for it upfront.',
-      'The dashboard now handles several times the concurrent data throughput of its predecessor without frame drops, verified under the client\'s own load-testing harness before sign-off — the kind of result an enterprise client actually measures, not just observes.',
+      'Fish Pond set out to answer a specific question: what does it actually look like, side by side, to make a simulated creature decide what to do via reflex rules, probabilistic scripting, and a real on-device model?',
+      'Cognitive Arena and the Visual Telemetry Benchmark answer that with no AI model at all — pure scripted behaviour, deliberately, so there\'s a clean control case to compare against. The Underwater scene is the other half: a goldfish environment with Triforge-authored materials, where an on-device ONNX model called Laya-AI makes the actual behavioural decisions while the renderer just executes them.',
+      'The project is explicit about where it stands: Laya-AI is a general text classifier repurposed for this task, not a fish-specific model, performance hasn\'t been measured on real GPUs yet, and System 2 reasoning for the underwater fish is still on the roadmap. Documenting the gaps is as much a part of the case study as the parts that work.',
     ],
-    topics: ['The Constraints', 'The Lesson', 'The Result'],
+    topics: ['The Question', 'Three Approaches', 'What\'s Still Open'],
   },
   {
-    id:       'client-3',
-    category: 'CLIENT',
-    title:    'Multi-Tenant SaaS Platform',
-    meta:     '10-month retainer · Embedded engineer',
+    id:       'inkwake-case-study',
+    category: 'CASE STUDY',
+    title:    'Inkwake: Proving a Framework Claim Instead of Asserting It',
+    meta:     'TypeScript · Lighthouse, 3 frameworks, 1 page',
     body: [
-      'An admin portal built zero-to-production for a multi-tenant SaaS platform, as an embedded engineer inside the client\'s own product team rather than an outside consultant — a different engagement model that meant attending their standups, not just delivering to a spec.',
-      'Scale here meant designing a single admin UI that had to serve tenants ranging from five-person teams to organisations with thousands of seats, without the interface itself changing shape between them — permission models and data density were the two variables that actually needed to scale.',
-      'The elevator version: built the internal tool that lets a SaaS company\'s own support and ops teams manage every tenant from one place, replacing what had been a patchwork of internal scripts and direct database access.',
+      'Building Strata raises an obvious question: does a JIT CSS framework you wrote yourself actually ship less CSS than Tailwind or Bootstrap, or does it just feel that way? Inkwake exists to answer that with evidence rather than assertion.',
+      'The same anime-themed e-commerce landing page — mega menu, master footer, 19 content sections, three-theme toggle — gets built three times, once per framework, with markup intent, copy, and business logic held identical across all three. Only the CSS framework and its native JS idiom change.',
+      'Each build deploys live and runs through Lighthouse under mobile and desktop presets, ten isolated runs per app per mode, with medians reported alongside means to filter out CPU-contention noise from parallel runs — the same rigor a real performance audit would demand, applied to my own tool.',
     ],
-    topics: ['The Engagement Model', 'The Numbers', 'The Elevator Version'],
+    topics: ['Why It Exists', 'What\'s Held Constant', 'The Methodology'],
   },
   {
     id:       'results',
-    category: 'RESULTS',
-    title:    'What Got Shipped',
-    meta:     'Outcomes across enterprise engagements',
+    category: 'SUMMARY',
+    title:    'What These Three Have in Common',
+    meta:     'The thread across the case studies',
     body: [
-      'Across these engagements: a two-step checkout that measurably reduced cart abandonment, a trading dashboard that held its frame rate under real market-data load, and an admin portal that replaced ad-hoc internal scripts with one supported tool. Different industries, same underlying discipline.',
-      'The credible version of each result traces to a specific decision, not a vague adjective — the checkout win traces to removing three confirmation screens, the dashboard win traces to moving aggregation off the render thread. The mechanism is what a technical stakeholder actually wants to hear.',
-      'Client names and direct quotes are withheld under NDA, standard for enterprise engagements at this level — full case studies with the detail these summaries compress are available on request after a brief call.',
+      'Different briefs, different stacks, same underlying habit: pick one idea or one question, and build the entire project in service of answering it rather than listing features. Aerin Bio had a design idea it had to physically embody. Fish Pond had a comparison it had to run fairly. Inkwake had a claim it had to prove or disprove.',
+      'None of these are commercial client engagements — there are no clients yet, and no NDA to work around. Everything here is public: the code, the commit history, and the repo issues where the rough edges are tracked openly instead of smoothed over for a case-study page.',
+      'Full repos, READMEs, and live demos are linked from Earth and Venus. This page is the "why it was built this way" layer on top of them.',
     ],
-    topics: ['What Moved', 'The Mechanism', 'Under NDA'],
+    topics: ['The Common Thread', 'No NDA Needed', 'Where to Go Next'],
   },
 ];
 ---
 
 <!-- ── Section 1 — Overview ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="bottom-center">
-  <span class="ex-jupiter-section-label">ENTERPRISE</span>
-  <h2 class="ex-heading ex-jupiter-section-title">Work<span class="ex-line-break"></span>at Scale.</h2>
-  <p class="ex-para ex-jupiter-body">Large-scale product work, commercial contracts, and long-running engagements. Projects that require system thinking, team coordination, and decisions that hold up at 100,000 users.</p>
+  <span class="ex-jupiter-section-label">CASE STUDIES</span>
+  <h2 class="ex-heading ex-jupiter-section-title">Built<span class="ex-line-break"></span>to Prove Something.</h2>
+  <p class="ex-para ex-jupiter-body">Deep dives into the "why" behind three real, public projects — a design brief, a behavioural comparison, and a framework benchmark. No enterprise clients yet, no NDA — just the repos.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">3 clients</span><span class="ex-jupiter-stat-pill-label">Enterprise</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">2+ yrs</span><span class="ex-jupiter-stat-pill-label">Commercial work</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">3 case studies</span><span class="ex-jupiter-stat-pill-label">All public</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">0 NDAs</span><span class="ex-jupiter-stat-pill-label">Nothing withheld</span></div>
   </div>
   <button class="ex-jupiter-intro-cta" type="button" data-scroll-next>
-    VIEW THE ENGAGEMENTS
+    VIEW THE CASE STUDIES
     <span class="ex-jupiter-intro-cta-arrow"><i class="fa-solid fa-arrow-right"></i></span>
   </button>
 </div>
 
-<!-- ── Section 2 — Client 1 ─────────────────────────────────── -->
+<!-- ── Section 2 — Aerin Bio ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
-  <span class="ex-jupiter-section-label">02 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">National Retail Chain</h2>
-  <p class="ex-para ex-jupiter-body">A checkout and cart rebuild for a 40+ store retail chain — cut the mobile flow from five steps to two, scoped to the front-end checkout component library specifically, not the payments backend behind it.</p>
+  <span class="ex-jupiter-section-label">02 — CASE STUDY</span>
+  <h2 class="ex-heading ex-jupiter-section-title">Aerin Bio</h2>
+  <p class="ex-para ex-jupiter-body">A take-home brief treated like a real launch — "medicine that breathes with you" became the literal mechanic of an SVG-masked hero reveal, with GSAP-driven scroll sequences built on top of that one idea.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">40+ stores</span>
-    <span class="ex-jupiter-fact-label">Users or impact</span>
+    <span class="ex-jupiter-fact-number">Next.js + GSAP</span>
+    <span class="ex-jupiter-fact-label">Built with</span>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="0" data-planet="jupiter">Full case study →</button>
 </div>
 
-<!-- ── Section 3 — Client 2 ─────────────────────────────────── -->
+<!-- ── Section 3 — Fish Pond ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
-  <span class="ex-jupiter-section-label">03 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">Fintech Trading Platform</h2>
-  <p class="ex-para ex-jupiter-body">A real-time trading dashboard rebuilt to hold its frame rate under live market-data load, with every UI state change traceable to satisfy the client's own regulatory audit requirements.</p>
+  <span class="ex-jupiter-section-label">03 — CASE STUDY</span>
+  <h2 class="ex-heading ex-jupiter-section-title">Fish Pond</h2>
+  <p class="ex-para ex-jupiter-body">Comparing three ways to make a simulated fish decide what to do — scripted reflexes, a seeded probabilistic benchmark, and a real on-device ONNX model carrying the actual decisions in the Underwater scene.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">Zero dropped frames</span>
-    <span class="ex-jupiter-fact-label">Key result</span>
+    <span class="ex-jupiter-fact-number">3 approaches</span>
+    <span class="ex-jupiter-fact-label">Compared side by side</span>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="1" data-planet="jupiter">Full case study →</button>
 </div>
@@ -99,56 +99,56 @@ const items = [
 <!-- ── Section 4 — Methodology ──────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
   <span class="ex-jupiter-section-label">04 — METHODOLOGY</span>
-  <h2 class="ex-heading ex-jupiter-section-title">Working at Volume</h2>
-  <p class="ex-para ex-jupiter-body">Enterprise work requires a different mode: slower decision cycles, more stakeholders, longer horizons. I've learned to navigate org charts as well as wireframes — to align, document, and communicate clearly at every layer.</p>
+  <h2 class="ex-heading ex-jupiter-section-title">One Idea, Fully Followed</h2>
+  <p class="ex-para ex-jupiter-body">Every project here starts from one idea or one question and gets built in service of answering it, not as a feature list. Aerin Bio had a design concept to embody. Fish Pond had a comparison to run fairly. Inkwake had a claim to prove.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">Cross-functional</span>
-    <span class="ex-jupiter-fact-label">Team collaboration</span>
+    <span class="ex-jupiter-fact-number">Documented openly</span>
+    <span class="ex-jupiter-fact-label">Working method</span>
   </div>
 </div>
 
-<!-- ── Section 5 — Client 3 ─────────────────────────────────── -->
+<!-- ── Section 5 — Inkwake ─────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
-  <span class="ex-jupiter-section-label">05 — CLIENT</span>
-  <h2 class="ex-heading ex-jupiter-section-title">Multi-Tenant SaaS Platform</h2>
-  <p class="ex-para ex-jupiter-body">An admin portal built zero-to-production as an embedded engineer inside the client's own team — one interface serving tenants from five-person teams to organisations with thousands of seats.</p>
+  <span class="ex-jupiter-section-label">05 — CASE STUDY</span>
+  <h2 class="ex-heading ex-jupiter-section-title">Inkwake</h2>
+  <p class="ex-para ex-jupiter-body">Does Strata actually ship less CSS than Tailwind or Bootstrap? Inkwake builds the same page three times and settles the question with Lighthouse data instead of an assertion.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">10 months</span><span class="ex-jupiter-stat-pill-label">Engagement length</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Embedded</span><span class="ex-jupiter-stat-pill-label">Your contribution</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">3 frameworks</span><span class="ex-jupiter-stat-pill-label">One page each</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">10 runs</span><span class="ex-jupiter-stat-pill-label">Per app, per mode</span></div>
   </div>
   <button class="ex-jupiter-detail-link" type="button" data-item-id="2" data-planet="jupiter">Full case study →</button>
 </div>
 
 <!-- ── Section 6 — Industries ───────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
-  <span class="ex-jupiter-section-label">06 — INDUSTRIES</span>
-  <h2 class="ex-heading ex-jupiter-section-title">Sectors Worked</h2>
-  <p class="ex-para ex-jupiter-body">Retail, fintech, and B2B SaaS so far — each with its own version of "at scale": store count, transaction throughput, and tenant count respectively. Context that signals domain familiarity to the next client.</p>
+  <span class="ex-jupiter-section-label">06 — STACKS</span>
+  <h2 class="ex-heading ex-jupiter-section-title">What They're Built On</h2>
+  <p class="ex-para ex-jupiter-body">Next.js and React across the design-led work, Three.js and Triforge where 3D rendering is the point, and plain TypeScript where the project is a benchmark harness rather than a product.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Retail</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Fintech</span><span class="ex-jupiter-stat-pill-label">Industry</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Next.js</span><span class="ex-jupiter-stat-pill-label">Stack</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Three.js</span><span class="ex-jupiter-stat-pill-label">Stack</span></div>
   </div>
 </div>
 
 <!-- ── Section 7 — Results ──────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="right">
-  <span class="ex-jupiter-section-label">07 — RESULTS</span>
-  <h2 class="ex-heading ex-jupiter-section-title">What Got Shipped</h2>
-  <p class="ex-para ex-jupiter-body">A two-step checkout, a dashboard that holds up under live market-data load, and an admin portal that replaced ad-hoc internal scripts. Each result traces to one specific, describable decision.</p>
+  <span class="ex-jupiter-section-label">07 — SUMMARY</span>
+  <h2 class="ex-heading ex-jupiter-section-title">What They Have in Common</h2>
+  <p class="ex-para ex-jupiter-body">No enterprise clients yet, no NDA to work around — every repo, README, and live demo behind these case studies is public, linked from Earth and Venus.</p>
   <div class="ex-jupiter-key-fact">
-    <span class="ex-jupiter-fact-number">3 engagements</span>
-    <span class="ex-jupiter-fact-label">Full detail under NDA</span>
+    <span class="ex-jupiter-fact-number">3 case studies</span>
+    <span class="ex-jupiter-fact-label">All public, no NDA</span>
   </div>
-  <button class="ex-jupiter-detail-link" type="button" data-item-id="3" data-planet="jupiter">All results →</button>
+  <button class="ex-jupiter-detail-link" type="button" data-item-id="3" data-planet="jupiter">Read the summary →</button>
 </div>
 
 <!-- ── Section 8 — CTA ──────────────────────────────────────── -->
 <div class="ex-jupiter-section" data-layout="center">
   <span class="ex-jupiter-section-label">08 — ENGAGE</span>
   <h2 class="ex-heading ex-jupiter-section-title">Let's Work Together</h2>
-  <p class="ex-para ex-jupiter-body">Available for enterprise contracts, long-term retainers, and embedded team roles. NDA available. Case studies with full detail available on request after a brief call. Reach out via Neptune.</p>
+  <p class="ex-para ex-jupiter-body">Open to new projects and collaborations. Every case study above links back to a real, public repo — browse the code directly, or reach out via Neptune.</p>
   <div class="ex-jupiter-stats-row">
-    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">NDA ready</span><span class="ex-jupiter-stat-pill-label">On request</span></div>
+    <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">GitHub</span><span class="ex-jupiter-stat-pill-label">Browse the code</span></div>
     <div class="ex-jupiter-stat-pill"><span class="ex-jupiter-stat-pill-value">Neptune</span><span class="ex-jupiter-stat-pill-label">Contact</span></div>
   </div>
 </div>

@@ -5,52 +5,52 @@
 
 const items = [
   {
-    id:       'terrarium',
+    id:       'cognitive-arena',
     category: 'EXPERIMENT',
-    title:    'Terrarium',
-    meta:     'WebGL + GLSL · 2024',
+    title:    'Cognitive Arena',
+    meta:     'Fish Pond · Scripted, no AI model',
     body: [
-      'A generative plant-growth shader — one rule (branches bend toward the brightest point on screen) run thousands of times to see what shapes emerge without any single stroke being hand-drawn. The constraint was strict: no pre-baked geometry, everything grown in the fragment shader from a single seed value.',
-      'The first version grew nothing but straight lines — the "bend toward light" rule needed noise injected into the branching angle before anything resembling a plant showed up. The failure taught more about how organic-looking randomness actually works than the eventual success did.',
-      'Currently a standalone WebGL demo, not wired into anything production. Turning it into a generative loading-screen background is the obvious next step, not yet done.',
+      'Cognitive Arena is a scripted, non-AI simulation inside Fish Pond: a single fish responds to eight different stimuli, some known and some not. Known stimuli trigger fast, reflex-like reactions; unknown objects get a slower, multi-phase appraisal instead.',
+      'Short-term memory is visible in real time through a live "Fish Mind" readout — the point of the arena is to make the decision process legible rather than a black box, comparing reflex-like, probabilistic, and deliberative behaviour side by side.',
+      'No AI model runs here at all — it is deliberately scripted, which makes it the control case against the Underwater scene\'s actual on-device model.',
     ],
-    topics: ['The Rule', 'What Failed First', 'Where It Stands'],
+    topics: ['The Setup', 'Known vs. Unknown Stimuli', 'The Control Case'],
   },
   {
-    id:       'echograph',
+    id:       'visual-telemetry-benchmark',
     category: 'EXPERIMENT',
-    title:    'Echograph',
-    meta:     'Web Audio API · 2023',
+    title:    'Visual Telemetry Benchmark',
+    meta:     'Fish Pond · Seeded, 16s cycle',
     body: [
-      'A real-time audio visualiser that reacts to frequency data from the Web Audio API instead of a canned animation — feed it any playing audio and it draws a live waveform field that actually reflects what is playing, bass and treble rendered as different depths in a 3D scene.',
-      'The unexpected result: silence turned out to be the hardest case to handle gracefully, not loud audio. A flat frequency spectrum produced a visually dead scene, which meant designing an idle-state animation that only kicks in below a volume threshold.',
-      'This is the project that proved audio-reactive visuals were worth the effort — a version of this exact technique now drives the hover sound feedback across this site\'s UI.',
+      'Three scripted controllers run side by side on identical inputs, with live telemetry overlaid on each — seeded randomness keeps every run reproducible rather than letting chance mask real differences in behaviour.',
+      'Each automated test cycle runs for sixteen seconds before resetting, long enough to see divergence between the controllers without turning the comparison into a long-running observation task.',
+      'It exists for the same reason a benchmark exists anywhere else in this body of work: a claim about behaviour is only useful once it is measured against something, not just described.',
     ],
-    topics: ['The Setup', 'The Surprise', 'What It Shows'],
+    topics: ['The Setup', 'Why Seeded', 'The 16-Second Cycle'],
   },
   {
-    id:       'fracture',
+    id:       'underwater-laya-ai',
     category: 'EXPERIMENT',
-    title:    'Fracture',
-    meta:     'Canvas + Physics · 2023',
+    title:    'Underwater / Laya-AI',
+    meta:     'Fish Pond · ONNX Runtime Web',
     body: [
-      'A shatter effect for UI elements — click a card and it breaks into physically-simulated shards that fall and settle under gravity, instead of the usual fade-and-slide dismissal. Built with a lightweight 2D physics step written from scratch rather than a full physics engine, since the use case never needed collision resolution beyond "fall and stop."',
-      'Building this revealed a real limitation of Canvas 2D: redrawing hundreds of independently-rotating shard polygons every frame is fine at low counts and falls off a cliff past roughly 150 shards on mid-range hardware — the kind of ceiling that only shows up once you actually stress-test past the demo case.',
-      'Status: archived as a component, but the shard-fracture math got reused (rewritten for WebGL instancing) in an early prototype of this site\'s warp transition before the current starfield approach replaced it.',
+      'The Underwater scene is Fish Pond\'s most ambitious piece: a realistic goldfish environment with caustics, water absorption, and bloom, built on Triforge node-graph materials instead of hand-written GLSL — the same approach used for every planet on this site.',
+      'Fish decisions — flee, go for food, where to swim — are made by an on-device model nicknamed Laya-AI, running in the browser via ONNX Runtime Web. The renderer only carries out what the model decides; it has no decision logic of its own.',
+      'Laya-AI is opt-in because the download is roughly 524MB and may not run well on phones or low-end laptops. It is a general text classifier repurposed for this task, not a fish-specific model, and System 2 reasoning for the underwater fish is on the roadmap, not yet implemented.',
     ],
-    topics: ['The Medium', 'What It Revealed', 'Current Status'],
+    topics: ['The Scene', 'The Model', 'Known Limits'],
   },
   {
-    id:       'driftwood',
-    category: 'EXPERIMENT',
-    title:    'Driftwood',
-    meta:     'Three.js + Verlet Physics · 2022',
+    id:       'inkwake-benchmark',
+    category: 'BENCHMARK',
+    title:    'Inkwake',
+    meta:     'Tailwind vs. Bootstrap vs. Strata',
     body: [
-      'A cloth/rope simulation built on Verlet integration, applied to something deliberately unglamorous: a driftwood-and-rope bridge that sways believably under a simulated wind force. No practical use case going in — just curiosity about whether a from-scratch physics step could look convincing without a physics engine dependency.',
-      'What makes this one different from the others: it is the only experiment here that is pure simulation, no visual shader trickery. If Terrarium and Fracture are about rendering, Driftwood is about the underlying math holding up on its own.',
-      'Eleven iterations before the rope stopped visibly vibrating at rest — the real lesson was about numerical damping, not about Three.js. The kind of problem that looks like a rendering bug but is actually a math bug.',
+      'Inkwake builds the same anime-themed e-commerce landing page three times — once each in Tailwind, Bootstrap 5, and Strata — holding markup intent, copy, and business logic constant so any measured difference traces back to the CSS framework itself.',
+      'Each build deploys live and gets Lighthouse-benchmarked under mobile and desktop presets, ten isolated runs per app per mode, reporting medians alongside means to filter out CPU-contention noise from running tests in parallel.',
+      'This is the most rigorous experiment in the set precisely because it is not exploratory — it exists to get a real answer to "does my own framework actually cost less," not just to assume it.',
     ],
-    topics: ['The Outlier', 'Technique vs. Concept', 'The Real Lesson'],
+    topics: ['The Setup', 'The Methodology', 'Why It\'s Different'],
   },
 ];
 ---
@@ -59,9 +59,9 @@ const items = [
 <div class="ex-mars-section" data-layout="bottom-center">
   <span class="ex-mars-section-label">LABS</span>
   <h2 class="ex-heading ex-mars-section-title">Push<span class="ex-line-break"></span>the Limits.</h2>
-  <p class="ex-para ex-mars-body">Experiments that don't need a client brief. Work done to learn, to break, to find the edge of what's possible in a browser. Some ships. Some stays here. All of it teaches something.</p>
+  <p class="ex-para ex-mars-body">Fish Pond's own experiments, plus Inkwake's framework benchmark — work done to measure, compare, and find the edge of what's possible in a browser, documented in their own public repos.</p>
   <div class="ex-mars-stats-row">
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">4 active</span><span class="ex-mars-stat-pill-label">Experiments</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">4 experiments</span><span class="ex-mars-stat-pill-label">Across 2 repos</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">WebGL</span><span class="ex-mars-stat-pill-label">Primary medium</span></div>
   </div>
   <button class="ex-mars-intro-cta" type="button" data-scroll-next>
@@ -70,50 +70,50 @@ const items = [
   </button>
 </div>
 
-<!-- ── Section 2 — Experiment 1 ─────────────────────────────── -->
+<!-- ── Section 2 — Cognitive Arena ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">02 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">Terrarium</h2>
-  <p class="ex-para ex-mars-body">A generative plant-growth shader — one branching rule run thousands of times from a single seed value, no geometry hand-drawn. Noise turned out to be the missing ingredient between "straight lines" and "plant."</p>
+  <h2 class="ex-heading ex-mars-section-title">Cognitive Arena</h2>
+  <p class="ex-para ex-mars-body">A scripted, no-AI simulation inside Fish Pond — one fish responds to eight stimuli, known ones fast and reflexive, unknown ones slower and multi-phase, with a live "Fish Mind" readout.</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">GLSL</span>
-    <span class="ex-mars-fact-label">Built with</span>
+    <span class="ex-mars-fact-number">8 stimuli</span>
+    <span class="ex-mars-fact-label">Tested</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="0" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- ── Section 3 — Experiment 2 ─────────────────────────────── -->
+<!-- ── Section 3 — Visual Telemetry ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">03 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">Echograph</h2>
-  <p class="ex-para ex-mars-body">A real-time audio visualiser reacting to live frequency data via the Web Audio API — bass and treble rendered as depth in a 3D field. Silence, not loud audio, turned out to be the hard case to design for.</p>
+  <h2 class="ex-heading ex-mars-section-title">Visual Telemetry Benchmark</h2>
+  <p class="ex-para ex-mars-body">Three scripted controllers run side by side on identical, seeded inputs inside Fish Pond, with live telemetry over a 16-second automated test cycle — reproducible by design, not left to chance.</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">Shipped a spinoff</span>
-    <span class="ex-mars-fact-label">What it does</span>
+    <span class="ex-mars-fact-number">16s cycle</span>
+    <span class="ex-mars-fact-label">Per run</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="1" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- ── Section 4 — Experiment 3 ─────────────────────────────── -->
+<!-- ── Section 4 — Underwater ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">04 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">Fracture</h2>
-  <p class="ex-para ex-mars-body">A shatter effect for UI dismissal — cards break into physically-simulated shards under gravity instead of fading out. Hit a real Canvas 2D performance ceiling around 150 simultaneous shards.</p>
+  <h2 class="ex-heading ex-mars-section-title">Underwater / Laya-AI</h2>
+  <p class="ex-para ex-mars-body">A realistic goldfish scene built on Triforge node-graph materials — caustics, water absorption, bloom — with an on-device ONNX model deciding whether each fish flees, feeds, or just swims.</p>
   <div class="ex-mars-stats-row">
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">2023</span><span class="ex-mars-stat-pill-label">Built</span></div>
-    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Archived</span><span class="ex-mars-stat-pill-label">Ongoing / archived</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">62</span><span class="ex-mars-stat-pill-label">Adjustable settings</span></div>
+    <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Opt-in</span><span class="ex-mars-stat-pill-label">Laya-AI model</span></div>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="2" data-planet="mars">Lab notes →</button>
 </div>
 
-<!-- ── Section 5 — Experiment 4 ─────────────────────────────── -->
+<!-- ── Section 5 — Inkwake ─────────────────────────────── -->
 <div class="ex-mars-section" data-layout="right">
-  <span class="ex-mars-section-label">05 — EXPERIMENT</span>
-  <h2 class="ex-heading ex-mars-section-title">Driftwood</h2>
-  <p class="ex-para ex-mars-body">A from-scratch Verlet-integration rope/cloth simulation — a driftwood bridge swaying under a simulated wind force, no physics engine dependency, built purely out of curiosity about the underlying math.</p>
+  <span class="ex-mars-section-label">05 — BENCHMARK</span>
+  <h2 class="ex-heading ex-mars-section-title">Inkwake</h2>
+  <p class="ex-para ex-mars-body">The same landing page built three times — Tailwind, Bootstrap 5, Strata — then Lighthouse-benchmarked live to see what the CSS framework itself actually costs, with everything else held constant.</p>
   <div class="ex-mars-key-fact">
-    <span class="ex-mars-fact-number">11 iterations</span>
-    <span class="ex-mars-fact-label">Before it clicked</span>
+    <span class="ex-mars-fact-number">10 runs</span>
+    <span class="ex-mars-fact-label">Per app, per mode</span>
   </div>
   <button class="ex-mars-detail-link" type="button" data-item-id="3" data-planet="mars">Lab notes →</button>
 </div>
@@ -133,7 +133,7 @@ const items = [
 <div class="ex-mars-section" data-layout="right">
   <span class="ex-mars-section-label">07 — TOOLS</span>
   <h2 class="ex-heading ex-mars-section-title">Lab Equipment</h2>
-  <p class="ex-para ex-mars-body">Three.js, GLSL shaders, WebGL, Web Audio API, Canvas, GSAP. Sometimes just raw CSS. The constraint isn't the tool — it's the question.</p>
+  <p class="ex-para ex-mars-body">Three.js, Triforge node graphs, ONNX Runtime Web, Next.js, Lighthouse. Sometimes just raw CSS. The constraint isn't the tool — it's the question.</p>
   <div class="ex-mars-stats-row">
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">Three.js</span><span class="ex-mars-stat-pill-label">3D</span></div>
     <div class="ex-mars-stat-pill"><span class="ex-mars-stat-pill-value">GLSL</span><span class="ex-mars-stat-pill-label">Shaders</span></div>

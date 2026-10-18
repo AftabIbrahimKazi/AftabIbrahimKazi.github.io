@@ -1,140 +1,142 @@
 ---
-// src/components/overlays/SaturnOverlay.astro — Products / Store
+// src/components/overlays/SaturnOverlay.astro — Published Packages
 // 8 sections — layout data-attributes drive CSS positioning.
 // Sections match SATURN_SCROLL_PATH waypoints in PlanetScrollCameras.ts.
+// No commercial storefront exists — these are real, free, open-source
+// packages published on npm, presented as "products" you can install.
 
 const items = [
   {
-    id:       'orbit-ui',
-    category: 'PRODUCT',
-    title:    'Orbit UI',
-    meta:     '$49 · Figma',
+    id:       'strata-css',
+    category: 'PACKAGE',
+    title:    'strata-css',
+    meta:     'npm · MIT · Free',
     body: [
-      'Orbit UI is a 120-component Figma kit built for SaaS dashboards — the exact component set this planetarium\'s own admin-style overlays were prototyped from, cleaned up and generalised for reuse. Auto-layout throughout, dark and light variants on every component.',
-      'Built for the specific situation of starting a new SaaS product screen and not wanting to rebuild data tables, filter bars, and settings panels from scratch for the fifth time. It is not a general-purpose UI kit — it is the specific 20% of components that SaaS dashboards need over and over.',
-      'Includes: 120 components across 8 categories, both theme variants, a Figma variables setup for quick rebranding, and lifetime update access. Licensed for commercial use on unlimited client projects.',
+      'strata-css is a JIT CSS framework — Bootstrap-style ready-made components (`btn-primary`, `card`, `navbar`) alongside Tailwind-style arbitrary values (`mt-[24px]`, `bg-[#ff0000]`) and state variants (`hover:`, `focus-visible:`, `group-hover:`, `peer-checked:`, `before:`, `print:`), scanned and generated just-in-time so only used classes ship.',
+      'Framework styles live inside CSS cascade layers, so nothing ever needs `!important`, and plain unlayered CSS automatically overrides it. Components are driven by `data-st-*` attributes rather than JavaScript class toggling, with built-in light, dark, and dim themes.',
+      'Six companion packages extend it further: `@strata-packages/modal`, `offcanvas`, `picker`, `forms`, `chart`, and `shopmap` — each installable standalone. This exact site runs entirely on it; there is no other CSS framework loaded anywhere on these pages.',
     ],
-    topics: ['The Product', 'The Problem It Solves', "What's Included"],
+    topics: ['The Package', 'The Companion Set', "It's Running Right Now"],
   },
   {
-    id:       'nightfall',
-    category: 'PRODUCT',
-    title:    'Nightfall',
-    meta:     '$39 · Includes 6 page templates',
+    id:       'triforge',
+    category: 'PACKAGE',
+    title:    '@triforge/*',
+    meta:     'npm · MIT · 19 packages, Free',
     body: [
-      'Nightfall is a dark-mode Astro starter theme — six page templates (landing, blog index, article, pricing, about, contact) built on the same cascade-layer CSS architecture this site uses, no Tailwind or CSS-in-JS dependency.',
-      'Built for developers who want a real starting codebase, not a Figma file to translate themselves. "A freelance developer who wants a production-ready Astro base instead of starting from a blank astro.config" is the specific buyer this serves.',
-      'Fully plug-and-play: clone, `npm install`, `npm run dev`. Comes with a documented content-collection schema for the blog templates and a short setup guide — no configuration required to see it running.',
+      'Triforge is a 19-package suite — `shader-core`, `geometry-nodes`, `particle-core`, `physics-core`, `keyframe`, and more — that brings Blender\'s node-graph workflow to plain Three.js, with Three.js as the only hard dependency.',
+      'Every planet material, atmosphere, and ring on this site, plus the warp transition and the landing-page carousel, compiles from a Triforge node graph rather than hand-written GLSL. It works with vanilla Three.js and React Three Fiber on any r128+ project, with no required build step.',
+      'Stage 1 — all 19 packages — shipped and is MIT-licensed. Stage 2, a GUI node-editor application and a terrain/vegetation addon suite, is the next milestone on the public roadmap.',
     ],
-    topics: ['The Format', 'The Buyer', 'The Onboarding'],
+    topics: ['The Package', 'What It Powers Here', 'The Roadmap'],
   },
   {
-    id:       'glyphset',
-    category: 'PRODUCT',
-    title:    'Glyphset',
-    meta:     '$19 · 200 icons included',
+    id:       'ai-dev-kit',
+    category: 'PACKAGE',
+    title:    'ai-dev-kit',
+    meta:     'GitHub · MIT · Free',
     body: [
-      'Glyphset is a 200-icon set drawn at a single consistent stroke weight and corner radius — SVG, PNG, and an Astro-ready icon-component wrapper included, built to solve the specific annoyance of mixing icon packs from three different sources and having nothing visually match.',
-      'The differentiator against the many free icon packs already out there: every icon in this set was drawn by hand for this specific stroke system, not auto-generated or assembled from mismatched sources — visual consistency across all 200 is the entire pitch.',
-      'Licensed for commercial use, including client projects and products you resell, with no attribution required. An extended licence for icon-pack resale specifically is available on request.',
+      'AI Dev Kit is a portable set of agent skills and layered coding standards for AI-assisted development — built for Claude Code, OpenCode, Codex, and other agents that read markdown. It is not an npm package; it installs by copying markdown files into a project.',
+      'Each skill lives in a single `SKILL.md` file that only loads when its trigger matches the task at hand, keeping an agent\'s context focused instead of front-loading every possible instruction. The coding-standards layer covers CSS, HTML, JS/TS, git, SEO, accessibility, and performance, with framework-specific overrides for Astro, Bootstrap, and Strata.',
+      'A project-wide code-audit skill checks 47 script-checkable rules against a baseline so the violation count only moves down — the same discipline this portfolio\'s own codebase is held to.',
     ],
-    topics: ['The Catalogue Gap', 'The Differentiator', 'The Licence'],
+    topics: ['The Package', 'How Skills Load', 'The Audit Baseline'],
   },
 ];
 ---
 
 <!-- ── Section 1 — Overview ─────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="bottom-center">
-  <span class="ex-saturn-section-label">PRODUCTS</span>
-  <h2 class="ex-saturn-section-title ex-heading">Things<span class="ex-line-break"></span>for Sale.</h2>
-  <p class="ex-para ex-saturn-body">Themes, templates, UI kits, and digital assets built for other designers and developers. Products that encode the same standards I hold in client work.</p>
+  <span class="ex-saturn-section-label">PACKAGES</span>
+  <h2 class="ex-saturn-section-title ex-heading">Free.<span class="ex-line-break"></span>Published. Installable.</h2>
+  <p class="ex-para ex-saturn-body">No storefront — just real, open-source packages on npm and GitHub, built to the same standard as any client work, because they <em>are</em> the work.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">3 products</span><span class="ex-saturn-stat-pill-label">Available</span></div>
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Gumroad</span><span class="ex-saturn-stat-pill-label">Where to buy</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">3 packages</span><span class="ex-saturn-stat-pill-label">Available</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">npm install</span><span class="ex-saturn-stat-pill-label">Where to get them</span></div>
   </div>
   <button class="ex-saturn-intro-cta" type="button" data-scroll-next>
-    BROWSE PRODUCTS
+    BROWSE PACKAGES
     <span class="ex-saturn-intro-cta-arrow"><i class="fa-solid fa-arrow-right"></i></span>
   </button>
 </div>
 
-<!-- ── Section 2 — Product 1 ────────────────────────────────── -->
+<!-- ── Section 2 — strata-css ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">02 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">Orbit UI</h2>
-  <p class="ex-para ex-saturn-body">A 120-component Figma kit for SaaS dashboards — data tables, filter bars, and settings panels in dark and light variants, so the fifth new dashboard screen doesn't start from a blank canvas.</p>
+  <span class="ex-saturn-section-label">02 — PACKAGE</span>
+  <h2 class="ex-heading ex-saturn-section-title">strata-css</h2>
+  <p class="ex-para ex-saturn-body">A JIT CSS framework — ready-made components plus Tailwind-style arbitrary values, cascade layers instead of `!important`, and six companion packages. This exact site runs on it.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">$49</span>
-    <span class="ex-saturn-fact-label">One-time purchase</span>
+    <span class="ex-saturn-fact-number">Free · MIT</span>
+    <span class="ex-saturn-fact-label">License</span>
   </div>
-  <button class="ex-saturn-detail-link" type="button" data-item-id="0" data-planet="saturn">Product details →</button>
+  <button class="ex-saturn-detail-link" type="button" data-item-id="0" data-planet="saturn">Package details →</button>
 </div>
 
-<!-- ── Section 3 — Product 2 ────────────────────────────────── -->
+<!-- ── Section 3 — triforge ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">03 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">Nightfall</h2>
-  <p class="ex-para ex-saturn-body">A dark-mode Astro starter theme — six page templates on the same cascade-layer CSS architecture this site uses, no framework dependency. Clone, install, and it's running.</p>
+  <span class="ex-saturn-section-label">03 — PACKAGE</span>
+  <h2 class="ex-heading ex-saturn-section-title">@triforge/*</h2>
+  <p class="ex-para ex-saturn-body">19 packages bringing Blender's node-graph workflow to Three.js — geometry, shading, particles, physics, and animation. Three.js is the only hard dependency.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">$39</span>
-    <span class="ex-saturn-fact-label">Includes 6 templates</span>
+    <span class="ex-saturn-fact-number">19 packages</span>
+    <span class="ex-saturn-fact-label">Stage 1 complete</span>
   </div>
-  <button class="ex-saturn-detail-link" type="button" data-item-id="1" data-planet="saturn">Product details →</button>
+  <button class="ex-saturn-detail-link" type="button" data-item-id="1" data-planet="saturn">Package details →</button>
 </div>
 
-<!-- ── Section 4 — Product 3 ────────────────────────────────── -->
+<!-- ── Section 4 — ai-dev-kit ────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">04 — PRODUCT</span>
-  <h2 class="ex-heading ex-saturn-section-title">Glyphset</h2>
-  <p class="ex-para ex-saturn-body">A 200-icon set drawn at one consistent stroke weight and corner radius — SVG, PNG, and an Astro-ready component wrapper, so nothing looks mismatched against the rest of the UI.</p>
+  <span class="ex-saturn-section-label">04 — PACKAGE</span>
+  <h2 class="ex-heading ex-saturn-section-title">ai-dev-kit</h2>
+  <p class="ex-para ex-saturn-body">Agent skills and layered coding standards for AI-assisted development — markdown files that install into a project and load only when their trigger matches the task.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">200 icons</span><span class="ex-saturn-stat-pill-label">Included</span></div>
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">SVG + PNG</span><span class="ex-saturn-stat-pill-label">File type</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">47 rules</span><span class="ex-saturn-stat-pill-label">Code audit checks</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Markdown</span><span class="ex-saturn-stat-pill-label">Install format</span></div>
   </div>
-  <button class="ex-saturn-detail-link" type="button" data-item-id="2" data-planet="saturn">Product details →</button>
+  <button class="ex-saturn-detail-link" type="button" data-item-id="2" data-planet="saturn">Package details →</button>
 </div>
 
 <!-- ── Section 5 — Offer ────────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">05 — OFFER</span>
+  <span class="ex-saturn-section-label">05 — LICENSING</span>
   <h2 class="ex-heading ex-saturn-section-title">What's Included</h2>
-  <p class="ex-para ex-saturn-body">All products come with documentation, lifetime update access, and a licence for commercial use — including client work, no attribution required.</p>
+  <p class="ex-para ex-saturn-body">Every package ships MIT-licensed, with documentation and examples in the repo itself — free to use, modify, and ship in commercial projects, no attribution required.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">Commercial</span>
-    <span class="ex-saturn-fact-label">Licence included</span>
+    <span class="ex-saturn-fact-number">MIT</span>
+    <span class="ex-saturn-fact-label">License, every package</span>
   </div>
 </div>
 
 <!-- ── Section 6 — Custom Work ──────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">06 — CUSTOM</span>
-  <h2 class="ex-heading ex-saturn-section-title">Need Something Bespoke?</h2>
-  <p class="ex-para ex-saturn-body">Products are starting points. If you need a theme modified, a template system extended, or a design kit built to your brand, I offer custom product development on a project basis.</p>
+  <span class="ex-saturn-section-label">06 — CONTRIBUTING</span>
+  <h2 class="ex-heading ex-saturn-section-title">Want Something Added?</h2>
+  <p class="ex-para ex-saturn-body">These packages are under active development. If a feature is missing or a bug gets in your way, open an issue on the repo — findings from real use are exactly how each one gets better.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">From $150</span>
-    <span class="ex-saturn-fact-label">Custom product work</span>
+    <span class="ex-saturn-fact-number">GitHub Issues</span>
+    <span class="ex-saturn-fact-label">How to reach the maintainer</span>
   </div>
 </div>
 
 <!-- ── Section 7 — Reviews ──────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="right">
-  <span class="ex-saturn-section-label">07 — REVIEWS</span>
-  <h2 class="ex-heading ex-saturn-section-title">What Customers Say</h2>
-  <p class="ex-para ex-saturn-body">Early buyers on Orbit UI and Nightfall — reviews will fill in as the storefront gets more traffic. Real feedback carries more weight than any copy written here, so this section grows honestly, not artificially.</p>
+  <span class="ex-saturn-section-label">07 — STATUS</span>
+  <h2 class="ex-heading ex-saturn-section-title">Where Things Stand</h2>
+  <p class="ex-para ex-saturn-body">strata-css and the triforge suite are both under active development, with version history and findings logged in the open. ai-dev-kit is tested on Windows; its Linux/macOS and GPU paths are implemented but not yet verified.</p>
   <div class="ex-saturn-key-fact">
-    <span class="ex-saturn-fact-number">New storefront</span>
-    <span class="ex-saturn-fact-label">Reviews coming soon</span>
+    <span class="ex-saturn-fact-number">Active development</span>
+    <span class="ex-saturn-fact-label">All three packages</span>
   </div>
 </div>
 
 <!-- ── Section 8 — Shop CTA ─────────────────────────────────── -->
 <div class="ex-saturn-section" data-layout="center">
-  <span class="ex-saturn-section-label">08 — SHOP</span>
-  <h2 class="ex-heading ex-saturn-section-title">Browse the Store</h2>
-  <p class="ex-para ex-saturn-body">All products are available on Gumroad. Instant download after purchase. Questions before buying? Reach out at Neptune and I'll answer the same day.</p>
+  <span class="ex-saturn-section-label">08 — INSTALL</span>
+  <h2 class="ex-heading ex-saturn-section-title">Get the Packages</h2>
+  <p class="ex-para ex-saturn-body">strata-css and @triforge/* are on npm; ai-dev-kit installs from GitHub. Questions before using one in a real project? Reach out via Neptune.</p>
   <div class="ex-saturn-stats-row">
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Gumroad</span><span class="ex-saturn-stat-pill-label">Store</span></div>
-    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">Instant</span><span class="ex-saturn-stat-pill-label">Delivery</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">npm</span><span class="ex-saturn-stat-pill-label">strata-css, triforge</span></div>
+    <div class="ex-saturn-stat-pill"><span class="ex-saturn-stat-pill-value">GitHub</span><span class="ex-saturn-stat-pill-label">ai-dev-kit</span></div>
   </div>
 </div>
 

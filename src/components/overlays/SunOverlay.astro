@@ -8,25 +8,25 @@ const items = [
     id:       'discipline',
     category: 'DISCIPLINE',
     title:    'What I Build',
-    meta:     'Full-stack · Design to deployment',
+    meta:     'Frontend development · Graphic design background',
     body: [
-      'I work across the full product lifecycle — from early research and wireframing through component-level design and shipped code. The split between "designer" and "developer" has never resonated. The most interesting problems live at the boundary.',
-      'On the design side: UI/UX for web and mobile, design systems from scratch, motion and interaction, brand and visual identity. On the engineering side: semantic HTML, accessible CSS, TypeScript, React, Astro, Three.js, GSAP.',
-      'I am most effective on small, focused teams where design and engineering work closely together — where a decision in Figma is immediately stress-tested against what is possible in code, and vice versa.',
+      'I\'m a frontend developer with a graphic design background, which shows up less as a portfolio of logos and more as an eye for the UI problems that are really design problems in disguise. The split between "designer" and "developer" has never resonated — the most interesting problems live at the boundary.',
+      'On the engineering side: TypeScript, React, Astro, Three.js, and the kind of production UI that has to hold up under real traffic, not just a demo. On the tooling side: I build the libraries underneath the interface as much as the interface itself — strata-css and the Triforge node suite are both mine, published, and used on real projects including this site.',
+      'My day job is one where the actual output is open-sourced on GitHub and npm — there is no separate "portfolio work" and "real work" split here. What you see on these planets is what shipped.',
     ],
-    topics: ['The Boundary', 'Design + Engineering', 'Small Teams'],
+    topics: ['Design + Engineering', 'The Tooling Habit', 'Open-Sourced by Default'],
   },
   {
     id:       'philosophy',
     category: 'PHILOSOPHY',
     title:    'How I Work',
-    meta:     'Problem-first · Clarity over cleverness',
+    meta:     'Fix the root cause, in public',
     body: [
-      'Design starts with constraints, not aesthetics. Before touching Figma, I want to understand: what problem are we solving, for whom, and what does success look like? The visual language is a response to those answers — not a starting point.',
-      'Clarity over cleverness is the rule that has saved me the most time. A clever solution nobody else can maintain is a liability. A clear solution another developer can read and modify without asking questions is a gift. I write code and design systems with the next person in mind.',
-      'I work async-first, with documented decisions and clean handoffs. I will tell you when a timeline is unrealistic, when a brief needs more clarity, or when a technical decision I disagree with is about to cause a problem.',
+      'When a tool I\'m using has a gap, the default move is to patch around it locally. I\'d rather fix it at the source, publish the fix, and let every future project inherit it — slower in the moment, compounding over time. Mercury\'s findings log and the open issues on Triforge and Strata are the proof of that habit, not a claim about it.',
+      'Clarity over cleverness is the rule that has saved the most time. A clever workaround nobody else can maintain is a liability. A clear fix, logged with a reproduction case and a root cause, is something the next person — or the next version of me — can actually build on.',
+      'I\'d rather say a feature isn\'t built yet than imply it is. Uranus exists specifically to list the real gaps in my own tools honestly, instead of dressing them up as finished.',
     ],
-    topics: ['Constraints First', 'Clarity Over Cleverness', 'Async-First'],
+    topics: ['Fix the Root Cause', 'Clarity Over Cleverness', 'Say What Isn\'t Done'],
   },
   {
     id:       'stack',
@@ -34,21 +34,21 @@ const items = [
     title:    'Tools of the Trade',
     meta:     'Design + engineering stack',
     body: [
-      'Design tools: Figma for UI and systems. Illustrator for vector and identity. After Effects and GSAP for motion. Framer for interactive prototyping when static wireframes are not enough.',
-      'Frontend: TypeScript with strict mode. React for component-driven UIs. Astro for content-focused sites. GSAP for animation. Three.js and GLSL for 3D and shader work. CSS with cascade layers and custom properties — no framework dependency.',
-      'Backend and infrastructure: Node.js, PostgreSQL, Supabase. Vercel and Netlify for deployment. I am comfortable owning the full stack on smaller projects and contributing to backend systems on larger ones.',
+      'Frontend: TypeScript, React, Astro, Next.js. Three.js and GLSL for 3D and shader work — mostly compiled from Triforge node graphs rather than hand-written these days. GSAP for animation, Swiper for carousels.',
+      'CSS: strata-css, my own JIT framework with cascade layers and arbitrary-value utilities — this is the only CSS layer running on this site. No Tailwind, no Bootstrap underneath it.',
+      'Deployment and tooling: Vercel for live demos, npm for publishing packages, GitHub for everything. I choose tools that match the problem, including the ones I had to build myself because nothing else fit.',
     ],
-    topics: ['Design Tools', 'Frontend', 'Backend + Infra'],
+    topics: ['Frontend', 'CSS', 'Deployment + Tooling'],
   },
   {
     id:       'highlights',
     category: 'HIGHLIGHTS',
     title:    'At a Glance',
-    meta:     'Key numbers',
+    meta:     'Real numbers',
     body: [
-      '12+ client and personal projects shipped across design and engineering, spanning healthcare, fintech, e-commerce, and creative-tech work. Every project on this site is a stop on that list — Venus, Earth, and Mars each hold a different slice of it.',
-      'Specificity is the point. "Years of experience" says less than "shipped a design system that is still the default starting point for a team\'s new features two hundred days later" — the kind of outcome that is actually worth judging work by.',
-      'What comes next is more of the same: small, focused teams, problems that sit at the design/engineering boundary, and work that holds up under scrutiny — not just at first glance.',
+      'Seven public repositories, three published libraries (strata-css, the @triforge/* suite, and ai-dev-kit), and one portfolio site that runs entirely on the first two. Every project on this site is a stop on that list — Venus, Earth, Jupiter, and Saturn each hold a different slice of it.',
+      'Specificity is the point. "Years of experience" says less than "19 published Triforge packages compiling every planet material on this page, with the bugs found while building it fixed upstream and verified against the published npm version" — the kind of claim that can actually be checked.',
+      'What comes next is more of the same: fixing gaps at the root, publishing the fix, and letting the next project inherit it — the roadmap on Uranus is the honest version of what\'s not done yet.',
     ],
     topics: ['The Numbers', 'Why Specificity Matters', "What's Next"],
   },
@@ -59,9 +59,9 @@ const items = [
 <div class="ex-sun-section" data-layout="bottom-center">
   <span class="ex-sun-section-label">THE SOURCE</span>
   <h2 class="ex-heading ex-sun-section-title">Everything<span class="ex-line-break"></span>Orbits Something.</h2>
-  <p class="ex-para ex-sun-body">I'm Aftab Kazi — a designer and developer building digital products at the intersection of craft and clarity. This is where the system starts. Freelance, open to full-time, passionate about work that matters.</p>
+  <p class="ex-para ex-sun-body">I'm Aftab Ibrahim Kazi — a frontend developer with a graphic design background, based in Ratnagiri, Maharashtra. This is where the system starts. Open to new projects, and open-source by default.</p>
   <div class="ex-sun-stats-row">
-    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">5+ yrs</span><span class="ex-sun-stat-pill-label">Experience</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">7 repos</span><span class="ex-sun-stat-pill-label">Public on GitHub</span></div>
     <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Design + Dev</span><span class="ex-sun-stat-pill-label">Discipline</span></div>
   </div>
   <button class="ex-sun-intro-cta" type="button" data-scroll-next>
@@ -74,10 +74,10 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">02 — DISCIPLINE</span>
   <h2 class="ex-heading ex-sun-section-title">What I Build</h2>
-  <p class="ex-para ex-sun-body">UI/UX design. Front-end engineering. Design systems. Motion and interaction. I work across the full product lifecycle — from early concepts to shipped code. Comfortable in Figma and a terminal in equal measure.</p>
+  <p class="ex-para ex-sun-body">Frontend engineering with a graphic design background. I build the libraries underneath the interface as much as the interface itself — strata-css and the Triforge node suite are both mine, and both run this site.</p>
   <div class="ex-sun-key-fact">
-    <span class="ex-sun-fact-number">Full-Stack</span>
-    <span class="ex-sun-fact-label">Design to deployment</span>
+    <span class="ex-sun-fact-number">Design + Dev</span>
+    <span class="ex-sun-fact-label">The boundary I work at</span>
   </div>
   <button class="ex-sun-detail-link" type="button" data-item-id="0" data-planet="sun">More detail →</button>
 </div>
@@ -86,10 +86,10 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">03 — PHILOSOPHY</span>
   <h2 class="ex-heading ex-sun-section-title">How I Work</h2>
-  <p class="ex-para ex-sun-body">Clarity over cleverness. Systems over one-offs. I believe the best design is invisible — it removes friction and lets the work speak. I start with constraints, not aesthetics. The visual language follows from the problem.</p>
+  <p class="ex-para ex-sun-body">Fix the root cause, in public. When a tool I'm using has a gap, I'd rather patch the library and publish the fix than work around it quietly — Mercury's findings log is the proof, not the claim.</p>
   <div class="ex-sun-key-fact">
-    <span class="ex-sun-fact-number">Problem-first</span>
-    <span class="ex-sun-fact-label">Design methodology</span>
+    <span class="ex-sun-fact-number">Fix at the source</span>
+    <span class="ex-sun-fact-label">Working method</span>
   </div>
   <button class="ex-sun-detail-link" type="button" data-item-id="1" data-planet="sun">More detail →</button>
 </div>
@@ -98,11 +98,11 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">04 — STACK</span>
   <h2 class="ex-heading ex-sun-section-title">Tools of the Trade</h2>
-  <p class="ex-para ex-sun-body">Figma, Astro, TypeScript, React, GSAP, Three.js, CSS. On the back end: Node, PostgreSQL, Supabase. I choose tools that match the problem — not the trend.</p>
+  <p class="ex-para ex-sun-body">Astro, TypeScript, React, Next.js, Three.js, GSAP, and strata-css — my own CSS layer, the only one running on this site. I choose tools that match the problem, including the ones I had to build myself.</p>
   <div class="ex-sun-stats-row">
-    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Figma</span><span class="ex-sun-stat-pill-label">Design</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">strata-css</span><span class="ex-sun-stat-pill-label">CSS</span></div>
     <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Astro / TS</span><span class="ex-sun-stat-pill-label">Frontend</span></div>
-    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">GSAP</span><span class="ex-sun-stat-pill-label">Motion</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Triforge</span><span class="ex-sun-stat-pill-label">3D</span></div>
   </div>
   <button class="ex-sun-detail-link" type="button" data-item-id="2" data-planet="sun">Full stack breakdown →</button>
 </div>
@@ -111,10 +111,10 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">05 — BACKGROUND</span>
   <h2 class="ex-heading ex-sun-section-title">The Journey</h2>
-  <p class="ex-para ex-sun-body">Started as a self-taught developer, picking apart other people's code long before writing much of my own. Freelance from day one — no bootcamp, no internship, just shipped work and steadily harder problems. Picked up 3D and creative coding the same way: by building this planetarium.</p>
+  <p class="ex-para ex-sun-body">Based in Ratnagiri, Maharashtra. Came to frontend development through a graphic design background, which is why the interface problems that interest me most are usually design problems first. Picked up 3D and shader work the same hands-on way: by building this planetarium on top of my own Triforge node suite.</p>
   <div class="ex-sun-key-fact">
-    <span class="ex-sun-fact-number">Since 2020</span>
-    <span class="ex-sun-fact-label">Working independently</span>
+    <span class="ex-sun-fact-number">Ratnagiri, Maharashtra</span>
+    <span class="ex-sun-fact-label">Based in</span>
   </div>
 </div>
 
@@ -122,10 +122,10 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">06 — VALUES</span>
   <h2 class="ex-heading ex-sun-section-title">What I Stand By</h2>
-  <p class="ex-para ex-sun-body">Honest timelines. Clean handoffs. Code that another human can read. I don't over-promise and I don't disappear mid-project. I collaborate openly and I'll tell you when something isn't working — before it ships.</p>
+  <p class="ex-para ex-sun-body">Code that another human — or the next version of me — can read and build on. Bugs logged with a reproduction case and a root cause, not just closed. Gaps named honestly on Uranus instead of implied away.</p>
   <div class="ex-sun-stats-row">
-    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Async-first</span><span class="ex-sun-stat-pill-label">Communication</span></div>
-    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Open source</span><span class="ex-sun-stat-pill-label">Contributor</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">MIT licensed</span><span class="ex-sun-stat-pill-label">Every package</span></div>
+    <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">Open source</span><span class="ex-sun-stat-pill-label">By default</span></div>
   </div>
 </div>
 
@@ -133,10 +133,10 @@ const items = [
 <div class="ex-sun-section" data-layout="right">
   <span class="ex-sun-section-label">07 — HIGHLIGHTS</span>
   <h2 class="ex-heading ex-sun-section-title">At a Glance</h2>
-  <p class="ex-para ex-sun-body">Projects shipped, clients worked with, and the range of problems tackled along the way — the numbers that matter most when deciding who to work with next.</p>
+  <p class="ex-para ex-sun-body">Real repos, real packages, and the range of problems tackled along the way — the numbers that actually hold up when you click through to GitHub.</p>
   <div class="ex-sun-key-fact">
-    <span class="ex-sun-fact-number">12+ Projects</span>
-    <span class="ex-sun-fact-label">Shipped across 4 industries</span>
+    <span class="ex-sun-fact-number">3 libraries</span>
+    <span class="ex-sun-fact-label">Published on npm/GitHub</span>
   </div>
   <button class="ex-sun-detail-link" type="button" data-item-id="3" data-planet="sun">Full highlights →</button>
 </div>
@@ -145,7 +145,7 @@ const items = [
 <div class="ex-sun-section" data-layout="center">
   <span class="ex-sun-section-label">08 — THE SYSTEM</span>
   <h2 class="ex-heading ex-sun-section-title">Explore the Orbits</h2>
-  <p class="ex-para ex-sun-body">Each planet in this system holds a different body of work. Design lives on Venus. Development on Earth. Experiments on Mars. Enterprise work on Jupiter. Products on Saturn. Concepts on Uranus. Reach me at Neptune.</p>
+  <p class="ex-para ex-sun-body">Each planet in this system holds a different body of work. Open-source projects live on Venus. Development on Earth. Experiments on Mars. Case studies on Jupiter. Published packages on Saturn. Roadmap on Uranus. Reach me at Neptune.</p>
   <div class="ex-sun-stats-row">
     <div class="ex-sun-stat-pill"><span class="ex-sun-stat-pill-value">8 planets</span><span class="ex-sun-stat-pill-label">8 bodies of work</span></div>
   </div>

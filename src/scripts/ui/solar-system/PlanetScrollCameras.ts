@@ -141,31 +141,31 @@ export const VENUS_SCROLL_PATH: ScrollCameraConfig = {
       lookAt: { x: 0,  y: 0,   z: 1.75      },
     },
     {
-      // S3 — Project 1 (Lumen): 80° — R2.943
+      // S3 — Project 1 (Triforge): 80° — R2.943
       at:     0.2,
       offset: { x: 0,      y: 0.0, z: 5.0    },
       lookAt: { x: 0.0,  y: 0,   z: 0      },
     },
     {
-      // S4 — Project 2 (Solstice): 120° — R2.229
+      // S4 — Project 2 (Strata CSS): 120° — R2.229
       at:     0.3,
       offset: { x: 0.0,  y: 0.0, z: 0.0 },
       lookAt: { x: 0.0, y: 0,   z: 0.0 },
     },
     {
-      // S5 — Project 3 (Nimbus): 160° — R1.849, close pass
+      // S5 — Project 3 (Fish Pond): 160° — R1.849, close pass
       at:     0.4,
       offset: { x: 0.0,  y: 5, z: 5 },
       lookAt: { x: 0.0, y: 0,   z: 5.0 },
     },
     {
-      // S6 — Project 4 (Aurora): 200° — R1.849, close pass
+      // S6 — Project 4 (Inkwake): 200° — R1.849, close pass
       at:     0.5,
       offset: { x: 0, y: 0, z: 5 },
       lookAt: { x: -0.75, y: 0,   z: 0.0  },
     },
     {
-      // S7 — Project 5 (Kinetic): 240° — R2.229
+      // S7 — Project 5 (AI Dev Kit): 240° — R2.229
       at:     0.6,
       offset: { x: 0, y: 5, z: 5 },
       lookAt: { x: -1.15, y: 0,   z: 0.5  },

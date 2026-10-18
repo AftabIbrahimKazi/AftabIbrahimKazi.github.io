@@ -5,52 +5,52 @@
 
 const items = [
   {
-    id:       'meridian',
+    id:       'aerin-bio',
     category: 'PROJECT',
-    title:    'Meridian',
-    meta:     'React + TypeScript · 2024',
+    title:    'Aerin Bio',
+    meta:     'Next.js + TypeScript · 2026',
     body: [
-      'Meridian is a usage-analytics dashboard for a B2B SaaS product — the kind of internal tool that starts as a spreadsheet and slowly turns into the thing the whole company checks every morning. The brief was to make that transition without the rebuild taking six months.',
-      'The hardest part was rendering thousands of data points without the UI stuttering. Virtualising the table and moving the heavier chart aggregation off the main thread with a Web Worker turned a visibly janky scroll into a smooth one — the kind of fix that never shows up in a screenshot but is the difference between a tool people tolerate and one they trust.',
-      'Shipped and in daily use by the product team since launch. The lesson that carried forward: performance work on internal tools is invisible right up until it is missing.',
+      'Aerin Bio is a fictional biotech landing page — "Medicine that breathes with you" — built as a take-home assignment for a creative frontend developer role, exploring inhaled biologics delivered as a mist rather than a bloodstream route.',
+      'The signature piece is the hero: the word "Aerin" is an SVG mask revealing a real photo beneath it, growing as you scroll until the letters dissolve into the image. A Canvas 2D smoke layer reacts to cursor and touch movement, drifting through a curl-noise field and staying blank at rest.',
+      'Built on Next.js App Router with React, TypeScript, and Tailwind CSS v4, with GSAP driving scroll-scrubbed and pinned sequences, staggered reveals, and count-up stats — all respecting `prefers-reduced-motion` throughout.',
     ],
-    topics: ['The Brief', 'The Hard Part', 'The Outcome'],
+    topics: ['The Brief', 'The Hero', 'The Stack'],
   },
   {
-    id:       'northwind',
+    id:       'stratisle',
     category: 'PROJECT',
-    title:    'Northwind',
-    meta:     'Astro + Node.js · 2024',
+    title:    'Stratisle',
+    meta:     'Next.js · In development',
     body: [
-      'Northwind is a headless e-commerce rebuild — same product catalogue and checkout logic, moved off a heavyweight monolith and onto a static-first Astro front end with a lightweight Node API behind it. The goal was speed: the old storefront was losing mobile shoppers to load time before they ever saw a product.',
-      'The constraint was migrating without downtime and without breaking the client\'s existing inventory sync. That meant running both systems in parallel behind a feature flag for three weeks, comparing outputs field-by-field before the old storefront was retired.',
-      'Time-to-interactive dropped from a little over four seconds to under one on mobile. Concrete numbers over adjectives: that was the whole point of the rebuild.',
+      'Stratisle is a Next.js web app currently in active development — built with TypeScript, ESLint, and PostCSS on the standard Next.js App Router foundation.',
+      'It is early-stage and evolving in the open rather than finished and polished for a case study. The repository is public, so the commit history tells the real story of where it is at any given point.',
+      'Like everything else here, it will get a proper write-up once there is a finished product to show rather than a work-in-progress to describe in the abstract.',
     ],
-    topics: ['Why Rebuild', 'The Constraint', 'The Numbers'],
+    topics: ['Status', 'The Stack', 'Why It\'s Brief'],
   },
   {
-    id:       'pulsegrid',
+    id:       'fish-pond',
     category: 'PROJECT',
-    title:    'Pulsegrid',
-    meta:     'Three.js + WebGL · 2023',
+    title:    'Fish Pond',
+    meta:     'Next.js + Three.js + Triforge · 2026',
     body: [
-      'Pulsegrid is a real-time data-visualisation layer for IoT sensor networks — hundreds of live data points rendered as an interactive 3D field rather than a table of numbers, so an operator can spot an anomaly by shape, not by scanning rows.',
-      'This is the project that shows the range beyond typical CRUD/dashboard work: shader-driven visuals, WebSocket-fed live data, and a rendering loop that has to stay smooth even as the dataset grows mid-session.',
-      'It is also the direct predecessor to this planetarium\'s own custom shader-graph system — Pulsegrid was where the itch to build proper 3D tooling instead of hand-rolling one-off GLSL first showed up.',
+      'Fish Pond is a browser-based set of 3D fish-behaviour experiments — reflex-like, probabilistic, and deliberative decision-making compared side by side, entirely client-side with no backend, account, or tracking.',
+      'The Underwater scene is the showcase: caustics, water absorption, and bloom, built on Triforge node-graph materials rather than hand-written GLSL — the same approach used for every planet on this site — with fish decisions driven by an on-device ONNX model nicknamed Laya-AI.',
+      'It is the clearest example of Triforge and Three.js carrying a real rendering workload beyond this portfolio, and it is also featured on Three.js Resources.',
     ],
-    topics: ['The Concept', 'Showing Range', 'Where It Led'],
+    topics: ['The Concept', 'The Underwater Scene', 'Where It\'s Featured'],
   },
   {
     id:       'open-source',
     category: 'OPEN SOURCE',
     title:    'In the Commons',
-    meta:     'Contributions & published tools',
+    meta:     'Published packages & tools',
     body: [
       'Strata is a CSS utility framework built and maintained from scratch — it powers every page on this site, including this one. It exists because utility-class frameworks kept forcing tradeoffs (arbitrary-value support, cascade-layer discipline, dark-mode tokens) that felt worth solving properly rather than working around.',
-      'Triforge is a Blender-style shader-graph system for Three.js — the node-based tool that renders every planet material, the warp transition, and the landing-page carousel on this site. It exists because hand-writing GLSL for nine different planet materials did not scale, and no existing library offered a node graph built specifically for Three.js.',
-      'Both are public on GitHub and under active development — this site is the largest real-world proving ground for both, and bugs found while building it get fixed upstream in the packages, not patched around locally.',
+      'Triforge is a Blender-style node-graph system for Three.js — the tool that renders every planet material, the warp transition, and the landing-page carousel on this site. It exists because hand-writing GLSL for nine different planet materials did not scale, and no existing library offered a node graph built specifically for Three.js.',
+      'AI Dev Kit rounds out the set — agent skills and a coding-standards system for AI-assisted development. All three are public on GitHub and under active development, and this site is the largest real-world proving ground for the first two.',
     ],
-    topics: ['Strata', 'Triforge', 'Built From Real Use'],
+    topics: ['Strata', 'Triforge', 'AI Dev Kit'],
   },
 ];
 ---
@@ -59,10 +59,10 @@ const items = [
 <div class="ex-earth-section" data-layout="bottom-center">
   <span class="ex-earth-section-label">DEVELOPMENT</span>
   <h2 class="ex-heading ex-earth-section-title">Built<span class="ex-line-break"></span>to Last.</h2>
-  <p class="ex-para ex-earth-body">Front-end engineering, full-stack products, and everything in between. I write code that ships clean, reads clearly, and scales without drama.</p>
+  <p class="ex-para ex-earth-body">Front-end engineering and production UI, built with a graphic design background. I write code that ships clean, reads clearly, and scales without drama.</p>
   <div class="ex-earth-stats-row">
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">10+ apps</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">5+ yrs</span><span class="ex-earth-stat-pill-label">Engineering</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">7 repos</span><span class="ex-earth-stat-pill-label">Public on GitHub</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">3 libraries</span><span class="ex-earth-stat-pill-label">Published on npm</span></div>
   </div>
   <button class="ex-earth-intro-cta" type="button" data-scroll-next>
     EXPLORE THE WORK
@@ -73,10 +73,10 @@ const items = [
 <!-- ── Section 2 — Project 1 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">02 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">Meridian</h2>
-  <p class="ex-para ex-earth-body">A usage-analytics dashboard for a B2B SaaS product — built to replace a spreadsheet-based reporting habit with something the whole team checks every morning, without a six-month rebuild.</p>
+  <h2 class="ex-heading ex-earth-section-title">Aerin Bio</h2>
+  <p class="ex-para ex-earth-body">A fictional biotech landing page built as a take-home assignment — an SVG-masked hero reveal, cursor-reactive smoke, and GSAP-driven scroll sequences on Next.js.</p>
   <div class="ex-earth-key-fact">
-    <span class="ex-earth-fact-number">React + TS</span>
+    <span class="ex-earth-fact-number">Next.js + TS</span>
     <span class="ex-earth-fact-label">Tech used</span>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="0" data-planet="earth">Project breakdown →</button>
@@ -86,7 +86,7 @@ const items = [
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">03 — STACK</span>
   <h2 class="ex-heading ex-earth-section-title">The Tech Layer</h2>
-  <p class="ex-para ex-earth-body">TypeScript, React, Astro, Node.js, PostgreSQL, Supabase, Vercel. I favour type-safe, well-structured codebases with minimal abstraction overhead.</p>
+  <p class="ex-para ex-earth-body">TypeScript, React, Astro, Next.js, Three.js, Node.js, Vercel. I favour type-safe, well-structured codebases with minimal abstraction overhead.</p>
   <div class="ex-earth-stats-row">
     <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">TypeScript</span><span class="ex-earth-stat-pill-label">Language</span></div>
     <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">React / Astro</span><span class="ex-earth-stat-pill-label">Framework</span></div>
@@ -96,11 +96,11 @@ const items = [
 <!-- ── Section 4 — Project 2 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">04 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">Northwind</h2>
-  <p class="ex-para ex-earth-body">A headless e-commerce rebuild — same catalogue and checkout logic, moved onto a static-first Astro front end to fix a mobile load-time problem that was costing the client shoppers before the page even finished painting.</p>
+  <h2 class="ex-heading ex-earth-section-title">Stratisle</h2>
+  <p class="ex-para ex-earth-body">A Next.js web app currently in active development — built in the open, with the commit history telling the real story rather than a polished case study.</p>
   <div class="ex-earth-key-fact">
-    <span class="ex-earth-fact-number">4x faster TTI</span>
-    <span class="ex-earth-fact-label">Key outcome</span>
+    <span class="ex-earth-fact-number">In progress</span>
+    <span class="ex-earth-fact-label">Status</span>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="1" data-planet="earth">Project breakdown →</button>
 </div>
@@ -119,11 +119,11 @@ const items = [
 <!-- ── Section 6 — Project 3 ────────────────────────────────── -->
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">06 — PROJECT</span>
-  <h2 class="ex-heading ex-earth-section-title">Pulsegrid</h2>
-  <p class="ex-para ex-earth-body">A real-time 3D data-visualisation layer for IoT sensor networks — hundreds of live data points rendered as an interactive field so an operator can spot an anomaly by shape, not by scanning a table.</p>
+  <h2 class="ex-heading ex-earth-section-title">Fish Pond</h2>
+  <p class="ex-para ex-earth-body">Browser-based 3D fish-behaviour experiments — an Underwater scene with Triforge node-graph materials and an on-device ONNX model deciding how each fish moves.</p>
   <div class="ex-earth-stats-row">
     <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">WebGL</span><span class="ex-earth-stat-pill-label">Project category</span></div>
-    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">2023</span><span class="ex-earth-stat-pill-label">Shipped</span></div>
+    <div class="ex-earth-stat-pill"><span class="ex-earth-stat-pill-value">Three.js Resources</span><span class="ex-earth-stat-pill-label">Featured on</span></div>
   </div>
   <button class="ex-earth-detail-link" type="button" data-item-id="2" data-planet="earth">Project breakdown →</button>
 </div>
@@ -132,7 +132,7 @@ const items = [
 <div class="ex-earth-section" data-layout="right">
   <span class="ex-earth-section-label">07 — OPEN SOURCE</span>
   <h2 class="ex-heading ex-earth-section-title">In the Commons</h2>
-  <p class="ex-para ex-earth-body">Strata (a CSS utility framework) and Triforge (a Blender-style shader-graph system for Three.js) — both public, both actively maintained, and both doing real work on this site right now.</p>
+  <p class="ex-para ex-earth-body">Strata (a CSS utility framework), Triforge (a Blender-style node-graph system for Three.js), and AI Dev Kit (agent skills + coding standards) — all public, all actively maintained, and the first two doing real work on this site right now.</p>
   <div class="ex-earth-key-fact">
     <span class="ex-earth-fact-number">github.com/AftabIbrahimKazi</span>
     <span class="ex-earth-fact-label">Code in the open</span>

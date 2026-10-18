@@ -1,7 +1,7 @@
 {
   "name": "planetarium",
   "type": "module",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,34 +9,34 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.2.0",
-    "@iconify-json/lucide": "^1.2.93",
-    "@strata-packages/modal": "^1.0.1",
-    "@strata-packages/offcanvas": "^1.0.0",
-    "@triforge/animation-core": "^0.1.0",
-    "@triforge/compositor-core": "^0.1.0",
-    "@triforge/context-pool-core": "^0.1.0",
-    "@triforge/core-types": "^0.1.0",
-    "@triforge/curve-core": "^0.1.1",
-    "@triforge/geometry-nodes": "^0.1.0",
-    "@triforge/keyframe": "^0.1.0",
-    "@triforge/modifier-core": "^0.1.1",
-    "@triforge/particle-core": "^0.1.1",
-    "@triforge/radius-parametric-geometry": "^0.1.0",
-    "@triforge/render-budget-core": "^0.1.0",
-    "@triforge/shader-core": "^0.4.2",
-    "@triforge/uv-core": "^0.1.1",
-    "@triforge/volume-core": "^0.1.0",
-    "astro": "^6.4.8",
-    "astro-icon": "^1.1.5",
-    "gsap": "^3.14.2",
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@iconify-json/lucide": "^1.2.145",
+    "@strata-packages/modal": "^1.0.3",
+    "@strata-packages/offcanvas": "^1.0.2",
+    "@triforge/animation-core": "^0.1.3",
+    "@triforge/compositor-core": "^0.1.3",
+    "@triforge/context-pool-core": "^0.1.1",
+    "@triforge/core-types": "^0.1.1",
+    "@triforge/curve-core": "^0.1.2",
+    "@triforge/geometry-nodes": "^0.1.2",
+    "@triforge/keyframe": "^0.1.2",
+    "@triforge/modifier-core": "^0.1.2",
+    "@triforge/particle-core": "^0.1.2",
+    "@triforge/radius-parametric-geometry": "^0.1.2",
+    "@triforge/render-budget-core": "^0.1.1",
+    "@triforge/shader-core": "^0.4.3",
+    "@triforge/uv-core": "^0.1.2",
+    "@triforge/volume-core": "^0.1.1",
+    "astro": "^7.4.0",
+    "astro-icon": "^1.2.0",
+    "gsap": "^3.15.0",
     "jeasings": "^0.0.16",
-    "strata-css": "^1.8.17",
+    "strata-css": "^1.9.0",
     "swiper": "^12.2.0",
-    "three": "^0.183.1"
+    "three": "^0.186.1"
   },
   "devDependencies": {
-    "@types/three": "^0.183.1",
-    "playwright": "^1.61.1"
+    "@types/three": "^0.186.0",
+    "playwright": "^1.64.1"
   }
 }

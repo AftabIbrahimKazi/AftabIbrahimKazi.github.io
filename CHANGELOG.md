@@ -4,6 +4,18 @@ All notable changes to this project are documented here, per `coding-standards/v
 
 ---
 
+## [0.5.0] — 2026-10-18
+
+### Changed
+- Dependencies updated to latest: `astro` 6.4.8 → 7.4.0, `three`/`@types/three` → 0.186.x, `gsap` → 3.15.0, `astro-icon` → 1.2.0, `@fortawesome/fontawesome-free` → 7.3.1, `@iconify-json/lucide` → 1.2.145, `playwright` → 1.64.1, `strata-css` → 1.9.0, `@strata-packages/*` and `@triforge/*` bumped to their latest published versions. `npm audit` is clean (was 9 vulnerabilities, including a critical Astro XSS/RCE advisory fixed only in 7.x).
+- Replaced placeholder/dummy content across Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Sun overlays — and the matching landing-page "Selected Work"/"Commercial Work" sections — with real data pulled from this author's actual public repos (`strata`, `triforge`, `ai-dev-kit`, `fish-pond`, `aerin-bio`, `inkwake`, `stratisle`). No fabricated clients, employers, pricing, or metrics remain; Jupiter is now real project case studies and Saturn is real published npm/GitHub packages instead of invented commercial ones.
+
+### Fixed
+- `astro-icon` scandir warning on build (`src/icons/` didn't exist).
+- Dead placeholder social link (`https://x.com`) on Neptune's contact page/overlay replaced with the real npm profile link.
+
+---
+
 ## [0.4.0] — 2026-08-23
 
 ### Added
