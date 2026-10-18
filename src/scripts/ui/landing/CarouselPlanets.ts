@@ -413,13 +413,20 @@ export class CarouselPlanets {
     this._textureTier = plan.textureTier;
     this._adapter = new ClippableSharedRenderer(this._renderer, plan.maxConcurrentContexts);
 
-    const scrollContainer = document.getElementById('lp-scroll-container');
-    scrollContainer?.addEventListener('scroll', this._scrollHandler, { passive: true });
-
     // Only the carousel strip is a scrollable, clipping ancestor
     // (overflow-x: auto) — journal/comm orbs sit in normal page flow, no
     // clip ancestor needed for them.
     const carouselStrip = document.getElementById('lp-planet-carousel');
+
+    // The carousel's own horizontal scroll (not the page's vertical
+    // #lp-scroll-container) is what moves each orb's anchor rect, so the
+    // sync-on-scroll re-render has to listen on the strip itself — listening
+    // on the page container only fired for vertical page scroll, leaving the
+    // canvas-rendered orbs to catch up on the next rAF tick while the DOM
+    // focus ring (driven by native scroll, compositor-frame-accurate)
+    // visibly outran them.
+    carouselStrip?.addEventListener('scroll', this._scrollHandler, { passive: true });
+    document.getElementById('lp-scroll-container')?.addEventListener('scroll', this._scrollHandler, { passive: true });
 
     const loader = new THREE.TextureLoader();
     this._registerGroup(document.querySelectorAll<HTMLCanvasElement>('canvas.lp-planet-orb'),
@@ -457,6 +464,7 @@ export class CarouselPlanets {
 
   destroy(): void {
     removeEventListener('resize', this._resizeHandler);
+    document.getElementById('lp-planet-carousel')?.removeEventListener('scroll', this._scrollHandler);
     document.getElementById('lp-scroll-container')?.removeEventListener('scroll', this._scrollHandler);
     this._adapter?.dispose();
     this._renderer?.dispose();
